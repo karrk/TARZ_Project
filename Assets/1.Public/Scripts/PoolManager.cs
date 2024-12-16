@@ -68,6 +68,7 @@ public class PoolManager : MonoBehaviour
             {
                 newObj = Instantiate(prefab);
                 pool.Add(newObj);
+                newObj.SetActive(false);
 
                 newObj.transform.SetParent(innerDirectory);
             }

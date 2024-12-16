@@ -8,7 +8,7 @@ public class CSVLoader : IInitializable
 {
     [Inject] private CoroutineHelper helper;
     [Inject] private DataParser dataPaser;
-    //[Inject] private PoolManager pool;
+    [Inject] private PoolManager pool;
 
     private Dictionary<E_CSVTableType, (string, string)> mainTableUrls = new Dictionary<E_CSVTableType, (string, string)>();
     
@@ -46,7 +46,7 @@ public class CSVLoader : IInitializable
         yield return MainTableDataLoad();
         yield return TableDataLoad(E_CSVTableType.Monster);
 
-        //pool.RegistPools();
+        pool.RegistPools();
     }
 
     private IEnumerator MainTableDataLoad()
