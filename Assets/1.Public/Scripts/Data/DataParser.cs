@@ -1,6 +1,7 @@
 using System;
 using Zenject;
 
+// 전달받는 데이터 타입에 맞게 변환을 하기위한 클래스
 public class DataParser
 {
     [Inject] private DataBase _db;

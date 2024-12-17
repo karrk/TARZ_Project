@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Networking;
 using Zenject;
-using UniRx;
 
+// CSV 테이블의 각 데이터들을 불러오기 위한 클래스
 public class CSVLoader : IInitializable
 {
     [Inject] private CoroutineHelper helper;
