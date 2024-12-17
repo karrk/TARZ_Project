@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
@@ -42,6 +40,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         Container.BindInterfacesAndSelfTo<CSVLoader>().AsSingle().NonLazy();
         Container.Bind<DataBase>().AsSingle().NonLazy();
         Container.Bind<DataParser>().AsSingle();
+        Container.BindInterfacesAndSelfTo<DataSlots>().AsSingle().NonLazy();
     }
 
     private void InstallPools()
