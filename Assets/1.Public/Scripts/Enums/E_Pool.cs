@@ -22,4 +22,5 @@ public enum E_VFX
 {
     None = -1,
     VTest,
+    DamageText
 }
