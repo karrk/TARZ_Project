@@ -17,16 +17,24 @@ public class InputManager : ITickable
     /// </summary>
     public event Action<Vector3> InputedRot;
 
+
+
     private Vector3 moveVec;
     private Vector3 rotVec;
+    private Vector3 arrowVec;
 
     public void Tick()
     {
         InputMove();
         InputJump();
         InputRot();
+        InputB();
+        InputArrow();
     }
 
+    /// <summary>
+    /// 좌측 스틱 동작감지
+    /// </summary>
     private void InputMove()
     {
         moveVec.x = Input.GetAxisRaw("Horizontal");
@@ -36,14 +44,25 @@ public class InputManager : ITickable
             return;
 
         InputedMove?.Invoke(moveVec);
+
+        Debug.Log("이동");
     }
 
+    /// <summary>
+    /// A 키
+    /// </summary>
     private void InputJump()
     {
         if (Input.GetButtonDown("Jump"))
+        {
             InputedJump?.Invoke();
+            Debug.Log("점프");
+        }
     }
 
+    /// <summary>
+    /// 우측 스틱 동작
+    /// </summary>
     private void InputRot()
     {
         rotVec.x = Input.GetAxisRaw("Mouse X");
@@ -53,5 +72,27 @@ public class InputManager : ITickable
             return;
 
         InputedRot?.Invoke(rotVec);
+
+        Debug.Log("회전");
+    }
+
+
+    private void InputB()
+    {
+        if(Input.GetButtonDown("Cancel"))
+        {
+            Debug.Log("Cancel");
+        }
+    }
+
+    private void InputArrow()
+    {
+        arrowVec.x = Input.GetAxis("DPAD_H");
+        arrowVec.y = Input.GetAxis("DPAD_V");
+
+        if (arrowVec == Vector3.zero)
+            return;
+
+        Debug.Log(arrowVec);
     }
 }
