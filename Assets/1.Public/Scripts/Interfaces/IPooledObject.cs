@@ -1,8 +1,9 @@
+using System;
 using UnityEngine;
 
 public interface IPooledObject
 {
-    public E_PoolType MyType { get; }
+    public Enum MyType { get; }
     public GameObject MyObj { get; }
     public void Return();
 }

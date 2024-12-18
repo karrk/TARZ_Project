@@ -5,7 +5,7 @@ using Zenject;
 
 public class ProjectInstaller : MonoInstaller<ProjectInstaller>
 {
-    [Inject] private Prefabs prefabs;
+    [Inject] private NormalPrefab prefabs;
 
     public override void InstallBindings()
     {
@@ -45,16 +45,87 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
 
     private void InstallPools()
     {
-        Container.Bind<PoolManager>().FromNewComponentOnNewPrefab(prefabs.PoolPrefab)
+        Container.Bind<PoolManager>().FromComponentInNewPrefab(prefabs.PoolManager)
             .AsSingle().NonLazy();
     }
 
     [Serializable]
-    public class Prefabs
+    public class NormalPrefab
     {
-        public GameObject PoolPrefab;
+        public GameObject PoolManager;
+    }
 
-        public List<GameObject> PoolObjects;
+    [Serializable]
+    public class PooledPrefab
+    {
+        public Prefabs<E_Monster> Monster;
+        public Prefabs<E_VFX> VFX;
+    }
+
+    [Serializable]
+    public class Prefabs<T> where T : Enum
+    {
+        [SerializeField] private PrefabList<T> list;
+
+        public GameObject this[T idx]
+        { get { return list[idx]; } }
+
+        public Dictionary<Enum, GameObject> GetPairTable()
+        {
+            Dictionary<Enum, GameObject> pairTable = new Dictionary<Enum, GameObject>();
+            
+            foreach (var item in list.Table)
+            {
+                pairTable.Add(item.Key, item.Value);
+            }
+
+            return pairTable;
+        }
+
+        [Serializable]
+        private class PrefabList<DetailType> where DetailType : Enum
+        {
+            [SerializeField] private List<PrefabItem<DetailType>> pairInfo;
+            private Dictionary<DetailType, GameObject> table = new Dictionary<DetailType, GameObject>();
+            
+            public Dictionary<DetailType, GameObject> Table
+            {
+                get
+                {
+                    if (pairInfo.Count == table.Count)
+                        return table;
+
+                    RegistAllPrefabs();
+                    return table;
+                }
+            }
+
+            public GameObject this[DetailType type]
+            {
+                get { return Table[type]; }
+            }
+
+            public void RegistAllPrefabs()
+            {
+                DetailType type;
+                GameObject prefabObj;
+
+                for (int i = 0; i < pairInfo.Count; i++)
+                {
+                    type = pairInfo[i].Type;
+                    prefabObj = pairInfo[i].Prefab;
+
+                    table.Add(type, prefabObj);
+                }
+            }
+        }
+
+        [Serializable]
+        private class PrefabItem<DetailType> where DetailType : Enum
+        {
+            public DetailType Type;
+            public GameObject Prefab;
+        }
     }
 
     /// <summary>

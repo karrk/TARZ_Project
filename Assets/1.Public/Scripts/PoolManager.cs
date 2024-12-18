@@ -1,98 +1,151 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
 public class PoolManager : MonoBehaviour
 {
-    [Inject] private ProjectInstaller.Prefabs prefabs;
+    [Inject] private ProjectInstaller.PooledPrefab prefabs;
+    [Inject] private DiContainer container;
 
-    public Transform MainDirectory => this.transform;
+    public Transform MainDirectory { get; private set; }
 
-    private Dictionary<E_PoolType, ObjPool> poolTable = new Dictionary<E_PoolType, ObjPool>();
+    private Dictionary<E_PoolType, Dictionary<Enum, ObjPool>> pools = new Dictionary<E_PoolType, Dictionary<Enum, ObjPool>>();
 
-    /// <summary>
-    /// 설정한 오브젝트들의 풀을 구성합니다.
-    /// </summary>
+    private void CreateMainDirectory()
+    {
+        MainDirectory = new GameObject().transform;
+        MainDirectory.name = "Pools";
+        MainDirectory.SetParent(transform);
+    }
+
     public void RegistPools()
     {
-        poolTable.Add(E_PoolType.TestObject, new ObjPool(E_PoolType.TestObject, prefabs.PoolObjects[0], 3, MainDirectory));
+        CreateMainDirectory();
+
+        pools.Add(E_PoolType.Monster, new Dictionary<Enum, ObjPool>());
+        pools.Add(E_PoolType.VFX, new Dictionary<Enum, ObjPool>());
+
+        var monsterPrefab = prefabs.Monster.GetPairTable();
+        foreach (var item in monsterPrefab)
+        {
+            pools[E_PoolType.Monster][item.Key] 
+                = new ObjPool(container, item.Value,5,MainDirectory);
+        }
+
+        var vfxTable = prefabs.VFX.GetPairTable();
+        foreach (var item in vfxTable)
+        {
+            pools[E_PoolType.VFX][item.Key]
+                = new ObjPool(container, item.Value, 5, MainDirectory);
+        }
+
     }
 
     /// <summary>
-    /// 해당 타입의 오브젝트를 반환합니다.
+    /// 목록에 등록된 오브젝트 요소를 반환받습니다.
     /// </summary>
-    public GameObject GetObject(E_PoolType type)
+    public GameObject GetObject(Enum type)
     {
-        return poolTable[type].GetObject();
+        Type requestType = type.GetType();
+
+        foreach (var total in pools)
+        {
+            foreach (var inner in total.Value)
+            {
+                if(inner.Key.Equals(type))
+                {
+                    return inner.Value.GetObject();
+                }
+            }
+        }
+
+        return null;
     }
 
     /// <summary>
-    /// 해당 타입의 오브젝트의 컴포넌트를 반환합니다.
+    /// 요청된 오브젝트를 반환받으며 바로 컴포넌트로 접근합니다.
     /// </summary>
-    public T GetObject<T>(E_PoolType type)
+    public T GetObject<T>(Enum type)
     {
         return GetObject(type).GetComponent<T>();
     }
 
     /// <summary>
-    /// IpooledObject를 상속받는 오브젝트를 반환합니다.
+    /// 대상 오브젝트를 풀로 반환하며 오브젝트를 비활성화 합니다.
     /// </summary>
     public void Return(IPooledObject obj)
     {
-        poolTable[obj.MyType].Return(obj);
+        foreach (var total in pools)
+        {
+            foreach (var inner in total.Value)
+            {
+                if (inner.Key.Equals(obj.MyType))
+                    inner.Value.Return(obj.MyObj);
+            }
+        }
     }
 
+    //private void Update()
+    //{
+    //    if(Input.GetMouseButtonDown(0))
+    //    {
+    //        GetObject(E_Monster.TestA);
+    //    }
+    //}
+
+    #region 오브젝트 풀
     private class ObjPool
     {
         private List<GameObject> pool;
-        private GameObject prefab;
         private Transform innerDirectory;
-        private E_PoolType type;
+        private DiContainer container;
 
-        public ObjPool(E_PoolType type, GameObject prefab, int initCount, Transform parent)
+        public ObjPool(DiContainer container, GameObject prefab,int initCount = 10, Transform parent = null)
         {
-            this.prefab = prefab;
-            pool = new List<GameObject>(initCount);
             innerDirectory = new GameObject().transform;
-            innerDirectory.name = prefab.name + "Pool";
+            innerDirectory.gameObject.name = $"{prefab.name} Pool";
             innerDirectory.SetParent(parent);
+            this.container = container;
 
-            Create(pool.Capacity);
+            pool = new List<GameObject>(initCount);
+            CreateObject(prefab, initCount);
         }
 
-        private void Create(int count)
+        private void CreateObject(GameObject prefab, int count)
         {
             GameObject newObj;
 
             for (int i = 0; i < count; i++)
             {
-                newObj = Instantiate(prefab);
-                pool.Add(newObj);
+                newObj = container.InstantiatePrefab(prefab, innerDirectory);
                 newObj.SetActive(false);
-
-                newObj.transform.SetParent(innerDirectory);
+                pool.Add(newObj);
             }
         }
 
         public GameObject GetObject()
         {
-            if(pool.Count <= 0)
+            GameObject obj;
+
+            if(pool.Count <= 1)
             {
-                Create(pool.Capacity * 2);
+                CreateObject(pool[0], pool.Capacity * 2);
                 return GetObject();
             }
 
-            GameObject obj = pool[pool.Count - 1];
+            obj = pool[pool.Count - 1];
             pool.RemoveAt(pool.Count - 1);
             obj.SetActive(true);
 
             return obj;
         }
 
-        public void Return(IPooledObject obj)
+        public void Return(GameObject obj)
         {
-            pool.Add(obj.MyObj);
-            obj.MyObj.SetActive(false);
+            obj.SetActive(false);
+            pool.Add(obj);
         }
     }
+    #endregion
 }

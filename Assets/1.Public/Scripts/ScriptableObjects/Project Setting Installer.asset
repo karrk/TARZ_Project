@@ -12,8 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f663f6b0649a4f34ca7d16756001585a, type: 3}
   m_Name: Project Setting Installer
   m_EditorClassIdentifier: 
-  Prefabs:
-    PoolPrefab: {fileID: 1544817659041836364, guid: a5e628768368342448b9fe97d1a85ce2,
+  prefab:
+    PoolManager: {fileID: 1544817659041836364, guid: a5e628768368342448b9fe97d1a85ce2,
       type: 3}
-    PoolObjects:
-    - {fileID: 1120792743127800382, guid: 31060fa24d827d149931fa6257d4ff00, type: 3}
+  pooledPrefabs:
+    Monster:
+      list:
+        pairInfo:
+        - Type: 0
+          Prefab: {fileID: 1120792743127800382, guid: 31060fa24d827d149931fa6257d4ff00,
+            type: 3}
+    SFX:
+      list:
+        pairInfo: []
+    VFX:
+      list:
+        pairInfo: []
