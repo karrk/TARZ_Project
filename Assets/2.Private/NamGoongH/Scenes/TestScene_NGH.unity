@@ -532,9 +532,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4294c1ab030751b4db0aea785da68541, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemPrefabs:
-  - {fileID: 3111731739044657598, guid: 2e602ca01c8567143a1772306d7fa594, type: 3}
-  - {fileID: 3111731739044657598, guid: c7006c82560934f49ad65ef23136f2c2, type: 3}
+  garbagePrefabs: []
   spawnPoints:
   - {fileID: 2026013701}
   - {fileID: 1969775475}
@@ -706,7 +704,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ca8cc4b03a84b54c9ada9d3b13269b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemQueue: {fileID: 1427183043}
+  garbageQueue: {fileID: 0}
+  garbageLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &1427183042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -720,7 +721,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 419107972}
-  itemQueue: {fileID: 1427183043}
+  garbageQueue: {fileID: 0}
 --- !u!114 &1427183043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -733,10 +734,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52c195a3aaec94d428726220d6113cad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemPrefabs:
-  - {fileID: 3111731739044657598, guid: 2e602ca01c8567143a1772306d7fa594, type: 3}
-  - {fileID: 3111731739044657598, guid: c7006c82560934f49ad65ef23136f2c2, type: 3}
-  itemIndexList: 
+  garbagePrefabs: []
+  garbageIndexList: 
 --- !u!1 &1795925230
 GameObject:
   m_ObjectHideFlags: 0
@@ -971,7 +970,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2026013701}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

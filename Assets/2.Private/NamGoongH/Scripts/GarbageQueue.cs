@@ -3,14 +3,17 @@ using UnityEngine;
 
 public class GarbageQueue : MonoBehaviour
 {
+
     [Header("Available Item Prefabs")]
     public GameObject[] garbagePrefabs; // 투척물 프리팹 배열
 
     [SerializeField]
     private List<int> garbageIndexList = new List<int>(); // 인덱스를 저장하는 리스트 (FIFO)
-    //private Queue<int> garbageIndexQueue = new Queue<int>(); // 아이템 인덱스를 저장하는 큐
+    //private Queue<int> garbageIndexQueue = new Queue<int>(); // 투척물 인덱스를 저장하는 큐
 
-    // 아이템 인덱스 추가
+    /// <summary>
+    /// 리스트에 투척물 인덱스 추가
+    /// </summary>
     public void AddItem(int garbageIndex)
     {
         if (garbageIndex >= 0 && garbageIndex < garbagePrefabs.Length)
@@ -26,8 +29,10 @@ public class GarbageQueue : MonoBehaviour
         }
     }
 
-    // 다음 아이템을 가져와서 프리팹을 반환
-    public GameObject GetNextItemPrefab()
+    /// <summary>
+    /// 다음 투척물을 가져와서 프리팹을 반환
+    /// </summary>
+    public GameObject GetNextGarbagePrefab()
     {
         if (garbageIndexList.Count > 0)
         {
@@ -55,7 +60,9 @@ public class GarbageQueue : MonoBehaviour
         return null;
     }
 
-    // 디버깅용 리스트 출력
+    /// <summary>
+    /// 디버깅용 리스트 출력
+    /// </summary>
     private void PrintQueue()
     {
         string queueContent = "Current Queue: ";

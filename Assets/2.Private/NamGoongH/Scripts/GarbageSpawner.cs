@@ -9,10 +9,13 @@ public class GarbageSpawner : MonoBehaviour
 
     private void Start()
     {
-        SpawnItems();
+        SpawnGarbages();
     }
 
-    private void SpawnItems()
+    /// <summary>
+    /// 투척물 소환
+    /// </summary>
+    private void SpawnGarbages()
     {
         foreach (Transform spawnPoint in spawnPoints)
         {

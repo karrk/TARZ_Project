@@ -3,7 +3,7 @@ using UnityEngine;
 public class Shooter : MonoBehaviour
 {
     public Transform firePoint; // 발사 위치
-    public GarbageQueue garbageQueue; // ItemQueue 참조
+    public GarbageQueue garbageQueue; // GarbageQueue 참조
 
     void Update()
     {
@@ -13,10 +13,13 @@ public class Shooter : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 받아온 프리탭을 발사함
+    /// </summary>
     private void FireItem()
     {
         // 다음 아이템의 프리팹 가져오기
-        GameObject garbagePrefab = garbageQueue.GetNextItemPrefab();
+        GameObject garbagePrefab = garbageQueue.GetNextGarbagePrefab();
         if (garbagePrefab != null)
         {
             // 프리팹을 발사 위치에 생성
