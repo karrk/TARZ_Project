@@ -53,6 +53,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
     public class NormalPrefab
     {
         public GameObject PoolManager;
+        public GameObject Player;
     }
 
     [Serializable]
@@ -60,6 +61,16 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
     {
         public Prefabs<E_Monster> Monster;
         public Prefabs<E_VFX> VFX;
+    }
+
+    [Serializable]
+    public class CameraSetting
+    {
+        public float Height;
+        public float Dist;
+
+        public float RotationSpeed;
+        public float SmoothSpeed;
     }
 
     [Serializable]
