@@ -53,6 +53,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
     public class NormalPrefab
     {
         public GameObject PoolManager;
+        public GameObject Player;
     }
 
     [Serializable]
