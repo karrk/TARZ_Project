@@ -11,59 +11,74 @@ public class InputManager : ITickable
     /// 좌측 스틱 컨트롤러 조작시 발생되는 이벤트입니다.
     /// 데스크탑 환경에서는 WASD 키 입력시 발생됩니다.
     /// </summary>
+    //public event Action<Vector3> OnControlledLeftStick;
     public event Action<Vector3> OnControlledLeftStick;
+
+    
     /// <summary>
     /// 우측 스틱 컨트롤러 조작시 발생되는 이벤트입니다.
     /// 데스크탑 환경에서는 마우스 이동 시 발생됩니다.
     /// </summary>
     public event Action<Vector3> OnControlledRightStick;
+
     /// <summary>
     /// DPAD 키 입력시 발생됩니다.
     /// 데스크탑 환경에서는 4방향키 입력시 발생됩니다.
     /// </summary>
     public event Action<Vector3> OnControlledDPAD;
 
+
+
     /// <summary>
     /// X 키 입력시 발생됩니다.
     /// 데스크탑 환경에서는 Space 키 입력시 발생됩니다.
     /// </summary>
     public event Action PressedXKey;
+
     /// <summary>
     /// Y 키 입력시 발생됩니다.
     /// 데스크탑 환경에서는 Tab 키 입력시 발생됩니다.
     /// </summary>
     public event Action PressedYKey;
+
     /// <summary>
     /// A 키 입력시 발생됩니다.
     /// 데스크탑 환경에서는 좌측 Ctrl 키 입력시 발생됩니다.
     /// </summary>
     public event Action PressedAKey;
+
     /// <summary>
     /// B 키 입력시 발생됩니다.
     /// 데스크탑 환경에서는 좌측 Shift 키 입력시 발생됩니다.
     /// </summary>
     public event Action PressedBKey;
+
     /// <summary>
     /// R2 키 입력시 발생됩니다.
     /// 데스크탑 환경에서는 마우스 좌클릭 입력시 발생됩니다.
     /// </summary>
     public event Action PressedR2Key;
+
     /// <summary>
     /// L1 키 입력시 발생됩니다.
     /// 데스크탑 환경에서는 R 키 입력시 발생됩니다.
     /// </summary>
     public event Action PressedL1Key;
+
     /// <summary>
     /// R1 키 입력시 발생됩니다.
     /// 데스크탑 환경에서는 Q 키 입력시 발생됩니다.
     /// </summary>
     public event Action PressedR1Key;
 
+
+
     /// <summary>
     /// L2 입력이 감지되었을때 발생합니다.
     /// 데스크탑 환경에서는 마우스 우클릭시 발생됩니다.
     /// </summary>
     public event Action OnDownL2Key;
+
     /// <summary>
     /// L2 입력이 해제 되었을때 발생합니다.
     /// 데스크탑 환경에서는 마우스 우클릭을 해제한경우 발생됩니다.
@@ -108,8 +123,8 @@ public class InputManager : ITickable
         moveVec.x = Input.GetAxisRaw("LeftStickX");
         moveVec.z = Input.GetAxisRaw("LeftStickY");
 
-        if (moveVec == Vector3.zero)
-            return;
+        //if (moveVec == Vector3.zero)
+        //    return;
 
         OnControlledLeftStick?.Invoke(moveVec);
     }
