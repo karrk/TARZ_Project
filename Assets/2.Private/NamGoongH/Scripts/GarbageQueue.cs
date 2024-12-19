@@ -2,18 +2,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class GarbageQueue : MonoBehaviour
+public class GarbageQueue
 {
 
-    [Header("Available Item Prefabs")]
+    [Inject][Header("Available Item Prefabs")]
     private GameObject[] garbagePrefabs; // 투척물 프리팹 배열
 
     [SerializeField]
     private List<int> garbageIndexList = new List<int>(); // 인덱스를 저장하는 리스트 (FIFO)
     //private Queue<int> garbageIndexQueue = new Queue<int>(); // 투척물 인덱스를 저장하는 큐
 
-    [Inject]
-    public void Construct(GameObject[] garbagePrefabs)
+    public GarbageQueue(GameObject[] garbagePrefabs)
     {
         this.garbagePrefabs = garbagePrefabs;
     }

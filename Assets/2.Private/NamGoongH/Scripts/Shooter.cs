@@ -34,7 +34,7 @@ public class Shooter : MonoBehaviour
             Rigidbody rb = projectile.GetComponent<Rigidbody>();
             if (rb == null) rb = projectile.AddComponent<Rigidbody>();
 
-            rb.AddForce(firePoint.forward * 1, ForceMode.Force);
+            rb.AddForce(firePoint.forward * 5, ForceMode.Impulse);
             Debug.Log($"Fired item: {garbagePrefab.name}");
         }
     }
