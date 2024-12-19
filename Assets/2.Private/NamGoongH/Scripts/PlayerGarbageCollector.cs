@@ -1,6 +1,7 @@
 using UnityEngine;
+using Zenject;
 
-public class ItemCollector : MonoBehaviour
+public class PlayerGarbageCollector : MonoBehaviour
 {
     public GarbageQueue garbageQueue; // GarbageQueue 참조
     [Header("Layer Settings")]
@@ -9,6 +10,14 @@ public class ItemCollector : MonoBehaviour
     /// <summary>
     /// 플레이어가 투척물에 닿으면 투척물을 축적
     /// </summary>
+
+    [Inject]
+    public void Construct(GarbageQueue garbageQueue, LayerMask garbageLayer)
+    {
+        this.garbageQueue = garbageQueue;
+        this.garbageLayer = garbageLayer;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         // 충돌한 객체가 아이템 레이어에 속하는지 확인

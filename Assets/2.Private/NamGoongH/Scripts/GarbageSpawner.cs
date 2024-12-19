@@ -1,11 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class GarbageSpawner : MonoBehaviour
 {
+    
     public GameObject[] garbagePrefabs;
     public Transform[] spawnPoints;
+
+    [Inject]
+    public void Construct(GameObject[] garbagePrefabs)
+    {
+        this.garbagePrefabs = garbagePrefabs;
+    }
 
     private void Start()
     {

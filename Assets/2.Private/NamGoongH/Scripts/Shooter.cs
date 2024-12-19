@@ -1,9 +1,16 @@
 using UnityEngine;
+using Zenject;
 
 public class Shooter : MonoBehaviour
 {
     public Transform firePoint; // 발사 위치
     public GarbageQueue garbageQueue; // GarbageQueue 참조
+
+    [Inject]
+    public void Construct(GarbageQueue garbageQueue)
+    {
+        this.garbageQueue = garbageQueue;
+    }
 
     void Update()
     {
