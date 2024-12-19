@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &426686478681798768
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3375725803488884286}
+  - component: {fileID: 8794048438756491967}
+  m_Layer: 0
+  m_Name: Inventory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3375725803488884286
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 426686478681798768}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 848.4616, y: 421.34683, z: 0.5538651}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8794048438756491967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 426686478681798768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41ff32f9ba25928458431b67e949541f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemInfos:
+  - {fileID: 11400000, guid: 480e6b21e818aa74584ccea5748e9828, type: 2}
+  - {fileID: 11400000, guid: 2c0784ca8a4f7d444b3bc70df8b66ef9, type: 2}
+  - {fileID: 11400000, guid: 178019e970097f94082cbc3ea76c7e44, type: 2}
+  - {fileID: 11400000, guid: 7393c7f7ac8173745ba6453c12c27c51, type: 2}
+  - {fileID: 11400000, guid: aad0aaaa68343fb4081be3b3211c3e4b, type: 2}
+  - {fileID: 11400000, guid: 8ede1c269d0bdae4d9d4d816f5dba214, type: 2}
+  - {fileID: 11400000, guid: fe6db160e65f14f4888d8cac593fa407, type: 2}
+  - {fileID: 11400000, guid: f624f7996290a284ca82946b193297eb, type: 2}
+  - {fileID: 11400000, guid: 534d4de005ce12148b26735cfd1659c6, type: 2}
+  inventorySize: 12
