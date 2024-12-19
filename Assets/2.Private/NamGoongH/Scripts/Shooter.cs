@@ -1,9 +1,16 @@
 using UnityEngine;
+using Zenject;
 
 public class Shooter : MonoBehaviour
 {
     public Transform firePoint; // 발사 위치
     public GarbageQueue garbageQueue; // GarbageQueue 참조
+
+    [Inject]
+    public void Construct(GarbageQueue garbageQueue)
+    {
+        this.garbageQueue = garbageQueue;
+    }
 
     void Update()
     {
@@ -27,7 +34,7 @@ public class Shooter : MonoBehaviour
             Rigidbody rb = projectile.GetComponent<Rigidbody>();
             if (rb == null) rb = projectile.AddComponent<Rigidbody>();
 
-            rb.AddForce(firePoint.forward * 1, ForceMode.Force);
+            rb.AddForce(firePoint.forward * 5, ForceMode.Impulse);
             Debug.Log($"Fired item: {garbagePrefab.name}");
         }
     }

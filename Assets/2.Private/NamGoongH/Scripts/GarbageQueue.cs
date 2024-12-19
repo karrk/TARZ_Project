@@ -1,21 +1,33 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
-public class GarbageQueue : MonoBehaviour
+public class GarbageQueue
 {
 
-    [Header("Available Item Prefabs")]
-    public GameObject[] garbagePrefabs; // 투척물 프리팹 배열
+    [Inject][Header("Available Item Prefabs")]
+    private GameObject[] garbagePrefabs; // 투척물 프리팹 배열
 
     [SerializeField]
     private List<int> garbageIndexList = new List<int>(); // 인덱스를 저장하는 리스트 (FIFO)
     //private Queue<int> garbageIndexQueue = new Queue<int>(); // 투척물 인덱스를 저장하는 큐
+
+    public GarbageQueue(GameObject[] garbagePrefabs)
+    {
+        this.garbagePrefabs = garbagePrefabs;
+    }
 
     /// <summary>
     /// 리스트에 투척물 인덱스 추가
     /// </summary>
     public void AddItem(int garbageIndex)
     {
+        if (garbagePrefabs == null || garbagePrefabs.Length == 0)
+        {
+            Debug.LogWarning("Garbage prefabs array is not set or empty.");
+            return;
+        }
+
         if (garbageIndex >= 0 && garbageIndex < garbagePrefabs.Length)
         {
             garbageIndexList.Add(garbageIndex); // 리스트 끝에 인덱스 추가
@@ -34,6 +46,12 @@ public class GarbageQueue : MonoBehaviour
     /// </summary>
     public GameObject GetNextGarbagePrefab()
     {
+        if (garbagePrefabs == null || garbagePrefabs.Length == 0)
+        {
+            Debug.LogWarning("Garbage prefabs array is not set or empty.");
+            return null;
+        }
+
         if (garbageIndexList.Count > 0)
         {
             int garbageIndex = garbageIndexList[0]; // 첫 번째 인덱스 가져오기
@@ -63,6 +81,7 @@ public class GarbageQueue : MonoBehaviour
     /// <summary>
     /// 디버깅용 리스트 출력
     /// </summary>
+    #if UNITY_EDITOR
     private void PrintQueue()
     {
         string queueContent = "Current Queue: ";
@@ -72,4 +91,5 @@ public class GarbageQueue : MonoBehaviour
         }
         Debug.Log(queueContent + "END");
     }
+    #endif
 }
