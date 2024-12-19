@@ -36,7 +36,7 @@ public class MoveState : BaseState
             player.ChangeState(E_State.Jump);
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !Input.GetKeyDown(KeyCode.Space))
         {
             player.ChangeState(E_State.Dash);
         }
