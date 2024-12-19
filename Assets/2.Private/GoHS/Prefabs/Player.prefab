@@ -136,7 +136,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!114 &2228592640495473656
 MonoBehaviour:
@@ -164,15 +164,24 @@ MonoBehaviour:
     dashTime: 0
   longRangeAttackState:
     player: {fileID: 0}
+  colletState:
+    player: {fileID: 0}
+    viewArea: 0
+    maxViewArea: 0
+    viewSpeed: 0
+    viewAngle: 0
+    targetMask:
+      serializedVersion: 2
+      m_Bits: 0
+    Targets: []
   rigid: {fileID: 1992255528758277319}
   cam: {fileID: 0}
   <animator>k__BackingField: {fileID: 0}
-  moveSpeed: 0
-  dashSpeed: 0
-  dashduration: 0
-  dashCoolDown: 0
+  moveSpeed: 3
+  dashSpeed: 20
+  dashduration: 0.2
+  dashCoolDown: 1
   candash: 0
-  <isGrounded>k__BackingField: 0
   inputX: 0
   inputZ: 0
   bulletSpawnPoint: {fileID: 0}
