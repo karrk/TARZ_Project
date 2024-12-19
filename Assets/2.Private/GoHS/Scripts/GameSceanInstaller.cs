@@ -18,5 +18,6 @@ public class GameSceanInstaller : MonoInstaller
         Container.Bind<JumpState>().AsSingle();
         Container.Bind<DashState>().AsSingle();
         Container.Bind<LongRangeAttackState>().AsSingle();
+        Container.Bind<CollectState>().AsSingle();
     }
 }

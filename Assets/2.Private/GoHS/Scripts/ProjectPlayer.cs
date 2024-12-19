@@ -5,7 +5,7 @@ using UnityEngine.Events;
 using UnityEngine.UIElements;
 using Zenject;
 
-public enum E_State { Idle, Move, Jump, Dash, LongRangeAttack, Size }      // 우선적으로 선언한 상태
+public enum E_State { Idle, Move, Jump, Dash, LongRangeAttack, Collet, Size }      // 우선적으로 선언한 상태
 
 public class ProjectPlayer : MonoBehaviour
 {
@@ -20,6 +20,7 @@ public class ProjectPlayer : MonoBehaviour
     [Inject][SerializeField] private JumpState jumpState;
     [Inject][SerializeField] private DashState dashState;
     [Inject][SerializeField] private LongRangeAttackState longRangeAttackState;
+    [Inject][SerializeField] private CollectState colletState;
 
 
     [Header("프로퍼티")]
@@ -39,7 +40,7 @@ public class ProjectPlayer : MonoBehaviour
     [SerializeField] public float dashCoolDown;
     [SerializeField] public bool candash;
 
-    [field: SerializeField] public bool isGrounded { get; set; }                        // 현재 땅에 서있는지 여부
+    [SerializeField] public bool isGrounded { get; set; }                        // 현재 땅에 서있는지 여부
 
     [SerializeField] private float inputX;                                              // 좌, 우 입력값을 받아오기 위한 변수
     public float InputX { get { return inputX; } set { inputX = value; } }
@@ -58,6 +59,7 @@ public class ProjectPlayer : MonoBehaviour
         states[(int)E_State.Jump] = jumpState;
         states[(int)E_State.Dash] = dashState;
         states[(int)E_State.LongRangeAttack] = longRangeAttackState;
+        states[(int)E_State.Collet] = colletState;
     }
 
     private void Start()
@@ -72,6 +74,10 @@ public class ProjectPlayer : MonoBehaviour
         inputZ = Input.GetAxisRaw("Vertical");
 
         //GroundCheck();
+        if (curState == E_State.Collet)
+        {
+            colletState.OnDrawGizmos();
+        }
 
         states[(int)curState].Update();
     }
