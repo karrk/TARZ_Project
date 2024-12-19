@@ -29,7 +29,7 @@ public class InputManager : ITickable
         InputJump();
         InputRot();
         InputB();
-        InputArrow();
+        //InputArrow();
     }
 
     /// <summary>
