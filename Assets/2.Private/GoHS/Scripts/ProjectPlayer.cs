@@ -9,7 +9,6 @@ public enum E_State { Idle, Move, Jump, Dash, LongRangeAttack, Collet, Size }   
 
 public class ProjectPlayer : MonoBehaviour
 {
-
     [Header("State")]
     [SerializeField] protected E_State curState = E_State.Idle;
 
@@ -52,8 +51,14 @@ public class ProjectPlayer : MonoBehaviour
     [SerializeField] private Transform bulletSpawnPoint;
     [SerializeField] private GameObject bulletPrefab;
 
+    [Inject] private InputManager inputManager;
+
     private void Awake()
     {
+        cam = Camera.main;
+        rigid = GetComponent<Rigidbody>();
+        bulletSpawnPoint = transform.GetChild(1);
+
         states[(int)E_State.Idle] = idleState;
         states[(int)E_State.Move] = walkState;
         states[(int)E_State.Jump] = jumpState;
@@ -65,13 +70,20 @@ public class ProjectPlayer : MonoBehaviour
     private void Start()
     {
         states[(int)curState].Enter();
+        inputManager.OnControlledLeftStick += Move;
+    }
+
+    private void Move(Vector3 vector3)
+    {
+        InputX = vector3.x;
+        InputZ = vector3.z;
     }
 
     private void Update()
     {
         // 움직임 로직을 위한 변수 입력받기
-        inputX = Input.GetAxisRaw("Horizontal");
-        inputZ = Input.GetAxisRaw("Vertical");
+        //inputX = Input.GetAxisRaw("Horizontal");
+        //inputZ = Input.GetAxisRaw("Vertical");
 
         //GroundCheck();
         if (curState == E_State.Collet)
@@ -135,6 +147,9 @@ public class ProjectPlayer : MonoBehaviour
 
     public void SpawnBullet()
     {
+        if (bulletPrefab == null)
+            return;
+
         Instantiate(bulletPrefab, bulletSpawnPoint.position, transform.rotation);
     }
 }

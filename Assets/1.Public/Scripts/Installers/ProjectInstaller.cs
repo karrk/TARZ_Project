@@ -64,6 +64,16 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
     }
 
     [Serializable]
+    public class CameraSetting
+    {
+        public float Height;
+        public float Dist;
+
+        public float RotationSpeed;
+        public float SmoothSpeed;
+    }
+
+    [Serializable]
     public class Prefabs<T> where T : Enum
     {
         [SerializeField] private PrefabList<T> list;
