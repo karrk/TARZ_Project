@@ -25,4 +25,12 @@ public class Garbage : MonoBehaviour, IDrainable
             }
         }
     }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        if(CompareTag("Monster"))
+        {
+            Destroy(gameObject);
+        }
+    }
 }
