@@ -1,17 +1,17 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Zenject;
 
 /// <summary>
 /// 유저의 입력을 받아들여 필요한 클래스에서 이벤트를 활용해 기능을 연동하기 위한 클래스
 /// </summary>
-public class InputManager : ITickable
+public class InputManager : IInitializable, ITickable
 {
     /// <summary>
     /// 좌측 스틱 컨트롤러 조작시 발생되는 이벤트입니다.
     /// 데스크탑 환경에서는 WASD 키 입력시 발생됩니다.
     /// </summary>
-    //public event Action<Vector3> OnControlledLeftStick;
     public event Action<Vector3> OnControlledLeftStick;
 
     
@@ -89,6 +89,29 @@ public class InputManager : ITickable
     private Vector3 rotVec;
     private Vector3 arrowVec;
     private bool enteredL2;
+
+    [Inject] private SignalBus signal;
+
+    public void Initialize()
+    {
+        signal.Subscribe<StageEndSignal>(ResetEvents);
+    }
+
+    private void ResetEvents()
+    {
+        OnControlledLeftStick = null;
+        OnControlledRightStick = null;
+        OnControlledDPAD = null;
+        PressedXKey = null;
+        PressedYKey = null;
+        PressedAKey = null;
+        PressedBKey = null;
+        PressedR2Key = null;
+        PressedL1Key = null;
+        PressedR1Key = null;
+        OnDownL2Key = null;
+        OnUpL2Key = null;
+    }
 
     public void Tick()
     {
@@ -250,4 +273,6 @@ public class InputManager : ITickable
             enteredL2 = false;
         }
     }
+
+    
 }

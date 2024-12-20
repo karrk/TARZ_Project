@@ -6,6 +6,7 @@ using Zenject;
 public class ProjectInstaller : MonoInstaller<ProjectInstaller>
 {
     [Inject] private NormalPrefab prefabs;
+    public LayerMask garbageLayer;
 
     public override void InstallBindings()
     {
@@ -14,6 +15,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         InstallSignal();
         InstallData();
         InstallPools();
+        InstallGarbage();
     }
 
     private void InstallMisc()
@@ -33,6 +35,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
     private void InstallSignal()
     {
         SignalBusInstaller.Install(Container);
+        Container.DeclareSignal<StageEndSignal>();
     }
 
     private void InstallData()
@@ -49,11 +52,29 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
             .AsSingle().NonLazy();
     }
 
+    private void InstallGarbage()
+    {
+        Container.Bind<GarbageQueue>().AsSingle();
+        Container.BindInstance(garbageLayer).AsSingle();
+    }
+
+    [Serializable]
+    public class PlayerSettings
+    {
+        public float DrainSpeed;
+    }
+
     [Serializable]
     public class NormalPrefab
     {
         public GameObject PoolManager;
         public GameObject Player;
+    }
+
+    [Serializable]
+    public class GarbagePrefab
+    {
+        public GameObject[] Garbages;
     }
 
     [Serializable]
