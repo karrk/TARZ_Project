@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -11,6 +12,9 @@ public class GarbageQueue
     [SerializeField]
     private List<int> garbageIndexList = new List<int>(); // 인덱스를 저장하는 리스트 (FIFO)
     //private Queue<int> garbageIndexQueue = new Queue<int>(); // 투척물 인덱스를 저장하는 큐
+
+    public event Action ChangedInventory;
+    public int Count => garbageIndexList.Count;
 
     [Inject]
     public GarbageQueue(ProjectInstaller.GarbagePrefab garbagePrefabs)
@@ -35,6 +39,8 @@ public class GarbageQueue
             //garbageIndexQueue.Enqueue(garbageIndex); // 큐에 인덱스 추가
             Debug.Log($"Item index added: {garbageIndex}. Queue size: {garbageIndexList.Count}");
             PrintQueue();
+
+            ChangedInventory?.Invoke();
         }
         else
         {
@@ -71,6 +77,8 @@ public class GarbageQueue
             {
                 Debug.LogWarning($"Invalid index in list: {garbageIndex}");
             }
+
+            ChangedInventory?.Invoke();
         }
         else
         {
