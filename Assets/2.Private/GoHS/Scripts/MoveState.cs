@@ -10,6 +10,7 @@ public class MoveState : BaseState
 {
 
     [SerializeField] ProjectPlayer player;
+    private Vector3 moveDirection;
 
     public MoveState(ProjectPlayer player)
     {
@@ -24,7 +25,11 @@ public class MoveState : BaseState
 
     public override void Update()
     {
+
         Debug.Log("Move 업데이트문 진행중!");
+
+        player.animator.SetFloat("MoveSpeed", moveDirection.magnitude); // TODO : 패드로는 잘 작동하는데 키보드를 사용했을때는 1.414값이 나온다?
+
         if (player.InputX == 0 && player.InputZ == 0)
         {
             player.ChangeState(E_State.Idle);
@@ -62,8 +67,11 @@ public class MoveState : BaseState
         forward.Normalize();
         right.Normalize();
 
-        Vector3 moveDirection = forward * player.InputZ + right * player.InputX;
-        moveDirection.Normalize();
+        moveDirection = forward * player.InputZ + right * player.InputX;
+        //moveDirection.Normalize();
+
+        if(moveDirection.magnitude < 1)
+           moveDirection *= moveDirection.sqrMagnitude;
 
         player.transform.Translate(moveDirection * player.MoveSpeed * Time.deltaTime, Space.World);
 
@@ -73,6 +81,11 @@ public class MoveState : BaseState
             player.transform.rotation = Quaternion.Lerp(player.transform.rotation, rotation, 30f * Time.deltaTime);
         }
 
+    }
+
+    public override void Exit()
+    {
+        player.animator.SetFloat("MoveSpeed", 0f);
     }
 
 

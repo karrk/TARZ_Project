@@ -14,6 +14,7 @@ public class IdleState : BaseState
 
     public override void Enter()
     {
+        player.animator.SetBool("Idle", true);
         Debug.Log("현재 Idle 상태 진입 성공");
         player.Rigid.velocity = Vector3.zero;
         player.Rigid.angularVelocity = Vector3.zero;
@@ -54,5 +55,10 @@ public class IdleState : BaseState
             player.ChangeState(E_State.Drain);
         }
 
+    }
+
+    public override void Exit()
+    {
+        player.animator.SetBool("Idle", false);
     }
 }

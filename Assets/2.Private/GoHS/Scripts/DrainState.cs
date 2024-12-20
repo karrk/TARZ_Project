@@ -39,6 +39,7 @@ public class DrainState : BaseState
     public override void Enter()
     {
         Debug.Log("@@@@@@@@@@@@@@수집상태 진입 성공");
+        player.animator.SetBool("Drain", true);
     }
 
     public override void Update()
@@ -52,7 +53,15 @@ public class DrainState : BaseState
         else
         {
             viewArea = 0f;
-            player.ChangeState(E_State.Idle);
+            player.animator.SetBool("Drain", false);
+
+            AnimatorStateInfo stateInfo = player.animator.GetCurrentAnimatorStateInfo(0);
+            if(stateInfo.IsName("Absorb_End_KHS") && stateInfo.normalizedTime >= 1.0f)
+            {
+                Debug.Log("드레인 끝 확인됨");
+                player.ChangeState(E_State.Idle);
+            }
+
         }
     }
     
@@ -101,6 +110,11 @@ public class DrainState : BaseState
         return new Vector3(Mathf.Sin(AngleInDegree * Mathf.Deg2Rad), 0, Mathf.Cos(AngleInDegree * Mathf.Deg2Rad));
     }
 
+
+    public override void Exit()
+    {
+
+    }
 
     //public void OnDrawGizmos()
     //{
