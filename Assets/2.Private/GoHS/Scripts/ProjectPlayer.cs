@@ -29,7 +29,7 @@ public class ProjectPlayer : MonoBehaviour
     [SerializeField] private Camera cam;                                                // 카메라 변수
     public Camera Cam { get { return cam; } set { cam = value; } }
 
-    [field: SerializeField] public Animator animator { get; protected set; }
+    [field: SerializeField] public Animator animator { get; protected set; }            // 애니메이터 변수
 
     [SerializeField] private float moveSpeed;                                           // 움직이는 속도
     public float MoveSpeed { get { return moveSpeed; } set { moveSpeed = value; } }
