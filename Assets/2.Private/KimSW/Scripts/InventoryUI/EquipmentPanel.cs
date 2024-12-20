@@ -20,6 +20,7 @@ public class EquipmentPanel : AnimatedUI, ISlotPanel
     private void Awake()
     {
         SetSlot();
+        SetMoveOffset();
         rotationOffset = transform.rotation;
     }
 

@@ -29,7 +29,7 @@ public class TestInput : MonoBehaviour
         }
         if (Input.GetButtonDown("Cancel"))
         {
-            inGameUI.InputEsc();
+            inGameUI.InputCancel();
         }
 
         playerModel.Stamina.Value += Time.deltaTime * 100;

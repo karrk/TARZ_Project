@@ -17,12 +17,14 @@ public class BackpackPanel : AnimatedUI, ISlotPanel
     [Inject]
     ItemInventory inventory;
 
+ 
     private void Awake()
     {
         SetSlot();
-      
-    }
 
+        SetMoveOffset();
+
+    }
 
 
     public void SetSelectCursor()

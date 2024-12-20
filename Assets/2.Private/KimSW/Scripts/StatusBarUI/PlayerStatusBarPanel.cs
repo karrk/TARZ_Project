@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-public class PlayerStatusBarPanel : FadePanel
+public class PlayerStatusBarPanel : MonoBehaviour, IOpenCloseMenu
 {
     [Inject]
     InGameUI inGameUI;
@@ -33,49 +33,20 @@ public class PlayerStatusBarPanel : FadePanel
         playerExpView = GetComponentInChildren<PlayerExpView>();
         garbageInventoryView = GetComponentInChildren<GarbageInventoryView>();
 
-        SetComponent();
     }
-    public override void SetComponent()
+  
+
+
+    public void OpenUIPanel()
     {
-        images = GetComponentsInChildren<Image>();
-        texts = GetComponentsInChildren<TMP_Text>();
-    }
-
-
-
-    public override void FadeOutUI()
-    {
-   
-        foreach (Image image in images)
-        {
-            image.DOKill();
-            image.DOFade(0, fadeOutDuration).OnComplete(()=>playerHpSliderView.ResetColor());
-         
-        }
-
-        foreach(TMP_Text text in texts)
-        {
-            text.DOKill();
-            text.DOFade(0, fadeOutDuration);
-        }
-        
+        gameObject.SetActive(true);
     }
 
-    public override void FadeInUI()
+    public void CloseUIPanel()
     {
-      
-        foreach (Image image in images)
-        {
-            image.DOKill();
-            image.DOFade(1, fadeInDuration).OnComplete(() => playerHpSliderView.ResetColor());
-           
-        }
-
-        foreach (TMP_Text text in texts)
-        {
-            text.DOKill();
-            text.DOFade(1, fadeInDuration);
-        }
+        gameObject.SetActive(false);
+        inGameUI.CurrentMenu = inGameUI.InGameMenuPanel;
+        inGameUI.CurrentMenu.OpenUIPanel();
     }
 }
 
