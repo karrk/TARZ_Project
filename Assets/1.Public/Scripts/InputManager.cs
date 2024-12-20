@@ -143,11 +143,13 @@ public class InputManager : IInitializable, ITickable
     /// </summary>
     private void InputLeftStick()
     {
-        moveVec.x = Input.GetAxisRaw("LeftStickX");
-        moveVec.z = Input.GetAxisRaw("LeftStickY");
+        moveVec.x = Input.GetAxis("LeftStickX");
+        moveVec.z = Input.GetAxis("LeftStickY");
 
         //if (moveVec == Vector3.zero)
         //    return;
+
+        Debug.Log(moveVec);
 
         OnControlledLeftStick?.Invoke(moveVec);
     }
@@ -157,8 +159,8 @@ public class InputManager : IInitializable, ITickable
     /// </summary>
     private void InputRightStick()
     {
-        rotVec.x = Input.GetAxisRaw("RightStickX");
-        rotVec.y = Input.GetAxisRaw("RightStickY");
+        rotVec.x = Input.GetAxis("RightStickX");
+        rotVec.y = Input.GetAxis("RightStickY");
 
         if (rotVec == Vector3.zero)
             return;
@@ -171,8 +173,8 @@ public class InputManager : IInitializable, ITickable
     /// </summary>
     private void InputDPAD()
     {
-        arrowVec.x = Input.GetAxis("DPAD_H");
-        arrowVec.y = Input.GetAxis("DPAD_V");
+        arrowVec.x = Input.GetAxisRaw("DPAD_H");
+        arrowVec.y = Input.GetAxisRaw("DPAD_V");
 
         if (arrowVec == Vector3.zero)
             return;

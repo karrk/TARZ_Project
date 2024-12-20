@@ -65,6 +65,13 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
     }
 
     [Serializable]
+    public  class PlayerBaseStats
+    {
+        public float Hp;
+        public float Atk;
+    }
+
+    [Serializable]
     public class NormalPrefab
     {
         public GameObject PoolManager;

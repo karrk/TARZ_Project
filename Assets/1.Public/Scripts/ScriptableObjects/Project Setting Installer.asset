@@ -33,6 +33,9 @@ MonoBehaviour:
     - {fileID: 3111731739044657598, guid: 735d6edfd94719943be3fba04f8d9f29, type: 3}
   playerSetting:
     DrainSpeed: 2
+  playerBaseStats:
+    Hp: 10
+    Atk: 1
   camSetting:
     Height: 2.5
     Dist: -7.5
