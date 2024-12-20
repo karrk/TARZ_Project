@@ -7,40 +7,50 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Zenject;
 
-public class InGameMenuPanel : FadePanel
+public class InGameMenuPanel : MonoBehaviour, IOpenCloseMenu
 {
     [Inject]
     InGameUI inGameUI;
 
-    private void Awake()
-    {
-        SetComponent();
-    }
+  
   
 
     public void ResumeGame()
     {
-        // °ÔÀÓ ÁøÇà
-        inGameUI.OffInGameMenu();
+        // ê²Œìž„ ì§„í–‰
+        CloseUIPanel();
 
     }
 
     public void OnOptionMenu()
     {
-        // ¿É¼Ç ¸Þ´º È°¼ºÈ­
+        // ì˜µì…˜ ë©”ë‰´ í™œì„±í™”
     }
 
     public void TutorialEnd()
     {
-        // Æ©Åä¸®¾ó Á¾·á
+        // íŠœí† ë¦¬ì–¼ ì¢…ë£Œ
     }
 
     public void ExitGameScene()
     {
-        // °ÔÀÓ¾À ³ª°¡±â
+        // ê²Œìž„ì”¬ ë‚˜ê°€ê¸°
     }
 
+    public void OpenUIPanel()
+    {
+        gameObject.SetActive(true);
+    }
 
+    public void CloseUIPanel()
+    {
+        gameObject.SetActive(false);
+        inGameUI.CurrentMenu = inGameUI.PlayerStatusBarPanel;
+        inGameUI.CurrentMenu.OpenUIPanel();
+    }
 
- 
+    public void OffUIPanel()
+    {
+        gameObject.SetActive(false);
+    }
 }

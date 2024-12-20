@@ -4,9 +4,11 @@ using System.Linq;
 using UnityEngine;
 using Zenject;
 
-public class EquipmentPanel : MonoBehaviour, ISlotPanel
+public class EquipmentPanel : AnimatedUI, ISlotPanel
 {
     private List<UISlot> equipmentSlotList;
+
+    public List<UISlot> EquipmentSlotList { get { return equipmentSlotList; } }
 
     [Inject]
     InGameUI gameUI;
@@ -18,6 +20,8 @@ public class EquipmentPanel : MonoBehaviour, ISlotPanel
     private void Awake()
     {
         SetSlot();
+        SetMoveOffset();
+        rotationOffset = transform.rotation;
     }
 
     public void SetSlot()
@@ -65,5 +69,15 @@ public class EquipmentPanel : MonoBehaviour, ISlotPanel
             gameUI.ItemInformationPanel.SetEquippedItemInformation(inventory.Equipments[slotNumber]);
         }
         
+    }
+
+    public Vector3 GetImagePosition(int num)
+    {
+        return equipmentSlotList[num].transform.position;
+    }
+
+    public UISlot GetSlot(int num)
+    {
+        return equipmentSlotList[num];
     }
 }

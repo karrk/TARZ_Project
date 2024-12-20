@@ -14,6 +14,8 @@ public class TestInput : MonoBehaviour
     [Inject]
     PlayerUIModel playerModel;
 
+    [Inject]
+    InputManager inputManager;
 
     void Update()
     {
@@ -25,9 +27,9 @@ public class TestInput : MonoBehaviour
         {
             inGameUI.OnInventory();
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetButtonDown("Cancel"))
         {
-            inGameUI.InputEsc();
+            inGameUI.InputCancel();
         }
 
         playerModel.Stamina.Value += Time.deltaTime * 100;

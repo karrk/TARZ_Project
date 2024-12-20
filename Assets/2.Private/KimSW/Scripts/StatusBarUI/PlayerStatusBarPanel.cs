@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-public class PlayerStatusBarPanel : FadePanel
+public class PlayerStatusBarPanel : MonoBehaviour, IOpenCloseMenu
 {
     [Inject]
     InGameUI inGameUI;
@@ -25,6 +25,10 @@ public class PlayerStatusBarPanel : FadePanel
     public GarbageInventoryView GarbageInventoryView { get { return garbageInventoryView; } }
 
 
+
+    [SerializeField] AnimatedUI[] animatedUIs;
+
+
     private void Awake()
     {
         playerHpSliderView = GetComponentInChildren<PlayerHpSliderView>();
@@ -33,48 +37,36 @@ public class PlayerStatusBarPanel : FadePanel
         playerExpView = GetComponentInChildren<PlayerExpView>();
         garbageInventoryView = GetComponentInChildren<GarbageInventoryView>();
 
-        SetComponent();
     }
-    public override void SetComponent()
+  
+
+
+    public void OpenUIPanel()
     {
-        images = GetComponentsInChildren<Image>();
-        texts = GetComponentsInChildren<TMP_Text>();
-    }
-
-
-
-    public override void FadeOutUI()
-    {
-   
-        foreach (Image image in images)
+        gameObject.SetActive(true);
+        for (int i = 0; i < animatedUIs.Length; i++)
         {
-            image.DOKill();
-            image.DOFade(0, fadeOutDuration).OnComplete(()=>playerHpSliderView.ResetColor());
-         
+            animatedUIs[i].MoveOnUI();
         }
 
-        foreach(TMP_Text text in texts)
-        {
-            text.DOKill();
-            text.DOFade(0, fadeOutDuration);
-        }
-        
     }
 
-    public override void FadeInUI()
+    public void CloseUIPanel()
     {
-      
-        foreach (Image image in images)
+        for (int i = 0; i < animatedUIs.Length; i++)
         {
-            image.DOKill();
-            image.DOFade(1, fadeInDuration).OnComplete(() => playerHpSliderView.ResetColor());
-           
+            animatedUIs[i].MoveOffUI();
         }
 
-        foreach (TMP_Text text in texts)
+        inGameUI.CurrentMenu = inGameUI.InGameMenuPanel;
+        inGameUI.CurrentMenu.OpenUIPanel();
+    }
+
+    public void OffUIPanel()
+    {
+        for (int i = 0; i < animatedUIs.Length; i++)
         {
-            text.DOKill();
-            text.DOFade(1, fadeInDuration);
+            animatedUIs[i].MoveOffUI();
         }
     }
 }

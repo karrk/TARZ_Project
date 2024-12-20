@@ -1,17 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Events;
-
 public class InGameUI : BindUI
 {
-    private GameObject inventoryUI;
     private InventoryPanel inventoryPanel;
+    private InventorySetPanel inventorySetPanel;
     private ItemInformationPanel itemInformationPanel;
     private PlayerStatusBarPanel playerStatusBarPanel;
     private InGameMenuPanel inGameMenuPanel;
-    public GameObject InventoryUI { get { return inventoryUI; } }
+
+
     public InventoryPanel InventoryPanel { get { return inventoryPanel; } }
+    public InventorySetPanel InventorySetPanel { get { return inventorySetPanel; } }
 
     public ItemInformationPanel ItemInformationPanel { get { return itemInformationPanel; } }
 
@@ -19,11 +16,16 @@ public class InGameUI : BindUI
 
     public InGameMenuPanel InGameMenuPanel { get { return inGameMenuPanel; } }
 
+
+    private IOpenCloseMenu currentMenu;
+
+    public IOpenCloseMenu CurrentMenu { get { return currentMenu; } set { currentMenu = value; } }
+
     private void Awake()
     {
         Bind();
-        inventoryUI = GetUI("InGame_InventoryPanel");
         inventoryPanel = GetUI<InventoryPanel>("InventoryPanel");
+        inventorySetPanel = GetUI<InventorySetPanel>("InventorySetPanel");
         itemInformationPanel = GetUI<ItemInformationPanel>("ItemInformationPanel");
         playerStatusBarPanel = GetUI<PlayerStatusBarPanel>("PlayerStatusBarPanel");
         inGameMenuPanel = GetUI<InGameMenuPanel>("InGameMenuPanel");
@@ -31,56 +33,33 @@ public class InGameUI : BindUI
     }
     private void Start()
     {
-        InventoryUI.SetActive(false);
+
+        inventorySetPanel.gameObject.SetActive(false);
+        currentMenu = playerStatusBarPanel;
+
     }
 
 
-    public void InputEsc()
+    public void InputCancel()
     {
-        if (InventoryUI.activeSelf)
+        if (currentMenu is not null)
         {
+            CurrentMenu.CloseUIPanel();
 
-            OffInventory();
         }
-        else if(InGameMenuPanel.gameObject.activeSelf)
-        {
-            OffInGameMenu();
-        }
-        else
-        {
-            OnInGameMenu();
-        }
-
     }
-
 
     public void OnInventory()
     {
         if (InGameMenuPanel.gameObject.activeSelf)
             return;
 
-        InventoryUI.SetActive(true);
-        InventoryPanel.OnInventoryUI();
-        PlayerStatusBarPanel.FadeOutUI();
+        CurrentMenu = inventorySetPanel;
+        CurrentMenu.OpenUIPanel();
+
 
     }
 
-    public void OffInventory()
-    {
-        InventoryUI.SetActive(false);
-        PlayerStatusBarPanel.FadeInUI();
-    }
 
-    public void OnInGameMenu()
-    {
-        InGameMenuPanel.gameObject.SetActive(true);
-        PlayerStatusBarPanel.FadeOutUI();
-        InGameMenuPanel.FadeInUI();
-    }
-    public void OffInGameMenu()
-    {
-       // InGameMenuPanel.gameObject.SetActive(false);
-        PlayerStatusBarPanel.FadeInUI();
-        InGameMenuPanel.FadeOutUI();
-    }
+
 }
