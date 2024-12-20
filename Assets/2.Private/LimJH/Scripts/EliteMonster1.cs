@@ -3,31 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using BehaviorDesigner.Runtime;
 
-public class EliteMonster1 : MonoBehaviour
+public class EliteMonster1 : BaseMonster
 {
-    public float health;
     public bool canJumpAttack = true;
     public float jumpAttackCoolTime;
 
-    private BehaviorTree behaviorTree;
-
-    private void Awake()
-    {
-        behaviorTree = GetComponent<BehaviorTree>(); // BehaviorTree 컴포넌트를 찾음
-    }
-
-    public void TakeDamage(float damage)
-    {
-        health -= damage;
-        Debug.Log($"Health: {health}");
-    }
 
     private void Update()
     {
-        if (behaviorTree != null && behaviorTree.GetVariable("health") != null)
-        {
-            behaviorTree.SetVariableValue("health", health);
-        }
+        base.Update();
 
         if (behaviorTree != null && behaviorTree.GetVariable("canJumpAttack") != null)
         {

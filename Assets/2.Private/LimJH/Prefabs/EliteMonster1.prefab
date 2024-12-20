@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1994540643244079858}
   - component: {fileID: 8772785832521179456}
   - component: {fileID: 7855947380227009085}
-  - component: {fileID: 916930304638041271}
+  - component: {fileID: 346164323966265174}
   m_Layer: 0
   m_Name: EliteMonster1
   m_TagString: Monster
@@ -204,7 +204,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &916930304638041271
+--- !u!114 &346164323966265174
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -217,5 +217,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 3
+  behaviorTree: {fileID: 0}
   canJumpAttack: 1
   jumpAttackCoolTime: 5
