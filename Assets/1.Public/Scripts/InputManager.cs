@@ -149,7 +149,7 @@ public class InputManager : IInitializable, ITickable
         //if (moveVec == Vector3.zero)
         //    return;
 
-        Debug.Log(moveVec);
+        //Debug.Log(moveVec);
 
         OnControlledLeftStick?.Invoke(moveVec);
     }
