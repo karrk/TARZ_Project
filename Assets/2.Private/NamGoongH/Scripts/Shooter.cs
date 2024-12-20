@@ -37,6 +37,5 @@ public class Shooter : MonoBehaviour
             rb.AddForce(firePoint.forward * 5, ForceMode.Impulse);
             Debug.Log($"Fired item: {garbagePrefab.name}");
         }
-
     }
 }
