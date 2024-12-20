@@ -1,8 +1,8 @@
 ID,Hp,Power,AttackSpeed,MoveSpeed,ProjectileSpeed,StatusResistance,HitResistance,AttackRange,DetectionRange,SkillConditionTime,SkillConditionCount,SkillConditionRange,GroggyTime,GimmickBreakHitCount,Skill1CastProbability,Skill2CastProbability,Skill3CastProbability,BerserkSkillConditionCount,BerserkAttackSpeed,BerserkSkill1CastProbability,BerserkSkill2CastProbability,BerserkSkill3CastProbability
-MonNormal01,150,5,100%,100%,null,0%,0%,1,10,null,null,null,null,null,null,null,null,null,null,null,null,null
-MonNormal02,100,3,70%,50%,,0%,0%,7,10,null,null,null,null,null,null,null,null,null,null,null,null,null
-MonNormal03,70,2,150%,200%,null,0%,0%,1,10,null,null,null,null,null,null,null,null,null,null,null,null,null
-MonElite01,500,10,100%,100%,null,10%,30%,1,10,4,null,null,null,null,null,null,null,null,null,null,null,null
-MonElite02,400,4,100%,200%,null,10%,30%,10,10,5,null,null,null,null,null,null,null,null,null,null,null,null
-MonMidBoss01,1500,20,100%,100%,,30%,50%,30,30,null,4,5,5,null,null,null,null,null,null,null,null,null
-MonBoss01,3000,40,100%,150%,null,50%,70%,30,30,3,5,null,5,5,10%,60%,30%,3,,30%,20%,50%
+MonNormal01,150,5,100%,100%,0,0%,0%,1,10,0,0,0,0,0,0,0,0,0,0,0,0,0
+MonNormal02,100,3,70%,50%,0,0%,0%,7,10,0,0,0,0,0,0,0,0,0,0,0,0,0
+MonNormal03,70,2,150%,200%,0,0%,0%,1,10,0,0,0,0,0,0,0,0,0,0,0,0,0
+MonElite01,500,10,100%,100%,0,10%,30%,1,10,0,0,0,0,0,0,0,0,0,0,0,0,0
+MonElite02,400,4,100%,200%,0,10%,30%,10,10,0,0,0,0,0,0,0,0,0,0,0,0,0
+MonMidBoss01,1500,20,100%,100%,0,30%,50%,30,30,0,4,5,5,0,0,0,0,0,0,0,0,0
+MonBoss01,3000,40,100%,150%,0,50%,70%,30,30,3,5,0,5,5,10%,60%,30%,3,0%,30%,20%,50%

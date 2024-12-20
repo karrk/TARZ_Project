@@ -10,7 +10,7 @@ public class MonsterScriptableObject : ScriptableObject
     public string monsterName;
 
     // 몬스터 체력
-    public float monsterHp;
+    public int monsterHp;
 
     // 몬스터 공격력
     public float monsterPower;
