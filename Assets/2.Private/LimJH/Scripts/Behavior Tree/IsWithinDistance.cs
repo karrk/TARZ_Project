@@ -19,7 +19,7 @@ public class IsWithinDistance : Conditional
             Vector3.Distance(selfObject.Value.transform.position,
             targetObject.Value.transform.position);
 
-        Debug.Log(distance);
+        //Debug.Log(distance);
 
         if (distance <= detectRange.Value)
         {
