@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class AnimatedUI : MonoBehaviour
 {
+    protected Quaternion rotationOffset;
+
 
     
 
@@ -16,11 +18,14 @@ public class AnimatedUI : MonoBehaviour
         Sprite sprite = currentSlot.GetSprite();
 
         currentSlotTransform.DOMove(targetSlotVector, 0.1f).
-            SetEase(Ease.OutBack).
+            SetEase(Ease.Linear).
             OnKill(() => {
                 targetSlot.SetSlotImage(sprite);
+                targetSlot.OnVFX();
+
                 currentSlot.RemoveSlotImage();
                 currentSlotTransform.localPosition = Vector3.zero;
+                
                 targetPanel.ShakeObject();
                  });
     }
@@ -29,6 +34,6 @@ public class AnimatedUI : MonoBehaviour
     {
         transform.DOShakeRotation(0.3f,1 ).
             SetEase(Ease.Linear).
-            OnKill(()=> { transform.localRotation = Quaternion.identity; });
+            OnKill(()=> { transform.localRotation = rotationOffset; });
     }
 }

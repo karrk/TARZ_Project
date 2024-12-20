@@ -9,6 +9,8 @@ public class UISlot : MonoBehaviour
 
     ISlotPanel slotPanel;
 
+    [SerializeField] GameObject uiVFX;
+
     [SerializeField] private Image uiImage;
     [SerializeField] private ButtonSelectCallback selectCallback;
     [SerializeField] public Button slotButton;
@@ -54,6 +56,13 @@ public class UISlot : MonoBehaviour
         slotPanel.SlotSelectCallback(SlotNumber);
     }
 
+
+    public void OnVFX()
+    {
+        uiVFX.SetActive(false);
+        uiVFX.SetActive(true);
+    }
+
     private void OnEnable()
     {
         selectCallback.selectEvent += ChangeItemInformation;
@@ -62,6 +71,10 @@ public class UISlot : MonoBehaviour
 
     private void OnDisable()
     {
+        if (uiVFX)
+        {
+            uiVFX.SetActive(false);
+        }
         selectCallback.selectEvent -= ChangeItemInformation;
     }
 }
