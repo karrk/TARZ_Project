@@ -2,6 +2,7 @@ using UnityEngine;
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 using BehaviorDesigner.Runtime.Tasks.Unity.UnityGameObject;
+using UnityEditor.Experimental.GraphView;
 
 public class GimmickFire : Action
 {
@@ -14,6 +15,8 @@ public class GimmickFire : Action
     private float originalDamageReduction = 1f; // 기존 피해 감소 비율
 
     public GameObject fire;
+
+    public SharedGameObjectList pillarList;  // 기둥 리스트
 
     public override void OnStart()
     {
@@ -44,7 +47,8 @@ public class GimmickFire : Action
 
             if (pillarPrefab != null)
             {
-                GameObject.Instantiate(pillarPrefab, randomPosition, Quaternion.identity);
+                GameObject pillar = GameObject.Instantiate(pillarPrefab, randomPosition, Quaternion.identity);
+                pillarList.Value.Add(pillar);
             }
         }
     }
