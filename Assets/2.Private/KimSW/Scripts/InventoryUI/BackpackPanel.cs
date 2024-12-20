@@ -10,6 +10,8 @@ public class BackpackPanel : AnimatedUI, ISlotPanel
 {
 
     private List<UISlot> backpackSlotList;
+    private Button currentEquipmentSlot;
+
 
     [Inject]
     InGameUI gameUI;
@@ -20,6 +22,7 @@ public class BackpackPanel : AnimatedUI, ISlotPanel
 
     [SerializeField] Animator uiAnimator;
 
+    int currentNumber;
 
     private void Awake()
     {
@@ -27,8 +30,14 @@ public class BackpackPanel : AnimatedUI, ISlotPanel
 
         SetMoveOffset();
 
+     
+
     }
 
+    private void Start()
+    {
+        currentEquipmentSlot = gameUI.InventoryPanel.equipmentPanel.GetSlot(0).slotButton;
+    }
 
     public void SetSelectCursor()
     {
@@ -53,7 +62,7 @@ public class BackpackPanel : AnimatedUI, ISlotPanel
     public void SetSprite(int num, Sprite sprite)
     {
         backpackSlotList[num].SetSlotImage(sprite);
-        SlotSelectCallback(num);
+        SlotSelectCallback(currentNumber);
     }
 
     public void EquipmentAnimation(int num)
@@ -83,17 +92,25 @@ public class BackpackPanel : AnimatedUI, ISlotPanel
 
     public void SlotSelectCallback(int slotNumber)
     {
-      
+        currentNumber = slotNumber;
         if (inventory.Items[slotNumber] is null)
         {
             gameUI.ItemInformationPanel.SetDefaultEquippedInformation();
             gameUI.ItemInformationPanel.SetDefaultItemInformation();
+
+            currentEquipmentSlot.image.color = Color.white;
         }
         else
         {
             gameUI.ItemInformationPanel.SetSelectItemInformation(inventory.Items[slotNumber]);
 
             int typeNumber = (int)inventory.Items[slotNumber].itemType;
+
+            // 일치 하는 장비칸 포커스
+            currentEquipmentSlot.image.color = Color.white;
+            currentEquipmentSlot = gameUI.InventoryPanel.equipmentPanel.GetSlot(typeNumber).slotButton;
+            currentEquipmentSlot.image.color = Color.yellow;
+
             if (inventory.Equipments[typeNumber] is null)
             {
                 gameUI.ItemInformationPanel.SetDefaultEquippedInformation();
