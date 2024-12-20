@@ -28,7 +28,7 @@ public class PlayerInstaller : MonoInstaller
         Container.Bind<JumpState>().AsSingle();
         Container.Bind<DashState>().AsSingle();
         Container.Bind<LongRangeAttackState>().AsSingle();
-        Container.Bind<CollectState>().AsSingle();
+        Container.Bind<DrainState>().AsSingle();
     }
 
     private void InstallCamera()

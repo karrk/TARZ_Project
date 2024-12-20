@@ -4,15 +4,18 @@ using UnityEngine;
 
 [System.Serializable]
 
-public class CollectState : BaseState
+public class DrainState : BaseState
 {
 
     [SerializeField] private ProjectPlayer player;
 
-    public CollectState (ProjectPlayer player)
+    public DrainState (ProjectPlayer player)
     {
         this.player = player;
         this.viewAngle = 360f;
+        this.maxViewArea = 10f;
+        this.viewSpeed = 10f;
+        this.targetMask = LayerMask.GetMask("Garbage");
     }
 
     // 판정 범위 거리
@@ -31,6 +34,8 @@ public class CollectState : BaseState
     [HideInInspector]
     [SerializeField] private List<Transform> Targets = new List<Transform>();
 
+    [SerializeField] private float drainSpeed;
+
     public override void Enter()
     {
         Debug.Log("@@@@@@@@@@@@@@수집상태 진입 성공");
@@ -40,6 +45,7 @@ public class CollectState : BaseState
     {
         if(Input.GetKey(KeyCode.LeftControl))
         {
+            Debug.Log("드레인 진행중!");
             IncreaseViewArea();
             GetTarget();
         }
@@ -55,6 +61,7 @@ public class CollectState : BaseState
     /// </summary>
     private void IncreaseViewArea()
     {
+        Debug.Log(viewArea);
         viewArea += viewSpeed * Time.deltaTime;
         viewArea = Mathf.Clamp(viewArea, 0, maxViewArea);
     }
@@ -72,10 +79,19 @@ public class CollectState : BaseState
         {
             Transform target = TargetCollider[i].transform;
             Vector3 direction = target.position - player.transform.position;
+
             if (Vector3.Dot(direction.normalized, player.transform.forward) > GetAngle(viewAngle / 2).z)
             {
                 Debug.Log(GetAngle(viewAngle / 2).z);
                 Targets.Add(target);
+
+                IDrainable drainable = target.GetComponent<IDrainable>();
+                if (drainable != null)
+                {
+                    drainable.DrainTowards(player.transform.position, drainSpeed);
+                    Debug.Log($"빨아들이는중 {target.name}");
+                }
+
             }
         }
     }
@@ -86,16 +102,16 @@ public class CollectState : BaseState
     }
 
 
-    public void OnDrawGizmos()
-    {
-        Debug.Log("~~~~~~~~~기즈모 실행중~~~~~~~~~~~");
-        Handles.DrawWireArc(player.transform.position, Vector3.up, player.transform.forward, 360, viewArea);
-        Handles.DrawLine(player.transform.position, player.transform.position + GetAngle(-viewAngle / 2) * viewArea);
-        Handles.DrawLine(player.transform.position, player.transform.position + GetAngle(viewAngle / 2) * viewArea);
+    //public void OnDrawGizmos()
+    //{
+    //    Debug.Log("~~~~~~~~~기즈모 실행중~~~~~~~~~~~");
+    //    Handles.DrawWireArc(player.transform.position, Vector3.up, player.transform.forward, 360, viewArea);
+    //    Handles.DrawLine(player.transform.position, player.transform.position + GetAngle(-viewAngle / 2) * viewArea);
+    //    Handles.DrawLine(player.transform.position, player.transform.position + GetAngle(viewAngle / 2) * viewArea);
 
-        foreach (Transform Target in Targets)
-        {
-            Handles.DrawLine(player.transform.position, Target.position);
-        }
-    }
+    //    foreach (Transform Target in Targets)
+    //    {
+    //        Handles.DrawLine(player.transform.position, Target.position);
+    //    }
+    //}
 }

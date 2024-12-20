@@ -5,7 +5,7 @@ using UnityEngine.Events;
 using UnityEngine.UIElements;
 using Zenject;
 
-public enum E_State { Idle, Move, Jump, Dash, LongRangeAttack, Collet, Size }      // 우선적으로 선언한 상태
+public enum E_State { Idle, Move, Jump, Dash, LongRangeAttack, Drain, Size }      // 우선적으로 선언한 상태
 
 public class ProjectPlayer : MonoBehaviour
 {
@@ -19,7 +19,7 @@ public class ProjectPlayer : MonoBehaviour
     [Inject][SerializeField] private JumpState jumpState;
     [Inject][SerializeField] private DashState dashState;
     [Inject][SerializeField] private LongRangeAttackState longRangeAttackState;
-    [Inject][SerializeField] private CollectState colletState;
+    [Inject][SerializeField] private DrainState drainState;
 
 
     [Header("프로퍼티")]
@@ -64,7 +64,7 @@ public class ProjectPlayer : MonoBehaviour
         states[(int)E_State.Jump] = jumpState;
         states[(int)E_State.Dash] = dashState;
         states[(int)E_State.LongRangeAttack] = longRangeAttackState;
-        states[(int)E_State.Collet] = colletState;
+        states[(int)E_State.Drain] = drainState;
     }
 
     private void Start()
@@ -86,10 +86,10 @@ public class ProjectPlayer : MonoBehaviour
         //inputZ = Input.GetAxisRaw("Vertical");
 
         //GroundCheck();
-        if (curState == E_State.Collet)
-        {
-            colletState.OnDrawGizmos();
-        }
+        //if (curState == E_State.Drain)
+        //{
+        //    drainState.OnDrawGizmos();
+        //}
 
         states[(int)curState].Update();
     }
