@@ -10,7 +10,7 @@ public class TestScript : MonoBehaviour
  
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)){
+        if (Input.GetKeyDown(KeyCode.T)){
             poolManager.GetObject<DamageText>(E_VFX.DamageText).SetText("200", transform.position, false);
 
         }

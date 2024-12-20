@@ -39,7 +39,7 @@ public class IdleState : BaseState
         }
 
         // 대쉬 상태로 넘어가는 로직
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !Input.GetKeyDown(KeyCode.Space))
         {
             player.ChangeState(E_State.Dash);
         }
@@ -49,6 +49,10 @@ public class IdleState : BaseState
             player.ChangeState(E_State.LongRangeAttack);
         }
 
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            player.ChangeState(E_State.Collet);
+        }
 
     }
 }
