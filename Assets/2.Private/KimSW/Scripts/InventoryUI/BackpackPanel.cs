@@ -17,7 +17,10 @@ public class BackpackPanel : AnimatedUI, ISlotPanel
     [Inject]
     ItemInventory inventory;
 
- 
+
+    [SerializeField] Animator uiAnimator;
+
+
     private void Awake()
     {
         SetSlot();
@@ -55,6 +58,8 @@ public class BackpackPanel : AnimatedUI, ISlotPanel
 
     public void EquipmentAnimation(int num)
     {
+        uiAnimator.SetTrigger("PlayUIAni");
+
         ThrowSlotUI(backpackSlotList[num],
          gameUI.InventoryPanel.equipmentPanel.GetSlot((int)inventory.Items[num].itemType),
          gameUI.InventoryPanel.equipmentPanel);

@@ -12,6 +12,7 @@ public class AnimatedUI : MonoBehaviour
     protected Vector2 positionOffset;
     [SerializeField] protected Vector2 targetOffset;
 
+    [SerializeField] float targetScale;
     private void Awake()
     {
         SetMoveOffset();
@@ -54,7 +55,7 @@ public class AnimatedUI : MonoBehaviour
     public void ShrunkAnimation(Transform objectTransform)
     {
         DOTween.Sequence().
-            Append(objectTransform.DOScale(2, 0.1f)).
+            Append(objectTransform.DOScale(targetScale, 0.1f)).
             Append(objectTransform.DOScale(1, 0.1f)).
             OnKill(() =>
             {

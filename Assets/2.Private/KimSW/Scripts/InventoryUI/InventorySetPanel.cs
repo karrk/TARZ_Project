@@ -13,7 +13,7 @@ public class InventorySetPanel : MonoBehaviour, IOpenCloseMenu
 
     public void OpenUIPanel()
     {
-        inGameUI.PlayerStatusBarPanel.gameObject.SetActive(false);
+        inGameUI.PlayerStatusBarPanel.OffUIPanel();
         gameObject.SetActive(true);
 
         for (int i = 0; i < animatedUIs.Length; i++)

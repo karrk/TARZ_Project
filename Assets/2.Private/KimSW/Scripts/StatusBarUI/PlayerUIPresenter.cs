@@ -89,7 +89,7 @@ public class PlayerUIPresenter : MonoBehaviour
 
         playerModel.MaxGarbageCount
         .Where(value => value >= 0)
-        .Subscribe(value => inGameUI.PlayerStatusBarPanel.GarbageInventoryView.SetSliderMax(value))
+        .Subscribe(value => inGameUI.PlayerStatusBarPanel.GarbageInventoryView.SetTextMax(value))
         .AddTo(this);
 
         playerModel.GarbageCount
@@ -105,7 +105,7 @@ public class PlayerUIPresenter : MonoBehaviour
         playerModel.GarbageCount
        .Where(value => value >= 0)
        .Where(value => value <= playerModel.MaxGarbageCount.Value)
-       .Subscribe(value => inGameUI.PlayerStatusBarPanel.GarbageInventoryView.SetSlider(value))
+       .Subscribe(value => inGameUI.PlayerStatusBarPanel.GarbageInventoryView.SetText(value))
        .AddTo(this);
 
 

@@ -3,20 +3,26 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class GarbageInventoryView : SliderView
+public class GarbageInventoryView : AnimatedUI
 {
     [SerializeField] TMP_Text currentText;
     [SerializeField] TMP_Text maxText;
 
-
-    public override void SetSlider(float value)
+    private void Awake()
     {
-        currentText.text = value.ToString("000");
+        SetMoveOffset();
+        rectTransform.anchoredPosition = positionOffset;
     }
 
-    public override void SetSliderMax(float value)
+    public  void SetText(float value)
+    {
+        currentText.text = value.ToString("000");
+        ShrunkAnimation(transform);
+    }
+
+    public  void SetTextMax(float value)
     {
         maxText.text = value.ToString("000");
-
+        ShrunkAnimation(transform);
     }
 }

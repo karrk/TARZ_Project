@@ -25,6 +25,10 @@ public class PlayerStatusBarPanel : MonoBehaviour, IOpenCloseMenu
     public GarbageInventoryView GarbageInventoryView { get { return garbageInventoryView; } }
 
 
+
+    [SerializeField] AnimatedUI[] animatedUIs;
+
+
     private void Awake()
     {
         playerHpSliderView = GetComponentInChildren<PlayerHpSliderView>();
@@ -40,13 +44,30 @@ public class PlayerStatusBarPanel : MonoBehaviour, IOpenCloseMenu
     public void OpenUIPanel()
     {
         gameObject.SetActive(true);
+        for (int i = 0; i < animatedUIs.Length; i++)
+        {
+            animatedUIs[i].MoveOnUI();
+        }
+
     }
 
     public void CloseUIPanel()
     {
-        gameObject.SetActive(false);
+        for (int i = 0; i < animatedUIs.Length; i++)
+        {
+            animatedUIs[i].MoveOffUI();
+        }
+
         inGameUI.CurrentMenu = inGameUI.InGameMenuPanel;
         inGameUI.CurrentMenu.OpenUIPanel();
+    }
+
+    public void OffUIPanel()
+    {
+        for (int i = 0; i < animatedUIs.Length; i++)
+        {
+            animatedUIs[i].MoveOffUI();
+        }
     }
 }
 

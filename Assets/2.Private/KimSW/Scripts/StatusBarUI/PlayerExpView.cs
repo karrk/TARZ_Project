@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class PlayerExpView : MonoBehaviour
+public class PlayerExpView : AnimatedUI
 {
    
 
@@ -12,7 +12,9 @@ public class PlayerExpView : MonoBehaviour
  
     private void Awake()
     {
-        expText = GetComponentInChildren<TMP_Text>(); 
+        expText = GetComponentInChildren<TMP_Text>();
+        SetMoveOffset();
+        rectTransform.anchoredPosition = positionOffset;
     }
 
  
