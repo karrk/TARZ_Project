@@ -44,6 +44,11 @@ public class UISlot : MonoBehaviour
         return uiImage.sprite;
     }
 
+    public Transform GetImageTransform()
+    {
+        return uiImage.transform;
+    }
+
     public void ChangeItemInformation()
     {
         slotPanel.SlotSelectCallback(SlotNumber);

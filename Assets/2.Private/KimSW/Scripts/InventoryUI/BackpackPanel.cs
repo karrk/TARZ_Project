@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using Zenject;
 
-public class BackpackPanel : MonoBehaviour, ISlotPanel
+public class BackpackPanel : AnimatedUI, ISlotPanel
 {
 
     private List<UISlot> backpackSlotList;
@@ -19,6 +20,7 @@ public class BackpackPanel : MonoBehaviour, ISlotPanel
     private void Awake()
     {
         SetSlot();
+      
     }
 
 
@@ -46,10 +48,17 @@ public class BackpackPanel : MonoBehaviour, ISlotPanel
     public void SetSprite(int num, Sprite sprite)
     {
         backpackSlotList[num].SetSlotImage(sprite);
-
         SlotSelectCallback(num);
     }
 
+    public void EquipmentAnimation(int num)
+    {
+        ThrowSlotUI(backpackSlotList[num],
+         gameUI.InventoryPanel.equipmentPanel.GetSlot((int)inventory.Items[num].itemType),
+         gameUI.InventoryPanel.equipmentPanel);
+    }
+
+ 
     public void RemoveSprite(int num)
     {
         if (inventory.Items[num] is null)
@@ -57,10 +66,9 @@ public class BackpackPanel : MonoBehaviour, ISlotPanel
             return;
         }
 
-        // Àåºñ ÀåÂø
-        gameUI.InventoryPanel.equipmentPanel.SetSprite((int)inventory.Items[num].itemType, backpackSlotList[num].GetSprite());
-
-        backpackSlotList[num].RemoveSlotImage();
+        // ìž¥ë¹„ ìž¥ì°©
+        EquipmentAnimation(num);
+ 
         inventory.RemoveItem(num);
 
         SlotSelectCallback(num);

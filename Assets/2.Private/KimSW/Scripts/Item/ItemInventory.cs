@@ -52,7 +52,7 @@ public class ItemInventory : MonoBehaviour
                     items[i] = item;
 
                     inGameUI.InventoryPanel.GetItem(i, item.sprite);
-
+                
                     return;
                 }
                
