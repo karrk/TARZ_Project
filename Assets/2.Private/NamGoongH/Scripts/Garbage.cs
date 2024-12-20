@@ -1,8 +1,13 @@
 using UnityEngine;
 
-public class Garbage : MonoBehaviour
+public class Garbage : MonoBehaviour, IDrainable
 {
     public int garbageIndex; // 투척물의 인덱스
+
+    public void DrainTowards(Vector3 targetPosition, float speed)
+    {
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+    }
 
     private void Start()
     {

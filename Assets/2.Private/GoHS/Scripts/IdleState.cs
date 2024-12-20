@@ -51,7 +51,7 @@ public class IdleState : BaseState
 
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
-            player.ChangeState(E_State.Collet);
+            player.ChangeState(E_State.Drain);
         }
 
     }
