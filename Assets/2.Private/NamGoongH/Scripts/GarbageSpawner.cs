@@ -10,9 +10,9 @@ public class GarbageSpawner : MonoBehaviour
     public Transform[] spawnPoints;
 
     [Inject]
-    public void Construct(GameObject[] garbagePrefabs)
+    public void Construct(ProjectInstaller.GarbagePrefab garbagePrefabs)
     {
-        this.garbagePrefabs = garbagePrefabs;
+        this.garbagePrefabs = garbagePrefabs.Garbages;
     }
 
     private void Start()
