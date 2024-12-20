@@ -12,8 +12,8 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         // 입력 받기
-        float horizontal = Input.GetAxisRaw("Horizontal"); // 좌우 이동 (A, D 또는 화살표 키)
-        float vertical = Input.GetAxisRaw("Vertical"); // 앞뒤 이동 (W, S 또는 화살표 키)
+        float horizontal = Input.GetAxisRaw("LeftStickX"); // 좌우 이동 (A, D)
+        float vertical = Input.GetAxisRaw("LeftStickY"); // 앞뒤 이동 (W, S)
 
         // 이동 처리
         Vector3 movement = new Vector3(horizontal, 0, vertical).normalized; // 정규화된 이동 방향

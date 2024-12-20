@@ -2,11 +2,12 @@ using UnityEngine;
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 
-public class IsInAttackRange : Conditional
+public class IsInJumpAttack : Conditional
 {
     public SharedGameObject selfObject;
     public SharedGameObject targetObject;
-    public SharedFloat attackRange;
+    public SharedFloat detectRange;
+    public SharedBool canJumpAttack;
 
     public override TaskStatus OnUpdate()
     {
@@ -20,8 +21,8 @@ public class IsInAttackRange : Conditional
             targetObject.Value.transform.position);
 
         //Debug.Log(distance);
-
-        if (distance <= attackRange.Value)
+        
+        if (distance <= detectRange.Value && canJumpAttack.Value)
         {
             return TaskStatus.Success;
         }

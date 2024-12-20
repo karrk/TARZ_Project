@@ -13,8 +13,12 @@ public class JumpAttack : Action
     private Vector3 startPosition;        // 점프 시작 위치
     private Vector3 targetPosition;       // 점프 도착 위치
 
+    private EliteMonster1 eliteMonster;
+
     public override void OnStart()
     {
+        eliteMonster = gameObject.GetComponent<EliteMonster1>();
+
         if (targetObject.Value == null)
         {
             Debug.LogWarning("타겟 오브젝트가 존재하지 않습니다.");
@@ -32,6 +36,12 @@ public class JumpAttack : Action
 
         // 점프 애니메이션 트리거 추가 가능
         Debug.Log("점프 시작!");
+
+        // 점프 공격 불가능 상태로 설정
+        if (eliteMonster != null)
+        {
+            eliteMonster.canJumpAttack = false; // 점프 공격 비활성화
+        }
     }
 
     public override TaskStatus OnUpdate()
@@ -76,5 +86,18 @@ public class JumpAttack : Action
     {
         // 점프 및 공격 종료 작업
         Debug.Log("점프 공격 완료");
+
+        // 점프 공격 쿨타임 시작
+        if (eliteMonster != null)
+        {
+            eliteMonster.StartCoroutine(StartJumpAttackCooldown(eliteMonster));
+        }
+    }
+
+    private System.Collections.IEnumerator StartJumpAttackCooldown(EliteMonster1 monster)
+    {
+        yield return new WaitForSeconds(monster.jumpAttackCoolTime); // 쿨타임 대기
+        monster.canJumpAttack = true; // 점프 공격 가능 상태로 복구
+        Debug.Log("점프 공격 쿨타임 종료");
     }
 }

@@ -5,7 +5,6 @@ using Zenject;
 public class GameSceneInstaller : MonoInstaller
 {
     [SerializeField] PlayerController player;
-    [SerializeField] SharedFloat health;
 
     public override void InstallBindings()
     {
