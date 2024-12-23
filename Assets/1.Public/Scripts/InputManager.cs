@@ -47,6 +47,8 @@ public class InputManager : IInitializable, ITickable
     /// </summary>
     public event Action PressedAKey;
 
+    public event Action OnUpAkey;
+
     /// <summary>
     /// B 키 입력시 발생됩니다.
     /// 데스크탑 환경에서는 좌측 Shift 키 입력시 발생됩니다.
@@ -89,6 +91,7 @@ public class InputManager : IInitializable, ITickable
     private Vector3 rotVec;
     private Vector3 arrowVec;
     private bool enteredL2;
+    private bool pressingAkey;
 
     [Inject] private SignalBus signal;
 
@@ -220,9 +223,15 @@ public class InputManager : IInitializable, ITickable
     /// </summary>
     private void InputA()
     {
-        if (Input.GetButtonDown("A") || Input.GetKeyDown(KeyCode.F))
+        if ((Input.GetButtonDown("A") || Input.GetKeyDown(KeyCode.F)) && pressingAkey == false)
         {
             PressedAKey?.Invoke();
+            pressingAkey = true;
+        }
+        else if((Input.GetButtonUp("A") || Input.GetKeyUp(KeyCode.F)) && pressingAkey == true)
+        {
+            pressingAkey = false;
+            OnUpAkey?.Invoke();
         }
     }
 

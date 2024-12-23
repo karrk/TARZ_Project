@@ -6,6 +6,8 @@ public class IdleState : BaseState
 {
     [SerializeField] ProjectPlayer player;
 
+    [Inject] private InputManager inputManager;
+
     public IdleState(ProjectPlayer player)
     {
         this.player = player;
@@ -55,10 +57,17 @@ public class IdleState : BaseState
             player.ChangeState(E_State.Drain);
         }
 
+        if( Input.GetKeyDown(KeyCode.R))
+        {
+            player.ChangeState(E_State.LongRangeSkill_1);
+        }
+
     }
 
     public override void Exit()
     {
         player.animator.SetBool("Idle", false);
     }
+
+
 }
