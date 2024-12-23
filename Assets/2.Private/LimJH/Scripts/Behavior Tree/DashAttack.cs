@@ -21,6 +21,6 @@ public class DashAttack : Action
     public override void OnEnd()
     {
         // 공격 횟수 초기화
-        //attackCount.Value = 0;
+        attackCount.Value = 0;
     }
 }
