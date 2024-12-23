@@ -6,13 +6,9 @@ using UnityEngine;
 public class Equipment
 {
     public E_EquipmentsType type;                   // 장비 타입
-
     public string name;                             // 장비 이름
-
     public int grade;                               // 등급 (e.g., 1=Common, 2=Rare, 3=Epic)
-
     public float primaryStat;                       // 주요 스탯
-
     public Dictionary<string, float> subStats;      // 부가 스탯
 
     // 생성자
@@ -43,12 +39,12 @@ public class Equipment
             case E_EquipmentsType.Head: return grade * 10f; // 크리티컬 데미지
             case E_EquipmentsType.Chest: return grade * 10f; // 최대 생명력
             case E_EquipmentsType.Glasses: return grade * 5f; // 크리티컬 확률
-            case E_EquipmentsType.Arm: return grade * 10f; // 공격력 예시
-            case E_EquipmentsType.Leg: return grade * 10f; // 스테미너 예시
-            case E_EquipmentsType.Earing: return grade * 5f; // 최대 물건 보유량 예시
-            case E_EquipmentsType.Ring: return grade * 10f; // 마나흡수 예시
-            case E_EquipmentsType.Boots: return grade * 2f - 1; // 이동속도 예시
-            case E_EquipmentsType.Necklace: return grade * 10f; // 스테미너 회복 예시
+            case E_EquipmentsType.Arm: return grade * 10f; // 공격력
+            case E_EquipmentsType.Leg: return grade * 10f; // 스테미너
+            case E_EquipmentsType.Earing: return grade * 5f; // 최대 물건 보유량
+            case E_EquipmentsType.Ring: return grade * 10f; // 마나흡수
+            case E_EquipmentsType.Boots: return grade * 2f - 1; // 이동속도
+            case E_EquipmentsType.Necklace: return grade * 10f; // 스테미너 회복
             default: return 0f;
         }
     }

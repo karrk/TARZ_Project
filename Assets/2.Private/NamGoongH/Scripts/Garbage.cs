@@ -1,8 +1,12 @@
+using UnityEditorInternal;
 using UnityEngine;
 
 public class Garbage : MonoBehaviour, IDrainable
 {
     public int garbageIndex; // 투척물의 인덱스
+
+    private bool isProjectile = false;
+    public bool IsProjectile { get { return isProjectile; } set { isProjectile = value; } } // 플레이어가 발사했는지 판별
 
     public void DrainTowards(Vector3 targetPosition, float speed)
     {
@@ -28,9 +32,37 @@ public class Garbage : MonoBehaviour, IDrainable
 
     public void OnCollisionEnter(Collision collision)
     {
-        if(CompareTag("Monster"))
+        // 충돌한 객체의 태그 확인
+        string collisionTag = collision.gameObject.tag;
+
+        // 몬스터와 충돌한 경우
+        if (collisionTag == "Monster" && IsProjectile == true)
         {
+            Debug.Log("Hit Monster!");
+
+            // 투척물 소멸
             Destroy(gameObject);
+            return;
         }
+
+        // 바닥 또는 기본 환경과 충돌한 경우
+        if (collisionTag == "Ground" || collisionTag == "Untagged")
+        {
+            // 투척물이 비어있는 상태일때
+            if (garbageIndex == 0)
+            {
+                // 무한 투척물 파괴
+                Destroy(gameObject);
+            }
+            // 투척물 상태 해제
+            IsProjectile = false;
+            Debug.Log("Garbage hit the ground and is no longer a projectile.");
+        }
+    }
+
+    // 플레이어에 의해 발사되었음을 설정
+    public void SetAsProjectile()
+    {
+        IsProjectile = true;
     }
 }

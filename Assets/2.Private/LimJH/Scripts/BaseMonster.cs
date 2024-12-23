@@ -39,13 +39,11 @@ public class BaseMonster : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(IsInLayerMask(other.gameObject, garbageLayer))
+        Garbage garbage = other.GetComponent<Garbage>();
+        if(IsInLayerMask(other.gameObject, garbageLayer) && garbage.IsProjectile == true)
         {
             // 몬스터의 체력을 감소
             TakeDamage(1);
-
-            // 충돌한 투척물 제거
-            Destroy(other.gameObject);
         }
     }
 
