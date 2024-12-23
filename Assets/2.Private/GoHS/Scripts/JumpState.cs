@@ -27,6 +27,7 @@ public class JumpState : BaseState
     public override void Enter()
     {
         Debug.Log("점프 진입!");
+        player.animator.SetBool("Jump", true);
         player.Rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
         player.isGrounded = false;
     }
@@ -36,6 +37,7 @@ public class JumpState : BaseState
         Debug.Log("Jump 업데이트문 진행중");
         if (player.isGrounded)
         {
+            player.animator.SetBool("Jump", false);
             player.ChangeState(E_State.Idle);
         }
 
