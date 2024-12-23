@@ -58,6 +58,7 @@ public class ProjectPlayer : MonoBehaviour
         cam = Camera.main;
         rigid = GetComponent<Rigidbody>();
         bulletSpawnPoint = transform.GetChild(1);
+        longRangeSkill_1State.HitBox = transform.GetChild(2).gameObject;
 
         states[(int)E_State.Idle] = idleState;
         states[(int)E_State.Move] = walkState;
