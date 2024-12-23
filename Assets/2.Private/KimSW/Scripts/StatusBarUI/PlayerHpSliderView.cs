@@ -22,7 +22,7 @@ public class PlayerHpSliderView : SliderView
         slider = GetComponentInChildren<Slider>();
 
         ColorUtility.TryParseHtmlString("#ff0000", out hitColor);
-        ColorUtility.TryParseHtmlString("#d3f1ff", out normalColor);
+        ColorUtility.TryParseHtmlString("#00FF5B", out normalColor);
 
         fillImage.color = normalColor;
 
@@ -49,6 +49,7 @@ public class PlayerHpSliderView : SliderView
         hitImage.DOFade(0.7f, 0).OnComplete(() => { hitImage.enabled = true; });
         hitImage.DOFade(0.0f, hitDuration).OnComplete(() => { hitImage.enabled = false; });
 
+        fillImage.DOKill();
         fillImage.color = hitColor;
         ResetColor();
     }

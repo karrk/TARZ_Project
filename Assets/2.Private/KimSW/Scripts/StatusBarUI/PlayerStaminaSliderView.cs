@@ -10,6 +10,7 @@ public class PlayerStaminaSliderView : SliderView
 
     public override void SetSlider(float value)
     {
+        slider.DOKill();
         slider.DOValue(value, duration).SetEase(Ease.Linear);
     }
 }
