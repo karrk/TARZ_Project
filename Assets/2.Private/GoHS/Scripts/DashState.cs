@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Zenject;
 using static ProjectPlayer;
 
@@ -10,6 +11,7 @@ public class DashState : BaseState
 {
 
     [SerializeField] ProjectPlayer player;
+
 
     public DashState(ProjectPlayer player)
     {
@@ -24,6 +26,7 @@ public class DashState : BaseState
     public override void Enter()
     {
         Debug.Log("Dash 상태 진입!");
+        player.animator.SetTrigger("Dash");
         dashTime = player.dashduration;         // 플레이어 스크립트에서 설정한 지속시간만큼 설정
 
         // 플레이어 입력방향에 따라 대쉬 방향 설정

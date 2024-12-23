@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BehaviorDesigner.Runtime;
-using UnityEditor;
 
 public class BaseMonster : MonoBehaviour
 {
     public float health;
+
+    public float damageReducation = 1f;
 
     public BehaviorTree behaviorTree;
 
@@ -24,7 +25,7 @@ public class BaseMonster : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        health -= damage;
+        health -= (damage * damageReducation);
         Debug.Log($"Health: {health}");
     }
 
@@ -38,13 +39,11 @@ public class BaseMonster : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(IsInLayerMask(other.gameObject, garbageLayer))
+        Garbage garbage = other.GetComponent<Garbage>();
+        if(IsInLayerMask(other.gameObject, garbageLayer) && garbage.IsProjectile == true)
         {
             // 몬스터의 체력을 감소
             TakeDamage(1);
-
-            // 충돌한 투척물 제거
-            Destroy(other.gameObject);
         }
     }
 

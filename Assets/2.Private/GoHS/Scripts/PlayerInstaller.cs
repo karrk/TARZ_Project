@@ -4,6 +4,7 @@ using Zenject;
 public class PlayerInstaller : MonoInstaller
 {
     [SerializeField] ProjectPlayer player;
+    [SerializeField] GameObject longRangeSkill_1;
 
     public override void InstallBindings()
     {
@@ -19,6 +20,8 @@ public class PlayerInstaller : MonoInstaller
             .FromInstance(player)
             .AsSingle()
             .NonLazy();
+
+        Container.Bind<GameObject>().FromInstance(longRangeSkill_1).AsSingle().NonLazy();
     }
 
     private void InstallPlayerStates()
@@ -29,6 +32,7 @@ public class PlayerInstaller : MonoInstaller
         Container.Bind<DashState>().AsSingle();
         Container.Bind<LongRangeAttackState>().AsSingle();
         Container.Bind<DrainState>().AsSingle();
+        Container.Bind<LongRangeSkill_1>().AsSingle();
     }
 
     private void InstallCamera()

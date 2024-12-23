@@ -475,18 +475,22 @@ MonoBehaviour:
       parentIndex: 
       startIndex: 
       variableStartIndex: 
-      JSONSerialization: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(602.0049,-399.3525)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Repeater","NodeData":{"Offset":"(2.00488281,111.064087)"},"ID":1,"Name":"Repeater","Instant":true,"SharedIntcount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0},"SharedBoolrepeatForever":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedBoolendOnFailure":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(-3.49511719,112.536385)"},"ID":2,"Name":"Selector","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-361.026978,158.647491)"},"ID":3,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"DetectPlayer","NodeData":{"Offset":"(-184.661865,139.5364)"},"ID":4,"Name":"Detect
-        Player","Instant":true}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-190.669037,164.647491)"},"ID":5,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.UnityGameObject.SetActive","NodeData":{"Offset":"(-3.550725,139.5364)"},"ID":6,"Name":"Set
-        Active","Instant":true,"SharedGameObjecttargetGameObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null},"SharedBoolactive":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false}}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(72.95898,162.038788)"},"ID":7,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"DetectPlayer","NodeData":{"Offset":"(10.8938856,142.869934)"},"ID":8,"Name":"Detect
-        Player","Instant":true}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Idle","NodeData":{"Offset":"(270.504883,160.647491)"},"ID":9,"Name":"Idle","Instant":true}]}]},"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":"targetPlayer","IsShared":true,"PropertyMapping":"UnityEngine.Transform/transform","PropertyMappingOwner":0,"TransformmValue":1}]}'
+      JSONSerialization: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(602.0049,-399.3525)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Repeater","NodeData":{"Offset":"(2.00488281,111.064087)"},"ID":1,"Name":"Repeater","Instant":true,"SharedIntcount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0},"SharedBoolrepeatForever":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBoolendOnFailure":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(-3.49511719,112.536385)"},"ID":2,"Name":"Selector","Instant":true,"AbortTypeabortType":"LowerPriority","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-968.6462,146.742737)"},"ID":3,"Name":"MonsterDead","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"IsDead","NodeData":{"Offset":"(-48.35215,116.599762)"},"ID":4,"Name":"Is
+        Dead","Instant":true,"SharedInthealth":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":"bossMonsterHp","IsShared":true,"IsGlobal":true,"Int32mValue":10}},{"Type":"Die","NodeData":{"Offset":"(61.6478729,122.5522)"},"ID":5,"Name":"Die","Instant":true,"SharedInthealth":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":"bossMonsterHp","IsShared":true,"IsGlobal":true,"Int32mValue":10},"SharedGameObjectselfObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null,"GameObjectmValue":0}}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-694.9546,150.837982)"},"ID":6,"Name":"Gimmick1
+        End","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"IsGimmick1end","NodeData":{"Offset":"(-110,120)"},"ID":7,"Name":"Is
+        Gimmick 1end","Instant":true,"SharedIntdamagedCount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0},"Int32n1":0,"SharedBoolisGroggyActive":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"IsBossGroggiActive","IsShared":true,"IsGlobal":true,"Tooltip":"\ubcf4\uc2a4\uadf8\ub85c\uae30OnOff","BooleanmValue":false}},{"Type":"GroggyState","NodeData":{"Offset":"(0,120)"},"ID":8,"Name":"Groggy
+        State","Instant":true,"SharedBoolisGroggyActive":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"IsBossGroggiActive","IsShared":true,"IsGlobal":true,"Tooltip":"\ubcf4\uc2a4\uadf8\ub85c\uae30OnOff","BooleanmValue":false},"Singlen2":0},{"Type":"RemoveLightning","NodeData":{"Offset":"(108.504883,119.647491)"},"ID":9,"Name":"Remove
+        Lightning","Instant":true,"SharedBoolsummonLightning":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"summonLightning","IsShared":true,"IsGlobal":true,"BooleanmValue":false}}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-319.898132,148.229279)"},"ID":10,"Name":"IsGimmick1
+        Start","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"IsGimmick1Start","NodeData":{"Offset":"(-55.4951172,118.647491)"},"ID":11,"Name":"Is
+        Gimmick 1 Start","Instant":true,"SharedIntcurHP":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":"bossMonsterHp","IsShared":true,"IsGlobal":true,"Int32mValue":10},"Int32maxHP":0,"BooleanisGimmick1Active":false}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Parallel","NodeData":{"Offset":"(197.790283,150.689484)"},"ID":12,"Name":"Parallel","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.CompareSharedBool","NodeData":{"Offset":"(-3.40026855,118.546547)"},"ID":13,"Name":"Compare
+        Shared Bool","Instant":true,"SharedBoolsummonLightning":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"summonLightning","IsShared":true,"IsGlobal":true,"BooleanmValue":false},"SharedFloatlightningTimer":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"LightningTimer","IsShared":true,"IsGlobal":true,"SinglemValue":0}},{"Type":"BehaviorDesigner.Runtime.Tasks.Log","NodeData":{"Offset":"(141.837769,123.308418)"},"ID":14,"Name":"Log","Instant":true,"SharedStringtext":{"Type":"BehaviorDesigner.Runtime.SharedString","Name":null,"StringmValue":""}},{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.SetSharedFloat","NodeData":{"Offset":"(260.1932,117.439171)"},"ID":15,"Name":"LightTimerReset","Instant":true,"SinglelightTimer":0},{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.SetSharedFloat","NodeData":{"Offset":"(399.091064,118.6364)"},"ID":16,"Name":"LightningTimerStart","Instant":true,"SinglelightTimer":0}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Idle","NodeData":{"Offset":"(1031.45764,170.647491)"},"ID":17,"Name":"Idle","Instant":true}]}]}}'
       fieldSerializationData:
         typeName: []
         fieldNameHash: 
         startIndex: 
         dataPosition: 
         unityObjects:
-        - {fileID: 1270407522}
-        - {fileID: 1270407526}
+        - {fileID: 1148011483}
         byteData: 
         byteDataArray: 
       Version: 1.7.11
@@ -508,7 +512,7 @@ GameObject:
   - component: {fileID: 1270407528}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -614,9 +618,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c4adfa3b85df764ea181ffffe238e28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  rotationSpeed: 360
-  health: 100
 --- !u!54 &1270407528
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -771,6 +772,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1494431160}
+  - component: {fileID: 1494431161}
   m_Layer: 0
   m_Name: MonsterDatatableParser
   m_TagString: Untagged
@@ -793,6 +795,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1494431161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1494431158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -638047543, guid: da41a8dd3b5ec434a802d9b5a2a0a777, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateInterval: 0
+  updateIntervalSeconds: 0
+  executionsPerTick: 0
+  maxTaskExecutionsPerTick: 100
 --- !u!1 &1701603171
 GameObject:
   m_ObjectHideFlags: 0

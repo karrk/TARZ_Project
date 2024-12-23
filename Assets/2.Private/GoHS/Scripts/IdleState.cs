@@ -6,6 +6,8 @@ public class IdleState : BaseState
 {
     [SerializeField] ProjectPlayer player;
 
+    [Inject] private InputManager inputManager;
+
     public IdleState(ProjectPlayer player)
     {
         this.player = player;
@@ -15,7 +17,7 @@ public class IdleState : BaseState
     public override void Enter()
     {
         player.animator.SetBool("Idle", true);
-        Debug.Log("현재 Idle 상태 진입 성공");
+        //Debug.Log("현재 Idle 상태 진입 성공");
         player.Rigid.velocity = Vector3.zero;
         player.Rigid.angularVelocity = Vector3.zero;
 
@@ -23,7 +25,7 @@ public class IdleState : BaseState
 
     public override void Update()
     {
-        Debug.Log("Idle 업데이트문 진행중");
+        //Debug.Log("Idle 업데이트문 진행중");
 
 
 
@@ -45,14 +47,19 @@ public class IdleState : BaseState
             player.ChangeState(E_State.Dash);
         }
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            player.ChangeState(E_State.LongRangeAttack);
-        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    player.ChangeState(E_State.LongRangeAttack);
+        //}
 
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             player.ChangeState(E_State.Drain);
+        }
+
+        if( Input.GetKeyDown(KeyCode.R))
+        {
+            player.ChangeState(E_State.LongRangeSkill_1);
         }
 
     }
@@ -61,4 +68,6 @@ public class IdleState : BaseState
     {
         player.animator.SetBool("Idle", false);
     }
+
+
 }

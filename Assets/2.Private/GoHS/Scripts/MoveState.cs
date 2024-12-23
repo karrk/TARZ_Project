@@ -26,7 +26,7 @@ public class MoveState : BaseState
     public override void Update()
     {
 
-        Debug.Log("Move 업데이트문 진행중!");
+        //Debug.Log("Move 업데이트문 진행중!");
 
         player.animator.SetFloat("MoveSpeed", moveDirection.magnitude); // TODO : 패드로는 잘 작동하는데 키보드를 사용했을때는 1.414값이 나온다?
 
@@ -46,10 +46,10 @@ public class MoveState : BaseState
             player.ChangeState(E_State.Dash);
         }
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            player.ChangeState(E_State.LongRangeAttack);
-        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    player.ChangeState(E_State.LongRangeAttack);
+        //}
 
     }
 

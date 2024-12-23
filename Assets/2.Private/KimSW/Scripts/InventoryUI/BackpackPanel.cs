@@ -10,7 +10,7 @@ public class BackpackPanel : AnimatedUI, ISlotPanel
 {
 
     private List<UISlot> backpackSlotList;
-    private Button currentEquipmentSlot;
+    private UISlot currentEquipmentSlot;
 
 
     [Inject]
@@ -36,7 +36,7 @@ public class BackpackPanel : AnimatedUI, ISlotPanel
 
     private void Start()
     {
-        currentEquipmentSlot = gameUI.InventoryPanel.equipmentPanel.GetSlot(0).slotButton;
+        currentEquipmentSlot = gameUI.InventoryPanel.equipmentPanel.GetSlot(0);
     }
 
     public void SetSelectCursor()
@@ -98,7 +98,7 @@ public class BackpackPanel : AnimatedUI, ISlotPanel
             gameUI.ItemInformationPanel.SetDefaultEquippedInformation();
             gameUI.ItemInformationPanel.SetDefaultItemInformation();
 
-            currentEquipmentSlot.image.color = Color.white;
+            currentEquipmentSlot.SetDefaultColor();
         }
         else
         {
@@ -107,9 +107,9 @@ public class BackpackPanel : AnimatedUI, ISlotPanel
             int typeNumber = (int)inventory.Items[slotNumber].itemType;
 
             // 일치 하는 장비칸 포커스
-            currentEquipmentSlot.image.color = Color.white;
-            currentEquipmentSlot = gameUI.InventoryPanel.equipmentPanel.GetSlot(typeNumber).slotButton;
-            currentEquipmentSlot.image.color = Color.yellow;
+            currentEquipmentSlot.SetDefaultColor();
+            currentEquipmentSlot = gameUI.InventoryPanel.equipmentPanel.GetSlot(typeNumber);
+            currentEquipmentSlot.slotButton.image.color = Color.yellow;
 
             if (inventory.Equipments[typeNumber] is null)
             {

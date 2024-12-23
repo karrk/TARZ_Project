@@ -4,7 +4,7 @@ using BehaviorDesigner.Runtime.Tasks;
 
 public class Die : Action
 {
-    public SharedFloat health; // 몬스터의 체력
+    public SharedInt health; // 몬스터의 체력
     public SharedGameObject selfObject;
 
     public override TaskStatus OnUpdate()

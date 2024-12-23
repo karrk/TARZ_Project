@@ -246,10 +246,10 @@ Animator:
   m_GameObject: {fileID: 1094803065581388682}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 80079e21c093f8d4faaf1a46d0b9a3e1, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 697a6b6add5713b4c8a6d33808f58c3e, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -2554,6 +2554,7 @@ GameObject:
   - component: {fileID: 726719191030262112}
   - component: {fileID: 9054078597359120966}
   - component: {fileID: 6174339517248486042}
+  - component: {fileID: 824026980931313999}
   m_Layer: 0
   m_Name: ProjectPlayer
   m_TagString: Untagged
@@ -2615,7 +2616,11 @@ MonoBehaviour:
       m_Bits: 0
     Targets: []
     drainSpeed: 0
-  rigid: {fileID: 0}
+  longRangeSkill_1State:
+    player: {fileID: 0}
+    hitbox: {fileID: 0}
+    delay: 0
+  rigid: {fileID: 6174339517248486042}
   cam: {fileID: 0}
   <animator>k__BackingField: {fileID: 4780658996693449557}
   moveSpeed: 3
@@ -2625,7 +2630,7 @@ MonoBehaviour:
   candash: 0
   inputX: 0
   inputZ: 0
-  bulletSpawnPoint: {fileID: 0}
+  bulletSpawnPoint: {fileID: 3295809978564738148}
   bulletPrefab: {fileID: 7729617087500702279, guid: 99affcefbb09da546b21062b67dc8db8,
     type: 3}
 --- !u!114 &726719191030262112
@@ -2674,7 +2679,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7501606899982736315}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2693,6 +2698,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &824026980931313999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7501606899982736315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73467fd903a7a204c9004d1f19d81b49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firePoint: {fileID: 3295809978564738148}
 --- !u!1 &7510644566747437619
 GameObject:
   m_ObjectHideFlags: 0

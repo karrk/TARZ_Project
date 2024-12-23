@@ -16,22 +16,30 @@ public class UISlot : MonoBehaviour
     [SerializeField] public Button slotButton;
     [SerializeField] private int slotNumber;
 
+    Color defaultColor;
     private void Awake()
     {
+
         selectCallback = GetComponentInChildren<ButtonSelectCallback>();
         slotButton = GetComponentInChildren<Button>();
         slotPanel = GetComponentInParent<ISlotPanel>();
+        defaultColor = slotButton.image.color;
     }
 
     public int SlotNumber { get { return slotNumber; } set { slotNumber = value; } } 
 
 
-  
+    
 
     public void SetSlotImage(Sprite sprite)
     {
         uiImage.enabled = true;
         uiImage.sprite = sprite;
+    }
+
+    public void SetDefaultColor()
+    {
+        slotButton.image.color = defaultColor;
     }
 
     public void RemoveSlotImage()

@@ -6,6 +6,7 @@ public class Attack : Action
 {
     public SharedGameObject targetObject;
     public SharedFloat attackDamage;
+    public SharedInt attackCount;
 
     public override void OnStart()
     {
@@ -27,11 +28,12 @@ public class Attack : Action
         }
 
         //대상의 baseMonster컴포넌트에 데미지 전달
-        var player = targetObject.Value.GetComponent<PlayerController>();
+        var player = targetObject.Value.GetComponent<ProjectPlayer>();
         if (player != null)
         {
             player.TakeDamage(attackDamage.Value);
             Debug.Log(attackDamage.Value + "의 데미지를 " + targetObject.Value.name + "에게 주었습니다.");
+            attackCount.Value++;
         }
         else
         {

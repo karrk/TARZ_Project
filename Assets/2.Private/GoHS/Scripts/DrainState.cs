@@ -40,11 +40,20 @@ public class DrainState : BaseState
     {
         Debug.Log("@@@@@@@@@@@@@@수집상태 진입 성공");
         player.animator.SetBool("Drain", true);
+        isDrainMode = true;
+    }
+
+    private bool isDrainMode = false;
+
+    public void StopDrain()
+    {
+        isDrainMode = false;
+        
     }
 
     public override void Update()
     {
-        if(Input.GetKey(KeyCode.LeftControl))
+        if(isDrainMode)
         {
             Debug.Log("드레인 진행중!");
             IncreaseViewArea();
@@ -52,17 +61,35 @@ public class DrainState : BaseState
         }
         else
         {
-            viewArea = 0f;
+            viewArea = 0;
             player.animator.SetBool("Drain", false);
-
-            AnimatorStateInfo stateInfo = player.animator.GetCurrentAnimatorStateInfo(0);
-            if(stateInfo.IsName("Absorb_End_KHS") && stateInfo.normalizedTime >= 1.0f)
-            {
-                Debug.Log("드레인 끝 확인됨");
-                player.ChangeState(E_State.Idle);
-            }
-
+            player.ChangeState(E_State.Idle);
         }
+
+        //if(Input.GetKey(KeyCode.LeftControl))
+        //{
+        //    Debug.Log("드레인 진행중!");
+        //    IncreaseViewArea();
+        //    GetTarget();
+        //}
+        //else
+        //{
+        //    viewArea = 0f;
+        //    player.animator.SetBool("Drain", false);
+
+        //    AnimatorStateInfo stateInfo = player.animator.GetCurrentAnimatorStateInfo(0);
+        //    if(stateInfo.IsName("Absorb_End_KHS") && stateInfo.normalizedTime >= 1.0f)
+        //    {
+        //        Debug.Log("드레인 끝 확인됨");
+        //        player.ChangeState(E_State.Idle);
+        //    }
+        //    else if(stateInfo.normalizedTime >= 0.5f)
+        //    {
+        //        Debug.Log("드레인 끝 확인됨");
+        //        player.ChangeState(E_State.Idle);
+        //    }
+
+        //}
     }
     
     /// <summary>
@@ -70,7 +97,7 @@ public class DrainState : BaseState
     /// </summary>
     private void IncreaseViewArea()
     {
-        Debug.Log(viewArea);
+        //Debug.Log(viewArea);
         viewArea += viewSpeed * Time.deltaTime;
         viewArea = Mathf.Clamp(viewArea, 0, maxViewArea);
     }
