@@ -13,7 +13,9 @@ public class LongRangeSkill_1 : BaseState
         this.player = player;
     }
 
-    [SerializeField] private GameObject hitbox;
+    [SerializeField] private GameObject hitBox;
+    public GameObject HitBox { get { return hitBox; }  set { hitBox = value; } }
+
     [SerializeField] private float delay;
 
     public override void Enter()
@@ -29,12 +31,12 @@ public class LongRangeSkill_1 : BaseState
         }
         else
         {
-            hitbox.SetActive(true);
+            hitBox.SetActive(true);
         }
     }
 
     public override void Exit()
     {
-        hitbox.SetActive(false);
+        hitBox.SetActive(false);
     }
 }
