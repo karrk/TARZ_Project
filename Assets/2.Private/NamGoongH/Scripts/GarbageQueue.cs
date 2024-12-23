@@ -53,12 +53,6 @@ public class GarbageQueue
     /// </summary>
     public GameObject GetNextGarbagePrefab()
     {
-        if (garbagePrefabs == null || garbagePrefabs.Length == 0)
-        {
-            Debug.LogWarning("Garbage prefabs array is not set or empty.");
-            return null;
-        }
-
         if (garbageIndexList.Count > 0)
         {
             int garbageIndex = garbageIndexList[0]; // 첫 번째 인덱스 가져오기
@@ -82,7 +76,17 @@ public class GarbageQueue
         }
         else
         {
-            Debug.LogWarning("Queue is empty.");
+            Debug.LogWarning("Queue is empty. Using default projectile (index 0).");
+
+            // 큐가 비어있으면 기본 프리팹 반환 (0번 인덱스)
+            if (garbagePrefabs[0] != null)
+            {
+                return garbagePrefabs[0];
+            }
+            else
+            {
+                Debug.LogError("Default garbage prefab (index 0) is null.");
+            }
         }
         return null;
     }
