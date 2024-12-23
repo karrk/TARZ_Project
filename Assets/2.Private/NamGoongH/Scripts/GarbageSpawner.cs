@@ -27,7 +27,7 @@ public class GarbageSpawner : MonoBehaviour
     {
         foreach (Transform spawnPoint in spawnPoints)
         {
-            int randomIndex = Random.Range(0, garbagePrefabs.Length);
+            int randomIndex = Random.Range(1, garbagePrefabs.Length);
             Instantiate(garbagePrefabs[randomIndex], spawnPoint.position, Quaternion.identity);
         }
     }
