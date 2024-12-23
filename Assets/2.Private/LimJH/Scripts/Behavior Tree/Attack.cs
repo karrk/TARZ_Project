@@ -28,7 +28,7 @@ public class Attack : Action
         }
 
         //대상의 baseMonster컴포넌트에 데미지 전달
-        var player = targetObject.Value.GetComponent<PlayerController>();
+        var player = targetObject.Value.GetComponent<ProjectPlayer>();
         if (player != null)
         {
             player.TakeDamage(attackDamage.Value);
