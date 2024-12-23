@@ -39,6 +39,7 @@ public class BaseMonster : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Garbage garbage = other.GetComponent<Garbage>();
         if(IsInLayerMask(other.gameObject, garbageLayer))
         {
             // 몬스터의 체력을 감소
