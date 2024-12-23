@@ -8,6 +8,8 @@ public class BaseMonster : MonoBehaviour
 {
     public float health;
 
+    public float damageReducation = 1f;
+
     public BehaviorTree behaviorTree;
 
     private LayerMask garbageLayer;
@@ -24,7 +26,7 @@ public class BaseMonster : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        health -= damage;
+        health -= (damage * damageReducation);
         Debug.Log($"Health: {health}");
     }
 

@@ -5,25 +5,23 @@ using BehaviorDesigner.Runtime.Tasks;
 public class IsCheckGroggy : Conditional
 {
     public SharedBool isGroggyActive;   // 그로기 상태 플래그
-    public SharedGameObjectList pillars; // 생성된 기둥 리스트
-
-    private bool isChekcDestoryPillar = false;
+    public SharedIntList pillarStates; // 기둥 상태 리스트 (0: 없음, 1: 생성됨, 2: 파괴됨)
 
     public override TaskStatus OnUpdate()
     {
-        // 기둥이 모두 파괴되었는지 확인
-        for (int i = 0; i < pillars.Value.Count; i++)
+        // 모든 기둥이 파괴되었는지 확인
+        bool allPillarsDestroyed = true;
+        for (int i = 0; i < pillarStates.Value.Count; i++)
         {
-            if (pillars.Value[i] == null)
+            if (pillarStates.Value[i] == 0 || pillarStates.Value[i] == 1) // 아직 생성된 상태의 기둥이 있으면
             {
-                isChekcDestoryPillar = true;
-                //return TaskStatus.Failure;
+                allPillarsDestroyed = false;
+                break;
             }
         }
 
-
         // 모든 기둥이 파괴되었고 그로기 상태가 활성화되어 있지 않으면 True 반환
-        if (!isGroggyActive.Value)
+        if (allPillarsDestroyed && !isGroggyActive.Value)
         {
             return TaskStatus.Success;
         }

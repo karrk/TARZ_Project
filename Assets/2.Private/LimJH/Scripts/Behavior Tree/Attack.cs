@@ -6,6 +6,7 @@ public class Attack : Action
 {
     public SharedGameObject targetObject;
     public SharedFloat attackDamage;
+    public SharedInt attackCount;
 
     public override void OnStart()
     {
@@ -32,6 +33,7 @@ public class Attack : Action
         {
             player.TakeDamage(attackDamage.Value);
             Debug.Log(attackDamage.Value + "의 데미지를 " + targetObject.Value.name + "에게 주었습니다.");
+            attackCount.Value++;
         }
         else
         {
