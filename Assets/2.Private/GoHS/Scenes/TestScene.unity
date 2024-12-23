@@ -246,12 +246,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &827909558 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3295809978564738148, guid: 0c45545b5ac752243ae16e97f66501c6,
-    type: 3}
-  m_PrefabInstance: {fileID: 8583533182648762509}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &882814297
 GameObject:
   m_ObjectHideFlags: 0
@@ -420,6 +414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1602037401}
+  longRangeSkill_1: {fileID: 0}
 --- !u!114 &1000772885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -701,12 +696,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c67cdcc24d286e49832538dc0ef0a45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!54 &1602037403 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 6174339517248486042, guid: 0c45545b5ac752243ae16e97f66501c6,
-    type: 3}
-  m_PrefabInstance: {fileID: 8583533182648762509}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2100143330
 GameObject:
   m_ObjectHideFlags: 0
@@ -874,31 +863,6 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 2100143332}
-    - target: {fileID: 878338197031248657, guid: 0c45545b5ac752243ae16e97f66501c6,
-        type: 3}
-      propertyPath: rigid
-      value: 
-      objectReference: {fileID: 1602037403}
-    - target: {fileID: 878338197031248657, guid: 0c45545b5ac752243ae16e97f66501c6,
-        type: 3}
-      propertyPath: bulletSpawnPoint
-      value: 
-      objectReference: {fileID: 827909558}
-    - target: {fileID: 4780658996693449557, guid: 0c45545b5ac752243ae16e97f66501c6,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 697a6b6add5713b4c8a6d33808f58c3e, type: 2}
-    - target: {fileID: 4780658996693449557, guid: 0c45545b5ac752243ae16e97f66501c6,
-        type: 3}
-      propertyPath: m_ApplyRootMotion
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6174339517248486042, guid: 0c45545b5ac752243ae16e97f66501c6,
-        type: 3}
-      propertyPath: m_Mass
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 7501606899982736315, guid: 0c45545b5ac752243ae16e97f66501c6,
         type: 3}
       propertyPath: m_Name

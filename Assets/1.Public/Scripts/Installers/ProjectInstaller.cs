@@ -64,6 +64,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         public float DrainSpeed;
         public float GaugeValue;
         public float[] SkillAnchor;
+        public float ThrowingSpeed;
     }
 
     [Serializable]

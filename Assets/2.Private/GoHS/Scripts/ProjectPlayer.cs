@@ -95,7 +95,13 @@ public class ProjectPlayer : MonoBehaviour
         inputManager.PressedAKey += Drain;
         inputManager.OnUpAkey += StopDrain;
         inputManager.PressedL1Key += LongRangeSkill_1;
+        inputManager.PressedR2Key += Fire;
         //inputManager.PressedBKey += Dash;
+    }
+
+    private void Fire()
+    {
+        ChangeState(E_State.LongRangeAttack);
     }
 
     private void Move(Vector3 vector3)
@@ -182,11 +188,15 @@ public class ProjectPlayer : MonoBehaviour
         }
     }
 
-
+    public void TakeDamage(float value)
+    {
+        // 데미지 받는 로직
+        // 스탯을 통한
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.CompareTag("Player"))        // TODO : 추후에 태그 설정해야함
+        if (collision.collider.CompareTag("Ground"))        // TODO : 추후에 태그 설정해야함
         {
             isGrounded = true;
         }

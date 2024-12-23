@@ -7,7 +7,7 @@ using Zenject;
 public class MonsterBehaviorBinder : MonoBehaviour
 {
     [Inject]
-    [SerializeField] PlayerController player; // Zenject로 주입받은 플레이어 객체
+    [SerializeField] ProjectPlayer player; // Zenject로 주입받은 플레이어 객체
 
     private void Start()
     {

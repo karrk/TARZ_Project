@@ -212,9 +212,12 @@ public class InputManager : IInitializable, ITickable
     /// </summary>
     private void InputR2()
     {
-        if (Input.GetButtonDown("R2") || Input.GetAxisRaw("R2")==1)
+        // 좌클릭은 가능 , 조이스틱 R2 기능 안함
+
+        if (Input.GetButtonDown("R2") && Input.GetAxisRaw("R2")==1)
         {
             PressedR2Key?.Invoke();
+            Debug.Log("R2");
         }
     }
 

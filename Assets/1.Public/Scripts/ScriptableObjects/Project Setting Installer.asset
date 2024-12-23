@@ -33,6 +33,14 @@ MonoBehaviour:
     - {fileID: 3111731739044657598, guid: 735d6edfd94719943be3fba04f8d9f29, type: 3}
   playerSetting:
     DrainSpeed: 2
+    GaugeValue: 5
+    SkillAnchor:
+    - 0.5
+    - 0.6
+    - 0.7
+    - 0.8
+    - 1
+    ThrowingSpeed: 15
   playerBaseStats:
     Hp: 10
     Atk: 1

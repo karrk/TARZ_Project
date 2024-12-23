@@ -9,6 +9,7 @@ public class LongRangeAttackState : BaseState
 {
 
     [SerializeField] private ProjectPlayer player;
+    [Inject] private Shooter shooter;
 
     public LongRangeAttackState(ProjectPlayer player)
     {
@@ -19,7 +20,8 @@ public class LongRangeAttackState : BaseState
     public override void Enter()
     {
         Debug.Log("원거리 공격 실행! LongRangeAttackState 상태 진입");
-        player.SpawnBullet();
+        //player.SpawnBullet();
+        shooter.FireItem();
     }
 
     public override void Update()
