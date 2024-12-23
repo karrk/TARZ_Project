@@ -1648,6 +1648,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d89f5f8d2b858ac4ba85d95721904536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiVFX: {fileID: 0}
   uiImage: {fileID: 5374776875274707756}
   selectCallback: {fileID: 0}
   slotButton: {fileID: 4296343745845683289}
@@ -2009,6 +2010,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d89f5f8d2b858ac4ba85d95721904536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiVFX: {fileID: 0}
   uiImage: {fileID: 8925833069339006501}
   selectCallback: {fileID: 0}
   slotButton: {fileID: 5973757413992178401}
@@ -3120,6 +3122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d89f5f8d2b858ac4ba85d95721904536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiVFX: {fileID: 0}
   uiImage: {fileID: 2643051950844695690}
   selectCallback: {fileID: 0}
   slotButton: {fileID: 187805276959753565}
@@ -4470,9 +4473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d8c37613d663334fa6f49705894dbe7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectButton: {fileID: 0}
-  fadeOutDuration: 0.3
-  fadeInDuration: 0.1
+  animatedUIs: []
 --- !u!224 &1518802286428148913
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5456,6 +5457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d89f5f8d2b858ac4ba85d95721904536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiVFX: {fileID: 0}
   uiImage: {fileID: 7214125962218321704}
   selectCallback: {fileID: 0}
   slotButton: {fileID: 1043799091194285300}
@@ -5636,6 +5638,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d89f5f8d2b858ac4ba85d95721904536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiVFX: {fileID: 0}
   uiImage: {fileID: 5354214341508701228}
   selectCallback: {fileID: 0}
   slotButton: {fileID: 6612372970621717273}
@@ -6173,6 +6176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d89f5f8d2b858ac4ba85d95721904536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiVFX: {fileID: 0}
   uiImage: {fileID: 5104823577053393562}
   selectCallback: {fileID: 0}
   slotButton: {fileID: 1185579785109771376}
@@ -6627,6 +6631,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d89f5f8d2b858ac4ba85d95721904536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiVFX: {fileID: 0}
   uiImage: {fileID: 919120423511232079}
   selectCallback: {fileID: 0}
   slotButton: {fileID: 3163874263437618530}
@@ -7209,6 +7214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d89f5f8d2b858ac4ba85d95721904536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiVFX: {fileID: 0}
   uiImage: {fileID: 208172094206659685}
   selectCallback: {fileID: 0}
   slotButton: {fileID: 7839077968909384583}
@@ -7751,6 +7757,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3659c93286f2624b8072fe71982ca9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetOffset: {x: 0, y: 0}
+  targetScale: 0
   expText: {fileID: 0}
 --- !u!1 &3019558071570619283
 GameObject:
@@ -8887,7 +8895,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2a8e550a2560dd458953150f65095d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 0}
+  targetOffset: {x: 0, y: 0}
+  targetScale: 0
   currentText: {fileID: 5521382256473233771}
   maxText: {fileID: 5986197889417316741}
 --- !u!1 &3517113551304087018
@@ -9332,6 +9341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d89f5f8d2b858ac4ba85d95721904536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiVFX: {fileID: 0}
   uiImage: {fileID: 9104527178037430671}
   selectCallback: {fileID: 0}
   slotButton: {fileID: 54861843123822396}
@@ -9660,6 +9670,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ba1b169dca0ac847b307095e5c57db4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetOffset: {x: 0, y: 0}
+  targetScale: 0
 --- !u!222 &3819238657951659399
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9680,6 +9692,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d89f5f8d2b858ac4ba85d95721904536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiVFX: {fileID: 0}
   uiImage: {fileID: 1456219191933911438}
   selectCallback: {fileID: 0}
   slotButton: {fileID: 2805876218283338276}
@@ -10447,6 +10460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d89f5f8d2b858ac4ba85d95721904536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiVFX: {fileID: 0}
   uiImage: {fileID: 2216642553446723468}
   selectCallback: {fileID: 0}
   slotButton: {fileID: 3321325249680284929}
@@ -11044,6 +11058,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d89f5f8d2b858ac4ba85d95721904536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiVFX: {fileID: 0}
   uiImage: {fileID: 3498149524571677654}
   selectCallback: {fileID: 0}
   slotButton: {fileID: 606023743913631812}
@@ -12582,6 +12597,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c4deb2e6879f8e428d69763f96130e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetOffset: {x: 0, y: 0}
+  targetScale: 0
+  uiAnimator: {fileID: 0}
 --- !u!224 &5182799950002746285
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12770,6 +12788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d89f5f8d2b858ac4ba85d95721904536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiVFX: {fileID: 0}
   uiImage: {fileID: 4649585073678173275}
   selectCallback: {fileID: 0}
   slotButton: {fileID: 6229000546882594686}
@@ -13038,6 +13057,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d89f5f8d2b858ac4ba85d95721904536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiVFX: {fileID: 0}
   uiImage: {fileID: 104209754167928752}
   selectCallback: {fileID: 0}
   slotButton: {fileID: 5939642669884085954}
@@ -13103,6 +13123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d89f5f8d2b858ac4ba85d95721904536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiVFX: {fileID: 0}
   uiImage: {fileID: 9036858162681977485}
   selectCallback: {fileID: 0}
   slotButton: {fileID: 2026422536809699882}
@@ -15582,6 +15603,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d89f5f8d2b858ac4ba85d95721904536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiVFX: {fileID: 0}
   uiImage: {fileID: 8134528926422842687}
   selectCallback: {fileID: 0}
   slotButton: {fileID: 5055174198217901160}
@@ -15721,9 +15743,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1314ab36a967364196c4e49bd458728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectButton: {fileID: 4063098985017042617}
-  fadeOutDuration: 0.2
-  fadeInDuration: 0.3
 --- !u!114 &6612372970621717273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16295,6 +16314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d89f5f8d2b858ac4ba85d95721904536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiVFX: {fileID: 0}
   uiImage: {fileID: 8424528776102332528}
   selectCallback: {fileID: 0}
   slotButton: {fileID: 6685023276307729560}
@@ -16637,6 +16657,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d89f5f8d2b858ac4ba85d95721904536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiVFX: {fileID: 0}
   uiImage: {fileID: 1941778113070470081}
   selectCallback: {fileID: 0}
   slotButton: {fileID: 3408008333498232324}
@@ -17387,6 +17408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d89f5f8d2b858ac4ba85d95721904536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiVFX: {fileID: 0}
   uiImage: {fileID: 3670149756071276075}
   selectCallback: {fileID: 0}
   slotButton: {fileID: 1090907669114496832}
@@ -18070,6 +18092,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d89f5f8d2b858ac4ba85d95721904536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiVFX: {fileID: 0}
   uiImage: {fileID: 1404965860857555861}
   selectCallback: {fileID: 0}
   slotButton: {fileID: 6034628315816389906}
@@ -20137,6 +20160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d89f5f8d2b858ac4ba85d95721904536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiVFX: {fileID: 0}
   uiImage: {fileID: 1331246351528947072}
   selectCallback: {fileID: 0}
   slotButton: {fileID: 7905583596893871960}
