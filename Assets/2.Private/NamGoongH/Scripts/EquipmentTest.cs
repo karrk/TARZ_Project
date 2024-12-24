@@ -29,10 +29,9 @@ public class EquipmentTest : MonoBehaviour
         Debug.Log($"Name : {equipment.name}");
         Debug.Log($"Type : {equipment.type}");
         Debug.Log($"Grade : {equipment.grade}");
-        Debug.Log($"Primary Stat : {equipment.primaryStat}");
-        foreach (var stat in equipment.subStats)
+        foreach (var stat in equipment.stats)
         {
-            Debug.Log($"Sub Stat : {stat}");
+            Debug.Log($"Stats : {stat}");
         }
     }
 }
