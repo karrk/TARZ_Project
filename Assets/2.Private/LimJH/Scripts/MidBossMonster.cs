@@ -28,7 +28,8 @@ public class MidBossMonster : BaseMonster
         // 테스트용: Space 키로 피해를 받는 상황을 테스트
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            TakeDamage(1);
+            //TakeDamage(1);
+            TakeHit(1);
         }
 
         // 피해 감소를 적용할 때 체력이 절반 이하로 떨어지면 피해 감소를 90%로 적용

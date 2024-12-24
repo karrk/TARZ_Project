@@ -5,5 +5,5 @@ using Zenject;
 
 public interface IDamagable 
 {
-    void TakeHit(float value, bool chargable);
+    void TakeHit(float value, bool chargable = false);
 }
