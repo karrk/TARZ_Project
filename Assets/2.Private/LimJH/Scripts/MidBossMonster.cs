@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class MidBossMonster : BaseMonster
 {
+    public float RangedAttackDelay;
+    public float DashAttackDelay;
+
     public float halfHealth;                  // 최대 체력의 절반 값
 
     private void Start()

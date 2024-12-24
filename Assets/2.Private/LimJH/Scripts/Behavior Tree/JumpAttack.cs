@@ -65,7 +65,7 @@ public class JumpAttack : Action
         if (progress >= 1f)
         {
             // 공격 처리
-            var player = targetObject.Value.GetComponent<PlayerController>();
+            var player = targetObject.Value.GetComponent<ProjectPlayer>();
             if (player != null)
             {
                 player.TakeDamage(attackDamage.Value);

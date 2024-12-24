@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BehaviorDesigner.Runtime;
+using Zenject;
 
 public class BaseMonster : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class BaseMonster : MonoBehaviour
     public BehaviorTree behaviorTree;
 
     private LayerMask garbageLayer;
+
+    [Inject] SkillManager SkillManager;
 
     private void Awake()
     {
@@ -27,7 +30,15 @@ public class BaseMonster : MonoBehaviour
     {
         health -= (damage * damageReducation);
         Debug.Log($"Health: {health}");
+        SkillManager.UpdateGauge();
     }
+
+    public void TakeDamageNotFillGauge(float damage)
+    {
+        health -= (damage * damageReducation);
+        Debug.Log($"Health: {health}");
+    }
+
 
     protected void Update()
     {
