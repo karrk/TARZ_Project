@@ -44,7 +44,7 @@ public class StatusInformationPanel : MonoBehaviour
     {
         stringBuilder.Clear();
 
-        float[] values = new float[(int)StatType.Size];
+        float[] values = new float[(int)E_StatType.Size];
 
         foreach (var item in inventory.Equipments)
         {
@@ -62,7 +62,7 @@ public class StatusInformationPanel : MonoBehaviour
 
     
 
-        string[] statType = Enum.GetNames(typeof(StatType));
+        string[] statType = Enum.GetNames(typeof(E_StatType));
 
         for (int i = 0; i < values.Length; i++)
         {

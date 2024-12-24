@@ -55,15 +55,15 @@ public class PlayerEquipment : MonoBehaviour
         {
             if (item == null) continue;
 
-            foreach (var stat in item.stats)
-            {
-                if (!totalStats.ContainsKey(stat.statType))
-                {
-                    totalStats[stat.statType] = 0;
-                }
+            //foreach (var stat in item.stats)
+            //{
+            //    if (!totalStats.ContainsKey(stat.statType))
+            //    {
+            //        totalStats[stat.statType] = 0;
+            //    }
 
-                totalStats[stat.statType] += stat.statValue;
-            }
+            //    totalStats[stat.statType] += stat.statValue;
+            //}
         }
     }
 
