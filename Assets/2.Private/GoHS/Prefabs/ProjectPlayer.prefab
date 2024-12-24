@@ -65,6 +65,59 @@ Transform:
   - {fileID: 2153638106940640087}
   m_Father: {fileID: 7695219034121558818}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &511482395631195085
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7854834694597580696}
+  - component: {fileID: 1730456397805903859}
+  m_Layer: 0
+  m_Name: LongRangeSkill_1_HitBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7854834694597580696
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511482395631195085}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.77, z: 1.84}
+  m_LocalScale: {x: 1.4475, y: 1, z: 2.321599}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8622134645739668758}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1730456397805903859
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511482395631195085}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.9999999, y: 1.422646, z: 1.2880269}
+  m_Center: {x: 0, y: 0.21132302, z: 0.14401296}
 --- !u!1 &556915760964675181
 GameObject:
   m_ObjectHideFlags: 0
@@ -2577,6 +2630,7 @@ Transform:
   m_Children:
   - {fileID: 5392949293751890076}
   - {fileID: 3295809978564738148}
+  - {fileID: 7854834694597580696}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &878338197031248657
@@ -2618,7 +2672,7 @@ MonoBehaviour:
     drainSpeed: 0
   longRangeSkill_1State:
     player: {fileID: 0}
-    hitbox: {fileID: 0}
+    hitBox: {fileID: 0}
     delay: 0
   rigid: {fileID: 6174339517248486042}
   cam: {fileID: 0}

@@ -7,7 +7,8 @@ using UnityEngine.UIElements;
 using Zenject;
 using Zenject.SpaceFighter;
 
-public enum E_State { Idle, Move, Jump, Dash, LongRangeAttack, Drain, LongRangeSkill_1, Size }      // 우선적으로 선언한 상태
+public enum E_State { Idle, Move, Jump, Dash, LongRangeAttack, Drain, 
+                      LongRangeSkill_1, LongRangeSkill_2, Size }      // 우선적으로 선언한 상태
 
 public class ProjectPlayer : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class ProjectPlayer : MonoBehaviour
     [Inject][SerializeField] private LongRangeAttackState longRangeAttackState;
     [Inject][SerializeField] private DrainState drainState;
     [Inject][SerializeField] private LongRangeSkill_1 longRangeSkill_1State;
+    [Inject][SerializeField] private LongRangeSkill_2 longRangeSkill_2State;
 
 
     [Header("프로퍼티")]
@@ -58,13 +60,14 @@ public class ProjectPlayer : MonoBehaviour
 
     private Dictionary<E_State, List<E_State>> actionGraph = new Dictionary<E_State, List<E_State>>
     {
-        { E_State.Idle, new List<E_State>(){ E_State.Move,E_State.Jump,E_State.Dash,E_State.LongRangeAttack,E_State.Drain,E_State.LongRangeSkill_1 } },
+        { E_State.Idle, new List<E_State>(){ E_State.Move,E_State.Jump,E_State.Dash,E_State.LongRangeAttack,E_State.Drain,E_State.LongRangeSkill_1, E_State.LongRangeSkill_2 } },
         {E_State.Move, new List<E_State>(){ E_State.Idle,E_State.Jump,E_State.Dash,E_State.LongRangeAttack }  },
         {E_State.Jump, new List<E_State>(){ E_State.Idle }  },
         {E_State.Dash, new List<E_State>(){ E_State.Idle }  },
         {E_State.Drain, new List<E_State>(){ E_State.Idle }  },
         {E_State.LongRangeAttack, new List<E_State>(){ E_State.Idle }  },
         {E_State.LongRangeSkill_1, new List<E_State>(){ E_State.Idle }  },
+        {E_State.LongRangeSkill_2, new List<E_State>(){ E_State.Idle }  },
 
     };
 
@@ -77,8 +80,8 @@ public class ProjectPlayer : MonoBehaviour
     {
         cam = Camera.main;
         rigid = GetComponent<Rigidbody>();
-        bulletSpawnPoint = transform.GetChild(1);
-        //longRangeSkill_1State.HitBox = transform.GetChild(2).gameObject;
+        bulletSpawnPoint = transform.GetChild(1);                           // 임시 총알 발사 위치
+        longRangeSkill_1State.HitBox = transform.GetChild(2).gameObject;    // 원거리 스킬 1번 히트박스 오브젝트
 
         states[(int)E_State.Idle] = idleState;
         states[(int)E_State.Move] = walkState;
@@ -87,6 +90,7 @@ public class ProjectPlayer : MonoBehaviour
         states[(int)E_State.LongRangeAttack] = longRangeAttackState;
         states[(int)E_State.Drain] = drainState;
         states[(int)E_State.LongRangeSkill_1] = longRangeSkill_1State;
+        states[(int)E_State.LongRangeSkill_2] = longRangeSkill_2State;
     }
 
     private void Start()
@@ -95,7 +99,7 @@ public class ProjectPlayer : MonoBehaviour
         inputManager.OnControlledLeftStick += Move;
         inputManager.PressedAKey += Drain;
         inputManager.OnUpAkey += StopDrain;
-        inputManager.PressedL1Key += LongRangeSkill_1;
+        inputManager.PressedL1Key += LongRangeSkill_2;
         inputManager.PressedR2Key += Fire;
         //inputManager.PressedBKey += Dash;
     }
@@ -127,7 +131,14 @@ public class ProjectPlayer : MonoBehaviour
 
     private void LongRangeSkill_1()
     {
+        // TODO : 스킬을 사용할 수 있는 조건을 여기에 달아야 할까? 우선적으로 생각중
         ChangeState(E_State.LongRangeSkill_1);
+    }
+
+    private void LongRangeSkill_2()
+    {
+        // TODO : 스킬을 사용할 수 있는 조건을 여기에 달아야 할까? 우선적으로 생각중
+        ChangeState(E_State.LongRangeSkill_2);
     }
 
     private void Update()
@@ -162,6 +173,8 @@ public class ProjectPlayer : MonoBehaviour
 
     private void GroundCheck()
     {
+        // TODO : 바닥을 감지하는 방식을 레이케스트 방식으로 만들 필요가 있다.
+
         Vector3 rayStartPosition = transform.position + new Vector3(0, -0.8f, 0);
 
         Debug.DrawRay(rayStartPosition, Vector3.down, Color.yellow, 0.2f);
