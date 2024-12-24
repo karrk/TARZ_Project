@@ -11,27 +11,41 @@ public class LongRangeSkill_1 : BaseState
     public LongRangeSkill_1(ProjectPlayer player)
     {
         this.player = player;
+        this.delay = 0.5f;
     }
 
     [SerializeField] private GameObject hitBox;
     public GameObject HitBox { get { return hitBox; }  set { hitBox = value; } }
 
     [SerializeField] private float delay;
+    [SerializeField] private float curDelay;
 
     public override void Enter()
     {
         Debug.Log("스킬 1 시전 시작!");
+        curDelay = delay;
     }
 
     public override void Update()
     {
-        if(delay > 0f)
+        if(curDelay > 0f)
         {
-            delay -= Time.deltaTime;
+            curDelay -= Time.deltaTime;
+            
         }
         else
         {
-            hitBox.SetActive(true);
+            if (!hitBox.activeSelf)
+            {
+                hitBox.SetActive(true);
+                Debug.Log("원거리 스킬 1 활성화됨");
+                curDelay = delay;
+            }
+            else
+            {
+                Debug.Log("딜레이 다 지나감");
+                player.ChangeState(E_State.Idle);
+            }
         }
     }
 

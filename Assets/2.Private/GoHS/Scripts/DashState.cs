@@ -51,7 +51,7 @@ public class DashState : BaseState
 
     public override void Update()
     {
-        Debug.Log("Dash 진행중");
+        //Debug.Log("Dash 진행중");
 
         if (dashTime > 0f)
         {
@@ -61,6 +61,7 @@ public class DashState : BaseState
         else
         {
             player.StartCoroutine(DashCooldownRoutine());
+            Debug.Log("대쉬 진행됨");
             player.ChangeState(E_State.Idle);
         }
     }
