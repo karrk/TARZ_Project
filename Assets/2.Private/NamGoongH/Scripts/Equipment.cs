@@ -1,8 +1,9 @@
+using BehaviorDesigner.Runtime.Tasks.Unity.UnityLight;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum StatType
+public enum E_StatType
 {
     CriticalChance,         // 크리티컬 확률
     CriticalDamage,         // 크리티컬 데미지
@@ -49,65 +50,72 @@ public class Equipment
 
         // 부가 스탯 설정
         List<Stat> subStats = GenerateSubStats(grade);
+        if (subStats != null)
+        {
+            foreach (Stat stat in subStats)
+            {
+                stats.Add(stat);
+            }
+        }
 
         return new Equipment(type, $"{type} Item", grade, stats);
     }
 
     private static Stat GeneratePrimaryStat(E_EquipmentsType type, int grade)
     {
-        StatType primaryStatType;
+        E_StatType primaryStatType;
         float primaryStatValue;
 
         switch (type)
         {
             // 머리 : 크리티컬 데미지
             case E_EquipmentsType.Head:
-                primaryStatType = StatType.CriticalDamage;
+                primaryStatType = E_StatType.CriticalDamage;
                 primaryStatValue = grade * 1f;
                 break;
             // 상의 : 최대 생명력
             case E_EquipmentsType.Chest:
-                primaryStatType = StatType.MaxHealth;
+                primaryStatType = E_StatType.MaxHealth;
                 primaryStatValue = grade * 10f;
                 break;
             // 눈장식 : 크리티컬 확률
             case E_EquipmentsType.Glasses:
-                primaryStatType = StatType.CriticalChance;
+                primaryStatType = E_StatType.CriticalChance;
                 primaryStatValue = grade * 5f;
                 break;
             // 장갑 : 각종 공격력중 무작위
             case E_EquipmentsType.Arm:
-                primaryStatType = (StatType)Random.Range(2,6);
+                primaryStatType = (E_StatType)Random.Range((int)E_StatType.AttackPower, (int)E_StatType.BasicAttackPower + 1);
                 primaryStatValue = grade * 10f;
                 break;
             // 하의 : 최대 스테미너
             case E_EquipmentsType.Leg:
-                primaryStatType = StatType.MaxStamina;
+                primaryStatType = E_StatType.MaxStamina;
                 primaryStatValue = grade * 10f;
                 break;
             // 귀장식 : 최대 물건 보유량
             case E_EquipmentsType.Earing:
-                primaryStatType = StatType.ThrowableItemCapacity;
+                primaryStatType = E_StatType.ThrowableItemCapacity;
                 primaryStatValue = grade * 5f;
                 break;
             // 반지 : 마나 흡수량
             case E_EquipmentsType.Ring:
-                primaryStatType = StatType.ManaAbsorption;
+                primaryStatType = E_StatType.ManaAbsorption;
                 primaryStatValue = grade * 10f;
                 break;
             // 신발 : 이동 속도
             case E_EquipmentsType.Boots:
-                primaryStatType = StatType.MovementSpeed;
+                primaryStatType = E_StatType.MovementSpeed;
                 primaryStatValue = grade * 2f - 1f;
                 break;
             // 목장식 : 스테미너 회복량
             case E_EquipmentsType.Necklace:
-                primaryStatType = StatType.StaminaRecoveryRate;
+                primaryStatType = E_StatType.StaminaRecoveryRate;
                 primaryStatValue = grade * 10f;
                 break;
             // 기본값
             default:
-                primaryStatType = StatType.Luck;
+                primaryStatType = E_StatType.Luck;
                 primaryStatValue = 0f;
                 break;
         }
@@ -119,16 +127,15 @@ public class Equipment
     {
         List<Stat> subStats = new List<Stat>();
 
-        StatType[] possibleSubStats = (StatType[])System.Enum.GetValues(typeof(StatType));
         int subStatCount = Random.Range(0, 3); // 0~2개의 부가 스탯
 
         for (int i = 0; i < subStatCount; i++)
         {
-            StatType statType = possibleSubStats[Random.Range(0, possibleSubStats.Length)];
+            E_StatType statType = (E_StatType)Random.Range(0, (int)E_StatType.Size);
             float statValue = Random.Range(1, grade + 1); // 등급에 따라 값 범위 증가
             switch (statType)
             {
-                case StatType.CriticalChance:
+                case E_StatType.CriticalChance:
                     switch (grade)
                     {
                         case 1:
@@ -145,13 +152,13 @@ public class Equipment
                             break;
                     }
                     break;
-                case StatType.CriticalDamage:
+                case E_StatType.CriticalDamage:
                     statValue = 1f * statValue;
                     break;
-                case StatType.MovementSpeed:
+                case E_StatType.MovementSpeed:
                     statValue = 2f * statValue - 1f;
                     break;
-                case StatType.ThrowableItemCapacity:
+                case E_StatType.ThrowableItemCapacity:
                     statValue = 5f * statValue;
                     break;
                 default:
@@ -159,11 +166,7 @@ public class Equipment
                     break;
             }
 
-            // 중복 방지
-            if (subStats.Find(s => s.statType == statType) == null)
-            {
-                subStats.Add(new Stat(statType, statValue));
-            }
+            subStats.Add(new Stat(statType, statValue));
         }
 
         return subStats;
@@ -173,10 +176,10 @@ public class Equipment
 [System.Serializable]
 public class Stat
 {
-    public StatType statType;   // 스탯 종류
-    public float statValue;     // 스탯 값
+    public E_StatType statType;     // 스탯 종류
+    public float statValue;         // 스탯 값
 
-    public Stat(StatType statType, float statValue)
+    public Stat(E_StatType statType, float statValue)
     {
         this.statType = statType;
         this.statValue = statValue;

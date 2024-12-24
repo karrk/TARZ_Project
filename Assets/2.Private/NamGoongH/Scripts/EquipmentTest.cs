@@ -31,7 +31,7 @@ public class EquipmentTest : MonoBehaviour
         Debug.Log($"Grade : {equipment.grade}");
         foreach (var stat in equipment.stats)
         {
-            Debug.Log($"Stats : {stat}");
+            Debug.Log($"Stats : {stat.statType} - {stat.statValue}");
         }
     }
 }
