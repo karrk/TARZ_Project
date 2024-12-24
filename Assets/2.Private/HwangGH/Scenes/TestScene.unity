@@ -304,7 +304,6 @@ GameObject:
   - component: {fileID: 1148011484}
   - component: {fileID: 1148011490}
   - component: {fileID: 1148011489}
-  - component: {fileID: 1148011488}
   m_Layer: 0
   m_Name: Monster
   m_TagString: Untagged
@@ -392,39 +391,12 @@ Transform:
   m_GameObject: {fileID: 1148011483}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.99982, z: -0, w: -0.018973488}
-  m_LocalPosition: {x: 0, y: 0.55, z: 2.53}
+  m_LocalPosition: {x: 0.06, y: 0.55, z: 4.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 182.174, z: 0}
---- !u!54 &1148011488
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1148011483}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!195 &1148011489
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -439,7 +411,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -476,14 +448,30 @@ MonoBehaviour:
       startIndex: 
       variableStartIndex: 
       JSONSerialization: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(602.0049,-399.3525)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Repeater","NodeData":{"Offset":"(2.00488281,111.064087)"},"ID":1,"Name":"Repeater","Instant":true,"SharedIntcount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0},"SharedBoolrepeatForever":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBoolendOnFailure":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(-3.49511719,112.536385)"},"ID":2,"Name":"Selector","Instant":true,"AbortTypeabortType":"LowerPriority","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-968.6462,146.742737)"},"ID":3,"Name":"MonsterDead","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"IsDead","NodeData":{"Offset":"(-48.35215,116.599762)"},"ID":4,"Name":"Is
-        Dead","Instant":true,"SharedInthealth":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":"bossMonsterHp","IsShared":true,"IsGlobal":true,"Int32mValue":10}},{"Type":"Die","NodeData":{"Offset":"(61.6478729,122.5522)"},"ID":5,"Name":"Die","Instant":true,"SharedInthealth":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":"bossMonsterHp","IsShared":true,"IsGlobal":true,"Int32mValue":10},"SharedGameObjectselfObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null,"GameObjectmValue":0}}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-694.9546,150.837982)"},"ID":6,"Name":"Gimmick1
+        Dead","Instant":true,"SharedInthealth":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":"bossMonsterHp","IsShared":true,"IsGlobal":true,"Int32mValue":100}},{"Type":"Die","NodeData":{"Offset":"(61.6478729,122.5522)"},"ID":5,"Name":"Die","Instant":true,"SharedInthealth":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":"bossMonsterHp","IsShared":true,"IsGlobal":true,"Int32mValue":100},"SharedGameObjectselfObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null,"GameObjectmValue":0}}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-694.9546,150.837982)"},"ID":6,"Name":"Gimmick1
         End","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"IsGimmick1end","NodeData":{"Offset":"(-110,120)"},"ID":7,"Name":"Is
-        Gimmick 1end","Instant":true,"SharedIntdamagedCount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0},"Int32n1":0,"SharedBoolisGroggyActive":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"IsBossGroggiActive","IsShared":true,"IsGlobal":true,"Tooltip":"\ubcf4\uc2a4\uadf8\ub85c\uae30OnOff","BooleanmValue":false}},{"Type":"GroggyState","NodeData":{"Offset":"(0,120)"},"ID":8,"Name":"Groggy
-        State","Instant":true,"SharedBoolisGroggyActive":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"IsBossGroggiActive","IsShared":true,"IsGlobal":true,"Tooltip":"\ubcf4\uc2a4\uadf8\ub85c\uae30OnOff","BooleanmValue":false},"Singlen2":0},{"Type":"RemoveLightning","NodeData":{"Offset":"(108.504883,119.647491)"},"ID":9,"Name":"Remove
-        Lightning","Instant":true,"SharedBoolsummonLightning":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"summonLightning","IsShared":true,"IsGlobal":true,"BooleanmValue":false}}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-319.898132,148.229279)"},"ID":10,"Name":"IsGimmick1
-        Start","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"IsGimmick1Start","NodeData":{"Offset":"(-55.4951172,118.647491)"},"ID":11,"Name":"Is
-        Gimmick 1 Start","Instant":true,"SharedIntcurHP":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":"bossMonsterHp","IsShared":true,"IsGlobal":true,"Int32mValue":10},"Int32maxHP":0,"BooleanisGimmick1Active":false}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Parallel","NodeData":{"Offset":"(197.790283,150.689484)"},"ID":12,"Name":"Parallel","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.CompareSharedBool","NodeData":{"Offset":"(-3.40026855,118.546547)"},"ID":13,"Name":"Compare
-        Shared Bool","Instant":true,"SharedBoolsummonLightning":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"summonLightning","IsShared":true,"IsGlobal":true,"BooleanmValue":false},"SharedFloatlightningTimer":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"LightningTimer","IsShared":true,"IsGlobal":true,"SinglemValue":0}},{"Type":"BehaviorDesigner.Runtime.Tasks.Log","NodeData":{"Offset":"(141.837769,123.308418)"},"ID":14,"Name":"Log","Instant":true,"SharedStringtext":{"Type":"BehaviorDesigner.Runtime.SharedString","Name":null,"StringmValue":""}},{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.SetSharedFloat","NodeData":{"Offset":"(260.1932,117.439171)"},"ID":15,"Name":"LightTimerReset","Instant":true,"SinglelightTimer":0},{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables.SetSharedFloat","NodeData":{"Offset":"(399.091064,118.6364)"},"ID":16,"Name":"LightningTimerStart","Instant":true,"SinglelightTimer":0}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Idle","NodeData":{"Offset":"(1031.45764,170.647491)"},"ID":17,"Name":"Idle","Instant":true}]}]}}'
+        Gimmick 1end","Instant":true,"SharedIntdamagedCount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":5},"Int32n1":5,"SharedBoolisGroggyActive":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"IsBossGroggiActive","IsShared":true,"IsGlobal":true,"Tooltip":"\ubcf4\uc2a4\uadf8\ub85c\uae30OnOff","BooleanmValue":false}},{"Type":"GroggyState","NodeData":{"Offset":"(-10,120)"},"ID":8,"Name":"Groggy
+        State","Instant":true,"SharedBoolisGroggyActive":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"IsBossGroggiActive","IsShared":true,"IsGlobal":true,"Tooltip":"\ubcf4\uc2a4\uadf8\ub85c\uae30OnOff","BooleanmValue":false},"Singlen2":10},{"Type":"RemoveLightning","NodeData":{"Offset":"(108.504883,119.647491)"},"ID":9,"Name":"Remove
+        Lightning","Instant":true,"SharedBoolsummonLightning":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"summonLightning","IsShared":true,"IsGlobal":true,"BooleanmValue":false}}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-249.898132,148.229279)"},"ID":10,"Name":"IsGimmick1
+        Start","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"IsGimmick1Start","NodeData":{"Offset":"(-185.495117,118.647491)"},"ID":11,"Name":"Is
+        Gimmick 1 Start","Instant":true,"SharedIntcurHP":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":"bossMonsterHp","IsShared":true,"IsGlobal":true,"Int32mValue":100},"Int32maxHP":100,"SharedBoolisGimmick1Active":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"isGimmick1Active","IsShared":true,"IsGlobal":true,"Tooltip":"\ubcf4\uc2a4
+        \uae30\ubbf91 \uacf5\uaca9","BooleanmValue":true}},{"Type":"Gimmick1State","NodeData":{"Offset":"(-71.99512,122.647491)"},"ID":12,"Name":"Gimmick
+        1 State","Instant":true,"SharedBoolisGimmick1Active":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"isGimmick1Active","IsShared":true,"IsGlobal":true,"Tooltip":"\ubcf4\uc2a4
+        \uae30\ubbf91 \uacf5\uaca9","BooleanmValue":true}},{"Type":"SummonLightning","NodeData":{"Offset":"(45.0048828,122.647491)"},"ID":13,"Name":"Summon
+        Lightning","Instant":true,"SharedBoolsummonLitning":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"summonLightning","IsShared":true,"IsGlobal":true,"BooleanmValue":false}},{"Type":"LightningTimerStart","NodeData":{"Offset":"(184.504883,124.647491)"},"ID":14,"Name":"Lightning
+        Timer Start","Instant":true,"SharedFloatlightningTimer":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"LightningTimer","IsShared":true,"IsGlobal":true,"SinglemValue":0}}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Parallel","NodeData":{"Offset":"(157.790283,163.189484)"},"ID":15,"Name":"CanAttack","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CanAttack","NodeData":{"Offset":"(-81.74507,114.397308)"},"ID":16,"Name":"Can
+        Attack","Instant":true,"SharedBoolsummonLightning":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"summonLightning","IsShared":true,"IsGlobal":true,"BooleanmValue":false},"SharedFloatlightningTimer":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":0},"Singlen2":2},{"Type":"LightningAttack","NodeData":{"Offset":"(30.0048828,112.647491)"},"ID":17,"Name":"Lightning
+        Attack","Instant":true},{"Type":"LightningTimerReset","NodeData":{"Offset":"(160.004883,110.647491)"},"ID":18,"Name":"Lightning
+        Timer Reset","Instant":true,"SharedFloatlightTimer":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"LightningTimer","IsShared":true,"IsGlobal":true,"SinglemValue":0}},{"Type":"LightningTimerStart2","NodeData":{"Offset":"(310.004883,106.647491)"},"ID":19,"Name":"Lightning
+        Timer Start 2","Instant":true,"SharedFloatlightningTimer":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"LightningTimer","IsShared":true,"IsGlobal":true,"SinglemValue":0}}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(844.671,135.64743)"},"ID":20,"Name":"IsGimmick2Start","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"IsGimmick2Start","NodeData":{"Offset":"(-217.5,127.5)"},"ID":21,"Name":"Is
+        Gimmick 2 Start","Instant":true,"SharedIntcurHP":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":"bossMonsterHp","IsShared":true,"IsGlobal":true,"Int32mValue":100},"SharedIntmaxHP":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":100},"SharedBoolisGimmick2Active":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"isGimmick2Actice","IsShared":true,"IsGlobal":true,"BooleanmValue":true}},{"Type":"Gimmick2State","NodeData":{"Offset":"(-102.5,132.5)"},"ID":22,"Name":"Gimmick
+        2 State","Instant":true,"SharedBoolisGimmick2Active":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"isGimmick2Actice","IsShared":true,"IsGlobal":true,"BooleanmValue":true}},{"Type":"IncreaseAttackSpeed","NodeData":{"Offset":"(27.4999733,130)"},"ID":23,"Name":"Increase
+        Attack Speed","Instant":true,"SharedFloatattackSpeed":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":10},"Singlen3":20},{"Type":"ChamgeAttackProbabilityTable","NodeData":{"Offset":"(207.499954,130)"},"ID":24,"Name":"Chamge
+        Attack Probability Table","Instant":true}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(1345.2605,140.757263)"},"ID":25,"Name":"CanAttack2","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CanAttack2","NodeData":{"Offset":"(-122.141487,133.147308)"},"ID":26,"Name":"Can
+        Attack 2","Instant":true,"SharedTransformmyselfPos":{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":null,"TransformmValue":1},"SharedTransformtargetPos":{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":null,"TransformmValue":2},"SharedFloatdistance":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":0},"SharedFloatDetectionRange":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":10}},{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(3.27218437,128.231415)"},"ID":27,"Name":"Selector","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(6.68720436,113.59716)"},"ID":28,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CountingNormalAttack","NodeData":{"Offset":"(-1.28808594,138.452271)"},"ID":29,"Name":"Counting
+        Normal Attack","Instant":true,"SharedIntattackCount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0},"Int32n5":0}]}]}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(1537.37012,145.078278)"},"ID":30,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"IsWithinDistance","NodeData":{"Offset":"(-57.4414,120.46019)"},"ID":31,"Name":"Is
+        Within Distance","Instant":true,"SharedGameObjectselfObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Monster","IsShared":true,"IsGlobal":true,"GameObjectmValue":3},"SharedGameObjecttargetObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Player","IsShared":true,"IsGlobal":true,"GameObjectmValue":4},"SharedFloatdetectRange":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"Distance","IsShared":true,"IsGlobal":true,"SinglemValue":90}},{"Type":"FollowPlayer","NodeData":{"Offset":"(72.42618,122.849091)"},"ID":32,"Name":"Follow
+        Player","Instant":true,"SharedGameObjectselfObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Monster","IsShared":true,"IsGlobal":true,"GameObjectmValue":5},"SharedGameObjecttargetObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Player","IsShared":true,"IsGlobal":true,"GameObjectmValue":6},"SharedFloatspeed":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":5},"SharedFloatstoppingDistance":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Idle","NodeData":{"Offset":"(1914.38416,170.647491)"},"ID":33,"Name":"Idle","Instant":true}]}]}}'
       fieldSerializationData:
         typeName: []
         fieldNameHash: 
@@ -491,6 +479,12 @@ MonoBehaviour:
         dataPosition: 
         unityObjects:
         - {fileID: 1148011483}
+        - {fileID: 1148011487}
+        - {fileID: 1270407526}
+        - {fileID: 1148011483}
+        - {fileID: 1270407522}
+        - {fileID: 1148011483}
+        - {fileID: 1270407522}
         byteData: 
         byteDataArray: 
       Version: 1.7.11
@@ -599,7 +593,7 @@ Transform:
   m_GameObject: {fileID: 1270407522}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: -4.27}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
