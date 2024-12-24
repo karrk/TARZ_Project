@@ -15,13 +15,14 @@ public class ItemInventory : MonoBehaviour
     [Inject]
     InGameUI inGameUI;
 
-    [SerializeField] ItemInfo[] itemInfos;
+    [SerializeField] EquipmentSprite equipmentSprite;
 
-    private Item[] items;
-    private Item[] equipments;
 
-    public Item[] Items {  get { return items; } }
-    public Item[] Equipments { get { return equipments; } }
+    private Equipment[] items;
+    private Equipment[] equipments;
+
+    public Equipment[] Items {  get { return items; } }
+    public Equipment[] Equipments { get { return equipments; } }
 
     int hasItemCount;
 
@@ -33,8 +34,8 @@ public class ItemInventory : MonoBehaviour
 
     private void Awake()
     {
-        items = new Item[inventorySize];
-        equipments = new Item[(int)E_EquipmentsType.Size];
+        items = new Equipment[inventorySize];
+        equipments = new Equipment[(int)E_EquipmentsType.Size];
 
     }
 
@@ -42,8 +43,9 @@ public class ItemInventory : MonoBehaviour
     {
         if (hasItemCount < inventorySize)
         {
+            Equipment item = Equipment.GenerateEquipment((E_EquipmentsType)(Random.Range(0, (int)E_EquipmentsType.Size)) , Random.Range(1, 4));
+          //  Equipment item = new Equipment(itemInfos[Random.Range(0, itemInfos.Length)]);
 
-            Item item = new Item(itemInfos[Random.Range(0, itemInfos.Length)]);
             hasItemCount++;
             for (int i = 0; i < items.Length; i++)
             {
@@ -51,7 +53,7 @@ public class ItemInventory : MonoBehaviour
                 {
                     items[i] = item;
 
-                    inGameUI.InventoryPanel.GetItem(i, item.sprite);
+                    inGameUI.InventoryPanel.GetItem(i, equipmentSprite.spriteType[(int)item.type].sprite[item.grade-1]);
                 
                     return;
                 }
@@ -64,15 +66,22 @@ public class ItemInventory : MonoBehaviour
     }
 
   
+ 
+  
 
-    public void RemoveItem(int num)
+    /// <summary>
+    /// 장비 장착 시 호출 되는 함수
+    /// </summary>
+    public void EquipItem(int num)
     {
-        equipments[(int)items[num].itemType] = items[num];
+        equipments[(int)items[num].type] = items[num];
         hasItemCount--;
         items[num] = null;
      
     }
-
+    /// <summary>
+    /// 장비 해제 시 호출 되는 함수
+    /// </summary>
     public void RemoveEquipments(int num)
     {
         equipments[num] = null;
