@@ -12,7 +12,8 @@ public class InGameMenuPanel : MonoBehaviour, IOpenCloseMenu
     [Inject]
     InGameUI inGameUI;
 
-  
+
+    [SerializeField] Button selectedButton;
   
 
     public void ResumeGame()
@@ -40,6 +41,7 @@ public class InGameMenuPanel : MonoBehaviour, IOpenCloseMenu
     public void OpenUIPanel()
     {
         gameObject.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(selectedButton.gameObject);
     }
 
     public void CloseUIPanel()
