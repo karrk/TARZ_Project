@@ -31,8 +31,12 @@ public class Attack : Action
         var player = targetObject.Value.GetComponent<ProjectPlayer>();
         if (player != null)
         {
-            player.TakeDamage(attackDamage.Value);
-            Debug.Log(attackDamage.Value + "의 데미지를 " + targetObject.Value.name + "에게 주었습니다.");
+            if(attackCount.Value!=-1) 
+            {
+                player.TakeDamage(attackDamage.Value);
+                Debug.Log(attackDamage.Value + "의 데미지를 " + targetObject.Value.name + "에게 주었습니다.");
+                //attackCount.Value++;
+            }
             attackCount.Value++;
         }
         else
