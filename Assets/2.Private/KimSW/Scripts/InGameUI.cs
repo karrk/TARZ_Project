@@ -4,8 +4,9 @@ public class InGameUI : BindUI
     private InventorySetPanel inventorySetPanel;
     private ItemInformationPanel itemInformationPanel;
     private PlayerStatusBarPanel playerStatusBarPanel;
+    private StatusInformationPanel statusInformationPanel;
     private InGameMenuPanel inGameMenuPanel;
-
+  
 
     public InventoryPanel InventoryPanel { get { return inventoryPanel; } }
     public InventorySetPanel InventorySetPanel { get { return inventorySetPanel; } }
@@ -13,6 +14,8 @@ public class InGameUI : BindUI
     public ItemInformationPanel ItemInformationPanel { get { return itemInformationPanel; } }
 
     public PlayerStatusBarPanel PlayerStatusBarPanel { get { return playerStatusBarPanel; } }
+
+    public StatusInformationPanel StatusInformationPanel { get { return statusInformationPanel; } }
 
     public InGameMenuPanel InGameMenuPanel { get { return inGameMenuPanel; } }
 
@@ -28,6 +31,7 @@ public class InGameUI : BindUI
         inventorySetPanel = GetUI<InventorySetPanel>("InventorySetPanel");
         itemInformationPanel = GetUI<ItemInformationPanel>("ItemInformationPanel");
         playerStatusBarPanel = GetUI<PlayerStatusBarPanel>("PlayerStatusBarPanel");
+        statusInformationPanel = GetUI<StatusInformationPanel>("StatusInformationPanel");
         inGameMenuPanel = GetUI<InGameMenuPanel>("InGameMenuPanel");
 
     }
