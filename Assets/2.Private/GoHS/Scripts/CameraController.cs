@@ -11,12 +11,27 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float rotationSpeed = 2f;   // 카메라 회전 속도
     [SerializeField] private float smoothSpeed = 0.125f; // 부드러운 이동 속도
 
+    // 판정 범위 거리
+    [SerializeField] private float viewArea;
+
+    // 판정 범위 각도
+    [Range(0, 360)]
+    [SerializeField] private float viewAngle;
+
+    // 충돌 감지 대상
+    [SerializeField] private LayerMask targetMask;
+
+    // 충돌 감지된 오브젝트들을 담는 리스트
+    [HideInInspector]
+    [SerializeField] private List<Transform> targets = new List<Transform>();   // 감지된 오브젝트를 담아두는 배열. 현재로선 사용안되도 됨
+
     private float currenX = 0f;
     private float currenY = 0f;
 
     private Vector3 current;
 
     private bool isLockOn = false;
+    public bool IsLockOn {  get { return isLockOn; } set { isLockOn = value; } }
 
 
     [Inject]
@@ -70,6 +85,9 @@ public class CameraController : MonoBehaviour
         //currenY = Mathf.Clamp(currenY, 7, 7);
     }
 
+    /// <summary>
+    /// 카메라가 플레이어를 따라가는 함수
+    /// </summary>
     private void FollowTarget()
     {
         if(isLockOn && monster != null)
@@ -98,17 +116,88 @@ public class CameraController : MonoBehaviour
 
     public GameObject monster;
 
+
+    /// <summary>
+    /// 락온기능 키고 끄는 함수
+    /// </summary>
     private void LockOn()
     {
         if (!isLockOn)
         {
-            isLockOn = true;
-            Debug.Log("락온 기능 활성화");
+            GetTarget();
+            if (targets.Count > 0)
+            {
+                monster = GetTargetMonster();
+                if (monster != null)
+                {
+                    isLockOn = true;
+                    Debug.Log("락온 기능 활성화");
+                }
+            }
+            else
+            {
+                Debug.Log("감지된 몬스터가 없습니다.");
+            }
         }
         else
         {
             isLockOn = false;
+            monster = null;
             Debug.Log("락온 기능 비활성화");
         }
+    }
+
+    /// <summary>
+    /// 범위 안에 몇 마리의 몬스터가 존재하는지 확인하는 함수
+    /// </summary>
+    public void GetTarget()
+    {
+        targets.Clear();    // 배열 초기화
+        Collider[] TargetCollider = Physics.OverlapSphere(player.transform.position, viewArea, targetMask);
+
+        for (int i = 0; i < TargetCollider.Length; i++) // 감지된 콜라이더 
+        {
+            Transform target = TargetCollider[i].transform;
+            Vector3 direction = target.position - player.transform.position;
+
+            if (Vector3.Dot(direction.normalized, player.transform.forward) > GetAngle(viewAngle / 2).z)
+            {
+                Debug.Log(GetAngle(viewAngle / 2).z);
+
+                IDamagable damagable = target.GetComponent<IDamagable>();
+                if (damagable != null)
+                {
+                    targets.Add(target);
+                }
+            }
+        }
+    }
+
+
+    /// <summary>
+    /// 가장 가까이에 있는 몬스터를 판별하여 리턴해주는 함수
+    /// </summary>
+    /// <returns></returns>
+    private GameObject GetTargetMonster()
+    {
+        GameObject targetMonster = null;
+        float minDistance = float.MaxValue;
+
+        foreach (Transform target in targets)
+        {
+            float distance = Vector3.Distance(player.position, target.position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                targetMonster = target.gameObject;
+            }
+        }
+
+        return targetMonster;
+    }
+
+    public Vector3 GetAngle(float AngleInDegree)
+    {
+        return new Vector3(Mathf.Sin(AngleInDegree * Mathf.Deg2Rad), 0, Mathf.Cos(AngleInDegree * Mathf.Deg2Rad));
     }
 }

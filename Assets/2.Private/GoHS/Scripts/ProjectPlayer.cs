@@ -117,7 +117,7 @@ public class ProjectPlayer : MonoBehaviour
         inputManager.OnControlledLeftStick += Move;
         inputManager.PressedAKey += Drain;
         inputManager.OnUpAkey += StopDrain;
-        inputManager.PressedL1Key += LongRangeSkill_5;
+        inputManager.PressedL1Key += LongRangeSkill_4;
         inputManager.PressedR2Key += Fire;
         //inputManager.PressedBKey += Dash;
     }
@@ -165,16 +165,16 @@ public class ProjectPlayer : MonoBehaviour
         ChangeState(E_State.LongRangeSkill_3);
     }
 
-    private void LongRangeSkill_5()
-    {
-        // TODO : 스킬을 사용할 수 있는 조건을 여기에 달아야 할까? 우선적으로 생각중
-        ChangeState(E_State.LongRangeSkill_5);
-    }
-    
     private void LongRangeSkill_4()
     {
         // TODO : 스킬을 사용할 수 있는 조건을 여기에 달아야 할까? 우선적으로 생각중
         ChangeState(E_State.LongRangeSkill_4);
+    }
+
+    private void LongRangeSkill_5()
+    {
+        // TODO : 스킬을 사용할 수 있는 조건을 여기에 달아야 할까? 우선적으로 생각중
+        ChangeState(E_State.LongRangeSkill_5);
     }
 
     private void Update()

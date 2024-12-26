@@ -31,25 +31,38 @@ public class LongRangeSkill_4 : BaseState
     public override void Enter()
     {
         Debug.Log("원거리 스킬 4번 실행!");
+
+        CameraController cameraController = player.Cam.GetComponent<CameraController>();
+
+        if (cameraController != null)
+        {
+
+            Vector3 cameraEuler = player.Cam.transform.rotation.eulerAngles;
+            Vector3 playerEuler = player.transform.rotation.eulerAngles;
+
+            player.transform.rotation = Quaternion.Euler(playerEuler.x, cameraEuler.y, cameraEuler.z);
+
+        }
+
         player.StartCoroutine(GetTargetCouroutine());
     }
 
     private IEnumerator GetTargetCouroutine()
     {
         // 플레이어 앞쪽의 원 중심 계산
-        Vector3 center = player.transform.position + player.transform.forward * zOffset;
+        Vector3 center = player.transform.position + player.transform.forward * player.Setting.Skill4Setting.zOffset; 
 
         Debug.Log($"스킬 범위 중심 : {center}");
 
-        yield return new WaitForSeconds( skillDelay );
+        yield return new WaitForSeconds( player.Setting.Skill4Setting.Delay );
 
-        Collider[] hitcolliders = Physics.OverlapSphere( center, radius , enemyLayer);
+        Collider[] hitcolliders = Physics.OverlapSphere( center, player.Setting.Skill4Setting.Radius , player.Setting.Skill4Setting.TargetMask);
         foreach( Collider hitCollider in hitcolliders)
         {
             IDamagable damagable = hitCollider.GetComponent<IDamagable>();
             if (damagable != null)
             {
-                damagable.TakeHit(skillDamage, true);
+                damagable.TakeHit(player.Setting.Skill4Setting.Damage, true);
             }
         }
 

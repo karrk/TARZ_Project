@@ -44,7 +44,19 @@ public class LongRangeSkill_2 : BaseState
     public override void Enter()
     {
         Debug.Log("스킬 2 시전 시작!");
-        curDelay = delay;
+        curDelay = player.Setting.Skill2Setting.Delay;
+
+        CameraController cameraController = player.Cam.GetComponent<CameraController>();
+
+        if (cameraController != null)
+        {
+
+            Vector3 cameraEuler = player.Cam.transform.rotation.eulerAngles;
+            Vector3 playerEuler = player.transform.rotation.eulerAngles;
+
+            player.transform.rotation = Quaternion.Euler(playerEuler.x, cameraEuler.y, cameraEuler.z);
+
+        }
     }
 
     public override void Update()
@@ -61,7 +73,7 @@ public class LongRangeSkill_2 : BaseState
                 isStartSkill = true;
                 GetTarget();
                 Debug.Log("원거리 스킬 2 활성화됨");
-                curDelay = delay;
+                curDelay = player.Setting.Skill2Setting.Delay;
             }
             else
             {
