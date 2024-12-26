@@ -56,6 +56,7 @@ public class ProjectPlayer : MonoBehaviour
     public float InputZ { get { return inputZ; } set { inputZ = value; } }
 
     [Inject] private InputManager inputManager;
+    [Inject] private SkillManager skillManager;
 
     [SerializeField] public PlayerReferences Refernece;
 
@@ -117,7 +118,7 @@ public class ProjectPlayer : MonoBehaviour
         inputManager.OnControlledLeftStick += Move;
         inputManager.PressedAKey += Drain;
         inputManager.OnUpAkey += StopDrain;
-        inputManager.PressedL1Key += LongRangeSkill_5;
+        inputManager.PressedL1Key += UseSkill;
         inputManager.PressedR2Key += Fire;
         //inputManager.PressedBKey += Dash;
     }
@@ -145,6 +146,34 @@ public class ProjectPlayer : MonoBehaviour
     private void Dash()
     {
         ChangeState(E_State.Dash);
+    }
+
+    private void UseSkill()
+    {
+        int skillNumber = skillManager.UseSkill();
+
+        if (skillNumber == 0)
+            return;
+
+        switch (skillNumber)
+        {
+            case 1:
+                LongRangeSkill_1();
+                break;
+            case 2:
+                LongRangeSkill_2();
+                break;
+            case 3:
+                LongRangeSkill_3();
+                break;
+            case 4:
+                LongRangeSkill_4();
+                break;
+            case 5:
+                LongRangeSkill_5();
+                break;
+
+        }
     }
 
     private void LongRangeSkill_1()
