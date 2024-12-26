@@ -945,6 +945,7 @@ MonoBehaviour:
   offset: {x: 0, y: 2.5, z: -7.3}
   rotationSpeed: 2
   smoothSpeed: 0.125
+  monster: {fileID: 1176120533}
 --- !u!114 &2100143335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1002,6 +1003,11 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 2100143332}
+    - target: {fileID: 3412971563338093114, guid: 0c45545b5ac752243ae16e97f66501c6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7501606899982736315, guid: 0c45545b5ac752243ae16e97f66501c6,
         type: 3}
       propertyPath: m_Name
