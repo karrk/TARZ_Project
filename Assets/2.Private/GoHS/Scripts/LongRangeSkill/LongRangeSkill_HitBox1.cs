@@ -5,7 +5,7 @@ using Zenject.SpaceFighter;
 
 public class LongRangeSkill_HitBox1 : MonoBehaviour
 {
-    [SerializeField] private float skill_Str;       // 스킬 공격력. 현재 기획서 상 100 데미지
+    [SerializeField] private float skillDamge;       // 스킬 공격력. 현재 기획서 상 100 데미지
 
 
     private void OnTriggerEnter(Collider other)
@@ -20,7 +20,7 @@ public class LongRangeSkill_HitBox1 : MonoBehaviour
             IDamagable damagable = other.GetComponent<IDamagable>();
             if (damagable != null)
             {
-                damagable.TakeHit(skill_Str, true);
+                damagable.TakeHit(skillDamge, true);
             }
         }
     }

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,7 +6,7 @@ using UnityEngine;
 public class LongRangeSkill_2 : BaseState
 {
     [SerializeField] private ProjectPlayer player;
-    [SerializeField] private float skill_Str;       // 스킬 공격력. 현재 기획서상 200 데미지
+    [SerializeField] private float skillDamge;       // 스킬 공격력. 현재 기획서상 200 데미지
 
     public LongRangeSkill_2(ProjectPlayer player)
     {
@@ -71,6 +72,7 @@ public class LongRangeSkill_2 : BaseState
         isStartSkill = false;
     }
 
+
     public void GetTarget()
     {
         Targets.Clear();    // 배열 초기화
@@ -91,7 +93,7 @@ public class LongRangeSkill_2 : BaseState
                 IDamagable damagable = target.GetComponent<IDamagable>();
                 if (damagable != null)
                 {
-                    damagable.TakeHit(skill_Str, true);
+                    damagable.TakeHit(skillDamge, true);
                 }
 
             }
