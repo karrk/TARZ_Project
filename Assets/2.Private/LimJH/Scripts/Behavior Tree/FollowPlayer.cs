@@ -11,6 +11,7 @@ public class FollowPlayer : Action
     public SharedFloat stoppingDistance;
 
     private NavMeshAgent agent;
+    private Animator animator; // Animator 컴포넌트
 
     public override void OnStart()
     {
@@ -18,8 +19,11 @@ public class FollowPlayer : Action
         if (selfObject.Value != null)
         {
             agent = selfObject.Value.GetComponent<NavMeshAgent>();
+            animator = selfObject.Value.GetComponent<Animator>();
+            animator.SetBool("isMove", true);
             if (agent != null)
             {
+                agent.isStopped = false;
                 agent.stoppingDistance = stoppingDistance.Value;
                 agent.speed = speed.Value; // 이동 속도 설정
             }
@@ -47,6 +51,7 @@ public class FollowPlayer : Action
         // 대상 위치 설정
         agent.SetDestination(targetObject.Value.transform.position);
 
+
         // 이동 완료 여부 확인
         if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance + 0.1f)
         {
@@ -54,5 +59,16 @@ public class FollowPlayer : Action
         }
 
         return TaskStatus.Running; // 아직 이동 중
+    }
+
+    public override void OnEnd()
+    {
+        animator.SetBool("isMove", false);
+
+        if (agent != null)
+        {
+            agent.isStopped = true;  // NavMeshAgent 멈추기
+            agent.velocity = Vector3.zero;  // 이동 속도 초기화
+        }
     }
 }
