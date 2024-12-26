@@ -4,6 +4,7 @@ using Zenject;
 public class CheatManager : ITickable
 {
     [Inject] private GarbageQueue garbageManager;
+    [Inject] private SkillManager skillManager;
 
     public void Tick()
     {
@@ -11,6 +12,11 @@ public class CheatManager : ITickable
         {
             GetGarbage();
         }
+        else if(Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            GetGauge();
+        }
+
     }
 
     private void GetGarbage()
@@ -19,5 +25,10 @@ public class CheatManager : ITickable
         {
             garbageManager.AddItem(Random.Range((int)E_Garbage.Test2, (int)E_Garbage.Size));
         }
+    }
+
+    private void GetGauge()
+    {
+        skillManager.UpdateGauge();
     }
 }

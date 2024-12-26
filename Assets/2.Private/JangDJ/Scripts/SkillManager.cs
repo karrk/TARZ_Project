@@ -41,6 +41,7 @@ public class SkillManager
             return;
 
         float needPoint = setting.BasicSetting.SkillAnchor[skillNumber-1];
-        playerModel.SkillGauge.Value -= needPoint * 100;
+        gauge -= needPoint * 100;
+        playerModel.SkillGauge.Value = gauge;
     }
 }

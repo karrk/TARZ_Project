@@ -82,9 +82,12 @@ public class Shooter : MonoBehaviour
 
     public void FireItem(Vector3 firePos, Vector3 dir)
     {
+        garbageQueue.AddItem(Random.Range((int)E_Garbage.Test2, (int)E_Garbage.Size));
         E_Garbage idx = garbageQueue.GetNextGarbageIndex();
 
         Garbage garbage = manager.GetObject<Garbage>(idx);
+        garbage.SetImmediateMode();
+
         garbage.SetAsProjectile(attackPower);
 
         if (garbage.TryGetComponent<Rigidbody>(out Rigidbody rb) == false)
@@ -93,8 +96,10 @@ public class Shooter : MonoBehaviour
         }
 
         rb.transform.position = firePos;
-        rb.transform.forward = firePos + dir;
+        rb.transform.forward = dir;
         rb.velocity = Vector3.zero;
-        rb.AddForce(firePoint.forward * setting.BasicSetting.ThrowingSpeed, ForceMode.Impulse);
+        rb.AddForce(rb.transform.forward * setting.BasicSetting.ThrowingSpeed, ForceMode.Impulse);
     }
+
+
 }

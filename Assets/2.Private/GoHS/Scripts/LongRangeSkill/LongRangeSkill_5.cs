@@ -1,46 +1,35 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using Zenject;
 using Random = UnityEngine.Random;
 
 [Serializable]
 public class LongRangeSkill_5 : BaseState
 {
-    [Inject] private CoroutineHelper helper;
-    [Inject] private Shooter shooter;
-
     private GameObject garbages => player.Refernece.Skill5Garbages;
-
-    private int throwCount;
-    private float startDelay;
-    private float endDelay;
-    private float throwPower;
-    private float rotateSpeed;
-    private float rotateTime;
-    private float radius;
 
     public LongRangeSkill_5(ProjectPlayer player) : base(player)
     {
     }
 
-    public float Radius => radius;
+    public float Radius => player.Setting.Skill5Setting.Radius;
     public Vector3 AnchorPos => garbages.transform.position;
 
     public override void Enter()
     {
-        helper.StartCoroutine(ActionSkill());
+        player.StartCoroutine(ActionSkill());
     }
 
     private IEnumerator ActionSkill()
     {
         float rotateTimer = 0;
 
-        yield return new WaitForSeconds(startDelay);
+        yield return new WaitForSeconds(player.Setting.Skill5Setting.StartDelay);
+        garbages.SetActive(true);
 
         while (true)
         {
-            if(rotateTime <= rotateTimer) { break; }
+            if(player.Setting.Skill5Setting.RotateTime <= rotateTimer) { break; }
 
             Rotation();
 
@@ -48,26 +37,28 @@ public class LongRangeSkill_5 : BaseState
             yield return null;
         }
 
-        yield return new WaitForSeconds(endDelay);
-
+        garbages.SetActive(false);
         Shoot();
+        yield return new WaitForSeconds(player.Setting.Skill5Setting.EndDelay);
 
         player.ChangeState(E_State.Idle);
     }
 
     private void Rotation()
     {
-        garbages.transform.Rotate(Vector3.up * Time.deltaTime * rotateSpeed, Space.Self);
+        garbages.transform.Rotate(Vector3.up * Time.deltaTime * player.Setting.Skill5Setting.RotateSpeed, Space.Self);
     }
 
     private void Shoot()
     {
-        Vector3 randPos = GetRandomPos();
-        Vector3 dir = (AnchorPos - randPos).normalized;
+        Vector3 randPos;
+        Vector3 dir;
 
-        for (int i = 0; i < throwCount; i++)
+        for (int i = 0; i < player.Setting.Skill5Setting.ThrowCount; i++)
         {
-            shooter.FireItem(randPos, dir);
+            randPos = GetRandomPos();
+            dir = (randPos - AnchorPos).normalized;
+            player.Refernece.Shooter.FireItem(randPos, dir);
         }
     }
 
@@ -80,7 +71,7 @@ public class LongRangeSkill_5 : BaseState
 
         randDir = randDir.normalized;
 
-        Vector3 newPos = AnchorPos + randDir * radius;
+        Vector3 newPos = AnchorPos + randDir * player.Setting.Skill5Setting.Radius;
 
         return newPos;
     }
