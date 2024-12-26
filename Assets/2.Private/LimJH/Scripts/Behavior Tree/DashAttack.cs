@@ -20,10 +20,20 @@ public class DashAttack : Action
 
     public SharedBool isDelay;
 
+    private float originalAttackRange;
+    public SharedFloat attackRange;        // 공격 범위
+    public SharedFloat detectRange;        // 탐지 범위
+
     public override void OnStart()
     {
+        // 원래 attackRange 값 저장
+        originalAttackRange = attackRange.Value;
+
+        // attackRange를 detectRange로 변경
+        attackRange.Value = detectRange.Value;
+
         rushCount.Value = Random.Range(1, 4); // 1~3 랜덤 횟수 선택
-        Debug.Log($"{rushCount.Value}번 돌진 실행");
+        //Debug.Log($"{rushCount.Value}번 돌진 실행");
 
         if(midBossMonster == null)
         {
@@ -95,14 +105,14 @@ public class DashAttack : Action
     //    }
 
     //    // 아직 돌진 중인 상태
-    //    return TaskStatus.Running;*/
+    //    return TaskStatus.Running;
     //}
 
     public override void OnEnd()
     {
         // 점프 및 공격 종료 작업
         Debug.Log("대쉬 특수 공격 완료");
-
+        attackRange.Value = originalAttackRange;
 
         //attackCount.Value = 0;
     }
@@ -119,6 +129,8 @@ public class DashAttack : Action
 
     private async UniTask<TaskStatus> Test(MidBossMonster monster)
     {
+        //대쉬어택 구현
+
         isDelay.Value = true;
         await UniTask.Delay((int)(monster.DashAttackDelay * 1000));
         isDelay.Value = false;
