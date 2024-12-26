@@ -14,5 +14,11 @@ public class TestScript : MonoBehaviour
             poolManager.GetObject<DamageText>(E_VFX.DamageText).SetText("200", transform.position, false);
 
         }
+
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            poolManager.GetObject<DamageText>(E_VFX.DamageText).SetText("1000", transform.position, true);
+
+        }
     }
 }
