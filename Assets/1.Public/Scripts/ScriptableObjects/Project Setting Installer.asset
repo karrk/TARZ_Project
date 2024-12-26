@@ -52,51 +52,57 @@ MonoBehaviour:
     Dist: -7.5
     RotationSpeed: 2
     SmoothSpeed: 0.125
-  BasicSetting:
-    SkillAnchor: []
-    GaugeValue: 0
-    ThrowingSpeed: 0
-    MoveSpeed: 0
-  JumpSetting:
-    JumpPower: 0
-  DashSetting:
-    DashTime: 0
-    DashSpeed: 0
-    DashCoolTime: 0
-  DrainSetting:
-    DrainSpeed: 0
-    ViewArea: 0
-    MaxViewArea: 0
-    ViewSpeed: 0
-    ViewAngle: 0
-    TargetMask:
-      serializedVersion: 2
-      m_Bits: 0
-  Skill1Setting:
-    Delay: 0
-  Skill2Setting:
-    Damage: 0
-    ViewArea: 0
-    ViewAngle: 0
-    TargetMask:
-      serializedVersion: 2
-      m_Bits: 0
-    Delay: 0
-  Skill3Setting:
-    Delay: 0
-  Skill4Setting:
-    Radius: 0
-    zOffset: 0
-    Delay: 0
-    Damage: 0
-    TargetMask:
-      serializedVersion: 2
-      m_Bits: 0
-  Skill5Setting:
-    ThrowCount: 0
-    ThrowPower: 0
-    StartDelay: 0
-    EndDelay: 0
-    RotateSpeed: 0
-    RotateTime: 0
-    Radius: 0
+  playerSettings:
+    BasicSetting:
+      SkillAnchor:
+      - 0.5
+      - 0.6
+      - 0.7
+      - 0.8
+      - 1
+      GaugeValue: 0.2
+      ThrowingSpeed: 10
+      MoveSpeed: 3
+    JumpSetting:
+      JumpPower: 20
+    DashSetting:
+      DashTime: 0.2
+      DashSpeed: 20
+      DashCoolTime: 1
+    DrainSetting:
+      DrainSpeed: 2
+      ViewArea: 0
+      MaxViewArea: 10
+      ViewSpeed: 10
+      ViewAngle: 360
+      TargetMask:
+        serializedVersion: 2
+        m_Bits: 524288
+    Skill1Setting:
+      Delay: 1
+    Skill2Setting:
+      Damage: 200
+      ViewArea: 8
+      ViewAngle: 60
+      TargetMask:
+        serializedVersion: 2
+        m_Bits: 4096
+      Delay: 0.5
+    Skill3Setting:
+      Delay: 1
+    Skill4Setting:
+      Radius: 3
+      zOffset: 4
+      Delay: 0.5
+      Damage: 350
+      TargetMask:
+        serializedVersion: 2
+        m_Bits: 4096
+    Skill5Setting:
+      ThrowCount: 5
+      ThrowPower: 5
+      StartDelay: 1
+      EndDelay: 1
+      RotateSpeed: 10
+      RotateTime: 4
+      Radius: 3.6
