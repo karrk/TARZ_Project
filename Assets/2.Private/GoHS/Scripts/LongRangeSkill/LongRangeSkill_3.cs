@@ -1,4 +1,3 @@
-using BehaviorDesigner.Runtime.Tasks.Unity.UnityGameObject;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,7 +26,19 @@ public class LongRangeSkill_3 : BaseState
     public override void Enter()
     {
         Debug.Log("스킬 3 시전 시작!");
-        curDelay = delay;
+        curDelay = player.Setting.Skill3Setting.Delay;
+
+        CameraController cameraController = player.Cam.GetComponent<CameraController>();
+
+        if (cameraController != null)
+        {
+
+            Vector3 cameraEuler = player.Cam.transform.rotation.eulerAngles;
+            Vector3 playerEuler = player.transform.rotation.eulerAngles;
+
+            player.transform.rotation = Quaternion.Euler(playerEuler.x, cameraEuler.y, cameraEuler.z);
+
+        }
     }
 
     public override void Update()
@@ -37,9 +48,9 @@ public class LongRangeSkill_3 : BaseState
             curDelay -= Time.deltaTime;
 
         }
-        else 
+        else
         {
-            if(!isStartSkill)
+            if (!isStartSkill)
             {
                 isStartSkill = true;
                 player.StartCoroutine(StartSkillCoroutine());
