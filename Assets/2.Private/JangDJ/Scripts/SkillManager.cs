@@ -23,6 +23,8 @@ public class SkillManager
             count++;
         }
 
+        RemoveGauge(count);
+
         return count;
     }
 
@@ -31,5 +33,14 @@ public class SkillManager
         this.gauge += setting.GaugeValue;
         this.gauge = Mathf.Clamp(gauge, 0, 100);
         playerModel.SkillGauge.Value = gauge;
+    }
+
+    private void RemoveGauge(int skillNumber)
+    {
+        if (skillNumber == 0)
+            return;
+
+        float needPoint = setting.SkillAnchor[skillNumber-1];
+        playerModel.SkillGauge.Value -= needPoint * 100;
     }
 }
