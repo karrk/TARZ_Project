@@ -76,4 +76,9 @@ public class BaseMonster : MonoBehaviour, IDamagable
         this.health -= value * damageReducation;
         Debug.Log($"Health: {health}");
     }
+
+    public void EndAttack()
+    {
+        Debug.Log("EndAttack");
+    }
 }
