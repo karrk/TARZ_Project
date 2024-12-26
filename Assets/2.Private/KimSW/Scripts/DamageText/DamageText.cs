@@ -18,16 +18,19 @@ public class DamageText : MonoBehaviour, IPooledObject
     [SerializeField] int normalFontSize;
     [SerializeField] int skillFontSize;
 
-    [SerializeField] float duration;
+   
     [SerializeField] float delay;
+    [SerializeField] float fadeDuration;
+    [SerializeField] float sizeDuration;
+
     [SerializeField] float moveDistance;
+    [SerializeField] float size;
+   
 
     [Inject]
     PoolManager poolManager;
 
     TMP_Text damageText;
-
-   
 
     Enum IPooledObject.MyType => E_VFX.DamageText;
 
@@ -67,14 +70,24 @@ public class DamageText : MonoBehaviour, IPooledObject
 
         vec.y += moveDistance;
 
-        
 
-        transform.DOMove(vec, duration).SetDelay(delay);
-        damageText.DOFade(1f, 0).OnComplete(() => {
-            damageText.DOFade(0, duration).SetDelay(delay).OnComplete(() => {
+
+        DOTween.Sequence().
+            Prepend(damageText.DOFade(1f, 0)).
+            Append(transform.DOScale(size , 0)).
+            Append(transform.DOScale(1, sizeDuration)).
+            AppendInterval(delay).
+            Append(damageText.DOFade(0, fadeDuration).SetDelay(delay)).
+            Join(transform.DOMove(vec, fadeDuration)).
+            OnKill(() =>
+            {
                 Return();
+
             });
-        });
+
+
+       
+
     }
 
     public void Return()

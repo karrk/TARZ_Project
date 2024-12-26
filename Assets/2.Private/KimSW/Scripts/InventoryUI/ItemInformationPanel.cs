@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using TMPro;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class ItemInformationPanel : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class ItemInformationPanel : MonoBehaviour
     [SerializeField] TMP_Text selectItemGrade;
 
     StringBuilder stringBuilder = new StringBuilder();
+
+    ChatUI equippedTextChar = new ChatUI();
+    ChatUI selectItemTextChar = new ChatUI();
 
     public void SetEquippedItemInformation(Equipment item)
     {
@@ -30,7 +34,9 @@ public class ItemInformationPanel : MonoBehaviour
         }
 
 
-        equippedItemInfo.text = stringBuilder.ToString();
+        equippedTextChar.StartChatTask(equippedItemInfo, stringBuilder.ToString());
+
+      //  equippedItemInfo.text = stringBuilder.ToString();
 
         equippedItemGrade.text = item.grade.ToString();
     }
@@ -48,21 +54,26 @@ public class ItemInformationPanel : MonoBehaviour
             stringBuilder.Append("\n");
         }
 
-    
 
-        selectItemInfo.text = stringBuilder.ToString();
+        selectItemTextChar.StartChatTask(selectItemInfo, stringBuilder.ToString());
+
+        //selectItemInfo.text = stringBuilder.ToString();
 
         selectItemGrade.text = item.grade.ToString();
     }
 
     public void SetDefaultItemInformation()
     {
+        selectItemTextChar.CancelTask();
         selectItemName.text = "-";
         selectItemInfo.text = "";
+        selectItemGrade.text = "";
     }
     public void SetDefaultEquippedInformation()
     {
+        equippedTextChar.CancelTask();
         equippedItemName.text = "-";
         equippedItemInfo.text = "";
+        equippedItemGrade.text = "";
     }
 }

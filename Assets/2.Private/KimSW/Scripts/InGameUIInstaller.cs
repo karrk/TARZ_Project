@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
-using Zenject.SpaceFighter;
-
 public class InGameUIInstaller : MonoInstaller
 {
     public override void InstallBindings()

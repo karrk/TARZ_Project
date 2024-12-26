@@ -47,7 +47,7 @@ public class InGameMenuPanel : MonoBehaviour, IOpenCloseMenu
     public void CloseUIPanel()
     {
         gameObject.SetActive(false);
-        inGameUI.CurrentMenu = inGameUI.PlayerStatusBarPanel;
+        inGameUI.CurrentMenu = inGameUI.StatusBarPanel;
         inGameUI.CurrentMenu.OpenUIPanel();
     }
 
