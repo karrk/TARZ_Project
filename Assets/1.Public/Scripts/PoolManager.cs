@@ -25,6 +25,7 @@ public class PoolManager : MonoBehaviour
 
         pools.Add(E_PoolType.Monster, new Dictionary<Enum, ObjPool>());
         pools.Add(E_PoolType.VFX, new Dictionary<Enum, ObjPool>());
+        pools.Add(E_PoolType.Garbage, new Dictionary<Enum, ObjPool>());
 
         var monsterPrefab = prefabs.Monster.GetPairTable();
         foreach (var item in monsterPrefab)
@@ -40,6 +41,12 @@ public class PoolManager : MonoBehaviour
                 = new ObjPool(container, item.Value, 5, MainDirectory);
         }
 
+        var garbageTable = prefabs.Garbages.GetPairTable();
+        foreach (var item in garbageTable)
+        {
+            pools[E_PoolType.Garbage][item.Key]
+                = new ObjPool(container, item.Value, 5, MainDirectory);
+        }
     }
 
     /// <summary>

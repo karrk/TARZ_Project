@@ -2323,6 +2323,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8768777440296496512, guid: 6c32554c67185ee4c82e8aa0cff5c74e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -55
+      objectReference: {fileID: 0}
     - target: {fileID: 8776513008822034159, guid: 6c32554c67185ee4c82e8aa0cff5c74e,
         type: 3}
       propertyPath: m_SizeDelta.y
@@ -2491,7 +2496,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 966409818}
-  longRangeSkill_1: {fileID: 0}
 --- !u!114 &2075031765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2504,7 +2508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41ff32f9ba25928458431b67e949541f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemInfos: []
+  equipmentSprite: {fileID: 0}
   inventorySize: 0
 --- !u!114 &2075031766
 MonoBehaviour:
