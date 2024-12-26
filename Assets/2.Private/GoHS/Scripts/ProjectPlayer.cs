@@ -8,7 +8,7 @@ using Zenject;
 using Zenject.SpaceFighter;
 
 public enum E_State { Idle, Move, Jump, Dash, LongRangeAttack, Drain, 
-                      LongRangeSkill_1, LongRangeSkill_2, LongRangeSkill_3, Size }      // 우선적으로 선언한 상태
+                      LongRangeSkill_1, LongRangeSkill_2, LongRangeSkill_3, LongRangeSkill_5, Size }      // 우선적으로 선언한 상태
 
 public class ProjectPlayer : MonoBehaviour
 {
@@ -26,6 +26,7 @@ public class ProjectPlayer : MonoBehaviour
     [Inject][SerializeField] private LongRangeSkill_1 longRangeSkill_1State;
     [Inject][SerializeField] private LongRangeSkill_2 longRangeSkill_2State;
     [Inject][SerializeField] private LongRangeSkill_3 longRangeSkill_3State;
+    [Inject][SerializeField] private LongRangeSkill_5 longRangeSkill_5State;
 
 
     [Header("프로퍼티")]
@@ -72,6 +73,7 @@ public class ProjectPlayer : MonoBehaviour
         {E_State.LongRangeSkill_1, new List<E_State>(){ E_State.Idle }  },
         {E_State.LongRangeSkill_2, new List<E_State>(){ E_State.Idle }  },
         {E_State.LongRangeSkill_3, new List<E_State>(){ E_State.Idle }  },
+        {E_State.LongRangeSkill_5, new List<E_State>(){ E_State.Idle }  },
 
     };
 
@@ -97,6 +99,7 @@ public class ProjectPlayer : MonoBehaviour
         states[(int)E_State.LongRangeSkill_1] = longRangeSkill_1State;
         states[(int)E_State.LongRangeSkill_2] = longRangeSkill_2State;
         states[(int)E_State.LongRangeSkill_3] = longRangeSkill_3State;
+        states[(int)E_State.LongRangeSkill_5] = longRangeSkill_5State;
     }
 
     private void Start()
@@ -105,7 +108,7 @@ public class ProjectPlayer : MonoBehaviour
         inputManager.OnControlledLeftStick += Move;
         inputManager.PressedAKey += Drain;
         inputManager.OnUpAkey += StopDrain;
-        inputManager.PressedL1Key += LongRangeSkill_3;
+        inputManager.PressedL1Key += LongRangeSkill_5;
         inputManager.PressedR2Key += Fire;
         //inputManager.PressedBKey += Dash;
     }
@@ -151,6 +154,12 @@ public class ProjectPlayer : MonoBehaviour
     {
         // TODO : 스킬을 사용할 수 있는 조건을 여기에 달아야 할까? 우선적으로 생각중
         ChangeState(E_State.LongRangeSkill_3);
+    }
+
+    private void LongRangeSkill_5()
+    {
+        // TODO : 스킬을 사용할 수 있는 조건을 여기에 달아야 할까? 우선적으로 생각중
+        ChangeState(E_State.LongRangeSkill_5);
     }
 
     private void Update()
@@ -241,5 +250,9 @@ public class ProjectPlayer : MonoBehaviour
         Gizmos.color = Color.yellow;
         Vector3 center = transform.position + transform.forward * 6f;
         Gizmos.DrawWireSphere(center, 3f);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(longRangeSkill_5State.AnchorPos, longRangeSkill_5State.Radius);
     }
+
 }

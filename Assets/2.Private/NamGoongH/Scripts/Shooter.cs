@@ -79,4 +79,22 @@ public class Shooter : MonoBehaviour
         //    Debug.LogWarning("No garbage prefab available to fire.");
         //}
     }
+
+    public void FireItem(Vector3 firePos, Vector3 dir)
+    {
+        E_Garbage idx = garbageQueue.GetNextGarbageIndex();
+
+        Garbage garbage = manager.GetObject<Garbage>(idx);
+        garbage.SetAsProjectile(attackPower);
+
+        if (garbage.TryGetComponent<Rigidbody>(out Rigidbody rb) == false)
+        {
+            rb = garbage.AddComponent<Rigidbody>();
+        }
+
+        rb.transform.position = firePos;
+        rb.transform.forward = firePos + dir;
+        rb.velocity = Vector3.zero;
+        rb.AddForce(firePoint.forward * setting.ThrowingSpeed, ForceMode.Impulse);
+    }
 }
