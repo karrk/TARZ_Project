@@ -32,6 +32,7 @@ public class PlayerInstaller : MonoInstaller
         Container.Bind<LongRangeSkill_1>().AsSingle();
         Container.Bind<LongRangeSkill_2>().AsSingle();
         Container.Bind<LongRangeSkill_3>().AsSingle();
+        Container.Bind<LongRangeSkill_4>().AsSingle();
     }
 
     private void InstallCamera()
