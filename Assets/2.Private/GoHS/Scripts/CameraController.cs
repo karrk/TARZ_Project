@@ -16,6 +16,9 @@ public class CameraController : MonoBehaviour
 
     private Vector3 current;
 
+    private bool isLockOn = false;
+
+
     [Inject]
     private void Init(ProjectPlayer player, ProjectInstaller.CameraSetting setting, InputManager manager)
     {
@@ -33,6 +36,15 @@ public class CameraController : MonoBehaviour
         smoothSpeed = setting.SmoothSpeed;
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.LeftAlt))
+        {
+           LockOn();
+        }
+    }
+    
+
     private void LateUpdate()
     {
         if (player == null)
@@ -44,6 +56,11 @@ public class CameraController : MonoBehaviour
 
     private void HandleCameraRotation(Vector3 vec)
     {
+        if(isLockOn)
+        {
+            return;
+        }            
+
         current.x += vec.x * rotationSpeed;
         current.y -= vec.y * rotationSpeed;
 
@@ -55,12 +72,43 @@ public class CameraController : MonoBehaviour
 
     private void FollowTarget()
     {
-        Quaternion rotation = Quaternion.Euler(current.y, current.x, 0f);
-        //Vector3 desiredPosition = target.position + rotation * offset;
-        //transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
-        transform.position = player.position + rotation * offset;
-        transform.LookAt(player.position);
+        if(isLockOn && monster != null)
+        {
+            Vector3 directionToMonster = (monster.transform.position - player.position);
+            directionToMonster.y = 0;
+            directionToMonster.Normalize();
+            Quaternion lockOnRotation = Quaternion.LookRotation(directionToMonster);
+
+            transform.position = player.position + offset.z * directionToMonster + offset.y * Vector3.up;
+
+            //Vector3 resultDirection = new Vector3(directionToMonster.x, directionToMonster.y, directionToMonster.z);
+            //transform.position = player.position + resultDirection;
+            transform.LookAt(player.position);
+        }
+        else
+        {
+            Quaternion rotation = Quaternion.Euler(0, current.x, 0f);
+            //Vector3 desiredPosition = target.position + rotation * offset;
+            //transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
+            transform.position = player.position + rotation * offset;
+            transform.LookAt(player.position);
+        }
+
     }
 
+    public GameObject monster;
 
+    private void LockOn()
+    {
+        if (!isLockOn)
+        {
+            isLockOn = true;
+            Debug.Log("락온 기능 활성화");
+        }
+        else
+        {
+            isLockOn = false;
+            Debug.Log("락온 기능 비활성화");
+        }
+    }
 }
