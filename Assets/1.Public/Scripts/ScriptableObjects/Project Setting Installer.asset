@@ -60,7 +60,7 @@ MonoBehaviour:
       - 0.7
       - 0.8
       - 1
-      GaugeValue: 0.2
+      GaugeValue: 10
       ThrowingSpeed: 10
       MoveSpeed: 3
     JumpSetting:
@@ -99,10 +99,10 @@ MonoBehaviour:
         serializedVersion: 2
         m_Bits: 4096
     Skill5Setting:
-      ThrowCount: 5
-      ThrowPower: 5
-      StartDelay: 1
+      ThrowCount: 20
+      ThrowPower: 20
+      StartDelay: 0.5
       EndDelay: 1
-      RotateSpeed: 10
+      RotateSpeed: 750
       RotateTime: 4
-      Radius: 3.6
+      Radius: 3.4

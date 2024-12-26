@@ -56,13 +56,14 @@ public class ProjectPlayer : MonoBehaviour
     public float InputZ { get { return inputZ; } set { inputZ = value; } }
 
     [Inject] private InputManager inputManager;
+    [Inject] private SkillManager skillManager;
 
     [SerializeField] public PlayerReferences Refernece;
 
     private Dictionary<E_State, List<E_State>> actionGraph = new Dictionary<E_State, List<E_State>>
     {
         { E_State.Idle, new List<E_State>(){ E_State.Move,E_State.Jump,E_State.Dash,E_State.LongRangeAttack,
-            E_State.Drain,E_State.LongRangeSkill_1, E_State.LongRangeSkill_2, E_State.LongRangeSkill_3, E_State.LongRangeSkill_4 } },
+            E_State.Drain,E_State.LongRangeSkill_1, E_State.LongRangeSkill_2, E_State.LongRangeSkill_3, E_State.LongRangeSkill_4, E_State.LongRangeSkill_5  } },
 
         {E_State.Move, new List<E_State>(){ E_State.Idle,E_State.Jump,E_State.Dash,E_State.LongRangeAttack }  },
         {E_State.Jump, new List<E_State>(){ E_State.Idle }  },
@@ -117,7 +118,7 @@ public class ProjectPlayer : MonoBehaviour
         inputManager.OnControlledLeftStick += Move;
         inputManager.PressedAKey += Drain;
         inputManager.OnUpAkey += StopDrain;
-        inputManager.PressedL1Key += LongRangeSkill_5;
+        inputManager.PressedL1Key += UseSkill;
         inputManager.PressedR2Key += Fire;
         //inputManager.PressedBKey += Dash;
     }
@@ -145,6 +146,34 @@ public class ProjectPlayer : MonoBehaviour
     private void Dash()
     {
         ChangeState(E_State.Dash);
+    }
+
+    private void UseSkill()
+    {
+        int skillNumber = skillManager.UseSkill();
+
+        if (skillNumber == 0)
+            return;
+
+        switch (skillNumber)
+        {
+            case 1:
+                LongRangeSkill_1();
+                break;
+            case 2:
+                LongRangeSkill_2();
+                break;
+            case 3:
+                LongRangeSkill_3();
+                break;
+            case 4:
+                LongRangeSkill_4();
+                break;
+            case 5:
+                LongRangeSkill_5();
+                break;
+
+        }
     }
 
     private void LongRangeSkill_1()
@@ -258,8 +287,11 @@ public class ProjectPlayer : MonoBehaviour
         Vector3 center = transform.position + transform.forward * 6f;
         Gizmos.DrawWireSphere(center, 3f);
 
-        //Gizmos.color = Color.red;
-        //Gizmos.DrawWireSphere(longRangeSkill_5State.AnchorPos, longRangeSkill_5State.Radius);
+        Gizmos.color = Color.red;
+        if (setting != null)
+        {
+            Gizmos.DrawWireSphere(Refernece.Skill5Garbages.transform.position, setting.Skill5Setting.Radius);
+        }
     }
 
 }

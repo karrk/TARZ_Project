@@ -16,8 +16,6 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         InstallData();
         InstallPools();
         InstallGarbage();
-
-        Container.BindInterfacesAndSelfTo<CheatManager>().AsSingle().NonLazy();
     }
 
     private void InstallMisc()

@@ -16,7 +16,14 @@ public class Garbage : MonoBehaviour, IDrainable, IPooledObject
 
     private float playerAttackPower;
 
+    private bool isImmediatelyReturnMode;
+
     [Inject] private PoolManager manager;
+
+    public void SetImmediateMode()
+    {
+        isImmediatelyReturnMode = true;
+    }
 
     public void DrainTowards(Vector3 targetPosition, float speed)
     {
@@ -51,13 +58,6 @@ public class Garbage : MonoBehaviour, IDrainable, IPooledObject
         {
             Debug.Log("Hit Monster!");
 
-            // 몬스터에게 데미지 전달
-            //BaseMonster monster = collision.gameObject.GetComponent<BaseMonster>();
-            //if (monster != null)
-            //{
-            //    monster.TakeHit(playerAttackPower);
-            //}
-
             IDamagable monster = collision.gameObject.GetComponent<IDamagable>();
             if(monster != null)
             {
@@ -73,6 +73,9 @@ public class Garbage : MonoBehaviour, IDrainable, IPooledObject
         // 바닥 또는 기본 환경과 충돌한 경우
         if (collisionTag == "Ground" || collisionTag == "Environment")
         {
+            if (isImmediatelyReturnMode == true)
+                Return();
+
             // 투척물이 비어있는 상태일때
             if (garbageIndex == 0)
             {
@@ -96,6 +99,9 @@ public class Garbage : MonoBehaviour, IDrainable, IPooledObject
 
     public void Return()
     {
+        if (isImmediatelyReturnMode == true)
+            isImmediatelyReturnMode = false;
+
         manager.Return(this);
     }
 }
