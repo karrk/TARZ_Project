@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using TMPro;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class ItemInformationPanel : MonoBehaviour
 {
@@ -59,10 +60,12 @@ public class ItemInformationPanel : MonoBehaviour
     {
         selectItemName.text = "-";
         selectItemInfo.text = "";
+        selectItemGrade.text = "";
     }
     public void SetDefaultEquippedInformation()
     {
         equippedItemName.text = "-";
         equippedItemInfo.text = "";
+        equippedItemGrade.text = "";
     }
 }
