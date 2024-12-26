@@ -25,6 +25,9 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         Container.Bind<SoundSource>().AsSingle().NonLazy();
 
         Container.Bind<CoroutineHelper>().FromNewComponentOnRoot().AsSingle().NonLazy();
+
+        Container.Bind<PlayerEquipment>().FromComponentInNewPrefab(prefabs.PlayerEquipments)
+            .AsSingle().NonLazy();
     }
     
     private void InstallInput()
@@ -164,6 +167,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
     {
         public GameObject PoolManager;
         public GameObject Player;
+        public GameObject PlayerEquipments;
     }
 
     [Serializable]
