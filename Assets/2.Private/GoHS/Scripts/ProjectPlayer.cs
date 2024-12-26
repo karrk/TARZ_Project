@@ -62,7 +62,7 @@ public class ProjectPlayer : MonoBehaviour
     private Dictionary<E_State, List<E_State>> actionGraph = new Dictionary<E_State, List<E_State>>
     {
         { E_State.Idle, new List<E_State>(){ E_State.Move,E_State.Jump,E_State.Dash,E_State.LongRangeAttack,
-            E_State.Drain,E_State.LongRangeSkill_1, E_State.LongRangeSkill_2, E_State.LongRangeSkill_3, E_State.LongRangeSkill_4 } },
+            E_State.Drain,E_State.LongRangeSkill_1, E_State.LongRangeSkill_2, E_State.LongRangeSkill_3, E_State.LongRangeSkill_4, E_State.LongRangeSkill_5  } },
 
         {E_State.Move, new List<E_State>(){ E_State.Idle,E_State.Jump,E_State.Dash,E_State.LongRangeAttack }  },
         {E_State.Jump, new List<E_State>(){ E_State.Idle }  },
@@ -258,8 +258,11 @@ public class ProjectPlayer : MonoBehaviour
         Vector3 center = transform.position + transform.forward * 6f;
         Gizmos.DrawWireSphere(center, 3f);
 
-        //Gizmos.color = Color.red;
-        //Gizmos.DrawWireSphere(longRangeSkill_5State.AnchorPos, longRangeSkill_5State.Radius);
+        Gizmos.color = Color.red;
+        if (setting != null)
+        {
+            Gizmos.DrawWireSphere(Refernece.Skill5Garbages.transform.position, setting.Skill5Setting.Radius);
+        }
     }
 
 }
