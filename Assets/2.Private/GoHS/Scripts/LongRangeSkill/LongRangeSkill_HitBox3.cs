@@ -5,6 +5,7 @@ using UnityEngine;
 public class LongRangeSkill_HitBox3 : MonoBehaviour
 {
     [SerializeField] private GameObject punchObj;
+    [SerializeField] private float skillDamage;
 
     private void Start()
     {
@@ -71,9 +72,13 @@ public class LongRangeSkill_HitBox3 : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if(other.CompareTag("Monster"))
         {
-            Debug.Log("물체에 닿았다.");
+            IDamagable damagable = other.GetComponent<IDamagable>();
+            if (damagable != null)
+            {
+                damagable.TakeHit(skillDamage, true);
+            }
         }
 
     }

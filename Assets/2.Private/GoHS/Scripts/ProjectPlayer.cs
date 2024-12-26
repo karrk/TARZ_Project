@@ -235,4 +235,11 @@ public class ProjectPlayer : MonoBehaviour
 
         Instantiate(bulletPrefab, bulletSpawnPoint.position, transform.rotation);
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Vector3 center = transform.position + transform.forward * 6f;
+        Gizmos.DrawWireSphere(center, 3f);
+    }
 }
