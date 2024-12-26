@@ -4,23 +4,23 @@ using UnityEngine;
 
 public class PlayerEquipment : MonoBehaviour
 {
-    private Item[] equippedItems; // 현재 장착된 아이템
+    private Equipment[] equippedItems; // 현재 장착된 아이템
     private Dictionary<E_StatType, float> totalStats; // 합산된 스탯
 
-    public Dictionary<E_StatType, float> TotalStats => totalStats;
+    public Dictionary<E_StatType, float> TotalStats { get; }
 
     private void Awake()
     {
-        equippedItems = new Item[(int)E_EquipmentsType.Size];
+        equippedItems = new Equipment[(int)E_EquipmentsType.Size];
         totalStats = new Dictionary<E_StatType, float>();
     }
 
     // 장비 장착
-    public bool EquipItem(Item item)
+    public bool EquipItem(Equipment equipment)
     {
-        if (item == null || item.itemType == null) return false;
+        if (equipment == null) return false;
 
-        int slotIndex = (int)item.itemType;
+        int slotIndex = (int)equipment.type;
 
         // 기존 장비 해제
         if (equippedItems[slotIndex] != null)
@@ -29,7 +29,7 @@ public class PlayerEquipment : MonoBehaviour
         }
 
         // 장비 장착
-        equippedItems[slotIndex] = item;
+        equippedItems[slotIndex] = equipment;
         UpdateTotalStats();
 
         return true;
@@ -51,19 +51,19 @@ public class PlayerEquipment : MonoBehaviour
     {
         totalStats.Clear();
 
-        foreach (var item in equippedItems)
+        foreach (var equipment in equippedItems)
         {
-            if (item == null) continue;
+            if (equipment == null) continue;
 
-            //foreach (var stat in item.stats)
-            //{
-            //    if (!totalStats.ContainsKey(stat.statType))
-            //    {
-            //        totalStats[stat.statType] = 0;
-            //    }
+            foreach (var stat in equipment.stats)
+            {
+                if (!totalStats.ContainsKey(stat.statType))
+                {
+                    totalStats[stat.statType] = 0;
+                }
 
-            //    totalStats[stat.statType] += stat.statValue;
-            //}
+                totalStats[stat.statType] += stat.statValue;
+            }
         }
     }
 
