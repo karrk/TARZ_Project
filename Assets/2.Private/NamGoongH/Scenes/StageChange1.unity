@@ -620,6 +620,63 @@ Transform:
   - {fileID: 294610074}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &940439497
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 940439500}
+  - component: {fileID: 940439499}
+  - component: {fileID: 940439498}
+  m_Layer: 0
+  m_Name: PlayerEquipment
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &940439498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 940439497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1409140a8e11c74c80e6849474724c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &940439499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 940439497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7e0211e1ab03364e9cc02cd660ed322, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &940439500
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 940439497}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 593.472, y: 287.25546, z: 637.85693}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &966409818 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 878338197031248657, guid: 0c45545b5ac752243ae16e97f66501c6,
@@ -975,7 +1032,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1629448701}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36e80e067d6992e4d863e9833a106f92, type: 3}
   m_Name: 
@@ -987,7 +1044,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1629448701}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9ef1131a425942745a9636bba4aa7246, type: 3}
   m_Name: 
@@ -2887,6 +2944,7 @@ MonoBehaviour:
   - {fileID: 2075031763}
   - {fileID: 1961407524}
   - {fileID: 2075031766}
+  - {fileID: 940439498}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -2944,7 +3002,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 966409818}
-  longRangeSkill_1: {fileID: 0}
 --- !u!114 &2075031765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2957,7 +3014,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41ff32f9ba25928458431b67e949541f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemInfos: []
+  equipmentSprite: {fileID: 0}
   inventorySize: 0
 --- !u!114 &2075031766
 MonoBehaviour:
@@ -3312,3 +3369,4 @@ SceneRoots:
   - {fileID: 808554397}
   - {fileID: 1967955400}
   - {fileID: 250475154}
+  - {fileID: 940439500}

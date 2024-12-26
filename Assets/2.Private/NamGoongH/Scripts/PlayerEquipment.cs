@@ -7,7 +7,7 @@ public class PlayerEquipment : MonoBehaviour
     private Equipment[] equippedItems; // 현재 장착된 아이템
     private Dictionary<E_StatType, float> totalStats; // 합산된 스탯
 
-    public Dictionary<E_StatType, float> TotalStats { get; }
+    public Dictionary<E_StatType, float> TotalStats { get { return totalStats; } }
 
     private void Awake()
     {
@@ -25,7 +25,7 @@ public class PlayerEquipment : MonoBehaviour
         // 기존 장비 해제
         if (equippedItems[slotIndex] != null)
         {
-            UnEquipItem(slotIndex);
+            UnequipItem(slotIndex);
         }
 
         // 장비 장착
@@ -36,7 +36,7 @@ public class PlayerEquipment : MonoBehaviour
     }
 
     // 장비 해제
-    public bool UnEquipItem(int slotIndex)
+    public bool UnequipItem(int slotIndex)
     {
         if (equippedItems[slotIndex] == null) return false;
 

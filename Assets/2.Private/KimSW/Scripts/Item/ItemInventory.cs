@@ -12,6 +12,9 @@ public class ItemInventory : MonoBehaviour
     [Inject]
     InGameUI inGameUI;
 
+    [Inject]
+    PlayerEquipment playerEquipment;
+
     [SerializeField] EquipmentSprite equipmentSprite;
 
 
@@ -78,6 +81,7 @@ public class ItemInventory : MonoBehaviour
     public void EquipItem(int num)
     {
 
+        playerEquipment.EquipItem(items[num]);
         equipments[(int)items[num].type] = items[num];
 
         hasItemCount--;
@@ -90,6 +94,7 @@ public class ItemInventory : MonoBehaviour
     /// </summary>
     public void RemoveEquipments(int num)
     {
+        playerEquipment.UnequipItem(num);
         equipments[num] = null;
         inGameUI.StatusInformationPanel.UpdateStatusInfo();
     }
