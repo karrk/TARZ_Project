@@ -49,6 +49,11 @@ public class ChatUI : MonoBehaviour
 
     public void CancelTask()
     {
+        if (cancell is null)
+        {
+            return;
+        }
+
         cancell.Cancel();
         cancell.Dispose();
     }

@@ -17,8 +17,8 @@ public class ItemInformationPanel : MonoBehaviour
 
     StringBuilder stringBuilder = new StringBuilder();
 
-    ChatUI equippedTextChar = new ChatUI();
-    ChatUI selectItemTextChar = new ChatUI();
+    ChatUI equippedTextChat = new ChatUI();
+    ChatUI selectItemTextChat = new ChatUI();
 
     public void SetEquippedItemInformation(Equipment item)
     {
@@ -34,7 +34,7 @@ public class ItemInformationPanel : MonoBehaviour
         }
 
 
-        equippedTextChar.StartChatTask(equippedItemInfo, stringBuilder.ToString());
+        equippedTextChat.StartChatTask(equippedItemInfo, stringBuilder.ToString());
 
       //  equippedItemInfo.text = stringBuilder.ToString();
 
@@ -55,7 +55,7 @@ public class ItemInformationPanel : MonoBehaviour
         }
 
 
-        selectItemTextChar.StartChatTask(selectItemInfo, stringBuilder.ToString());
+        selectItemTextChat.StartChatTask(selectItemInfo, stringBuilder.ToString());
 
         //selectItemInfo.text = stringBuilder.ToString();
 
@@ -64,14 +64,14 @@ public class ItemInformationPanel : MonoBehaviour
 
     public void SetDefaultItemInformation()
     {
-        selectItemTextChar.CancelTask();
+        selectItemTextChat.StartChatTask(selectItemInfo, "");
         selectItemName.text = "-";
         selectItemInfo.text = "";
         selectItemGrade.text = "";
     }
     public void SetDefaultEquippedInformation()
     {
-        equippedTextChar.CancelTask();
+        equippedTextChat.StartChatTask(equippedItemInfo, "");
         equippedItemName.text = "-";
         equippedItemInfo.text = "";
         equippedItemGrade.text = "";
