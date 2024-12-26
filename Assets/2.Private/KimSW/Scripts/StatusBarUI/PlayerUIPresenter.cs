@@ -26,7 +26,7 @@ public class PlayerUIPresenter : MonoBehaviour
     {
         playerModel.MaxHp
         .Where(value => value >= 0)
-        .Subscribe(value => inGameUI.PlayerStatusBarPanel.PlayerHpSliderView.SetSliderMax(value))
+        .Subscribe(value => inGameUI.StatusBarPanel.PlayerHpSliderView.SetSliderMax(value))
         .AddTo(this);
 
         playerModel.Hp
@@ -42,13 +42,13 @@ public class PlayerUIPresenter : MonoBehaviour
         playerModel.Hp
        .Where(value => value >= 0)
        .Where(value => value <= playerModel.MaxHp.Value)
-       .Subscribe(value => inGameUI.PlayerStatusBarPanel.PlayerHpSliderView.SetSlider(value))
+       .Subscribe(value => inGameUI.StatusBarPanel.PlayerHpSliderView.SetSlider(value))
        .AddTo(this);
 
 
         playerModel.MaxStamina
         .Where(value => value >= 0)
-        .Subscribe(value => inGameUI.PlayerStatusBarPanel.PlayerStaminaSliderView.SetSliderMax(value))
+        .Subscribe(value => inGameUI.StatusBarPanel.PlayerStaminaSliderView.SetSliderMax(value))
         .AddTo(this);
 
         playerModel.Stamina
@@ -65,7 +65,7 @@ public class PlayerUIPresenter : MonoBehaviour
         playerModel.Stamina
        .Where(value => value >= 0)
        .Where(value => value <= playerModel.MaxStamina.Value)
-       .Subscribe(value => inGameUI.PlayerStatusBarPanel.PlayerStaminaSliderView.SetSlider(value))
+       .Subscribe(value => inGameUI.StatusBarPanel.PlayerStaminaSliderView.SetSlider(value))
        .AddTo(this);
 
 
@@ -82,14 +82,14 @@ public class PlayerUIPresenter : MonoBehaviour
         playerModel.SkillGauge
        .Where(value => value >= 0)
        .Where(value => value <= 100)
-       .Subscribe(value => inGameUI.PlayerStatusBarPanel.PlayerSkillSliderView.SetSlider(value))
+       .Subscribe(value => inGameUI.StatusBarPanel.PlayerSkillSliderView.SetSlider(value))
        .AddTo(this);
 
 
 
         playerModel.MaxGarbageCount
         .Where(value => value >= 0)
-        .Subscribe(value => inGameUI.PlayerStatusBarPanel.GarbageInventoryView.SetTextMax(value))
+        .Subscribe(value => inGameUI.StatusBarPanel.GarbageInventoryView.SetTextMax(value))
         .AddTo(this);
 
         playerModel.GarbageCount
@@ -105,7 +105,7 @@ public class PlayerUIPresenter : MonoBehaviour
         playerModel.GarbageCount
        .Where(value => value >= 0)
        .Where(value => value <= playerModel.MaxGarbageCount.Value)
-       .Subscribe(value => inGameUI.PlayerStatusBarPanel.GarbageInventoryView.SetText(value))
+       .Subscribe(value => inGameUI.StatusBarPanel.GarbageInventoryView.SetText(value))
        .AddTo(this);
 
 
@@ -125,7 +125,7 @@ public class PlayerUIPresenter : MonoBehaviour
 
         playerModel.CurrentEXP
           .Where(value => value >= 0)
-          .Subscribe(value => inGameUI.PlayerStatusBarPanel.PlayerExpView.SetExpText(value))
+          .Subscribe(value => inGameUI.StatusBarPanel.PlayerExpView.SetExpText(value))
           .AddTo(this);
 
        
