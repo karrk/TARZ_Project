@@ -6,6 +6,7 @@ public class Shooter : MonoBehaviour
     public Transform firePoint; // 발사 위치
     public GarbageQueue garbageQueue; // GarbageQueue 참조
     private float speed;
+    private float attackPower = 10f;
 
     [Inject]
     public void Construct(GarbageQueue garbageQueue, ProjectInstaller.PlayerSettings setting)
@@ -39,7 +40,7 @@ public class Shooter : MonoBehaviour
             if (garbage != null)
             {
                 // 발사 상태로 설정
-                garbage.SetAsProjectile();
+                garbage.SetAsProjectile(attackPower);
             }
             else
             {

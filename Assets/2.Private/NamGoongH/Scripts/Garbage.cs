@@ -8,6 +8,8 @@ public class Garbage : MonoBehaviour, IDrainable
     private bool isProjectile = false;
     public bool IsProjectile { get { return isProjectile; } set { isProjectile = value; } } // 플레이어가 발사했는지 판별
 
+    private float playerAttackPower;
+
     public void DrainTowards(Vector3 targetPosition, float speed)
     {
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
@@ -35,10 +37,18 @@ public class Garbage : MonoBehaviour, IDrainable
         // 충돌한 객체의 태그 확인
         string collisionTag = collision.gameObject.tag;
 
+
         // 몬스터와 충돌한 경우
         if (collisionTag == "Monster" && IsProjectile == true)
         {
             Debug.Log("Hit Monster!");
+
+            // 몬스터에게 데미지 전달
+            BaseMonster monster = collision.gameObject.GetComponent<BaseMonster>();
+            if (monster != null)
+            {
+                monster.TakeHit(playerAttackPower);
+            }
 
             // 투척물 소멸
             Destroy(gameObject);
@@ -61,8 +71,9 @@ public class Garbage : MonoBehaviour, IDrainable
     }
 
     // 플레이어에 의해 발사되었음을 설정
-    public void SetAsProjectile()
+    public void SetAsProjectile(float attackPower)
     {
         IsProjectile = true;
+        playerAttackPower = attackPower;
     }
 }
