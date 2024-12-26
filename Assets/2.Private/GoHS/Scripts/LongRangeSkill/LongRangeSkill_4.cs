@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 
+[System.Serializable]
 public class LongRangeSkill_4 : BaseState
 {
     [SerializeField] private ProjectPlayer player;
@@ -13,13 +14,14 @@ public class LongRangeSkill_4 : BaseState
         this.radius = 3f;
         this.zOffset = 4f;
         this.skillDelay = 0.5f;
+        this.skillDamage = 0.5f;
         this.enemyLayer = LayerMask.GetMask("Monster");
     }
 
     [SerializeField] private float radius = 3f; // 원의 반지름
     [SerializeField] private float zOffset = 4f; // 플레이어에서 z축으로 떨어진 거리
     [SerializeField] private float skillDelay = 1f; // 스킬 딜레이
-    [SerializeField] private float skillDamge = 3f; // 스킬 데미지
+    [SerializeField] private float skillDamage = 3f; // 스킬 데미지
     [SerializeField] private LayerMask enemyLayer;
 
     public override void Enter()
@@ -43,9 +45,11 @@ public class LongRangeSkill_4 : BaseState
             IDamagable damagable = hitCollider.GetComponent<IDamagable>();
             if (damagable != null)
             {
-                damagable.TakeHit(skillDamge, true);
+                damagable.TakeHit(skillDamage, true);
             }
         }
+
+        player.ChangeState(E_State.Idle);
     }
 
     //private void OnDrawGizmos()
