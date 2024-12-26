@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -70,6 +71,7 @@ public class LongRangeSkill_2 : BaseState
     {
         isStartSkill = false;
     }
+
 
     public void GetTarget()
     {
