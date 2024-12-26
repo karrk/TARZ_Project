@@ -1,14 +1,22 @@
-using UnityEditorInternal;
+using System;
 using UnityEngine;
+using Zenject;
 
-public class Garbage : MonoBehaviour, IDrainable
+public class Garbage : MonoBehaviour, IDrainable, IPooledObject
 {
     public int garbageIndex; // 투척물의 인덱스
+    public E_Garbage garbageType;
 
     private bool isProjectile = false;
     public bool IsProjectile { get { return isProjectile; } set { isProjectile = value; } } // 플레이어가 발사했는지 판별
 
+    public Enum MyType => garbageType;
+
+    public GameObject MyObj => this.gameObject;
+
     private float playerAttackPower;
+
+    [Inject] private PoolManager manager;
 
     public void DrainTowards(Vector3 targetPosition, float speed)
     {
@@ -44,25 +52,34 @@ public class Garbage : MonoBehaviour, IDrainable
             Debug.Log("Hit Monster!");
 
             // 몬스터에게 데미지 전달
-            BaseMonster monster = collision.gameObject.GetComponent<BaseMonster>();
-            if (monster != null)
+            //BaseMonster monster = collision.gameObject.GetComponent<BaseMonster>();
+            //if (monster != null)
+            //{
+            //    monster.TakeHit(playerAttackPower);
+            //}
+
+            IDamagable monster = collision.gameObject.GetComponent<IDamagable>();
+            if(monster != null)
             {
-                monster.TakeHit(playerAttackPower);
+                monster.TakeHit(playerAttackPower, true);
             }
 
             // 투척물 소멸
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            Return();
             return;
         }
 
         // 바닥 또는 기본 환경과 충돌한 경우
-        if (collisionTag == "Ground" || collisionTag == "Untagged")
+        if (collisionTag == "Ground" || collisionTag == "Environment")
         {
             // 투척물이 비어있는 상태일때
             if (garbageIndex == 0)
             {
                 // 무한 투척물 파괴
-                Destroy(gameObject);
+                //Destroy(gameObject);
+
+                Return();
             }
             // 투척물 상태 해제
             IsProjectile = false;
@@ -75,5 +92,10 @@ public class Garbage : MonoBehaviour, IDrainable
     {
         IsProjectile = true;
         playerAttackPower = attackPower;
+    }
+
+    public void Return()
+    {
+        manager.Return(this);
     }
 }

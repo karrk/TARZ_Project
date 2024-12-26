@@ -16,6 +16,8 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         InstallData();
         InstallPools();
         InstallGarbage();
+
+        Container.BindInterfacesAndSelfTo<CheatManager>().AsSingle().NonLazy();
     }
 
     private void InstallMisc()
@@ -92,6 +94,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
     {
         public Prefabs<E_Monster> Monster;
         public Prefabs<E_VFX> VFX;
+        public Prefabs<E_Garbage> Garbages;
     }
 
     [Serializable]
