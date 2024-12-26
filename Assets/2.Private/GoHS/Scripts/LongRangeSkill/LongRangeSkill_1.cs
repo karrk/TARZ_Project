@@ -6,19 +6,24 @@ using UnityEngine.Rendering;
 [System.Serializable]
 public class LongRangeSkill_1 : BaseState
 {
-    [SerializeField] private ProjectPlayer player;
+    //[SerializeField] private ProjectPlayer player;
 
-    public LongRangeSkill_1(ProjectPlayer player)
+    //public LongRangeSkill_1(ProjectPlayer player)
+    //{
+    //    this.player = player;
+    //    this.delay = 0.5f;
+    //}
+
+    public LongRangeSkill_1(ProjectPlayer player) : base(player)
     {
-        this.player = player;
-        this.delay = 0.5f;
     }
 
-    [SerializeField] private GameObject hitBox;
-    public GameObject HitBox { get { return hitBox; }  set { hitBox = value; } }
+    private GameObject hitBox => player.Refernece.Skill1HitBox;
 
     [SerializeField] private float delay;
     [SerializeField] private float curDelay;
+
+    
 
     public override void Enter()
     {

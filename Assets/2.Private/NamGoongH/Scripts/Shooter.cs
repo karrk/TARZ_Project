@@ -47,7 +47,7 @@ public class Shooter : MonoBehaviour
 
         rb.transform.position = firePoint.position;
         rb.velocity = Vector3.zero;
-        rb.AddForce(firePoint.forward * setting.ThrowingSpeed, ForceMode.Impulse);
+        rb.AddForce(firePoint.forward * setting.BasicSetting.ThrowingSpeed, ForceMode.Impulse);
 
         //if (idx )
         //{
@@ -95,6 +95,6 @@ public class Shooter : MonoBehaviour
         rb.transform.position = firePos;
         rb.transform.forward = firePos + dir;
         rb.velocity = Vector3.zero;
-        rb.AddForce(firePoint.forward * setting.ThrowingSpeed, ForceMode.Impulse);
+        rb.AddForce(firePoint.forward * setting.BasicSetting.ThrowingSpeed, ForceMode.Impulse);
     }
 }

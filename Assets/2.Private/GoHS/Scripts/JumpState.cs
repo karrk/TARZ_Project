@@ -8,27 +8,15 @@ using static ProjectPlayer;
 [System.Serializable]
 public class JumpState : BaseState
 {
-
-    [SerializeField] ProjectPlayer player;
-
-    public JumpState(ProjectPlayer player)
+    public JumpState(ProjectPlayer player) : base(player)
     {
-        this.player = player;
-        this.jumpPower = 20;
     }
-
-
-    [SerializeField] float jumpPower;
-    [SerializeField] float maxJumpHeight;
-    private float startJumpHeight;
-
-
 
     public override void Enter()
     {
         Debug.Log("점프 진입!");
-        player.animator.SetBool("Jump", true);
-        player.Rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+        player.Refernece.Animator.SetBool("Jump", true);
+        player.Refernece.Rigid.AddForce(Vector3.up * player.Setting.JumpSetting.JumpPower, ForceMode.Impulse);
         player.isGrounded = false;
     }
 
@@ -37,10 +25,9 @@ public class JumpState : BaseState
         Debug.Log("Jump 업데이트문 진행중");
         if (player.isGrounded)
         {
-            player.animator.SetBool("Jump", false);
+            player.Refernece.Animator.SetBool("Jump", false);
             player.ChangeState(E_State.Idle);
         }
-
     }
 
     public override void FixedUpdate()
@@ -57,7 +44,7 @@ public class JumpState : BaseState
         Vector3 moveDirection = forward * player.InputZ + right * player.InputX;
         moveDirection.Normalize();
 
-        player.transform.Translate(moveDirection * player.MoveSpeed * Time.deltaTime, Space.World);
+        player.transform.Translate(moveDirection * player.Setting.BasicSetting.MoveSpeed * Time.deltaTime, Space.World);
 
         if (moveDirection != Vector3.zero)
         {

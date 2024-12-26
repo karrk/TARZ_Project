@@ -63,11 +63,96 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
     [Serializable]
     public class PlayerSettings
     {
-        public float DrainSpeed;
-        public float GaugeValue;
-        public float[] SkillAnchor;
-        public float ThrowingSpeed;
+        public BasicSettings BasicSetting;
+        public JumpSettings JumpSetting;
+        public DashSettings DashSetting;
+        public DrainSettings DrainSetting;
+        public Skill_1_Settings Skill1Setting;
+        public Skill_2_Settings Skill2Setting;
+        public Skill_3_Settings Skill3Setting;
+        public Skill_4_Settings Skill4Setting;
+        public Skill_5_Settings Skill5Setting;
+
+        [Serializable]
+        public class BasicSettings
+        {
+            public float[] SkillAnchor;
+            public float GaugeValue;
+            public float ThrowingSpeed;
+            public float MoveSpeed;
+        }
+
+        [Serializable]
+        public class JumpSettings
+        {
+            public float JumpPower;
+        }
+
+        [Serializable]
+        public class DashSettings
+        {
+            public float DashTime;
+            public float DashSpeed;
+            public float DashCoolTime;
+        }
+
+        [Serializable]
+        public class DrainSettings
+        {
+            public float DrainSpeed;
+            public float ViewArea;
+            public float MaxViewArea;
+            public float ViewSpeed;
+            public float ViewAngle;
+            public LayerMask TargetMask;
+        }
+
+        [Serializable]
+        public class Skill_1_Settings
+        {
+            public float Delay;
+        }
+
+        [Serializable]
+        public class Skill_2_Settings
+        {
+            public float Damage;
+            public float ViewArea;
+            public float ViewAngle;
+            public LayerMask TargetMask;
+            public float Delay;
+        }
+
+        [Serializable]
+        public class Skill_3_Settings
+        {
+            public float Delay;
+        }
+
+        [Serializable]
+        public class Skill_4_Settings
+        {
+            public float Radius;
+            public float zOffset;
+            public float Delay;
+            public float Damage;
+            public LayerMask TargetMask;
+        }
+
+        [Serializable]
+        public class Skill_5_Settings
+        {
+            public int ThrowCount;
+            public float ThrowPower;
+            public float StartDelay;
+            public float EndDelay;
+            public float RotateSpeed;
+            public float RotateTime;
+            public float Radius;
+        }
     }
+
+    
 
     [Serializable]
     public  class PlayerBaseStats

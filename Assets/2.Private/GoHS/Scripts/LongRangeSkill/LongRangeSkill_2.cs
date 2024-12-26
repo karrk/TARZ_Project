@@ -5,18 +5,18 @@ using UnityEngine;
 [System.Serializable]
 public class LongRangeSkill_2 : BaseState
 {
-    [SerializeField] private ProjectPlayer player;
+    //[SerializeField] private ProjectPlayer player;
     [SerializeField] private float skillDamage;       // 스킬 공격력. 현재 기획서상 200 데미지
 
-    public LongRangeSkill_2(ProjectPlayer player)
-    {
-        this.player = player;
-        this.viewArea = 8f;             // 사정거리 우선 8f
-        this.viewAngle = 60f;           // 우선 60도
-        this.targetMask = LayerMask.GetMask("Monster");
+    //public LongRangeSkill_2(ProjectPlayer player)
+    //{
+    //    this.player = player;
+    //    this.viewArea = 8f;             // 사정거리 우선 8f
+    //    this.viewAngle = 60f;           // 우선 60도
+    //    this.targetMask = LayerMask.GetMask("Monster");
 
-        this.delay = 0.5f;
-    }
+    //    this.delay = 0.5f;
+    //}
 
     // 판정 범위 거리
     [SerializeField] private float viewArea;
@@ -36,6 +36,10 @@ public class LongRangeSkill_2 : BaseState
     [SerializeField] private float delay;
     [SerializeField] private float curDelay;
     private bool isStartSkill;
+
+    public LongRangeSkill_2(ProjectPlayer player) : base(player)
+    {
+    }
 
     public override void Enter()
     {

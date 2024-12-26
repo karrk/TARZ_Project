@@ -13,9 +13,9 @@ public class SkillManager
         int count = 0;
         float rate = gauge / 100f;
 
-        for (int i = 0; i < setting.SkillAnchor.Length; i++)
+        for (int i = 0; i < setting.BasicSetting.SkillAnchor.Length; i++)
         {
-            if(rate < setting.SkillAnchor[i])
+            if(rate < setting.BasicSetting.SkillAnchor[i])
             {
                 break;
             }
@@ -30,7 +30,7 @@ public class SkillManager
 
     public void UpdateGauge()
     {
-        this.gauge += setting.GaugeValue;
+        this.gauge += setting.BasicSetting.GaugeValue;
         this.gauge = Mathf.Clamp(gauge, 0, 100);
         playerModel.SkillGauge.Value = gauge;
     }
@@ -40,7 +40,7 @@ public class SkillManager
         if (skillNumber == 0)
             return;
 
-        float needPoint = setting.SkillAnchor[skillNumber-1];
+        float needPoint = setting.BasicSetting.SkillAnchor[skillNumber-1];
         playerModel.SkillGauge.Value -= needPoint * 100;
     }
 }

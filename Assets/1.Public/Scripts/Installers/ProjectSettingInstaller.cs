@@ -7,10 +7,10 @@ public class ProjectSettingInstaller : ScriptableObjectInstaller<ProjectSettingI
     public ProjectInstaller.NormalPrefab prefab;
     public ProjectInstaller.PooledPrefab pooledPrefabs;
     public ProjectInstaller.GarbagePrefab garbagePrefabs;
-    public ProjectInstaller.PlayerSettings playerSetting; 
     public ProjectInstaller.PlayerBaseStats playerBaseStats; 
     public ProjectInstaller.CameraSetting camSetting;
-    
+
+    public ProjectInstaller.PlayerSettings playerSettings;
 
     public override void InstallBindings()
     {
@@ -18,7 +18,8 @@ public class ProjectSettingInstaller : ScriptableObjectInstaller<ProjectSettingI
         Container.BindInstance(pooledPrefabs);
         Container.BindInstance(garbagePrefabs);
         Container.BindInstance(playerBaseStats);
-        Container.BindInstance(playerSetting);
         Container.BindInstance(camSetting);
-    }
+        Container.BindInstance(playerSettings);
+        
+        }
 }

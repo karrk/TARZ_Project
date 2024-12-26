@@ -1,50 +1,49 @@
+using System;
 using System.Collections.Generic;
-using Unity.IO.LowLevel.Unsafe;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.UIElements;
 using Zenject;
-using Zenject.SpaceFighter;
 
 public enum E_State { Idle, Move, Jump, Dash, LongRangeAttack, Drain, 
                       LongRangeSkill_1, LongRangeSkill_2, LongRangeSkill_3,LongRangeSkill_4 , LongRangeSkill_5, Size }      // 우선적으로 선언한 상태
+
+[Serializable]
+public class PlayerReferences
+{
+    public Shooter Shooter;
+    public Rigidbody Rigid;
+    public Animator Animator;
+    public Transform MuzzlePoint;
+    public GameObject Skill1HitBox;
+    public GameObject Skill3HitBox;
+    public GameObject Skill5Garbages;
+}
 
 public class ProjectPlayer : MonoBehaviour
 {
     [Header("State")]
     [SerializeField] protected E_State curState = E_State.Idle;
 
+    [Inject] private ProjectInstaller.PlayerSettings setting;
+    public ProjectInstaller.PlayerSettings Setting => setting;
+
     // 상태들 추가해주기
     protected BaseState[] states = new BaseState[(int)E_State.Size];
-    [Inject][SerializeField] private IdleState idleState;
-    [Inject][SerializeField] private MoveState walkState;
-    [Inject][SerializeField] private JumpState jumpState;
-    [Inject][SerializeField] private DashState dashState;
-    [Inject][SerializeField] private LongRangeAttackState longRangeAttackState;
-    [Inject][SerializeField] private DrainState drainState;
-    [Inject][SerializeField] private LongRangeSkill_1 longRangeSkill_1State;
-    [Inject][SerializeField] private LongRangeSkill_2 longRangeSkill_2State;
-    [Inject][SerializeField] private LongRangeSkill_3 longRangeSkill_3State;
-    [Inject][SerializeField] private LongRangeSkill_5 longRangeSkill_5State;
-    [Inject][SerializeField] private LongRangeSkill_4 longRangeSkill_4State;
-
+    private IdleState idleState;
+    private MoveState walkState;
+    private JumpState jumpState;
+    private DashState dashState;
+    private LongRangeAttackState longRangeAttackState;
+    private DrainState drainState;
+    private LongRangeSkill_1 longRangeSkill_1State;
+    private LongRangeSkill_2 longRangeSkill_2State;
+    private LongRangeSkill_3 longRangeSkill_3State;
+    private LongRangeSkill_4 longRangeSkill_4State;
+    private LongRangeSkill_5 longRangeSkill_5State;
 
     [Header("프로퍼티")]
-    [SerializeField] private Rigidbody rigid;                                           // 리지드바디
-    public Rigidbody Rigid { get { return rigid; } set { rigid = value; } }
-
     [SerializeField] private Camera cam;                                                // 카메라 변수
     public Camera Cam { get { return cam; } set { cam = value; } }
 
-    [field: SerializeField] public Animator animator { get; protected set; }            // 애니메이터 변수
-
-    [SerializeField] private float moveSpeed;                                           // 움직이는 속도
-    public float MoveSpeed { get { return moveSpeed; } set { moveSpeed = value; } }
-
-    [SerializeField] public float dashSpeed;
-    [SerializeField] public float dashduration;
-    [SerializeField] public float dashCoolDown;
     [SerializeField] public bool candash;
 
     [SerializeField] public bool isGrounded { get; set; }                        // 현재 땅에 서있는지 여부
@@ -56,10 +55,9 @@ public class ProjectPlayer : MonoBehaviour
 
     public float InputZ { get { return inputZ; } set { inputZ = value; } }
 
-    [SerializeField] private Transform bulletSpawnPoint;
-    [SerializeField] private GameObject bulletPrefab;
-
     [Inject] private InputManager inputManager;
+
+    [SerializeField] public PlayerReferences Refernece;
 
     private Dictionary<E_State, List<E_State>> actionGraph = new Dictionary<E_State, List<E_State>>
     {
@@ -87,10 +85,18 @@ public class ProjectPlayer : MonoBehaviour
     private void Awake()
     {
         cam = Camera.main;
-        rigid = GetComponent<Rigidbody>();
-        bulletSpawnPoint = transform.GetChild(1);                           // 임시 총알 발사 위치
-        longRangeSkill_1State.HitBox = transform.GetChild(2).gameObject;    // 원거리 스킬 1번 히트박스 오브젝트
-        longRangeSkill_3State.HitBox = transform.GetChild(3).gameObject;    // 원거리 스킬 3번 히트박스 오브젝트
+
+        idleState = new IdleState(this);
+        walkState = new MoveState(this);
+        jumpState = new JumpState(this);
+        dashState = new DashState(this);
+        longRangeAttackState = new LongRangeAttackState(this);
+        drainState = new DrainState(this);
+        longRangeSkill_1State = new LongRangeSkill_1(this);
+        longRangeSkill_2State = new LongRangeSkill_2(this);
+        longRangeSkill_3State = new LongRangeSkill_3(this);
+        longRangeSkill_4State = new LongRangeSkill_4(this);
+        longRangeSkill_5State = new LongRangeSkill_5(this);
 
         states[(int)E_State.Idle] = idleState;
         states[(int)E_State.Move] = walkState;
@@ -101,8 +107,8 @@ public class ProjectPlayer : MonoBehaviour
         states[(int)E_State.LongRangeSkill_1] = longRangeSkill_1State;
         states[(int)E_State.LongRangeSkill_2] = longRangeSkill_2State;
         states[(int)E_State.LongRangeSkill_3] = longRangeSkill_3State;
-        states[(int)E_State.LongRangeSkill_5] = longRangeSkill_5State;
         states[(int)E_State.LongRangeSkill_4] = longRangeSkill_4State;
+        states[(int)E_State.LongRangeSkill_5] = longRangeSkill_5State;
     }
 
     private void Start()
@@ -246,22 +252,14 @@ public class ProjectPlayer : MonoBehaviour
         }
     }
 
-    public void SpawnBullet()
-    {
-        if (bulletPrefab == null)
-            return;
-
-        Instantiate(bulletPrefab, bulletSpawnPoint.position, transform.rotation);
-    }
-
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
         Vector3 center = transform.position + transform.forward * 6f;
         Gizmos.DrawWireSphere(center, 3f);
 
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(longRangeSkill_5State.AnchorPos, longRangeSkill_5State.Radius);
+        //Gizmos.color = Color.red;
+        //Gizmos.DrawWireSphere(longRangeSkill_5State.AnchorPos, longRangeSkill_5State.Radius);
     }
 
 }

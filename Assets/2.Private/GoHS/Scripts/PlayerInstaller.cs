@@ -8,7 +8,7 @@ public class PlayerInstaller : MonoInstaller
     public override void InstallBindings()
     {
         InstallPlayerComponent();
-        InstallPlayerStates();
+        //InstallPlayerStates();
         InstallCamera();
     }
 

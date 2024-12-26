@@ -214,7 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c051cb75bf5cf0849be2daf04b072f6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillDamge: 0
+  skillDamage: 0
 --- !u!1 &556915760964675181
 GameObject:
   m_ObjectHideFlags: 0
@@ -3705,74 +3705,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curState: 0
-  idleState:
-    player: {fileID: 0}
-  walkState:
-    player: {fileID: 0}
-  jumpState:
-    player: {fileID: 0}
-    jumpPower: 0
-    maxJumpHeight: 0
-  dashState:
-    player: {fileID: 0}
-    dashTime: 0
-  longRangeAttackState:
-    player: {fileID: 0}
-  drainState:
-    player: {fileID: 0}
-    viewArea: 0
-    maxViewArea: 0
-    viewSpeed: 0
-    viewAngle: 0
-    targetMask:
-      serializedVersion: 2
-      m_Bits: 0
-    Targets: []
-    drainSpeed: 0
-  longRangeSkill_1State:
-    player: {fileID: 0}
-    hitBox: {fileID: 0}
-    delay: 1
-    curDelay: 0
-  longRangeSkill_2State:
-    player: {fileID: 0}
-    skillDamge: 0
-    viewArea: 0
-    viewAngle: 0
-    targetMask:
-      serializedVersion: 2
-      m_Bits: 0
-    Targets: []
-    delay: 0
-    curDelay: 0
-  longRangeSkill_3State:
-    player: {fileID: 0}
-    delay: 0
-    hitBox: {fileID: 0}
-    curDelay: 0
-  longRangeSkill_5State:
-    player: {fileID: 878338197031248657}
-    garbages: {fileID: 3412971563338093114}
-    throwCount: 5
-    startDelay: 1
-    endDelay: 1
-    throwPower: 3
-    rotateSpeed: 10
-    rotateTime: 5
-    radius: 3.6
-  rigid: {fileID: 6174339517248486042}
   cam: {fileID: 0}
-  <animator>k__BackingField: {fileID: 4780658996693449557}
-  moveSpeed: 3
-  dashSpeed: 20
-  dashduration: 0.2
-  dashCoolDown: 1
   candash: 0
   inputX: 0
   inputZ: 0
-  bulletSpawnPoint: {fileID: 3295809978564738148}
-  bulletPrefab: {fileID: 7729617087500702279, guid: 99affcefbb09da546b21062b67dc8db8,
-    type: 3}
+  Refernece:
+    Shooter: {fileID: 824026980931313999}
+    Rigid: {fileID: 6174339517248486042}
+    Animator: {fileID: 4780658996693449557}
+    MuzzlePoint: {fileID: 3295809978564738148}
+    Skill1HitBox: {fileID: 511482395631195085}
+    Skill3HitBox: {fileID: 5181889522547916206}
+    Skill5Garbages: {fileID: 3412971563338093114}
 --- !u!114 &726719191030262112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4898,6 +4842,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bcf9a957debeaa48b4753ff19e71e69, type: 3}
+--- !u!1 &5181889522547916206 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1408571744155332264, guid: 7bcf9a957debeaa48b4753ff19e71e69,
+    type: 3}
+  m_PrefabInstance: {fileID: 6081413764879389446}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8187697612589568166 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2721596943472624544, guid: 7bcf9a957debeaa48b4753ff19e71e69,

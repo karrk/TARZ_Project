@@ -10,17 +10,19 @@ public class LongRangeSkill_5 : BaseState
     [Inject] private CoroutineHelper helper;
     [Inject] private Shooter shooter;
 
-    [SerializeField] private ProjectPlayer player;
+    private GameObject garbages => player.Refernece.Skill5Garbages;
 
-    [SerializeField] private GameObject garbages;
+    private int throwCount;
+    private float startDelay;
+    private float endDelay;
+    private float throwPower;
+    private float rotateSpeed;
+    private float rotateTime;
+    private float radius;
 
-    [SerializeField] private int throwCount;
-    [SerializeField] private float startDelay;
-    [SerializeField] private float endDelay;
-    [SerializeField] private float throwPower;
-    [SerializeField] private float rotateSpeed;
-    [SerializeField] private float rotateTime;
-    [SerializeField] private float radius;
+    public LongRangeSkill_5(ProjectPlayer player) : base(player)
+    {
+    }
 
     public float Radius => radius;
     public Vector3 AnchorPos => garbages.transform.position;

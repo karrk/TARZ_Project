@@ -44,16 +44,6 @@ MonoBehaviour:
     - {fileID: 3111731739044657598, guid: 27e16f93793d35c4e898bbd5137f188b, type: 3}
     - {fileID: 3111731739044657598, guid: 35d9e1dce6b43fc4eaa38281d70b02b8, type: 3}
     - {fileID: 3111731739044657598, guid: 735d6edfd94719943be3fba04f8d9f29, type: 3}
-  playerSetting:
-    DrainSpeed: 2
-    GaugeValue: 5
-    SkillAnchor:
-    - 0.5
-    - 0.6
-    - 0.7
-    - 0.8
-    - 1
-    ThrowingSpeed: 15
   playerBaseStats:
     Hp: 10
     Atk: 1
@@ -62,3 +52,51 @@ MonoBehaviour:
     Dist: -7.5
     RotationSpeed: 2
     SmoothSpeed: 0.125
+  BasicSetting:
+    SkillAnchor: []
+    GaugeValue: 0
+    ThrowingSpeed: 0
+    MoveSpeed: 0
+  JumpSetting:
+    JumpPower: 0
+  DashSetting:
+    DashTime: 0
+    DashSpeed: 0
+    DashCoolTime: 0
+  DrainSetting:
+    DrainSpeed: 0
+    ViewArea: 0
+    MaxViewArea: 0
+    ViewSpeed: 0
+    ViewAngle: 0
+    TargetMask:
+      serializedVersion: 2
+      m_Bits: 0
+  Skill1Setting:
+    Delay: 0
+  Skill2Setting:
+    Damage: 0
+    ViewArea: 0
+    ViewAngle: 0
+    TargetMask:
+      serializedVersion: 2
+      m_Bits: 0
+    Delay: 0
+  Skill3Setting:
+    Delay: 0
+  Skill4Setting:
+    Radius: 0
+    zOffset: 0
+    Delay: 0
+    Damage: 0
+    TargetMask:
+      serializedVersion: 2
+      m_Bits: 0
+  Skill5Setting:
+    ThrowCount: 0
+    ThrowPower: 0
+    StartDelay: 0
+    EndDelay: 0
+    RotateSpeed: 0
+    RotateTime: 0
+    Radius: 0

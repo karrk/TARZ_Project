@@ -1,22 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using Zenject;
-
-
 
 [System.Serializable]
 public class MoveState : BaseState
 {
-
-    [SerializeField] ProjectPlayer player;
     private Vector3 moveDirection;
 
-    public MoveState(ProjectPlayer player)
+    public MoveState(ProjectPlayer player) : base(player)
     {
-        this.player = player;
+        // 플레이어에서 받아서 사용을 하는방법
     }
-
 
     public override void Enter()
     {
@@ -28,7 +22,7 @@ public class MoveState : BaseState
 
         //Debug.Log("Move 업데이트문 진행중!");
 
-        player.animator.SetFloat("MoveSpeed", moveDirection.magnitude); // TODO : 패드로는 잘 작동하는데 키보드를 사용했을때는 1.414값이 나온다?
+        player.Refernece.Animator.SetFloat("MoveSpeed", moveDirection.magnitude); // TODO : 패드로는 잘 작동하는데 키보드를 사용했을때는 1.414값이 나온다?
 
         if (player.InputX == 0 && player.InputZ == 0)
         {
@@ -73,7 +67,7 @@ public class MoveState : BaseState
         if(moveDirection.magnitude < 1)
            moveDirection *= moveDirection.sqrMagnitude;
 
-        player.transform.Translate(moveDirection * player.MoveSpeed * Time.deltaTime, Space.World);
+        player.transform.Translate(moveDirection * player.Setting.BasicSetting.MoveSpeed * Time.deltaTime, Space.World);
 
         if (moveDirection != Vector3.zero)
         {
@@ -85,7 +79,7 @@ public class MoveState : BaseState
 
     public override void Exit()
     {
-        player.animator.SetFloat("MoveSpeed", 0f);
+        player.Refernece.Animator.SetFloat("MoveSpeed", 0f);
     }
 
 

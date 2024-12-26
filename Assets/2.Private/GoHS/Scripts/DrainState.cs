@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 [System.Serializable]
@@ -7,15 +6,19 @@ using UnityEngine;
 public class DrainState : BaseState
 {
 
-    [SerializeField] private ProjectPlayer player;
+    //[SerializeField] private ProjectPlayer player;
 
-    public DrainState (ProjectPlayer player)
+    //public DrainState (ProjectPlayer player)
+    //{
+    //    this.player = player;
+    //    this.viewAngle = 360f;
+    //    this.maxViewArea = 10f;
+    //    this.viewSpeed = 10f;
+    //    this.targetMask = LayerMask.GetMask("Garbage");
+    //}
+
+    public DrainState(ProjectPlayer player) : base(player)
     {
-        this.player = player;
-        this.viewAngle = 360f;
-        this.maxViewArea = 10f;
-        this.viewSpeed = 10f;
-        this.targetMask = LayerMask.GetMask("Garbage");
     }
 
     // 판정 범위 거리
@@ -39,11 +42,13 @@ public class DrainState : BaseState
     public override void Enter()
     {
         Debug.Log("@@@@@@@@@@@@@@수집상태 진입 성공");
-        player.animator.SetBool("Drain", true);
+        player.Refernece.Animator.SetBool("Drain", true);
         isDrainMode = true;
     }
 
     private bool isDrainMode = false;
+
+    
 
     public void StopDrain()
     {
@@ -62,7 +67,7 @@ public class DrainState : BaseState
         else
         {
             viewArea = 0;
-            player.animator.SetBool("Drain", false);
+            player.Refernece.Animator.SetBool("Drain", false);
             player.ChangeState(E_State.Idle);
         }
 
