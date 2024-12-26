@@ -5,8 +5,8 @@ using Zenject;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private Transform target;
-    [SerializeField] private Vector3 offset;
+    [SerializeField] private Transform player;          // 플레이어 위치
+    [SerializeField] private Vector3 offset;            // 설정한 오프셋
 
     [SerializeField] private float rotationSpeed = 2f;   // 카메라 회전 속도
     [SerializeField] private float smoothSpeed = 0.125f; // 부드러운 이동 속도
@@ -20,7 +20,7 @@ public class CameraController : MonoBehaviour
     private void Init(ProjectPlayer player, ProjectInstaller.CameraSetting setting, InputManager manager)
     {
         Cursor.lockState = CursorLockMode.Locked;   // 마우스 커서를 고정
-        target = player.transform;
+        this.player = player.transform;
         manager.OnControlledRightStick += HandleCameraRotation;
         CamSetting(setting);
     }
@@ -35,7 +35,7 @@ public class CameraController : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (target == null)
+        if (player == null)
             return;
 
         //HandleCameraRotation();
@@ -58,8 +58,8 @@ public class CameraController : MonoBehaviour
         Quaternion rotation = Quaternion.Euler(current.y, current.x, 0f);
         //Vector3 desiredPosition = target.position + rotation * offset;
         //transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
-        transform.position = target.position + rotation * offset;
-        transform.LookAt(target.position);
+        transform.position = player.position + rotation * offset;
+        transform.LookAt(player.position);
     }
 
 
