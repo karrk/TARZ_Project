@@ -81,12 +81,15 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
             public float GaugeValue;
             public float ThrowingSpeed;
             public float MoveSpeed;
+            public float StaminaChargeWaitTime;
+            public float StaminaChargeValue;
         }
 
         [Serializable]
         public class JumpSettings
         {
             public float JumpPower;
+            public float UseStamina;
         }
 
         [Serializable]
@@ -95,6 +98,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
             public float DashTime;
             public float DashSpeed;
             public float DashCoolTime;
+            public float UseStamina;
         }
 
         [Serializable]
@@ -106,6 +110,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
             public float ViewSpeed;
             public float ViewAngle;
             public LayerMask TargetMask;
+            public float UseStamina;
         }
 
         [Serializable]

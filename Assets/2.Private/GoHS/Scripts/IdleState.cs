@@ -38,10 +38,10 @@ public class IdleState : BaseState
         }
 
         // 대쉬 상태로 넘어가는 로직
-        if (Input.GetKeyDown(KeyCode.LeftShift) && !Input.GetKeyDown(KeyCode.Space))
-        {
-            player.ChangeState(E_State.Dash);
-        }
+        //if (Input.GetKeyDown(KeyCode.LeftShift) && !Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    player.ChangeState(E_State.Dash);
+        //}
 
         //if (Input.GetMouseButtonDown(0))
         //{
