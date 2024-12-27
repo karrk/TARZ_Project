@@ -63,8 +63,10 @@ public class InGameUI : BindUI
 
     public void OnInventory()
     {
-        if (InGameMenuPanel.gameObject.activeSelf)
+        if (CurrentMenu.Equals(StatusBarPanel) == false)
             return;
+
+     
 
         CurrentMenu = inventorySetPanel;
         CurrentMenu.OpenUIPanel();
