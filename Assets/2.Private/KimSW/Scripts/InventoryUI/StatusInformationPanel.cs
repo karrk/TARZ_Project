@@ -5,11 +5,15 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 using Zenject;
+using static ProjectInstaller;
 
 public class StatusInformationPanel : MonoBehaviour
 {
     [Inject]
     ItemInventory inventory;
+
+    [Inject]
+    PlayerBaseStats status;
 
     [SerializeField] TMP_Text characterInformation;
     [SerializeField] TMP_Text itemStatusInformation;
@@ -32,8 +36,18 @@ public class StatusInformationPanel : MonoBehaviour
     /// </summary>
     public void SetCharacterInfoText()
     {
-       
+        stringBuilder.Clear();
+        stringBuilder.Append("체력");
+        stringBuilder.Append("  ");
+        stringBuilder.Append(status.Hp);
+        stringBuilder.Append("\n");
 
+        stringBuilder.Append("공격력");
+        stringBuilder.Append("  ");
+        stringBuilder.Append(status.Atk);
+        stringBuilder.Append("\n");
+
+        characterInformation.text = stringBuilder.ToString();
 
     }
 

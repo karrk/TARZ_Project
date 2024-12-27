@@ -4,14 +4,10 @@ using System.Xml.Linq;
 using TMPro;
 using UnityEngine;
 
-public class EnemyStatusPanel : AnimatedUI
+public class EnemyStatusPanel : MonoBehaviour
 {
     [SerializeField] EnemyHpView hpView;
-    private void Awake()
-    {
-        SetMoveOffset();
-        rectTransform.anchoredPosition = positionOffset;
-    }
+ 
 
     public bool EnemyHpViewCheck()
     {

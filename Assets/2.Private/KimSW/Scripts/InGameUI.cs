@@ -9,6 +9,7 @@ public class InGameUI : BindUI
     private StatusInformationPanel statusInformationPanel;
     private InGameMenuPanel inGameMenuPanel;
     private EnemyStatusPanel enemyStatusPanel;
+    private OptionPanel optionPanel;
 
 
     public InventoryPanel InventoryPanel { get { return inventoryPanel; } }
@@ -24,6 +25,8 @@ public class InGameUI : BindUI
 
     public EnemyStatusPanel EnemyStatusPanel { get { return enemyStatusPanel; } }
 
+    public OptionPanel OptionPanel { get { return optionPanel; } }
+
     private IOpenCloseMenu currentMenu;
 
     public IOpenCloseMenu CurrentMenu { get { return currentMenu; } set { currentMenu = value; } }
@@ -38,7 +41,7 @@ public class InGameUI : BindUI
         statusInformationPanel = GetUI<StatusInformationPanel>("StatusInformationPanel");
         inGameMenuPanel = GetUI<InGameMenuPanel>("InGameMenuPanel");
         enemyStatusPanel = GetUI<EnemyStatusPanel>("EnemyStatusPanel");
-
+        optionPanel = GetUI<OptionPanel>("OptionPanel");
     }
     private void Start()
     {
