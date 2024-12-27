@@ -73,8 +73,13 @@ public class PoolManager : MonoBehaviour
     /// <summary>
     /// 요청된 오브젝트를 반환받으며 바로 컴포넌트로 접근합니다.
     /// </summary>
-    public T GetObject<T>(Enum type)
+    public T GetObject<T>(Enum type) where T : class
     {
+        GameObject obj = GetObject(type);
+        
+        if (obj == null) 
+            return null;
+
         return GetObject(type).GetComponent<T>();
     }
 
