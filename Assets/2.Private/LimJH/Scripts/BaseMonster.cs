@@ -7,8 +7,8 @@ using Zenject;
 public class BaseMonster : MonoBehaviour, IDamagable
 {
     public float health;
-
     public float damageReducation = 1f;
+    public float damage;
 
     public BehaviorTree behaviorTree;
 
@@ -48,18 +48,6 @@ public class BaseMonster : MonoBehaviour, IDamagable
         }
     }
 
-    private void OnTriggerEnter(Collider other) // 하님께, 스킬을 통한 데미지를 받을때, 데미지 받는
-        // 방식을 통합시키기 위해 과정 변경을 요청합니다 - 몬스터가 투사체를 판정하는 방식이 아닌
-        // 투사체로부터 데미지값을 몬스터에게 전달하는 방식으로
-    {
-        Garbage garbage = other.GetComponent<Garbage>();
-        if(IsInLayerMask(other.gameObject, garbageLayer) && garbage.IsProjectile == true)
-        {
-            // 몬스터의 체력을 감소
-            //TakeDamage(1);
-            TakeHit(1);
-        }
-    }
 
     public bool IsInLayerMask(GameObject obj, LayerMask layerMask)
     {
@@ -77,8 +65,32 @@ public class BaseMonster : MonoBehaviour, IDamagable
         Debug.Log($"Health: {health}");
     }
 
+    public void PerformAttack(GameObject target)
+    {
+        if (target.TryGetComponent<ProjectPlayer>(out var player))
+        {
+            float finalDamage = damage;
+            player.TakeDamage(finalDamage);
+            Debug.Log($"{finalDamage}의 데미지를 {target.name}에게 주었습니다.");
+        }
+        else
+        {
+            Debug.LogWarning($"{target.name}은 공격 가능한 대상이 아닙니다.");
+        }
+    }
+
     public void EndAttack()
     {
-        Debug.Log("EndAttack");
+        // 애니메이션 이벤트에 의해 호출되는 메서드
+        var target = behaviorTree.GetVariable("targetObject").GetValue() as GameObject;
+
+        if (target != null)
+        {
+            PerformAttack(target);
+        }
+        else
+        {
+            Debug.LogWarning("타겟이 설정되지 않았습니다.");
+        }
     }
 }
