@@ -53,9 +53,23 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.LeftAlt))
+        if(Input.GetKey(KeyCode.Q))
         {
-           LockOn();
+           if(!isLockOn)
+            {
+                LockOn();
+            }
+           else
+            {
+                return;
+            }
+
+        }
+
+        if(Input.GetKeyUp(KeyCode.Q))
+        {
+            monster = null;
+            isLockOn = false;
         }
     }
     
@@ -122,28 +136,45 @@ public class CameraController : MonoBehaviour
     /// </summary>
     private void LockOn()
     {
-        if (!isLockOn)
+        //if (!isLockOn)
+        //{
+        //    GetTarget();
+        //    if (targets.Count > 0)
+        //    {
+        //        monster = GetTargetMonster();
+        //        if (monster != null)
+        //        {
+        //            isLockOn = true;
+        //            Debug.Log("락온 기능 활성화");
+        //        }
+        //    }
+        //    else
+        //    {
+        //        IsLockOn = false;
+        //        Debug.Log("감지된 몬스터가 없습니다.");
+        //    }
+        //}
+        //else
+        //{
+        //    isLockOn = false;
+        //    monster = null;
+        //    Debug.Log("락온 기능 비활성화");
+        //}
+
+        GetTarget();
+        if (targets.Count > 0)
         {
-            GetTarget();
-            if (targets.Count > 0)
+            monster = GetTargetMonster();
+            if (monster != null)
             {
-                monster = GetTargetMonster();
-                if (monster != null)
-                {
-                    isLockOn = true;
-                    Debug.Log("락온 기능 활성화");
-                }
-            }
-            else
-            {
-                Debug.Log("감지된 몬스터가 없습니다.");
+                isLockOn = true;
+                Debug.Log("락온 기능 활성화");
             }
         }
         else
         {
-            isLockOn = false;
-            monster = null;
-            Debug.Log("락온 기능 비활성화");
+            IsLockOn = false;
+            Debug.Log("감지된 몬스터가 없습니다.");
         }
     }
 

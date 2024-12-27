@@ -68,6 +68,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         public JumpSettings JumpSetting;
         public DashSettings DashSetting;
         public DrainSettings DrainSetting;
+        public LongRangeAttack_Settings longRangeSetting;
         public Skill_1_Settings Skill1Setting;
         public Skill_2_Settings Skill2Setting;
         public Skill_3_Settings Skill3Setting;
@@ -106,6 +107,13 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
             public float ViewSpeed;
             public float ViewAngle;
             public LayerMask TargetMask;
+        }
+
+        [Serializable]
+        public class LongRangeAttack_Settings
+        {
+            public float attackDelayTimer;
+            public float stateDelayTimer;
         }
 
         [Serializable]
