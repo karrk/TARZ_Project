@@ -22,7 +22,7 @@ public class PlayerSkillSliderView : SliderView
     }
 
     /// <summary>
-    /// 스킬 게이기 구간 체크 세팅
+    /// 스킬 게이지 구간 체크 세팅
     /// </summary>
     public void SetGaugePointCheck()
     {

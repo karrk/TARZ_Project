@@ -49,6 +49,7 @@ public class StatusBarPanel : MonoBehaviour, IOpenCloseMenu
             animatedUIs[i].MoveOnUI();
         }
 
+        inGameUI.OnEnemyHP();
     }
 
     public void CloseUIPanel()
@@ -60,14 +61,20 @@ public class StatusBarPanel : MonoBehaviour, IOpenCloseMenu
 
         inGameUI.CurrentMenu = inGameUI.InGameMenuPanel;
         inGameUI.CurrentMenu.OpenUIPanel();
+
+        inGameUI.OffEnemyHP();
     }
 
     public void OffUIPanel()
     {
+       
+
         for (int i = 0; i < animatedUIs.Length; i++)
         {
             animatedUIs[i].MoveOffUI();
         }
+
+        inGameUI.OffEnemyHP();
     }
 }
 

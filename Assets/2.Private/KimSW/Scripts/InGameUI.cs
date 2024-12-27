@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class InGameUI : BindUI
 {
     private InventoryPanel inventoryPanel;
@@ -65,8 +67,45 @@ public class InGameUI : BindUI
         CurrentMenu.OpenUIPanel();
 
 
+
     }
 
+    public void OnEnemyHP()
+    {
+        if (enemyStatusPanel.EnemyHpViewCheck())
+        {
+            enemyStatusPanel.gameObject.SetActive(true);
+        }
+    }
+    public void OffEnemyHP()
+    {
+        enemyStatusPanel.gameObject.SetActive(false);
 
+    }
 
+    /// <summary>
+    /// 적 체력 초기화
+    /// </summary>
+    /// <param name="hp"></param>
+    public void InitEnemyHP(int hp)
+    {
+        enemyStatusPanel.SetEnemyHP(hp);
+        OnEnemyHP();
+    }
+
+    /*
+    private void Update()
+    {
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            InitEnemyHP(100);
+        }
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            enemyStatusPanel.hpView.Hp.Value -= 30;
+        }
+
+    }
+    */
 }

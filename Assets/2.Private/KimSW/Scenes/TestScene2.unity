@@ -210,6 +210,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30a946b5c071cb740ab20ba58564ca01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &507524190 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7653883067969797076, guid: 6c32554c67185ee4c82e8aa0cff5c74e,
+    type: 3}
+  m_PrefabInstance: {fileID: 7273706345676492237}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &798663708
 GameObject:
   m_ObjectHideFlags: 0
@@ -522,6 +534,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19003848e0f41c740bca91386db0f6e2, type: 3}
+--- !u!114 &1691583288 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8519762154179608062, guid: 6c32554c67185ee4c82e8aa0cff5c74e,
+    type: 3}
+  m_PrefabInstance: {fileID: 7273706345676492237}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b57b7114c51280449e0ea36671cfa3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1782995101
 GameObject:
   m_ObjectHideFlags: 0
@@ -829,6 +853,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 931269944952575791, guid: 6c32554c67185ee4c82e8aa0cff5c74e,
+        type: 3}
+      propertyPath: hpView
+      value: 
+      objectReference: {fileID: 1691583288}
     - target: {fileID: 1117885431264782801, guid: 6c32554c67185ee4c82e8aa0cff5c74e,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -1769,6 +1798,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8519762154179608062, guid: 6c32554c67185ee4c82e8aa0cff5c74e,
+        type: 3}
+      propertyPath: slider
+      value: 
+      objectReference: {fileID: 507524190}
     - target: {fileID: 8776513008822034159, guid: 6c32554c67185ee4c82e8aa0cff5c74e,
         type: 3}
       propertyPath: m_SizeDelta.y
