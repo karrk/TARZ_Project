@@ -70,7 +70,7 @@ public class BaseMonster : MonoBehaviour, IDamagable
     {
         if(chargable == true)
         {
-            SkillManager.UpdateGauge();
+            SkillManager.UpdateSkillGauge();
         }
 
         this.health -= value * damageReducation;

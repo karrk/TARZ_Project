@@ -120,7 +120,7 @@ public class ProjectPlayer : MonoBehaviour
         inputManager.OnUpAkey += StopDrain;
         inputManager.PressedL1Key += UseSkill;
         inputManager.PressedR2Key += Fire;
-        //inputManager.PressedBKey += Dash;
+        inputManager.PressedBKey += Dash;
     }
 
     private void Fire()
@@ -145,6 +145,11 @@ public class ProjectPlayer : MonoBehaviour
 
     private void Dash()
     {
+        bool useAccept = skillManager.UseStamina(setting.DashSetting.UseStamina);
+
+        if (useAccept == false)
+            return;
+
         ChangeState(E_State.Dash);
     }
 

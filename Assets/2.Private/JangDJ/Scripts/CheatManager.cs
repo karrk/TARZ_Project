@@ -29,6 +29,6 @@ public class CheatManager : ITickable
 
     private void GetGauge()
     {
-        skillManager.UpdateGauge();
+        skillManager.UpdateSkillGauge();
     }
 }

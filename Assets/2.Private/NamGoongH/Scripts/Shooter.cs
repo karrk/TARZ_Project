@@ -38,6 +38,10 @@ public class Shooter : MonoBehaviour
         E_Garbage idx = garbageQueue.GetNextGarbageIndex();
 
         Garbage garbage = manager.GetObject<Garbage>(idx);
+
+        if (garbage == null)
+            return;
+
         garbage.SetAsProjectile(attackPower);
 
         if(garbage.TryGetComponent<Rigidbody>(out Rigidbody rb) == false)
@@ -86,6 +90,10 @@ public class Shooter : MonoBehaviour
         E_Garbage idx = garbageQueue.GetNextGarbageIndex();
 
         Garbage garbage = manager.GetObject<Garbage>(idx);
+
+        if (garbage == null)
+            return;
+
         garbage.SetImmediateMode();
 
         garbage.SetAsProjectile(attackPower);
