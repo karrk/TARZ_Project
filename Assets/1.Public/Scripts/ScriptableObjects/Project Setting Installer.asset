@@ -50,7 +50,7 @@ MonoBehaviour:
     Hp: 10
     Atk: 1
   camSetting:
-    Height: 2.5
+    Height: 4
     Dist: -7.5
     RotationSpeed: 2
     SmoothSpeed: 0.125
@@ -65,12 +65,16 @@ MonoBehaviour:
       GaugeValue: 10
       ThrowingSpeed: 10
       MoveSpeed: 3
+      StaminaChargeWaitTime: 0
+      StaminaChargeValue: 0
     JumpSetting:
-      JumpPower: 20
+      JumpPower: 25
+      UseStamina: 0
     DashSetting:
       DashTime: 0.2
       DashSpeed: 20
       DashCoolTime: 1
+      UseStamina: 0
     DrainSetting:
       DrainSpeed: 2
       ViewArea: 0
@@ -80,6 +84,10 @@ MonoBehaviour:
       TargetMask:
         serializedVersion: 2
         m_Bits: 524288
+      UseStamina: 0
+    longRangeSetting:
+      attackDelayTimer: 0.5
+      stateDelayTimer: 1
     Skill1Setting:
       Delay: 1
     Skill2Setting:

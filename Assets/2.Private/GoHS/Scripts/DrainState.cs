@@ -66,7 +66,7 @@ public class DrainState : BaseState
         }
         else
         {
-            viewArea = 0;
+            player.Setting.DrainSetting.ViewArea = 0;
             player.Refernece.Animator.SetBool("Drain", false);
             player.ChangeState(E_State.Idle);
         }
@@ -103,8 +103,8 @@ public class DrainState : BaseState
     private void IncreaseViewArea()
     {
         //Debug.Log(viewArea);
-        viewArea += viewSpeed * Time.deltaTime;
-        viewArea = Mathf.Clamp(viewArea, 0, maxViewArea);
+        player.Setting.DrainSetting.ViewArea += player.Setting.DrainSetting.ViewSpeed * Time.deltaTime;
+        player.Setting.DrainSetting.ViewArea = Mathf.Clamp(player.Setting.DrainSetting.ViewArea, 0, player.Setting.DrainSetting.MaxViewArea);
     }
 
 
@@ -114,22 +114,22 @@ public class DrainState : BaseState
     public void GetTarget()
     {
         Targets.Clear();    // 배열 초기화
-        Collider[] TargetCollider = Physics.OverlapSphere(player.transform.position, viewArea, targetMask);
+        Collider[] TargetCollider = Physics.OverlapSphere(player.transform.position, player.Setting.DrainSetting.ViewArea, player.Setting.DrainSetting.TargetMask);
 
         for (int i = 0; i < TargetCollider.Length; i++)
         {
             Transform target = TargetCollider[i].transform;
             Vector3 direction = target.position - player.transform.position;
 
-            if (Vector3.Dot(direction.normalized, player.transform.forward) > GetAngle(viewAngle / 2).z)
+            if (Vector3.Dot(direction.normalized, player.transform.forward) > GetAngle(player.Setting.DrainSetting.ViewAngle / 2).z)
             {
-                Debug.Log(GetAngle(viewAngle / 2).z);
+                Debug.Log(GetAngle(player.Setting.DrainSetting.ViewAngle / 2).z);
                 Targets.Add(target);
 
                 IDrainable drainable = target.GetComponent<IDrainable>();
                 if (drainable != null)
                 {
-                    drainable.DrainTowards(player.transform.position, drainSpeed);
+                    drainable.DrainTowards(player.transform.position, player.Setting.DrainSetting.DrainSpeed);
                     Debug.Log($"빨아들이는중 {target.name}");
                 }
 
