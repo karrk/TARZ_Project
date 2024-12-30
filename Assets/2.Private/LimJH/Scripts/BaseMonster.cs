@@ -49,6 +49,10 @@ public class BaseMonster : MonoBehaviour, IDamagable
         {
             behaviorTree.SetVariableValue("attackCount", attackCount);
         }
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            health--;
+        }
     }
 
 

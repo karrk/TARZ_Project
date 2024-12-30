@@ -52,7 +52,8 @@ public class Attack : Action
             AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
             if (stateInfo.IsName("Jake_Attack") && stateInfo.normalizedTime >= 1.0f)
             {
-                break;            }
+                break;            
+            }
             await UniTask.Yield();
         }
 
