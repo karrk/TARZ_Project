@@ -5,7 +5,7 @@ using Zenject;
 
 public enum E_State { Idle, Move, Jump, Dash, LongRangeAttack, Drain, 
                       LongRangeSkill_1, LongRangeSkill_2, LongRangeSkill_3,LongRangeSkill_4 , LongRangeSkill_5,
-                      DashMeleeAttack, Size }      // 우선적으로 선언한 상태
+                      DashMeleeAttack, MeleeSkill_1,  Size }      // 우선적으로 선언한 상태
 
 [Serializable]
 public class PlayerReferences
@@ -42,6 +42,7 @@ public class ProjectPlayer : MonoBehaviour
     private LongRangeSkill_4 longRangeSkill_4State;
     private LongRangeSkill_5 longRangeSkill_5State;
     public DashMeleeAttack dashMeleeAttackState;
+    public MeleeSkill_1 meleeSkill_1State;
 
     [Header("프로퍼티")]
     [SerializeField] private Camera cam;                                                // 카메라 변수
@@ -67,11 +68,13 @@ public class ProjectPlayer : MonoBehaviour
     {
         // Idle 상태
         { E_State.Idle, new List<E_State>(){ E_State.Move,E_State.Jump,E_State.Dash,E_State.LongRangeAttack,
-            E_State.Drain,E_State.LongRangeSkill_1, E_State.LongRangeSkill_2, E_State.LongRangeSkill_3, E_State.LongRangeSkill_4, E_State.LongRangeSkill_5  } },
+            E_State.Drain,E_State.LongRangeSkill_1, E_State.LongRangeSkill_2, E_State.LongRangeSkill_3, E_State.LongRangeSkill_4, E_State.LongRangeSkill_5,
+            E_State.MeleeSkill_1} },
 
         // Move 상태
         {E_State.Move, new List<E_State>(){ E_State.Idle,E_State.Jump,E_State.Dash,E_State.LongRangeAttack,
-            E_State.Drain,E_State.LongRangeSkill_1, E_State.LongRangeSkill_2, E_State.LongRangeSkill_3, E_State.LongRangeSkill_4, E_State.LongRangeSkill_5}  },
+            E_State.Drain,E_State.LongRangeSkill_1, E_State.LongRangeSkill_2, E_State.LongRangeSkill_3, E_State.LongRangeSkill_4, E_State.LongRangeSkill_5,
+            E_State.MeleeSkill_1}  },
 
         // Jump 상태
         {E_State.Jump, new List<E_State>(){ E_State.Idle,E_State.LongRangeAttack }  },
@@ -103,6 +106,9 @@ public class ProjectPlayer : MonoBehaviour
         // 대쉬 근접 공격 상태
         {E_State.DashMeleeAttack, new List<E_State>(){ E_State.Idle }  },
 
+        // 근접 스킬 1번 상태
+        {E_State.MeleeSkill_1, new List<E_State>(){ E_State.Idle }  },
+
     };
 
     private bool ValidNextAction(E_State nextState)
@@ -126,6 +132,7 @@ public class ProjectPlayer : MonoBehaviour
         longRangeSkill_4State = new LongRangeSkill_4(this);
         longRangeSkill_5State = new LongRangeSkill_5(this);
         dashMeleeAttackState = new DashMeleeAttack(this);
+        meleeSkill_1State = new MeleeSkill_1(this);
 
         states[(int)E_State.Idle] = idleState;
         states[(int)E_State.Move] = walkState;
@@ -139,6 +146,7 @@ public class ProjectPlayer : MonoBehaviour
         states[(int)E_State.LongRangeSkill_4] = longRangeSkill_4State;
         states[(int)E_State.LongRangeSkill_5] = longRangeSkill_5State;
         states[(int)E_State.DashMeleeAttack] = dashMeleeAttackState;
+        states[(int)E_State.MeleeSkill_1] = meleeSkill_1State;
 
     }
 
@@ -148,11 +156,15 @@ public class ProjectPlayer : MonoBehaviour
         inputManager.OnControlledLeftStick += Move;
         inputManager.PressedAKey += Drain;
         inputManager.OnUpAkey += StopDrain;
-        inputManager.PressedL1Key += UseSkill;
+        inputManager.PressedL1Key += UseLongRangeSkill;
         inputManager.PressedR2Key += Fire;
         inputManager.PressedBKey += Dash;
+        inputManager.PressedL1Key += MeleeSkill_1;
     }
 
+    /// <summary>
+    /// 원거리 공격 & 대쉬 근접 공격 사용 함수
+    /// </summary>
     private void Fire()
     {
         ChangeState(E_State.LongRangeAttack);
@@ -168,16 +180,26 @@ public class ProjectPlayer : MonoBehaviour
         InputX = vector3.x;
         InputZ = vector3.z;
     }
+
+    /// <summary>
+    /// 드레인 실행 함수
+    /// </summary>
     private void Drain()
     {
         ChangeState(E_State.Drain);
     }
 
+    /// <summary>
+    /// 드레인 멈춤 함수
+    /// </summary>
     private void StopDrain()
     {
         drainState.StopDrain();
     }
 
+    /// <summary>
+    /// 대쉬 사용 함수
+    /// </summary>
     private void Dash()
     {
         bool useAccept = skillManager.UseStamina(setting.DashSetting.UseStamina);
@@ -191,7 +213,11 @@ public class ProjectPlayer : MonoBehaviour
         ChangeState(E_State.Dash);
     }
 
-    private void UseSkill()
+
+    /// <summary>
+    /// 원거리 스킬 사용 함수
+    /// </summary>
+    private void UseLongRangeSkill()
     {
         int skillNumber = skillManager.UseSkill();
 
@@ -217,6 +243,12 @@ public class ProjectPlayer : MonoBehaviour
                 break;
 
         }
+    }
+
+    private void MeleeSkill_1()
+    {
+        // TODO : 스킬을 사용할 수 있는 조건을 여기에 달아야 할까? 우선적으로 생각중
+        ChangeState(E_State.MeleeSkill_1);
     }
 
     private void LongRangeSkill_1()

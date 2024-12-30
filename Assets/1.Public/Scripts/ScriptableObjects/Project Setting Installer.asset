@@ -71,10 +71,10 @@ MonoBehaviour:
       JumpPower: 25
       UseStamina: 30
     DashSetting:
-      DashTime: 0.2
+      DashTime: 0.4
       DashSpeed: 20
       DashCoolTime: 1
-      UseStamina: 40
+      UseStamina: 10
     DrainSetting:
       DrainSpeed: 2
       ViewArea: 0
@@ -118,3 +118,11 @@ MonoBehaviour:
       Radius: 3.4
     DashMeleeAttackSetting:
       Delay: 0.2
+    MeleeSkill1Setting:
+      Damage: 0
+      ViewArea: 8
+      ViewAngle: 180
+      TargetMask:
+        serializedVersion: 2
+        m_Bits: 4096
+      Delay: 0.5
