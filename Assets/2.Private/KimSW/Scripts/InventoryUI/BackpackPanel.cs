@@ -24,6 +24,8 @@ public class BackpackPanel : AnimatedUI, ISlotPanel
 
     int currentNumber;
 
+    bool dropFlag;
+
     private void Awake()
     {
         SetSlot();
@@ -37,6 +39,7 @@ public class BackpackPanel : AnimatedUI, ISlotPanel
     private void Start()
     {
         currentEquipmentSlot = gameUI.InventoryPanel.equipmentPanel.GetSlot(0);
+        gameUI.InventorySetPanel.gameObject.SetActive(false);
     }
 
     public void SetSelectCursor()
@@ -61,7 +64,7 @@ public class BackpackPanel : AnimatedUI, ISlotPanel
 
     public void DropItem(bool check)
     {
-        Debug.Log(check);
+        dropFlag=check;
     }
 
     public void SetSprite(int num, Sprite sprite)
@@ -88,9 +91,20 @@ public class BackpackPanel : AnimatedUI, ISlotPanel
         }
 
         // 장비 장착
-        EquipmentAnimation(num);
- 
-        inventory.EquipItem(num);
+        if (dropFlag == false)
+        {
+            EquipmentAnimation(num);
+
+            inventory.EquipItem(num);
+
+        }
+        else
+        {
+            backpackSlotList[num].RemoveSlotImage();
+            inventory.RemoveBackpackItems(num);
+         
+        }
+
 
         SlotSelectCallback(num);
     }

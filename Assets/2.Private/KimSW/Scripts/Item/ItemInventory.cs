@@ -98,4 +98,13 @@ public class ItemInventory : MonoBehaviour
         equipments[num] = null;
         inGameUI.StatusInformationPanel.UpdateStatusInfo();
     }
+
+
+    public void RemoveBackpackItems(int num)
+    {
+        hasItemCount--;
+        items[num] = null;
+
+        inGameUI.StatusInformationPanel.UpdateStatusInfo();
+    }
 }
