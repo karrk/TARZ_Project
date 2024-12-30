@@ -76,6 +76,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         public Skill_5_Settings Skill5Setting;
         public DashMeleeAttack_Settings DashMeleeAttackSetting;
         public MeleeSkill_1_Settings MeleeSkill1Setting;
+        public MeleeSkill_2_Settings MeleeSkill2Setting;
 
 
         [Serializable]
@@ -182,6 +183,15 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
             public float ViewArea;
             public float ViewAngle;
             public LayerMask TargetMask;
+            public float Delay;
+        }
+
+        [Serializable]
+        public class MeleeSkill_2_Settings
+        {
+            public float DashTime;
+            public float DashSpeed;
+            public float DashCoolTime;
             public float Delay;
         }
 

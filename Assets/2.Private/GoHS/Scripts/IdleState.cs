@@ -42,15 +42,15 @@ public class IdleState : BaseState
         //    player.ChangeState(E_State.LongRangeAttack);
         //}
 
-        if (Input.GetKeyDown(KeyCode.LeftControl))
-        {
-            player.ChangeState(E_State.Drain);
-        }
+        //if (Input.GetKeyDown(KeyCode.LeftControl))
+        //{
+        //    player.ChangeState(E_State.Drain);
+        //}
 
-        if( Input.GetKeyDown(KeyCode.R))
-        {
-            player.ChangeState(E_State.LongRangeSkill_1);
-        }
+        //if( Input.GetKeyDown(KeyCode.R))
+        //{
+        //    player.ChangeState(E_State.LongRangeSkill_1);
+        //}
 
     }
 

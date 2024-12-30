@@ -37,27 +37,37 @@ public class DashState : BaseState
             dashDirection = player.transform.forward;
         }
 
-        player.Refernece.Animator.SetTrigger("Dash");
+
+
+
 
     }
 
     public override void Update()
     {
         //Debug.Log("Dash 진행중");
-
         if(player.candash)
+        {
+            player.Refernece.Animator.SetTrigger("Dash");
+            Debug.Log("!@#!@##!@##!@##!@#대쉬 몇번중??");
+            player.Refernece.Rigid.AddForce(dashDirection * player.Setting.DashSetting.DashSpeed, ForceMode.Impulse);
+            player.candash = false;
+
+
+        }
+        else
         {
             if (dashTime > 0f)
             {
-                player.transform.Translate(dashDirection * player.Setting.DashSetting.DashSpeed * Time.deltaTime, Space.World);
+                player.candash = false;
                 dashTime -= Time.deltaTime;
             }
             else
             {
-                player.StartCoroutine(DashCooldownRoutine());
                 Debug.Log("대쉬 진행됨");
                 player.ChangeState(E_State.Idle);
             }
+
         }
     }
 
