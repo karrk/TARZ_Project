@@ -52,8 +52,9 @@ public class DrainState : BaseState
 
     public void StopDrain()
     {
+        player.Setting.DrainSetting.ViewArea = 0;
+        player.Refernece.Animator.SetBool("Drain", false);
         isDrainMode = false;
-        
     }
 
     public override void Update()
@@ -71,30 +72,6 @@ public class DrainState : BaseState
             player.ChangeState(E_State.Idle);
         }
 
-        //if(Input.GetKey(KeyCode.LeftControl))
-        //{
-        //    Debug.Log("드레인 진행중!");
-        //    IncreaseViewArea();
-        //    GetTarget();
-        //}
-        //else
-        //{
-        //    viewArea = 0f;
-        //    player.animator.SetBool("Drain", false);
-
-        //    AnimatorStateInfo stateInfo = player.animator.GetCurrentAnimatorStateInfo(0);
-        //    if(stateInfo.IsName("Absorb_End_KHS") && stateInfo.normalizedTime >= 1.0f)
-        //    {
-        //        Debug.Log("드레인 끝 확인됨");
-        //        player.ChangeState(E_State.Idle);
-        //    }
-        //    else if(stateInfo.normalizedTime >= 0.5f)
-        //    {
-        //        Debug.Log("드레인 끝 확인됨");
-        //        player.ChangeState(E_State.Idle);
-        //    }
-
-        //}
     }
     
     /// <summary>
@@ -145,19 +122,6 @@ public class DrainState : BaseState
 
     public override void Exit()
     {
-
+        StopDrain();
     }
-
-    //public void OnDrawGizmos()
-    //{
-    //    Debug.Log("~~~~~~~~~기즈모 실행중~~~~~~~~~~~");
-    //    Handles.DrawWireArc(player.transform.position, Vector3.up, player.transform.forward, 360, viewArea);
-    //    Handles.DrawLine(player.transform.position, player.transform.position + GetAngle(-viewAngle / 2) * viewArea);
-    //    Handles.DrawLine(player.transform.position, player.transform.position + GetAngle(viewAngle / 2) * viewArea);
-
-    //    foreach (Transform Target in Targets)
-    //    {
-    //        Handles.DrawLine(player.transform.position, Target.position);
-    //    }
-    //}
 }
