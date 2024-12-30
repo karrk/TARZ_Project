@@ -50,7 +50,7 @@ MonoBehaviour:
     Hp: 10
     Atk: 1
   camSetting:
-    Height: 2.5
+    Height: 4
     Dist: -7.5
     RotationSpeed: 2
     SmoothSpeed: 0.125
@@ -68,7 +68,7 @@ MonoBehaviour:
       StaminaChargeWaitTime: 1.5
       StaminaChargeValue: 0.02
     JumpSetting:
-      JumpPower: 20
+      JumpPower: 25
       UseStamina: 30
     DashSetting:
       DashTime: 0.2
@@ -87,7 +87,7 @@ MonoBehaviour:
       UseStamina: 1
     longRangeSetting:
       attackDelayTimer: 0
-      stateDelayTimer: 0
+      stateDelayTimer: 1
     Skill1Setting:
       Delay: 1
     Skill2Setting:

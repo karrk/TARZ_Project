@@ -32,7 +32,7 @@ public class ProjectPlayer : MonoBehaviour
     private MoveState walkState;
     private JumpState jumpState;
     private DashState dashState;
-    private LongRangeAttackState longRangeAttackState;
+    public LongRangeAttackState longRangeAttackState;
     private DrainState drainState;
     private LongRangeSkill_1 longRangeSkill_1State;
     private LongRangeSkill_2 longRangeSkill_2State;
@@ -69,7 +69,7 @@ public class ProjectPlayer : MonoBehaviour
         {E_State.Jump, new List<E_State>(){ E_State.Idle }  },
         {E_State.Dash, new List<E_State>(){ E_State.Idle }  },
         {E_State.Drain, new List<E_State>(){ E_State.Idle }  },
-        {E_State.LongRangeAttack, new List<E_State>(){ E_State.Idle }  },
+        {E_State.LongRangeAttack, new List<E_State>(){ E_State.Idle,E_State.Jump,E_State.Dash }  },
         {E_State.LongRangeSkill_1, new List<E_State>(){ E_State.Idle }  },
         {E_State.LongRangeSkill_2, new List<E_State>(){ E_State.Idle }  },
         {E_State.LongRangeSkill_3, new List<E_State>(){ E_State.Idle }  },
@@ -222,6 +222,9 @@ public class ProjectPlayer : MonoBehaviour
         //{
         //    drainState.OnDrawGizmos();
         //}
+
+        Refernece.Animator.SetFloat("VelocityX", InputX);
+        Refernece.Animator.SetFloat("VelocityZ", InputZ);
 
         states[(int)curState].Update();
     }
