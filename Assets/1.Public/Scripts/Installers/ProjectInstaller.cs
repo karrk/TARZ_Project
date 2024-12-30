@@ -74,6 +74,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         public Skill_3_Settings Skill3Setting;
         public Skill_4_Settings Skill4Setting;
         public Skill_5_Settings Skill5Setting;
+        public DashMeleeAttack_Settings DashMeleeAttackSetting;
 
         [Serializable]
         public class BasicSettings
@@ -164,9 +165,14 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
             public float RotateTime;
             public float Radius;
         }
+
+        [Serializable]
+        public class DashMeleeAttack_Settings
+        {
+            public float Delay;
+        }
     }
 
-    
 
     [Serializable]
     public  class PlayerBaseStats

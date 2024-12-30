@@ -214,7 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c051cb75bf5cf0849be2daf04b072f6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillDamage: 0
+  skillDamage: 100
 --- !u!1 &556915760964675181
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,6 +586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d99bb25d2448e84ab6910786e38240e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
 --- !u!1 &1155948065361506786
 GameObject:
   m_ObjectHideFlags: 0
@@ -1482,6 +1483,73 @@ Transform:
   - {fileID: 4081522518959128592}
   m_Father: {fileID: 2381723527167640216}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2888018099336518165
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4532616104697909937}
+  - component: {fileID: 2111238675586419565}
+  - component: {fileID: 2918661135708622949}
+  m_Layer: 0
+  m_Name: MeleeDashAttack_HitBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &4532616104697909937
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2888018099336518165}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.776, z: 0.89}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8622134645739668758}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2111238675586419565
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2888018099336518165}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.63, y: 1.1296347, z: 0.77105355}
+  m_Center: {x: 0, y: 0.06481737, z: -0.11447322}
+--- !u!114 &2918661135708622949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2888018099336518165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28e0a545e1618d74980558b3cbabbc15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillDamage: 150
 --- !u!1 &2914032361739494254
 GameObject:
   m_ObjectHideFlags: 0
@@ -1723,7 +1791,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5590825601198424687}
   m_Layer: 0
-  m_Name: Skill_5
+  m_Name: LongRangeSkill_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3703,6 +3771,7 @@ Transform:
   - {fileID: 7854834694597580696}
   - {fileID: 8187697612589568166}
   - {fileID: 5590825601198424687}
+  - {fileID: 4532616104697909937}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &878338197031248657
@@ -3730,6 +3799,7 @@ MonoBehaviour:
     Skill1HitBox: {fileID: 511482395631195085}
     Skill3HitBox: {fileID: 5181889522547916206}
     Skill5Garbages: {fileID: 3412971563338093114}
+    DashMeleeAttackHitBox: {fileID: 2888018099336518165}
 --- !u!114 &726719191030262112
 MonoBehaviour:
   m_ObjectHideFlags: 0

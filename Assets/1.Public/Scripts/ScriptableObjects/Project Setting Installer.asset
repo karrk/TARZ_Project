@@ -87,7 +87,7 @@ MonoBehaviour:
       UseStamina: 1
     longRangeSetting:
       attackDelayTimer: 0
-      stateDelayTimer: 1
+      stateDelayTimer: 2
     Skill1Setting:
       Delay: 1
     Skill2Setting:
@@ -116,3 +116,5 @@ MonoBehaviour:
       RotateSpeed: 750
       RotateTime: 4
       Radius: 3.4
+    DashMeleeAttackSetting:
+      Delay: 0.2

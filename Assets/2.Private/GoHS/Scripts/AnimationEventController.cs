@@ -7,9 +7,13 @@ public class AnimationEventController : MonoBehaviour
 {
     [Inject][SerializeField] private ProjectPlayer player;
     
-    public void Attack()
+    public void LongRangeAttack()
     {
         player.longRangeAttackState.Attack();
     }
 
+    public void DashMeleeAttack()
+    {
+        player.dashMeleeAttackState.DashMeleeAttackOn();
+    }
 }
