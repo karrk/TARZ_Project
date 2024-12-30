@@ -53,7 +53,7 @@ public class LongRangeSkill_HitBox3 : MonoBehaviour
     private IEnumerator MoveAndDestroryCoroutine()
     {
         float moveDistance = 3f;                                         // 이동 거리
-        float moveTime = 0.7f;                                             // 이동 시간
+        float moveTime = 0.7f;                                           // 이동 시간
         Vector3 startPos = transform.position;                           // 시작 위치
         Vector3 targetPos = startPos + transform.forward * moveDistance; // 목표 위치
 

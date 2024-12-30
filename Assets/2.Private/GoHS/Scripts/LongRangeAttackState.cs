@@ -2,6 +2,7 @@ using UnityEngine.EventSystems;
 using UnityEngine;
 using Zenject;
 using System.Text;
+using UnityEditor;
 
 [System.Serializable]
 
@@ -12,23 +13,21 @@ public class LongRangeAttackState : BaseState
     }
 
     private Vector3 moveDirection;
-    private float attackDelayTimer = 0f;    // 공격 딜레이 타이머
+    private float attackDelayTimer = 0f;    // 공격 딜레이 타이머           TODO : 사용 안해도 될 수 있음. 
     private float stateDelayTimer = 0f;     // 상태 딜레이 타이머
     private int attackStack = 0;            // 현재 공격 스택        
     private const int MAXSTACK = 4;         // 최종 공격 스택
-    private bool canAttack = true;          // 공격 가능 여부
     private int jumpAttackNum = 1;     // 점프하고 공격할 수 있는 횟수
 
 
     public override void Enter()
     {
-        canAttack = true;   // 공격 진입하면 공격 가능 상태
         jumpAttackNum = 1;  // 점프하고 공격횟수 1회 충전
         player.Refernece.Animator.SetBool("LongRangeAttack", true); // 원거리공격 Upper레이어 활성화를 위한 bool ture
         player.Refernece.Animator.SetTrigger("AttackTrigger");      // 공격 트리거 실행
 
         Debug.Log("원거리공격 진입");
-        attackDelayTimer = player.Setting.longRangeSetting.attackDelayTimer;    // 공격 딜레이 재설정
+        //attackDelayTimer = player.Setting.longRangeSetting.attackDelayTimer;    // 공격 딜레이 재설정
         stateDelayTimer = player.Setting.longRangeSetting.stateDelayTimer;      // 상태 딜레이 재설정
         //Attack();   // 공격 진행
     }
@@ -54,17 +53,11 @@ public class LongRangeAttackState : BaseState
 
         // 현재 공격 가능한 상태일때, 버튼을 입력했을때, 땅에 있을때
         // TODO : 입력 바꾸어야함
-        if (canAttack && Input.GetMouseButtonDown(0) && player.isGrounded)  
+        if (Input.GetMouseButtonDown(0) && player.isGrounded)
         {
             player.Refernece.Animator.SetTrigger("AttackTrigger");      // 공격 트리거 실행
-        }
-        else
-        {
-            attackDelayTimer -= Time.deltaTime;     // 공격 딜레이 진행
-            if (attackDelayTimer <= 0f)             // 공격 딜레이만큼 시간이 지났을때
-            {
-                canAttack = true;                   // 다시 공격 할 수 있음을 알림
-            }
+            //attackDelayTimer = player.Setting.longRangeSetting.attackDelayTimer;    // 공격 딜레이 재설정
+            stateDelayTimer = player.Setting.longRangeSetting.stateDelayTimer;      // 상태 딜레이 재설정
         }
 
 
@@ -77,18 +70,27 @@ public class LongRangeAttackState : BaseState
         // 상태 딜레이가 0보다 작아진다면
         else
         {
-            player.ChangeState(E_State.Idle);   // idle 상태로 넘어가기
 
-            if(!player.isGrounded)  // 땅에 있지 않다면 jump상태로
+
+            if (!player.isGrounded)  // 땅에 있지 않다면 jump상태로
             {
                 player.ChangeState(E_State.Jump);
+            }
+
+            if (player.InputX != 0 || player.InputZ != 0)
+            {
+                player.ChangeState(E_State.Move);
+            }
+            else
+            {
+                player.ChangeState(E_State.Idle);   // idle 상태로 넘어가기
             }
         }
 
 
         // 점프 진행했을때
         // TODO : 입력 바꾸어야함
-        if (Input.GetKeyDown(KeyCode.Space))     
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("점프 진입!");
             player.Refernece.Animator.SetBool("Jump", true);
@@ -100,9 +102,11 @@ public class LongRangeAttackState : BaseState
 
         // 공격횟수가 0이 아닐때, 현재 공격 가능한 상태일때, 버튼을 입력했을때, 땅에 있지 않을때
         // TODO : 입력 바꾸어야함
-        if (jumpAttackNum != 0 && canAttack && Input.GetMouseButtonDown(0) && !player.isGrounded)    
+        if (jumpAttackNum != 0 && Input.GetMouseButtonDown(0) && !player.isGrounded)
         {
             player.Refernece.Animator.SetTrigger("AttackTrigger");
+            //attackDelayTimer = player.Setting.longRangeSetting.attackDelayTimer;    // 공격 딜레이 재설정
+            stateDelayTimer = player.Setting.longRangeSetting.stateDelayTimer;       // 상태 딜레이 재설정
             jumpAttackNum--;    // 점프 중 공격 1회만 진행하기 위해 1 차감
         }
 
@@ -155,15 +159,12 @@ public class LongRangeAttackState : BaseState
 
         player.Refernece.Shooter.FireItem();    // 총알 발사
 
-        attackDelayTimer = player.Setting.longRangeSetting.attackDelayTimer;    // 공격 딜레이 재설정
-        stateDelayTimer = player.Setting.longRangeSetting.stateDelayTimer;      // 상태 딜레이 재설정
 
-        if(attackStack < MAXSTACK)  // 현재 스택이 최대 스택보다 낮다면
+        if (attackStack < MAXSTACK)  // 현재 스택이 최대 스택보다 낮다면
         {
             attackStack++;  // 스택 1 추가
         }
 
-        canAttack = false;  // 공격 불가 상태로 만들기
     }
 
     public override void Exit()
