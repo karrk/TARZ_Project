@@ -65,12 +65,16 @@ MonoBehaviour:
       GaugeValue: 10
       ThrowingSpeed: 10
       MoveSpeed: 3
+      StaminaChargeWaitTime: 1.5
+      StaminaChargeValue: 0.02
     JumpSetting:
       JumpPower: 20
+      UseStamina: 30
     DashSetting:
       DashTime: 0.2
       DashSpeed: 20
       DashCoolTime: 1
+      UseStamina: 40
     DrainSetting:
       DrainSpeed: 2
       ViewArea: 0
@@ -80,6 +84,10 @@ MonoBehaviour:
       TargetMask:
         serializedVersion: 2
         m_Bits: 524288
+      UseStamina: 1
+    longRangeSetting:
+      attackDelayTimer: 0
+      stateDelayTimer: 0
     Skill1Setting:
       Delay: 1
     Skill2Setting:
