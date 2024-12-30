@@ -46,7 +46,7 @@ public class InGameUI : BindUI
     private void Start()
     {
 
-        inventorySetPanel.gameObject.SetActive(false);
+   
         currentMenu = statusBarPanel;
 
     }
