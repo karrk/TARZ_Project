@@ -59,6 +59,11 @@ public class BackpackPanel : AnimatedUI, ISlotPanel
 
     }
 
+    public void DropItem(bool check)
+    {
+        Debug.Log(check);
+    }
+
     public void SetSprite(int num, Sprite sprite)
     {
         backpackSlotList[num].SetSlotImage(sprite);

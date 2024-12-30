@@ -26,6 +26,9 @@ public class InGameMenuPanel : MonoBehaviour, IOpenCloseMenu
     public void OnOptionMenu()
     {
         // 옵션 메뉴 활성화
+        OffUIPanel();
+        inGameUI.CurrentMenu = inGameUI.OptionPanel;
+        inGameUI.CurrentMenu.OpenUIPanel();
     }
 
     public void TutorialEnd()
