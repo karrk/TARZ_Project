@@ -12,6 +12,8 @@ public class SkillManager
 
     private bool usedStamina;
 
+    private Coroutine staminaChargeRoutine;
+
     public int UseSkill()
     {
         int count = 0;
@@ -40,7 +42,11 @@ public class SkillManager
         playerModel.Stamina.Value -= stamina;
 
         usedStamina = true;
-        //helper.StartCoroutine(WaitStaminaCharge());
+
+        if (staminaChargeRoutine != null)
+            helper.StopCoroutine(staminaChargeRoutine);
+
+        staminaChargeRoutine = helper.StartCoroutine(WaitStaminaCharge());
 
         return true;
     }
@@ -69,8 +75,10 @@ public class SkillManager
 
         while (true)
         {
-            if (usedStamina == true || playerModel.Stamina.Value >= 100)
+            if (usedStamina == true || playerModel.Stamina.Value >= playerModel.MaxStamina.Value)
                 break;
+
+            playerModel.Stamina.Value += setting.BasicSetting.StaminaChargeValue;
 
             yield return null;
         }

@@ -26,7 +26,7 @@ public class PlayerUIModel : MonoBehaviour
     {
         MaxHp = new ReactiveProperty<int>(100);
         Hp.Value = MaxHp.Value;
-        MaxStamina = new ReactiveProperty<float>(880);
+        MaxStamina = new ReactiveProperty<float>(100);
         Stamina.Value = MaxStamina.Value;
         SkillGauge = new ReactiveProperty<float>(0);
 
