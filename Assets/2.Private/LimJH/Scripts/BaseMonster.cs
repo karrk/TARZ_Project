@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using BehaviorDesigner.Runtime;
 using Zenject;
-using Cysharp.Threading.Tasks;
 
 public class BaseMonster : MonoBehaviour, IDamagable
 {
