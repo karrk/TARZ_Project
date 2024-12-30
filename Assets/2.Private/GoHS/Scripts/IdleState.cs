@@ -31,12 +31,6 @@ public class IdleState : BaseState
             player.ChangeState(E_State.Move);
         }
 
-        // 점프 상태로 넘어가는 로직
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            player.ChangeState(E_State.Jump);
-        }
-
         // 대쉬 상태로 넘어가는 로직
         //if (Input.GetKeyDown(KeyCode.LeftShift) && !Input.GetKeyDown(KeyCode.Space))
         //{

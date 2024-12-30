@@ -14,23 +14,15 @@ public class JumpState : BaseState
 
     public override void Enter()
     {
-        if (!player.isGrounded) // 이미 점프중이면 점프 진행 안한다. 
-        {
-            return;
-        }
-
-        Debug.Log("점프 진입!");
         player.Refernece.Animator.SetBool("Jump", true);
         player.Refernece.Rigid.AddForce(Vector3.up * player.Setting.JumpSetting.JumpPower, ForceMode.Impulse);
-        player.isGrounded = false;
-
-
+        player.IsGrounded = false;
     }
 
     public override void Update()
     {
         Debug.Log("Jump 업데이트문 진행중");
-        if (player.isGrounded)
+        if (player.IsGrounded)
         {
             player.Refernece.Animator.SetBool("Jump", false);
             player.ChangeState(E_State.Idle);
