@@ -92,16 +92,16 @@ public class LongRangeSkill_2 : BaseState
     public void GetTarget()
     {
         Targets.Clear();    // 배열 초기화
-        Collider[] TargetCollider = Physics.OverlapSphere(player.transform.position, viewArea, targetMask);
+        Collider[] TargetCollider = Physics.OverlapSphere(player.transform.position, player.Setting.Skill2Setting.ViewArea, player.Setting.Skill2Setting.TargetMask);
 
         for (int i = 0; i < TargetCollider.Length; i++) // 감지된 콜라이더 
         {
             Transform target = TargetCollider[i].transform;
             Vector3 direction = target.position - player.transform.position;
 
-            if (Vector3.Dot(direction.normalized, player.transform.forward) > GetAngle(viewAngle / 2).z)
+            if (Vector3.Dot(direction.normalized, player.transform.forward) > GetAngle(player.Setting.Skill2Setting.ViewAngle / 2).z)
             {
-                Debug.Log(GetAngle(viewAngle / 2).z);
+                Debug.Log(GetAngle(player.Setting.Skill2Setting.ViewAngle / 2).z);
                 Targets.Add(target);
 
                 // TODO : 스킬 2번을 사용하였을때 IDamagable 인터페이스를 가지고 있는 몬스터를 확인해서 해당 컴포넌트를 가지고 있으면
@@ -109,7 +109,7 @@ public class LongRangeSkill_2 : BaseState
                 IDamagable damagable = target.GetComponent<IDamagable>();
                 if (damagable != null)
                 {
-                    damagable.TakeHit(skillDamage, true);
+                    damagable.TakeHit(player.Setting.Skill2Setting.Damage, true);
                 }
 
             }
