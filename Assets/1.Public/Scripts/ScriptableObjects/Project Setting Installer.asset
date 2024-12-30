@@ -17,6 +17,8 @@ MonoBehaviour:
       type: 3}
     Player: {fileID: 5467619441096975080, guid: 5daeecfe9a52f3c45ba0659631db63d9,
       type: 3}
+    PlayerEquipments: {fileID: 7972474522850331046, guid: cf0ffd896d4d6e54a975c73312767b06,
+      type: 3}
   pooledPrefabs:
     Monster:
       list:
@@ -27,26 +29,90 @@ MonoBehaviour:
         - Type: 1
           Prefab: {fileID: 6872847601630210736, guid: c988fde7ba940e54f8cff2fc90e4d24e,
             type: 3}
+    Garbages:
+      list:
+        pairInfo:
+        - Type: 0
+          Prefab: {fileID: 3111731739044657598, guid: 27e16f93793d35c4e898bbd5137f188b,
+            type: 3}
+        - Type: 1
+          Prefab: {fileID: 3111731739044657598, guid: 35d9e1dce6b43fc4eaa38281d70b02b8,
+            type: 3}
+        - Type: 2
+          Prefab: {fileID: 3111731739044657598, guid: 735d6edfd94719943be3fba04f8d9f29,
+            type: 3}
   garbagePrefabs:
     Garbages:
     - {fileID: 3111731739044657598, guid: 27e16f93793d35c4e898bbd5137f188b, type: 3}
     - {fileID: 3111731739044657598, guid: 35d9e1dce6b43fc4eaa38281d70b02b8, type: 3}
     - {fileID: 3111731739044657598, guid: 735d6edfd94719943be3fba04f8d9f29, type: 3}
-  playerSetting:
-    DrainSpeed: 2
-    GaugeValue: 5
-    SkillAnchor:
-    - 0.5
-    - 0.6
-    - 0.7
-    - 0.8
-    - 1
-    ThrowingSpeed: 15
   playerBaseStats:
     Hp: 10
     Atk: 1
   camSetting:
-    Height: 2.5
+    Height: 4
     Dist: -7.5
     RotationSpeed: 2
     SmoothSpeed: 0.125
+  playerSettings:
+    BasicSetting:
+      SkillAnchor:
+      - 0.5
+      - 0.6
+      - 0.7
+      - 0.8
+      - 1
+      GaugeValue: 10
+      ThrowingSpeed: 10
+      MoveSpeed: 3
+      StaminaChargeWaitTime: 1.5
+      StaminaChargeValue: 0.02
+    JumpSetting:
+      JumpPower: 25
+      UseStamina: 30
+    DashSetting:
+      DashTime: 0.2
+      DashSpeed: 20
+      DashCoolTime: 1
+      UseStamina: 40
+    DrainSetting:
+      DrainSpeed: 2
+      ViewArea: 0
+      MaxViewArea: 10
+      ViewSpeed: 10
+      ViewAngle: 360
+      TargetMask:
+        serializedVersion: 2
+        m_Bits: 524288
+      UseStamina: 1
+    longRangeSetting:
+      attackDelayTimer: 0
+      stateDelayTimer: 1
+    Skill1Setting:
+      Delay: 1
+    Skill2Setting:
+      Damage: 200
+      ViewArea: 8
+      ViewAngle: 60
+      TargetMask:
+        serializedVersion: 2
+        m_Bits: 4096
+      Delay: 0.5
+    Skill3Setting:
+      Delay: 1
+    Skill4Setting:
+      Radius: 3
+      zOffset: 4
+      Delay: 0.5
+      Damage: 350
+      TargetMask:
+        serializedVersion: 2
+        m_Bits: 4096
+    Skill5Setting:
+      ThrowCount: 20
+      ThrowPower: 20
+      StartDelay: 0.5
+      EndDelay: 1
+      RotateSpeed: 750
+      RotateTime: 4
+      Radius: 3.4

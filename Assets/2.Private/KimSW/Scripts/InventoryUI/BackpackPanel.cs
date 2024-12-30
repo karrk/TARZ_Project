@@ -59,6 +59,11 @@ public class BackpackPanel : AnimatedUI, ISlotPanel
 
     }
 
+    public void DropItem(bool check)
+    {
+        Debug.Log(check);
+    }
+
     public void SetSprite(int num, Sprite sprite)
     {
         backpackSlotList[num].SetSlotImage(sprite);
@@ -70,7 +75,7 @@ public class BackpackPanel : AnimatedUI, ISlotPanel
         uiAnimator.SetTrigger("PlayUIAni");
 
         ThrowSlotUI(backpackSlotList[num],
-         gameUI.InventoryPanel.equipmentPanel.GetSlot((int)inventory.Items[num].itemType),
+         gameUI.InventoryPanel.equipmentPanel.GetSlot((int)inventory.Items[num].type),
          gameUI.InventoryPanel.equipmentPanel);
     }
 
@@ -85,7 +90,7 @@ public class BackpackPanel : AnimatedUI, ISlotPanel
         // 장비 장착
         EquipmentAnimation(num);
  
-        inventory.RemoveItem(num);
+        inventory.EquipItem(num);
 
         SlotSelectCallback(num);
     }
@@ -104,7 +109,7 @@ public class BackpackPanel : AnimatedUI, ISlotPanel
         {
             gameUI.ItemInformationPanel.SetSelectItemInformation(inventory.Items[slotNumber]);
 
-            int typeNumber = (int)inventory.Items[slotNumber].itemType;
+            int typeNumber = (int)inventory.Items[slotNumber].type;
 
             // 일치 하는 장비칸 포커스
             currentEquipmentSlot.SetDefaultColor();

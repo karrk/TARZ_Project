@@ -8,18 +8,19 @@ using System;
 using System.Threading;
 public class ChatUI : MonoBehaviour
 {
-   [SerializeField] TMP_Text tmpText;
-
+    /*
+    [SerializeField] TMP_Text tmpText;
+    
     [TextArea]
     [SerializeField] string chatText;
-
-    CancellationTokenSource cancell = new CancellationTokenSource();
-
+    */
+    public float duration;
+    public CancellationTokenSource cancell = new CancellationTokenSource();
+    /*
      void Start()
     {
         TextTask().Forget();
 
-        Invoke("InvokeTest", 1.0f);
     }
 
 
@@ -33,23 +34,42 @@ public class ChatUI : MonoBehaviour
     
 
     }
-
+    */
     private void OnDestroy()
     {
+        CancelTask();
+    }
+
+    public void StartChatTask(TMP_Text targetText, string str)
+    {
+        CancelTask();
+        cancell = new CancellationTokenSource();
+        TextTask(targetText, str).Forget();
+    }
+
+    public void CancelTask()
+    {
+        if (cancell is null)
+        {
+            return;
+        }
+
         cancell.Cancel();
         cancell.Dispose();
     }
 
-    async UniTaskVoid TextTask()
+    async UniTaskVoid TextTask(TMP_Text targetText, string str)
     {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < chatText.Length; i++)
+       
+        for (int i = 0; i < str.Length; i++)
         {
-           
-            sb.Append(chatText[i]);
-            tmpText.text = sb.ToString();
- 
-            if (Char.IsWhiteSpace(chatText[i]))
+            sb.Append(str[i]);
+            targetText.text = sb.ToString();
+
+            await UniTask.Delay(TimeSpan.FromSeconds(0.01f), cancellationToken: cancell.Token);
+            /*
+            if (Char.IsWhiteSpace(str[i]))
             {
                 await UniTask.Delay(TimeSpan.FromSeconds(0.5f), cancellationToken: cancell.Token);
             }
@@ -57,14 +77,9 @@ public class ChatUI : MonoBehaviour
             {
                 await UniTask.Delay(TimeSpan.FromSeconds(0.1f), cancellationToken: cancell.Token);
             }
-            
+            */
         }
-  
 
     }
 
-    public void InvokeTest()
-    {
-        Debug.Log("hello");
-    }
 }

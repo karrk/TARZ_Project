@@ -12,7 +12,8 @@ public class InGameMenuPanel : MonoBehaviour, IOpenCloseMenu
     [Inject]
     InGameUI inGameUI;
 
-  
+
+    [SerializeField] Button selectedButton;
   
 
     public void ResumeGame()
@@ -25,6 +26,9 @@ public class InGameMenuPanel : MonoBehaviour, IOpenCloseMenu
     public void OnOptionMenu()
     {
         // 옵션 메뉴 활성화
+        OffUIPanel();
+        inGameUI.CurrentMenu = inGameUI.OptionPanel;
+        inGameUI.CurrentMenu.OpenUIPanel();
     }
 
     public void TutorialEnd()
@@ -40,12 +44,13 @@ public class InGameMenuPanel : MonoBehaviour, IOpenCloseMenu
     public void OpenUIPanel()
     {
         gameObject.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(selectedButton.gameObject);
     }
 
     public void CloseUIPanel()
     {
         gameObject.SetActive(false);
-        inGameUI.CurrentMenu = inGameUI.PlayerStatusBarPanel;
+        inGameUI.CurrentMenu = inGameUI.StatusBarPanel;
         inGameUI.CurrentMenu.OpenUIPanel();
     }
 

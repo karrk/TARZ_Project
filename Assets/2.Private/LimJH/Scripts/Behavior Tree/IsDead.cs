@@ -4,7 +4,7 @@ using BehaviorDesigner.Runtime.Tasks;
 
 public class IsDead : Conditional
 {
-    public SharedInt health; // 몬스터의 체력
+    public SharedFloat health; // 몬스터의 체력
     public override TaskStatus OnUpdate()
     {
         // 체력이 0 이하일 경우 Success 반환

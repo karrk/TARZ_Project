@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-public class PlayerStatusBarPanel : MonoBehaviour, IOpenCloseMenu
+public class StatusBarPanel : MonoBehaviour, IOpenCloseMenu
 {
     [Inject]
     InGameUI inGameUI;
@@ -49,6 +49,7 @@ public class PlayerStatusBarPanel : MonoBehaviour, IOpenCloseMenu
             animatedUIs[i].MoveOnUI();
         }
 
+        inGameUI.OnEnemyHP();
     }
 
     public void CloseUIPanel()
@@ -60,14 +61,20 @@ public class PlayerStatusBarPanel : MonoBehaviour, IOpenCloseMenu
 
         inGameUI.CurrentMenu = inGameUI.InGameMenuPanel;
         inGameUI.CurrentMenu.OpenUIPanel();
+
+        inGameUI.OffEnemyHP();
     }
 
     public void OffUIPanel()
     {
+       
+
         for (int i = 0; i < animatedUIs.Length; i++)
         {
             animatedUIs[i].MoveOffUI();
         }
+
+        inGameUI.OffEnemyHP();
     }
 }
 

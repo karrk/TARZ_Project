@@ -4,22 +4,18 @@ using Zenject;
 [System.Serializable]
 public class IdleState : BaseState
 {
-    [SerializeField] ProjectPlayer player;
-
     [Inject] private InputManager inputManager;
 
-    public IdleState(ProjectPlayer player)
+    public IdleState(ProjectPlayer player) : base(player)
     {
-        this.player = player;
     }
-
 
     public override void Enter()
     {
-        player.animator.SetBool("Idle", true);
+        player.Refernece.Animator.SetBool("Idle", true);
         //Debug.Log("현재 Idle 상태 진입 성공");
-        player.Rigid.velocity = Vector3.zero;
-        player.Rigid.angularVelocity = Vector3.zero;
+        player.Refernece.Rigid.velocity = Vector3.zero;
+        player.Refernece.Rigid.angularVelocity = Vector3.zero;
 
     }
 
@@ -42,10 +38,10 @@ public class IdleState : BaseState
         }
 
         // 대쉬 상태로 넘어가는 로직
-        if (Input.GetKeyDown(KeyCode.LeftShift) && !Input.GetKeyDown(KeyCode.Space))
-        {
-            player.ChangeState(E_State.Dash);
-        }
+        //if (Input.GetKeyDown(KeyCode.LeftShift) && !Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    player.ChangeState(E_State.Dash);
+        //}
 
         //if (Input.GetMouseButtonDown(0))
         //{
@@ -66,7 +62,7 @@ public class IdleState : BaseState
 
     public override void Exit()
     {
-        player.animator.SetBool("Idle", false);
+        player.Refernece.Animator.SetBool("Idle", false);
     }
 
 

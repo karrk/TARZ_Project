@@ -102,7 +102,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 100
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3ea7fcc5cdb048d47981ec359df72933, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 77bd62f448e15d5429a3cb5a6996b853, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -133,7 +133,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 2
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -188,6 +188,8 @@ MonoBehaviour:
   skillColor: {r: 0.44705883, g: 0, b: 0.7529412, a: 1}
   normalFontSize: 5
   skillFontSize: 8
-  duration: 0.5
-  delay: 0.5
+  delay: 0.3
+  fadeDuration: 0.3
+  sizeDuration: 0.1
   moveDistance: 1
+  size: 3

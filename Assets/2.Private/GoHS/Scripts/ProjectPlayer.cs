@@ -1,45 +1,49 @@
+using System;
 using System.Collections.Generic;
-using Unity.IO.LowLevel.Unsafe;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.UIElements;
 using Zenject;
-using Zenject.SpaceFighter;
 
-public enum E_State { Idle, Move, Jump, Dash, LongRangeAttack, Drain, LongRangeSkill_1, Size }      // 우선적으로 선언한 상태
+public enum E_State { Idle, Move, Jump, Dash, LongRangeAttack, Drain, 
+                      LongRangeSkill_1, LongRangeSkill_2, LongRangeSkill_3,LongRangeSkill_4 , LongRangeSkill_5, Size }      // 우선적으로 선언한 상태
+
+[Serializable]
+public class PlayerReferences
+{
+    public Shooter Shooter;
+    public Rigidbody Rigid;
+    public Animator Animator;
+    public Transform MuzzlePoint;
+    public GameObject Skill1HitBox;
+    public GameObject Skill3HitBox;
+    public GameObject Skill5Garbages;
+}
 
 public class ProjectPlayer : MonoBehaviour
 {
     [Header("State")]
     [SerializeField] protected E_State curState = E_State.Idle;
 
+    [Inject] private ProjectInstaller.PlayerSettings setting;
+    public ProjectInstaller.PlayerSettings Setting => setting;
+
     // 상태들 추가해주기
     protected BaseState[] states = new BaseState[(int)E_State.Size];
-    [Inject][SerializeField] private IdleState idleState;
-    [Inject][SerializeField] private MoveState walkState;
-    [Inject][SerializeField] private JumpState jumpState;
-    [Inject][SerializeField] private DashState dashState;
-    [Inject][SerializeField] private LongRangeAttackState longRangeAttackState;
-    [Inject][SerializeField] private DrainState drainState;
-    [Inject][SerializeField] private LongRangeSkill_1 longRangeSkill_1State;
-
+    private IdleState idleState;
+    private MoveState walkState;
+    private JumpState jumpState;
+    private DashState dashState;
+    public LongRangeAttackState longRangeAttackState;
+    private DrainState drainState;
+    private LongRangeSkill_1 longRangeSkill_1State;
+    private LongRangeSkill_2 longRangeSkill_2State;
+    private LongRangeSkill_3 longRangeSkill_3State;
+    private LongRangeSkill_4 longRangeSkill_4State;
+    private LongRangeSkill_5 longRangeSkill_5State;
 
     [Header("프로퍼티")]
-    [SerializeField] private Rigidbody rigid;                                           // 리지드바디
-    public Rigidbody Rigid { get { return rigid; } set { rigid = value; } }
-
     [SerializeField] private Camera cam;                                                // 카메라 변수
     public Camera Cam { get { return cam; } set { cam = value; } }
 
-    [field: SerializeField] public Animator animator { get; protected set; }            // 애니메이터 변수
-
-    [SerializeField] private float moveSpeed;                                           // 움직이는 속도
-    public float MoveSpeed { get { return moveSpeed; } set { moveSpeed = value; } }
-
-    [SerializeField] public float dashSpeed;
-    [SerializeField] public float dashduration;
-    [SerializeField] public float dashCoolDown;
     [SerializeField] public bool candash;
 
     [SerializeField] public bool isGrounded { get; set; }                        // 현재 땅에 서있는지 여부
@@ -51,20 +55,26 @@ public class ProjectPlayer : MonoBehaviour
 
     public float InputZ { get { return inputZ; } set { inputZ = value; } }
 
-    [SerializeField] private Transform bulletSpawnPoint;
-    [SerializeField] private GameObject bulletPrefab;
-
     [Inject] private InputManager inputManager;
+    [Inject] private SkillManager skillManager;
+
+    [SerializeField] public PlayerReferences Refernece;
 
     private Dictionary<E_State, List<E_State>> actionGraph = new Dictionary<E_State, List<E_State>>
     {
-        { E_State.Idle, new List<E_State>(){ E_State.Move,E_State.Jump,E_State.Dash,E_State.LongRangeAttack,E_State.Drain,E_State.LongRangeSkill_1 } },
+        { E_State.Idle, new List<E_State>(){ E_State.Move,E_State.Jump,E_State.Dash,E_State.LongRangeAttack,
+            E_State.Drain,E_State.LongRangeSkill_1, E_State.LongRangeSkill_2, E_State.LongRangeSkill_3, E_State.LongRangeSkill_4, E_State.LongRangeSkill_5  } },
+
         {E_State.Move, new List<E_State>(){ E_State.Idle,E_State.Jump,E_State.Dash,E_State.LongRangeAttack }  },
         {E_State.Jump, new List<E_State>(){ E_State.Idle }  },
         {E_State.Dash, new List<E_State>(){ E_State.Idle }  },
         {E_State.Drain, new List<E_State>(){ E_State.Idle }  },
-        {E_State.LongRangeAttack, new List<E_State>(){ E_State.Idle }  },
+        {E_State.LongRangeAttack, new List<E_State>(){ E_State.Idle,E_State.Jump,E_State.Dash }  },
         {E_State.LongRangeSkill_1, new List<E_State>(){ E_State.Idle }  },
+        {E_State.LongRangeSkill_2, new List<E_State>(){ E_State.Idle }  },
+        {E_State.LongRangeSkill_3, new List<E_State>(){ E_State.Idle }  },
+        {E_State.LongRangeSkill_5, new List<E_State>(){ E_State.Idle }  },
+        {E_State.LongRangeSkill_4, new List<E_State>(){ E_State.Idle }  },
 
     };
 
@@ -76,9 +86,18 @@ public class ProjectPlayer : MonoBehaviour
     private void Awake()
     {
         cam = Camera.main;
-        rigid = GetComponent<Rigidbody>();
-        bulletSpawnPoint = transform.GetChild(1);
-        //longRangeSkill_1State.HitBox = transform.GetChild(2).gameObject;
+
+        idleState = new IdleState(this);
+        walkState = new MoveState(this);
+        jumpState = new JumpState(this);
+        dashState = new DashState(this);
+        longRangeAttackState = new LongRangeAttackState(this);
+        drainState = new DrainState(this);
+        longRangeSkill_1State = new LongRangeSkill_1(this);
+        longRangeSkill_2State = new LongRangeSkill_2(this);
+        longRangeSkill_3State = new LongRangeSkill_3(this);
+        longRangeSkill_4State = new LongRangeSkill_4(this);
+        longRangeSkill_5State = new LongRangeSkill_5(this);
 
         states[(int)E_State.Idle] = idleState;
         states[(int)E_State.Move] = walkState;
@@ -87,6 +106,10 @@ public class ProjectPlayer : MonoBehaviour
         states[(int)E_State.LongRangeAttack] = longRangeAttackState;
         states[(int)E_State.Drain] = drainState;
         states[(int)E_State.LongRangeSkill_1] = longRangeSkill_1State;
+        states[(int)E_State.LongRangeSkill_2] = longRangeSkill_2State;
+        states[(int)E_State.LongRangeSkill_3] = longRangeSkill_3State;
+        states[(int)E_State.LongRangeSkill_4] = longRangeSkill_4State;
+        states[(int)E_State.LongRangeSkill_5] = longRangeSkill_5State;
     }
 
     private void Start()
@@ -95,9 +118,9 @@ public class ProjectPlayer : MonoBehaviour
         inputManager.OnControlledLeftStick += Move;
         inputManager.PressedAKey += Drain;
         inputManager.OnUpAkey += StopDrain;
-        inputManager.PressedL1Key += LongRangeSkill_1;
+        inputManager.PressedL1Key += UseSkill;
         inputManager.PressedR2Key += Fire;
-        //inputManager.PressedBKey += Dash;
+        inputManager.PressedBKey += Dash;
     }
 
     private void Fire()
@@ -122,12 +145,70 @@ public class ProjectPlayer : MonoBehaviour
 
     private void Dash()
     {
+        bool useAccept = skillManager.UseStamina(setting.DashSetting.UseStamina);
+
+        if (useAccept == false)
+            return;
+
         ChangeState(E_State.Dash);
+    }
+
+    private void UseSkill()
+    {
+        int skillNumber = skillManager.UseSkill();
+
+        if (skillNumber == 0)
+            return;
+
+        switch (skillNumber)
+        {
+            case 1:
+                LongRangeSkill_1();
+                break;
+            case 2:
+                LongRangeSkill_2();
+                break;
+            case 3:
+                LongRangeSkill_3();
+                break;
+            case 4:
+                LongRangeSkill_4();
+                break;
+            case 5:
+                LongRangeSkill_5();
+                break;
+
+        }
     }
 
     private void LongRangeSkill_1()
     {
+        // TODO : 스킬을 사용할 수 있는 조건을 여기에 달아야 할까? 우선적으로 생각중
         ChangeState(E_State.LongRangeSkill_1);
+    }
+
+    private void LongRangeSkill_2()
+    {
+        // TODO : 스킬을 사용할 수 있는 조건을 여기에 달아야 할까? 우선적으로 생각중
+        ChangeState(E_State.LongRangeSkill_2);
+    }
+
+    private void LongRangeSkill_3()
+    {
+        // TODO : 스킬을 사용할 수 있는 조건을 여기에 달아야 할까? 우선적으로 생각중
+        ChangeState(E_State.LongRangeSkill_3);
+    }
+
+    private void LongRangeSkill_4()
+    {
+        // TODO : 스킬을 사용할 수 있는 조건을 여기에 달아야 할까? 우선적으로 생각중
+        ChangeState(E_State.LongRangeSkill_4);
+    }
+
+    private void LongRangeSkill_5()
+    {
+        // TODO : 스킬을 사용할 수 있는 조건을 여기에 달아야 할까? 우선적으로 생각중
+        ChangeState(E_State.LongRangeSkill_5);
     }
 
     private void Update()
@@ -141,6 +222,9 @@ public class ProjectPlayer : MonoBehaviour
         //{
         //    drainState.OnDrawGizmos();
         //}
+
+        Refernece.Animator.SetFloat("VelocityX", InputX);
+        Refernece.Animator.SetFloat("VelocityZ", InputZ);
 
         states[(int)curState].Update();
     }
@@ -162,6 +246,8 @@ public class ProjectPlayer : MonoBehaviour
 
     private void GroundCheck()
     {
+        // TODO : 바닥을 감지하는 방식을 레이케스트 방식으로 만들 필요가 있다.
+
         Vector3 rayStartPosition = transform.position + new Vector3(0, -0.8f, 0);
 
         Debug.DrawRay(rayStartPosition, Vector3.down, Color.yellow, 0.2f);
@@ -203,11 +289,17 @@ public class ProjectPlayer : MonoBehaviour
         }
     }
 
-    public void SpawnBullet()
+    private void OnDrawGizmos()
     {
-        if (bulletPrefab == null)
-            return;
+        Gizmos.color = Color.yellow;
+        Vector3 center = transform.position + transform.forward * 6f;
+        Gizmos.DrawWireSphere(center, 3f);
 
-        Instantiate(bulletPrefab, bulletSpawnPoint.position, transform.rotation);
+        Gizmos.color = Color.red;
+        if (setting != null)
+        {
+            Gizmos.DrawWireSphere(Refernece.Skill5Garbages.transform.position, setting.Skill5Setting.Radius);
+        }
     }
+
 }

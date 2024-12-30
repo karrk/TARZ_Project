@@ -25,6 +25,7 @@ public class PoolManager : MonoBehaviour
 
         pools.Add(E_PoolType.Monster, new Dictionary<Enum, ObjPool>());
         pools.Add(E_PoolType.VFX, new Dictionary<Enum, ObjPool>());
+        pools.Add(E_PoolType.Garbage, new Dictionary<Enum, ObjPool>());
 
         var monsterPrefab = prefabs.Monster.GetPairTable();
         foreach (var item in monsterPrefab)
@@ -40,6 +41,12 @@ public class PoolManager : MonoBehaviour
                 = new ObjPool(container, item.Value, 5, MainDirectory);
         }
 
+        var garbageTable = prefabs.Garbages.GetPairTable();
+        foreach (var item in garbageTable)
+        {
+            pools[E_PoolType.Garbage][item.Key]
+                = new ObjPool(container, item.Value, 5, MainDirectory);
+        }
     }
 
     /// <summary>
@@ -66,8 +73,13 @@ public class PoolManager : MonoBehaviour
     /// <summary>
     /// 요청된 오브젝트를 반환받으며 바로 컴포넌트로 접근합니다.
     /// </summary>
-    public T GetObject<T>(Enum type)
+    public T GetObject<T>(Enum type) where T : class
     {
+        GameObject obj = GetObject(type);
+        
+        if (obj == null) 
+            return null;
+
         return GetObject(type).GetComponent<T>();
     }
 
