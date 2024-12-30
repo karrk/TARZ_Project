@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 using Zenject;
 
@@ -70,6 +69,9 @@ public class ProjectPlayer : MonoBehaviour
     [SerializeField] public PlayerReferences Refernece;
 
     private Coroutine CheckGroundRoutine;
+    private Coroutine DrainRoutine;
+
+    [HideInInspector] public bool IsJumpAttack = false;
 
     private Dictionary<E_State, List<E_State>> actionGraph = new Dictionary<E_State, List<E_State>>
     {
@@ -90,7 +92,7 @@ public class ProjectPlayer : MonoBehaviour
         {E_State.Dash, new List<E_State>(){ E_State.Idle ,E_State.DashMeleeAttack}  },
 
         // Drain 상태
-        {E_State.Drain, new List<E_State>(){ E_State.Idle }  }, 
+        {E_State.Drain, new List<E_State>(){ E_State.Idle,E_State.Move,E_State.Jump,E_State.Dash }  }, 
 
         // 원거리 공격 상태
         {E_State.LongRangeAttack, new List<E_State>(){ E_State.Idle,E_State.Move,E_State.Jump,E_State.Dash, E_State.LongRangeAttack }  },
@@ -182,7 +184,9 @@ public class ProjectPlayer : MonoBehaviour
             if (Physics.BoxCast(transform.position + Vector3.up * 0.05f, halfSize, Vector3.down, Quaternion.identity, groundBoxHeight, 1<<6))
             {
                 IsGrounded = true;
-                // Debug.Log("바닥감지");
+                jumpState.ResetJump();
+                longRangeAttackState.ResetJumpAttack();
+                IsJumpAttack = false;
                 break;
             }
 
@@ -192,11 +196,9 @@ public class ProjectPlayer : MonoBehaviour
 
     private void Jump()
     {
-        if (IsGrounded == false)
+        if (IsGrounded == false || skillManager.UseStamina(setting.JumpSetting.UseStamina) == false)
             return;
 
-        IsGrounded = false;
-        
         ChangeState(E_State.Jump);
 
         if (CheckGroundRoutine != null)
@@ -211,6 +213,10 @@ public class ProjectPlayer : MonoBehaviour
         {
             ChangeState(E_State.DashMeleeAttack);
             return;
+        }
+        else if(curState == E_State.Jump)
+        {
+            IsJumpAttack = true;
         }
 
         ChangeState(E_State.LongRangeAttack);
@@ -228,6 +234,8 @@ public class ProjectPlayer : MonoBehaviour
     private void Drain()
     {
         ChangeState(E_State.Drain);
+
+        DrainRoutine = StartCoroutine(DecreaseStamina(setting.DrainSetting.UseStamina, setting.DrainSetting.DecreaseInterval));
     }
 
     /// <summary>
@@ -236,6 +244,24 @@ public class ProjectPlayer : MonoBehaviour
     private void StopDrain()
     {
         drainState.StopDrain();
+
+        if (DrainRoutine != null)
+            StopCoroutine(DrainRoutine);
+    }
+
+    private IEnumerator DecreaseStamina(float needStamina, float interval)
+    {
+        WaitForSeconds intervalSec = new WaitForSeconds(interval);
+
+        while (true)
+        {
+            if (skillManager.UseStamina(needStamina) == false)
+                break;
+
+            yield return intervalSec;
+        }
+
+        StopDrain();
     }
 
     /// <summary>
@@ -246,9 +272,6 @@ public class ProjectPlayer : MonoBehaviour
         bool useAccept = skillManager.UseStamina(setting.DashSetting.UseStamina);
 
         if (useAccept == false)
-            return;
-
-        if (IsGrounded == false)
             return;
 
         ChangeState(E_State.Dash);

@@ -114,6 +114,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
             public float ViewSpeed;
             public float ViewAngle;
             public LayerMask TargetMask;
+            public float DecreaseInterval;
             public float UseStamina;
         }
 

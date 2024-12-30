@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
-using static ProjectPlayer;
 
 
 [System.Serializable]
@@ -14,19 +10,15 @@ public class JumpState : BaseState
 
     public override void Enter()
     {
+        player.IsGrounded = false;
         player.Refernece.Animator.SetBool("Jump", true);
         player.Refernece.Rigid.AddForce(Vector3.up * player.Setting.JumpSetting.JumpPower, ForceMode.Impulse);
-        player.IsGrounded = false;
     }
 
-    public override void Update()
+    public void ResetJump()
     {
-        Debug.Log("Jump 업데이트문 진행중");
-        if (player.IsGrounded)
-        {
-            player.Refernece.Animator.SetBool("Jump", false);
-            player.ChangeState(E_State.Idle);
-        }
+        player.Refernece.Animator.SetBool("Jump", false);
+        player.ChangeState(E_State.Idle);
     }
 
     public override void FixedUpdate()
