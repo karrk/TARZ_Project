@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using BehaviorDesigner.Runtime;
 using Zenject;
+using Cysharp.Threading.Tasks;
 
 public class BaseMonster : MonoBehaviour, IDamagable
 {
@@ -23,14 +24,6 @@ public class BaseMonster : MonoBehaviour, IDamagable
     private void Awake()
     {
         behaviorTree = GetComponent<BehaviorTree>(); // BehaviorTree 컴포넌트를 찾음
-    }
-
-    private void Start()
-    {
-        if (behaviorTree != null)
-        {
-            behaviorTree.SetVariableValue("attackCount", attackCount);
-        }
     }
 
     //public void TakeDamage(float damage)
@@ -89,6 +82,8 @@ public class BaseMonster : MonoBehaviour, IDamagable
             Debug.LogWarning($"{target.name}은 공격 가능한 대상이 아닙니다.");
             return;
         }
+
+
 
         // 타겟이 내각 및 거리 조건을 만족하는지 확인
         if (GetAngleHit(target.transform))

@@ -1,0 +1,57 @@
+using UnityEngine;
+using BehaviorDesigner.Runtime;
+using BehaviorDesigner.Runtime.Tasks;
+
+public class MonsterRotate : Action
+{
+    public SharedGameObject selfObject;
+    public SharedGameObject targetObject;
+    public float rotationSpeed = 5f;
+    public float maxRotationTime = 2f; // 최대 회전 시간
+
+    private float elapsedTime = 0f;
+
+    public override void OnStart()
+    {
+        elapsedTime = 0f; // 타이머 초기화
+    }
+
+    public override TaskStatus OnUpdate()
+    {
+        if (selfObject.Value == null || targetObject.Value == null)
+        {
+            Debug.LogWarning("Self or Target 오브젝트가 없습니다.");
+            return TaskStatus.Failure;
+        }
+
+        // 현재 위치와 목표 위치
+        Transform selfTransform = selfObject.Value.transform;
+        Transform targetTransform = targetObject.Value.transform;
+
+        // 목표 방향 계산
+        Vector3 directionToTarget = (targetTransform.position - selfTransform.position).normalized;
+        directionToTarget.y = 0; // 수평 방향만 회전하도록 설정
+
+        // 회전 수행
+        Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
+        selfTransform.rotation = 
+            Quaternion.Slerp(selfTransform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+        // 목표를 충분히 바라보고 있으면 성공 반환
+        float angleToTarget = Vector3.Angle(selfTransform.forward, directionToTarget);
+        if (angleToTarget < 5f) // 5도 이하로 차이가 나면 성공
+        {
+            return TaskStatus.Success;
+        }
+
+        // 시간 초과 체크
+        elapsedTime += Time.deltaTime;
+        if (elapsedTime >= maxRotationTime)
+        {
+            Debug.Log("회전 시간 테스트");
+            return TaskStatus.Success; 
+        }
+
+        return TaskStatus.Running; // 계속 회전 중
+    }
+}

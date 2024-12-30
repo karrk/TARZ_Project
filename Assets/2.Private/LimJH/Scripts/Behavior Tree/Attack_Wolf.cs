@@ -3,15 +3,8 @@ using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 using Cysharp.Threading.Tasks;
 
-public class Attack : Action
+public class Attack_Wolf : Action
 {
-    /*public SharedFloat attackDamage;
-    public SharedInt attackCount;
-    public SharedBool canAttack;
-
-    public float attackRange;
-    public float angle;*/
-
     public SharedGameObject selfObject;
     public SharedGameObject targetObject;
 
@@ -37,7 +30,6 @@ public class Attack : Action
             AttackRoutine(baseMonster).Forget();
         }
     }
-
     private async UniTask<TaskStatus> AttackRoutine(BaseMonster baseMonster)
     {
         if (targetObject.Value == null)
@@ -50,9 +42,10 @@ public class Attack : Action
         while (animator != null)
         {
             AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-            if (stateInfo.IsName("Jake_Attack") && stateInfo.normalizedTime >= 1.0f)
+            if (stateInfo.IsName("Wolf_Attack") && stateInfo.normalizedTime >= 1.0f)
             {
-                break;            }
+                break;
+            }
             await UniTask.Yield();
         }
 

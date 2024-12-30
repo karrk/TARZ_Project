@@ -20,6 +20,7 @@ public class Die : Action
 
     public override TaskStatus OnUpdate()
     {
+
         // 체력이 0 이하일 경우 죽음 처리
         if (health.Value <= 0)
         {
