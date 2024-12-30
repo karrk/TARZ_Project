@@ -10,12 +10,15 @@ public class OptionPanel : MonoBehaviour, IOpenCloseMenu
     [Inject]
     InGameUI inGameUI;
 
-    [SerializeField] Button selectedButton;
+    [SerializeField] Button defaultSelectedButton;
+
+    [SerializeField] OptionDetailPanel optionDetailPanel;
+ 
 
     public void OpenUIPanel()
     {
         gameObject.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(selectedButton.gameObject);
+        EventSystem.current.SetSelectedGameObject(defaultSelectedButton.gameObject);
     }
 
     public void CloseUIPanel()
