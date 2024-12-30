@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using Zenject;
 
@@ -18,6 +20,7 @@ public class PlayerReferences
     public GameObject Skill3HitBox;
     public GameObject Skill5Garbages;
     public GameObject DashMeleeAttackHitBox;
+    public CapsuleCollider Coll;
 }
 
 public class ProjectPlayer : MonoBehaviour
@@ -49,7 +52,7 @@ public class ProjectPlayer : MonoBehaviour
 
     [SerializeField] public bool candash;
 
-    [SerializeField] public bool isGrounded { get; set; }                        // 현재 땅에 서있는지 여부
+    [SerializeField] public bool IsGrounded { get; set; } = true;                     // 현재 땅에 서있는지 여부
 
     [SerializeField] private float inputX;                                              // 좌, 우 입력값을 받아오기 위한 변수
     public float InputX { get { return inputX; } set { inputX = value; } }
@@ -58,10 +61,14 @@ public class ProjectPlayer : MonoBehaviour
 
     public float InputZ { get { return inputZ; } set { inputZ = value; } }
 
+    [SerializeField] private float groundBoxHeight;
+
     [Inject] private InputManager inputManager;
     [Inject] private SkillManager skillManager;
 
     [SerializeField] public PlayerReferences Refernece;
+
+    private Coroutine CheckGroundRoutine;
 
     private Dictionary<E_State, List<E_State>> actionGraph = new Dictionary<E_State, List<E_State>>
     {
@@ -83,7 +90,7 @@ public class ProjectPlayer : MonoBehaviour
         {E_State.Drain, new List<E_State>(){ E_State.Idle }  }, 
 
         // 원거리 공격 상태
-        {E_State.LongRangeAttack, new List<E_State>(){ E_State.Idle,E_State.Move,E_State.Jump,E_State.Dash }  },
+        {E_State.LongRangeAttack, new List<E_State>(){ E_State.Idle,E_State.Move,E_State.Jump,E_State.Dash, E_State.LongRangeAttack }  },
 
         // 원거리 스킬 1번 상태
         {E_State.LongRangeSkill_1, new List<E_State>(){ E_State.Idle }  },
@@ -151,16 +158,52 @@ public class ProjectPlayer : MonoBehaviour
         inputManager.PressedL1Key += UseSkill;
         inputManager.PressedR2Key += Fire;
         inputManager.PressedBKey += Dash;
+        inputManager.PressedXKey += Jump;
+    }
+
+    private IEnumerator CheckGround()
+    {
+        yield return new WaitForSeconds(0.2f);
+        Vector3 halfSize = Vector3.one * (Refernece.Coll.radius * Mathf.Sqrt(2))/2;
+        halfSize.y = groundBoxHeight;
+
+        while (true)
+        {
+            if (Physics.BoxCast(transform.position + Vector3.up * 0.05f, halfSize, Vector3.down, Quaternion.identity, groundBoxHeight, 1<<6))
+            {
+                IsGrounded = true;
+                Debug.Log("바닥감지");
+                break;
+            }
+
+            yield return null;
+        }
+    }
+
+    private void Jump()
+    {
+        if (IsGrounded == false)
+            return;
+
+        IsGrounded = false;
+        
+        ChangeState(E_State.Jump);
+
+        if (CheckGroundRoutine != null)
+            StopCoroutine(CheckGroundRoutine);
+
+        CheckGroundRoutine = StartCoroutine(CheckGround());
     }
 
     private void Fire()
     {
-        ChangeState(E_State.LongRangeAttack);
-
         if(curState == E_State.Dash)
         {
             ChangeState(E_State.DashMeleeAttack);
+            return;
         }
+
+        ChangeState(E_State.LongRangeAttack);
     }
 
     private void Move(Vector3 vector3)
@@ -185,7 +228,7 @@ public class ProjectPlayer : MonoBehaviour
         if (useAccept == false)
             return;
 
-        if (isGrounded == false)
+        if (IsGrounded == false)
             return;
 
         ChangeState(E_State.Dash);
@@ -282,36 +325,36 @@ public class ProjectPlayer : MonoBehaviour
         states[(int)curState].Enter();
     }
 
-    private void GroundCheck()
-    {
-        // TODO : 바닥을 감지하는 방식을 레이케스트 방식으로 만들 필요가 있다.
+    //private void GroundCheck()
+    //{
+    //    // TODO : 바닥을 감지하는 방식을 레이케스트 방식으로 만들 필요가 있다.
 
-        Vector3 rayStartPosition = transform.position + new Vector3(0, -0.8f, 0);
+    //    Vector3 rayStartPosition = transform.position + new Vector3(0, -0.8f, 0);
 
-        Debug.DrawRay(rayStartPosition, Vector3.down, Color.yellow, 0.2f);
-        //RaycastHit2D hit = Physics2D.Raycast(rayStartPosition, Vector2.down, 0.2f, LayerMask.GetMask("Ground"));
-        RaycastHit[] hits = Physics.RaycastAll(rayStartPosition, Vector2.down, 0.2f);
+    //    Debug.DrawRay(rayStartPosition, Vector3.down, Color.yellow, 0.2f);
+    //    //RaycastHit2D hit = Physics2D.Raycast(rayStartPosition, Vector2.down, 0.2f, LayerMask.GetMask("Ground"));
+    //    RaycastHit[] hits = Physics.RaycastAll(rayStartPosition, Vector2.down, 0.2f);
 
-        if (hits != null && hits.Length >= 1)
-        {
-            foreach (RaycastHit hit in hits)
-            {
-                //Debug.Log($"콜라이더 감지 {hit.collider.name}");
+    //    if (hits != null && hits.Length >= 1)
+    //    {
+    //        foreach (RaycastHit hit in hits)
+    //        {
+    //            //Debug.Log($"콜라이더 감지 {hit.collider.name}");
 
-                if (hit.collider.gameObject.CompareTag("Ground"))  
-                {
-                    Debug.Log("콜라이더 감지 6번");
-                    isGrounded = true;
+    //            if (hit.collider.gameObject.CompareTag("Ground"))  
+    //            {
+    //                Debug.Log("콜라이더 감지 6번");
+    //                IsGrounded = true;
 
-                }
-                else
-                {
-                    //Debug.Log("땅에 없음");
-                    isGrounded = false;
-                }
-            }
-        }
-    }
+    //            }
+    //            else
+    //            {
+    //                //Debug.Log("땅에 없음");
+    //                IsGrounded = false;
+    //            }
+    //        }
+    //    }
+    //}
 
     public void TakeDamage(float value)
     {
@@ -319,13 +362,13 @@ public class ProjectPlayer : MonoBehaviour
         // 스탯을 통한
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.collider.CompareTag("Ground"))        // TODO : 추후에 태그 설정해야함
-        {
-            isGrounded = true;
-        }
-    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.collider.CompareTag("Ground"))        // TODO : 추후에 태그 설정해야함
+    //    {
+    //        IsGrounded = true;
+    //    }
+    //}
 
     private void OnDrawGizmos()
     {
@@ -337,6 +380,26 @@ public class ProjectPlayer : MonoBehaviour
         if (setting != null)
         {
             Gizmos.DrawWireSphere(Refernece.Skill5Garbages.transform.position, setting.Skill5Setting.Radius);
+        }
+
+        DrawGroundBox();
+    }
+
+    private void DrawGroundBox()
+    {
+        if(Application.isPlaying == false)
+        {
+            Gizmos.color = Color.blue;
+
+            Gizmos.DrawCube(transform.position + Vector3.down * groundBoxHeight / 2 + Vector3.up * 0.05f,
+                new Vector3(Refernece.Coll.radius * Mathf.Sqrt(2), groundBoxHeight, Refernece.Coll.radius * Mathf.Sqrt(2)));
+        }
+        else if(IsGrounded == false)
+        {
+            Gizmos.color = Color.blue;
+
+            Gizmos.DrawCube(transform.position + Vector3.down * groundBoxHeight / 2 + Vector3.up * 0.05f,
+                new Vector3(Refernece.Coll.radius * Mathf.Sqrt(2), groundBoxHeight, Refernece.Coll.radius * Mathf.Sqrt(2)));
         }
     }
 

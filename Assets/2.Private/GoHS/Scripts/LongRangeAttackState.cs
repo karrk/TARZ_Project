@@ -3,6 +3,7 @@ using UnityEngine;
 using Zenject;
 using System.Text;
 using UnityEditor;
+using System.Collections;
 
 [System.Serializable]
 
@@ -18,105 +19,88 @@ public class LongRangeAttackState : BaseState
     private int attackStack = 0;            // 현재 공격 스택        
     private const int MAXSTACK = 4;         // 최종 공격 스택
     private int jumpAttackNum = 1;     // 점프하고 공격할 수 있는 횟수
-
+    private bool isAttackDelaing;
+    private Coroutine waitRoutine;
 
     public override void Enter()
     {
-        jumpAttackNum = 1;  // 점프하고 공격횟수 1회 충전
-        player.Refernece.Animator.SetBool("LongRangeAttack", true); // 원거리공격 Upper레이어 활성화를 위한 bool ture
-        player.Refernece.Animator.SetTrigger("AttackTrigger");      // 공격 트리거 실행
+        AlignCamForward();
 
-        Debug.Log("원거리공격 진입");
-        //attackDelayTimer = player.Setting.longRangeSetting.attackDelayTimer;    // 공격 딜레이 재설정
-        stateDelayTimer = player.Setting.longRangeSetting.stateDelayTimer;      // 상태 딜레이 재설정
-        //Attack();   // 공격 진행
+        stateDelayTimer = player.Setting.longRangeSetting.stateDelayTimer;
+        
+        if(waitRoutine != null)
+        {
+            player.StopCoroutine(waitRoutine);
+        }
+        waitRoutine = player.StartCoroutine(ReduceAttackStateDelay());
+
+        player.Refernece.Animator.SetTrigger("AttackTrigger");
+
+        if (attackStack == 0)
+        {
+            jumpAttackNum = 1;  // 점프하고 공격횟수 1회 충전
+            player.Refernece.Animator.SetBool("LongRangeAttack", true); // 원거리공격 Upper레이어 활성화를 위한 bool ture
+        }
+    }
+
+    private void AlignCamForward()
+    {
+        Vector3 cameraEuler = player.Cam.transform.rotation.eulerAngles;    // 카메라의 각도
+        Vector3 playerEuler = player.transform.rotation.eulerAngles;        // 플레이어의 각도
+
+        player.transform.rotation = Quaternion.Euler(playerEuler.x, cameraEuler.y, cameraEuler.z);  // 카메라 방향으로 플레이어 방향설정
+    }
+
+    private IEnumerator ReduceAttackStateDelay()
+    {
+        while (true)
+        {
+            if (stateDelayTimer <= 0)
+                break;
+
+            stateDelayTimer -= Time.deltaTime;
+
+            yield return null;
+        }
+
+        attackStack = 0;
+        player.ChangeState(E_State.Idle);
+        player.Refernece.Animator.SetBool("LongRangeAttack", false);
     }
 
     public override void Update()
     {
-        // 카메라 컴포넌트 찾기
-        CameraController cameraController = player.Cam.GetComponent<CameraController>();
-
-        // 카메라를 찾았다면
-        if (cameraController != null)
-        {
-
-            Vector3 cameraEuler = player.Cam.transform.rotation.eulerAngles;    // 카메라의 각도
-            Vector3 playerEuler = player.transform.rotation.eulerAngles;        // 플레이어의 각도
-
-            player.transform.rotation = Quaternion.Euler(playerEuler.x, cameraEuler.y, cameraEuler.z);  // 카메라 방향으로 플레이어 방향설정
-
-        }
-
-        Debug.Log(attackStack);         // 현재 스택이 제대로 쌓이고 있는지 파악하기 위한 디버그
-        //Debug.Log(stateDelayTimer);
-
-        // 현재 공격 가능한 상태일때, 버튼을 입력했을때, 땅에 있을때
-        // TODO : 입력 바꾸어야함
-        if (Input.GetMouseButtonDown(0) && player.isGrounded)
-        {
-            player.Refernece.Animator.SetTrigger("AttackTrigger");      // 공격 트리거 실행
-            //attackDelayTimer = player.Setting.longRangeSetting.attackDelayTimer;    // 공격 딜레이 재설정
-            stateDelayTimer = player.Setting.longRangeSetting.stateDelayTimer;      // 상태 딜레이 재설정
-        }
-
-
-        // 공격 딜레이 후 상태 전환까지의 예외처리
-        if (stateDelayTimer > 0f)       // 상태 딜레이가 0보다 크다면
-        {
-            stateDelayTimer -= Time.deltaTime;      // 상태 딜레이 진행
-        }
-
-        // 상태 딜레이가 0보다 작아진다면
-        else
-        {
-
-
-            if (!player.isGrounded)  // 땅에 있지 않다면 jump상태로
-            {
-                player.ChangeState(E_State.Jump);
-            }
-
-            if (player.InputX != 0 || player.InputZ != 0)
-            {
-                player.ChangeState(E_State.Move);
-            }
-            else
-            {
-                player.ChangeState(E_State.Idle);   // idle 상태로 넘어가기
-            }
-        }
-
+        AlignCamForward();
 
         // 점프 진행했을때
         // TODO : 입력 바꾸어야함
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log("점프 진입!");
-            player.Refernece.Animator.SetBool("Jump", true);
-            player.Refernece.Rigid.AddForce(Vector3.up * player.Setting.JumpSetting.JumpPower, ForceMode.Impulse);
-            player.isGrounded = false;
-            jumpAttackNum = 1;
-        }
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    Debug.Log("점프 진입!");
+        //    player.Refernece.Animator.SetBool("Jump", true);
+        //    player.Refernece.Rigid.AddForce(Vector3.up * player.Setting.JumpSetting.JumpPower, ForceMode.Impulse);
+        //    player.isGrounded = false;
+        //    jumpAttackNum = 1;
+        //}
 
 
         // 공격횟수가 0이 아닐때, 현재 공격 가능한 상태일때, 버튼을 입력했을때, 땅에 있지 않을때
         // TODO : 입력 바꾸어야함
-        if (jumpAttackNum != 0 && Input.GetMouseButtonDown(0) && !player.isGrounded)
-        {
-            player.Refernece.Animator.SetTrigger("AttackTrigger");
-            //attackDelayTimer = player.Setting.longRangeSetting.attackDelayTimer;    // 공격 딜레이 재설정
-            stateDelayTimer = player.Setting.longRangeSetting.stateDelayTimer;       // 상태 딜레이 재설정
-            jumpAttackNum--;    // 점프 중 공격 1회만 진행하기 위해 1 차감
-        }
+        //if (jumpAttackNum != 0 && Input.GetMouseButtonDown(0) && !player.isGrounded)
+        //{
+        //    player.Refernece.Animator.SetTrigger("AttackTrigger");
+        //    //attackDelayTimer = player.Setting.longRangeSetting.attackDelayTimer;    // 공격 딜레이 재설정
+        //    stateDelayTimer = player.Setting.longRangeSetting.stateDelayTimer;       // 상태 딜레이 재설정
+        //    jumpAttackNum--;    // 점프 중 공격 1회만 진행하기 위해 1 차감
+        //}
 
 
-        // 플레이어가 땅에 있다면
-        if (player.isGrounded)
-        {
-            player.Refernece.Animator.SetBool("Jump", false);
-            jumpAttackNum = 1;
-        }
+        //// 플레이어가 땅에 있다면
+        //if (player.isGrounded)
+        //{
+        //    player.Refernece.Animator.SetBool("Jump", false);
+        //    jumpAttackNum = 1;
+        //}
 
     }
 
@@ -169,9 +153,9 @@ public class LongRangeAttackState : BaseState
 
     public override void Exit()
     {
-        Debug.Log("@@@@@@@@@@@@@@@@@@@@@@원거리 공격상태 해제됨");
-        attackStack = 0;    // 공격 스택 초기화
-        player.Refernece.Animator.SetBool("LongRangeAttack", false);
+        //Debug.Log("@@@@@@@@@@@@@@@@@@@@@@원거리 공격상태 해제됨");
+        //attackStack = 0;    // 공격 스택 초기화
+        //player.Refernece.Animator.SetBool("LongRangeAttack", false);
 
     }
 
