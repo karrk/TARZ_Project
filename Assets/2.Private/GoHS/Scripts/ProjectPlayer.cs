@@ -186,6 +186,7 @@ public class ProjectPlayer : MonoBehaviour
                 IsGrounded = true;
                 jumpState.ResetJump();
                 longRangeAttackState.ResetJumpAttack();
+                IsJumpAttack = false;
                 break;
             }
 
