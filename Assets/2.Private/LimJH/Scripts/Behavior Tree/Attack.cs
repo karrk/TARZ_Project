@@ -5,14 +5,15 @@ using Cysharp.Threading.Tasks;
 
 public class Attack : Action
 {
-    public SharedGameObject selfObject;
-    public SharedGameObject targetObject;
-    public SharedFloat attackDamage;
+    /*public SharedFloat attackDamage;
     public SharedInt attackCount;
     public SharedBool canAttack;
 
     public float attackRange;
-    public float angle;
+    public float angle;*/
+
+    public SharedGameObject selfObject;
+    public SharedGameObject targetObject;
 
     private Animator animator; // Animator 컴포넌트
 
@@ -20,11 +21,6 @@ public class Attack : Action
 
     public override void OnStart()
     {
-        if (targetObject.Value == null)
-        {
-            Debug.LogWarning("타겟 오브젝트가 존재하지 않습니다.");
-            return;
-        }
 
         if (baseMonster == null)
         {
@@ -34,7 +30,6 @@ public class Attack : Action
         // Animator 컴포넌트 가져오기
         if (selfObject.Value != null)
         {
-            canAttack.Value = true;
             animator = selfObject.Value.GetComponent<Animator>();
             animator.SetBool("isAttack", true);
 
@@ -98,18 +93,6 @@ public class Attack : Action
         return false; // 타격 실패
     }*/
 
-    /*private bool IsAttackAnimationFinished()
-    {
-        if (animator != null)
-        {
-            
-            AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-            return stateInfo.IsName("isAttack") && stateInfo.normalizedTime >= 1.0f; // normalizedTime이 1 이상이면 애니메이션 종료
-        }
-        return false;
-    }*/
-
-    //canAttack 어디서 초기화 할지
     private async UniTask<TaskStatus> AttackRoutine(BaseMonster baseMonster)
     {
         if (targetObject.Value == null)
@@ -129,24 +112,6 @@ public class Attack : Action
             await UniTask.Yield();
         }
 
-        //대상의 baseMonster컴포넌트에 데미지 전달
-        var player = targetObject.Value.GetComponent<ProjectPlayer>();
-        if (player != null /*&& GetAngleHit(targetObject.Value.transform*/)
-        {
-            if (attackCount.Value != -1 && canAttack.Value)
-            {
-                player.TakeDamage(attackDamage.Value);
-                Debug.Log(attackDamage.Value + "의 데미지를 " + targetObject.Value.name + "에게 주었습니다.");
-                //attackCount.Value++;
-            }
-            attackCount.Value++;
-        }
-        else
-        {
-            Debug.LogWarning("컴포넌트가 존재하지 않습니다.");
-        }
-
-        canAttack.Value = false;
         animator.SetBool("isAttack", false);
 
         return TaskStatus.Success;
