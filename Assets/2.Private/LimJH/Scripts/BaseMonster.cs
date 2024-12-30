@@ -25,14 +25,6 @@ public class BaseMonster : MonoBehaviour, IDamagable
         behaviorTree = GetComponent<BehaviorTree>(); // BehaviorTree 컴포넌트를 찾음
     }
 
-    private void Start()
-    {
-        if (behaviorTree != null)
-        {
-            behaviorTree.SetVariableValue("attackCount", attackCount);
-        }
-    }
-
     //public void TakeDamage(float damage)
     //{
     //    health -= (damage * damageReducation);
@@ -56,6 +48,10 @@ public class BaseMonster : MonoBehaviour, IDamagable
         if (behaviorTree.GetVariable("attackCount") != null)
         {
             behaviorTree.SetVariableValue("attackCount", attackCount);
+        }
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            health--;
         }
     }
 
@@ -89,6 +85,8 @@ public class BaseMonster : MonoBehaviour, IDamagable
             Debug.LogWarning($"{target.name}은 공격 가능한 대상이 아닙니다.");
             return;
         }
+
+
 
         // 타겟이 내각 및 거리 조건을 만족하는지 확인
         if (GetAngleHit(target.transform))

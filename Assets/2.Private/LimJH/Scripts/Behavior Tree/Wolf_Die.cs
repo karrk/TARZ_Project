@@ -2,7 +2,7 @@ using UnityEngine;
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 
-public class Die : Action
+public class Wolf_Die : Action
 {
     public SharedFloat health; // 몬스터의 체력
     public SharedGameObject selfObject;
@@ -53,7 +53,7 @@ public class Die : Action
         if (animator != null)
         {
             AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-            return stateInfo.IsName("Jake_Die") && stateInfo.normalizedTime >= 1.0f; // normalizedTime이 1 이상이면 애니메이션 종료
+            return stateInfo.IsName("Wolf_Die") && stateInfo.normalizedTime >= 1.0f; // normalizedTime이 1 이상이면 애니메이션 종료
         }
         return false;
     }
