@@ -1,8 +1,4 @@
-using UnityEngine.EventSystems;
 using UnityEngine;
-using Zenject;
-using System.Text;
-using UnityEditor;
 using System.Collections;
 
 [System.Serializable]
@@ -18,29 +14,40 @@ public class LongRangeAttackState : BaseState
     private float stateDelayTimer = 0f;     // 상태 딜레이 타이머
     private int attackStack = 0;            // 현재 공격 스택        
     private const int MAXSTACK = 4;         // 최종 공격 스택
-    private int jumpAttackNum = 1;     // 점프하고 공격할 수 있는 횟수
     private bool isAttackDelaing;
     private Coroutine waitRoutine;
+    private bool usedJumpAttack = false;
 
     public override void Enter()
     {
+        if (usedJumpAttack == true)
+            return;
+
         AlignCamForward();
 
         stateDelayTimer = player.Setting.longRangeSetting.stateDelayTimer;
         
-        if(waitRoutine != null)
+        if(player.IsJumpAttack == true)
         {
-            player.StopCoroutine(waitRoutine);
+            usedJumpAttack = true;
+            attackStack = 0;
         }
-        waitRoutine = player.StartCoroutine(ReduceAttackStateDelay());
+        else
+        {
+            if (waitRoutine != null)
+            {
+                player.StopCoroutine(waitRoutine);
+            }
+            waitRoutine = player.StartCoroutine(ReduceAttackStateDelay());
+        }
 
+        player.Refernece.Animator.SetBool("LongRangeAttack", true);
         player.Refernece.Animator.SetTrigger("AttackTrigger");
+    }
 
-        if (attackStack == 0)
-        {
-            jumpAttackNum = 1;  // 점프하고 공격횟수 1회 충전
-            player.Refernece.Animator.SetBool("LongRangeAttack", true); // 원거리공격 Upper레이어 활성화를 위한 bool ture
-        }
+    public void ResetJumpAttack()
+    {
+        usedJumpAttack = false;
     }
 
     private void AlignCamForward()
@@ -144,7 +151,7 @@ public class LongRangeAttackState : BaseState
         player.Refernece.Shooter.FireItem();    // 총알 발사
 
 
-        if (attackStack < MAXSTACK)  // 현재 스택이 최대 스택보다 낮다면
+        if (attackStack < MAXSTACK && usedJumpAttack == false)  // 현재 스택이 최대 스택보다 낮다면
         {
             attackStack++;  // 스택 1 추가
         }

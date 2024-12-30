@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 using Zenject;
 
@@ -70,6 +69,8 @@ public class ProjectPlayer : MonoBehaviour
     [SerializeField] public PlayerReferences Refernece;
 
     private Coroutine CheckGroundRoutine;
+
+    public bool IsJumpAttack = false;
 
     private Dictionary<E_State, List<E_State>> actionGraph = new Dictionary<E_State, List<E_State>>
     {
@@ -182,7 +183,8 @@ public class ProjectPlayer : MonoBehaviour
             if (Physics.BoxCast(transform.position + Vector3.up * 0.05f, halfSize, Vector3.down, Quaternion.identity, groundBoxHeight, 1<<6))
             {
                 IsGrounded = true;
-                // Debug.Log("바닥감지");
+                jumpState.ResetJump();
+                longRangeAttackState.ResetJumpAttack();
                 break;
             }
 
@@ -195,8 +197,6 @@ public class ProjectPlayer : MonoBehaviour
         if (IsGrounded == false)
             return;
 
-        IsGrounded = false;
-        
         ChangeState(E_State.Jump);
 
         if (CheckGroundRoutine != null)
@@ -211,6 +211,10 @@ public class ProjectPlayer : MonoBehaviour
         {
             ChangeState(E_State.DashMeleeAttack);
             return;
+        }
+        else if(curState == E_State.Jump)
+        {
+            IsJumpAttack = true;
         }
 
         ChangeState(E_State.LongRangeAttack);
