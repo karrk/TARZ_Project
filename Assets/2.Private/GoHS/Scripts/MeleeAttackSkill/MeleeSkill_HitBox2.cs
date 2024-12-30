@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
-public class DashMeleeAttack_HitBox : MonoBehaviour
+public class MeleeSkill_HitBox2 : MonoBehaviour
 {
+    [Inject][SerializeField] private ProjectPlayer player;
     [SerializeField] private float skillDamage;       // 스킬 공격력
 
 
@@ -20,6 +22,12 @@ public class DashMeleeAttack_HitBox : MonoBehaviour
             if (damagable != null)
             {
                 damagable.TakeHit(skillDamage, true);
+            }
+
+            IPushable pushable = other.GetComponent<IPushable>();
+            if(pushable != null)
+            {
+                pushable.Push(player.transform.position, other.transform.position);
             }
         }
     }

@@ -19,11 +19,15 @@ public class DashMeleeAttack : BaseState
     public override void Exit()
     {
         hitBox.SetActive(false);
+        player.Refernece.Rigid.velocity = Vector3.zero;
+        player.Refernece.Rigid.angularVelocity = Vector3.zero;
     }
 
     public void DashMeleeAttackOn()
     {
         player.StartCoroutine(DelayCoroutine());
+        player.Refernece.Rigid.velocity = Vector3.zero;
+        player.Refernece.Rigid.angularVelocity = Vector3.zero;
     }
 
     private IEnumerator DelayCoroutine()

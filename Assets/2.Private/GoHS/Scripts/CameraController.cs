@@ -53,7 +53,7 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKey(KeyCode.Q))
+        if(Input.GetKey(KeyCode.J))
         {
            if(!isLockOn)
             {
@@ -66,7 +66,7 @@ public class CameraController : MonoBehaviour
 
         }
 
-        if(Input.GetKeyUp(KeyCode.Q))
+        if(Input.GetKeyUp(KeyCode.J))
         {
             monster = null;
             isLockOn = false;
