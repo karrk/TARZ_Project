@@ -59,7 +59,7 @@ public class LongRangeSkill_4 : BaseState
             IDamagable damagable = hitCollider.GetComponent<IDamagable>();
             if (damagable != null)
             {
-                damagable.TakeHit(player.Setting.Skill4Setting.Damage, true);
+                damagable.TakeHit(player.Setting.Skill4Setting.Damage, false);
             }
         }
 

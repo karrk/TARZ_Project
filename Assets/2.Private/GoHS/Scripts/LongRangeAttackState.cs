@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Windows;
 
 [System.Serializable]
 
@@ -77,6 +78,9 @@ public class LongRangeAttackState : BaseState
 
     public override void Update()
     {
+        player.Refernece.Animator.SetFloat("VelocityX", player.InputX);
+        player.Refernece.Animator.SetFloat("VelocityZ", player.InputZ);
+
         AlignCamForward();
 
         // 점프 진행했을때

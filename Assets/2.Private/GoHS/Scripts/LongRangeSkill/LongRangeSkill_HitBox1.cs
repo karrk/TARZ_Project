@@ -20,7 +20,7 @@ public class LongRangeSkill_HitBox1 : MonoBehaviour
             IDamagable damagable = other.GetComponent<IDamagable>();
             if (damagable != null)
             {
-                damagable.TakeHit(skillDamage, true);
+                damagable.TakeHit(skillDamage, false);
             }
         }
     }
