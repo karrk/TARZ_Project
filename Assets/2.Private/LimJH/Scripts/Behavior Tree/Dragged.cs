@@ -4,22 +4,9 @@ using BehaviorDesigner.Runtime.Tasks;
 
 public class Dragged : Action
 {
-    public SharedGameObject targetObject;   // 플레이어의 Transform
-    public float pushDistance = 5f;         // 밀려날 거리
-    public float pushSpeed = 2f;            // 밀려나는 속도
-
-    private Vector3 targetPosition;         // 몬스터가 밀려날 목표 위치
-
-    public override void OnStart()
-    {
-
-        // 플레이어 위치와 몬스터 위치를 기준으로 방향 계산
-        Vector3 monsterPosition = transform.position;//selfObject로 수정(?)
-        Vector3 direction = (monsterPosition - targetObject.Value.transform.position).normalized;
-
-        // 목표 위치 계산
-        targetPosition = monsterPosition + direction * pushDistance;
-    }
+    public SharedGameObject targetObject;   // 몬스터를 모을 포인트
+    public float gatherSpeed = 2f;          // 모이는 속도
+    public float gatherRadius = 1f;         // 목표 지점에 도달했다고 간주하는 거리
 
     public override TaskStatus OnUpdate()
     {
@@ -28,15 +15,19 @@ public class Dragged : Action
             return TaskStatus.Failure;
         }
 
-        // 몬스터를 목표 위치로 이동
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, pushSpeed * Time.deltaTime);
+        // 목표 지점으로 이동
+        transform.position = Vector3.MoveTowards(
+            transform.position,
+            targetObject.Value.transform.position,
+            gatherSpeed * Time.deltaTime
+        );
 
         // 목표 지점에 도달했는지 확인
-        if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
+        if (Vector3.Distance(transform.position, targetObject.Value.transform.position) <= gatherRadius)
         {
-            return TaskStatus.Success;
+            return TaskStatus.Success; // 목표 지점에 도달하면 성공
         }
 
-        return TaskStatus.Running; // 목표 위치에 도달할 때까지 실행
+        return TaskStatus.Running; // 목표 지점으로 이동 중
     }
 }
