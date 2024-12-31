@@ -109,7 +109,7 @@ public class LongRangeSkill_2 : BaseState
                 IDamagable damagable = target.GetComponent<IDamagable>();
                 if (damagable != null)
                 {
-                    damagable.TakeHit(player.Setting.Skill2Setting.Damage, true);
+                    damagable.TakeHit(player.Setting.Skill2Setting.Damage, false);
                 }
 
             }

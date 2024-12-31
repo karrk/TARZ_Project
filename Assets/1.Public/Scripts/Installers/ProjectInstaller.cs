@@ -168,6 +168,11 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
             public float RotateSpeed;
             public float RotateTime;
             public float Radius;
+            public float Damage;
+            public float ViewArea;
+            public float ViewAngle;
+            public LayerMask TargetMask;
+            public float Delay;
         }
 
         [Serializable]

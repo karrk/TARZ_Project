@@ -37,7 +37,9 @@ public class DashState : BaseState
             dashDirection = player.transform.forward;
         }
 
-
+        Quaternion rotation = Quaternion.LookRotation(dashDirection);
+        //player.transform.rotation = Quaternion.Lerp(player.transform.rotation, rotation, 500f * Time.deltaTime);
+        player.transform.rotation = rotation;
 
 
 
@@ -49,7 +51,6 @@ public class DashState : BaseState
         if(player.candash)
         {
             player.Refernece.Animator.SetTrigger("Dash");
-            Debug.Log("!@#!@##!@##!@##!@#대쉬 몇번중??");
             player.Refernece.Rigid.AddForce(dashDirection * player.Setting.DashSetting.DashSpeed, ForceMode.Impulse);
             player.candash = false;
 

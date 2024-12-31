@@ -4,7 +4,5 @@ using UnityEngine;
 
 public interface IPushable 
 {
-    void Push(Vector3 pos);
-
-    void Push(Vector3 playerPos, Vector3 TargetPos);
+    void Push(Vector3 pos, E_SkillState skillType);
 }

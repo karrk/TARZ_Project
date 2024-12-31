@@ -16,4 +16,14 @@ public class AnimationEventController : MonoBehaviour
     {
         player.dashMeleeAttackState.DashMeleeAttackOn();
     }
+
+    public void LongRangeSkill_1()
+    { 
+        player.longRangeSkill_1State.LongRangeSkill_1_On();
+    }
+
+    public void LongRangeSkill_4()
+    {
+        player.longRangeSkill_4State.LongRangeSkill_4_On();
+    }
 }

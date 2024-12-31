@@ -18,12 +18,10 @@ public class LongRangeSkill_1 : BaseState
     {
     }
 
+    private GameObject armUnit => player.Refernece.Skill1_ArmUnit;
     private GameObject hitBox => player.Refernece.Skill1HitBox;
 
-    [SerializeField] private float delay;
     [SerializeField] private float curDelay;
-
-    
 
     public override void Enter()
     {
@@ -41,33 +39,48 @@ public class LongRangeSkill_1 : BaseState
             player.transform.rotation = Quaternion.Euler(playerEuler.x, cameraEuler.y, cameraEuler.z);
 
         }
+
+        armUnit.SetActive(true);
     }
 
     public override void Update()
     {
-        if(curDelay > 0f)
-        {
-            curDelay -= Time.deltaTime;
+        //if(curDelay > 0f)
+        //{
+        //    curDelay -= Time.deltaTime;
             
-        }
-        else
-        {
-            if (!hitBox.activeSelf)
-            {
-                hitBox.SetActive(true);
-                Debug.Log("원거리 스킬 1 활성화됨");
-                curDelay = player.Setting.Skill1Setting.Delay;
-            }
-            else
-            {
-                Debug.Log("딜레이 다 지나감");
-                player.ChangeState(E_State.Idle);
-            }
-        }
+        //}
+        //else
+        //{
+        //    if (!hitBox.activeSelf)
+        //    {
+        //        hitBox.SetActive(true);
+        //        Debug.Log("원거리 스킬 1 활성화됨");
+        //        curDelay = player.Setting.Skill1Setting.Delay;
+        //    }
+        //    else
+        //    {
+        //        Debug.Log("딜레이 다 지나감");
+        //        player.ChangeState(E_State.Idle);
+        //    }
+        //}
     }
 
     public override void Exit()
     {
+        armUnit.SetActive(false);
         hitBox.SetActive(false);
+    }
+
+    public void LongRangeSkill_1_On()
+    {
+        player.StartCoroutine(DelayCoroutine());
+    }
+        
+    private IEnumerator DelayCoroutine()
+    {
+        hitBox.SetActive(true);
+        yield return new WaitForSeconds(curDelay);
+        player.ChangeState(E_State.Idle);
     }
 }

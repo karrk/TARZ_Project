@@ -68,7 +68,7 @@ MonoBehaviour:
       StaminaChargeWaitTime: 1.5
       StaminaChargeValue: 0.1
     JumpSetting:
-      JumpPower: 25
+      JumpPower: 5
       UseStamina: 30
     DashSetting:
       DashTime: 0.3
@@ -76,7 +76,7 @@ MonoBehaviour:
       DashCoolTime: 1
       UseStamina: 0
     DrainSetting:
-      DrainSpeed: 2
+      DrainSpeed: 3
       ViewArea: 0
       MaxViewArea: 10
       ViewSpeed: 10
@@ -104,7 +104,7 @@ MonoBehaviour:
     Skill4Setting:
       Radius: 3
       zOffset: 4
-      Delay: 0.5
+      Delay: 1.5
       Damage: 350
       TargetMask:
         serializedVersion: 2
@@ -117,6 +117,13 @@ MonoBehaviour:
       RotateSpeed: 750
       RotateTime: 4
       Radius: 3.4
+      Damage: 0
+      ViewArea: 0
+      ViewAngle: 0
+      TargetMask:
+        serializedVersion: 2
+        m_Bits: 0
+      Delay: 0
     DashMeleeAttackSetting:
       Delay: 0.5
     MeleeSkill1Setting:
@@ -128,7 +135,7 @@ MonoBehaviour:
         m_Bits: 4096
       Delay: 0.5
     MeleeSkill2Setting:
-      DashTime: 0
-      DashSpeed: 0
+      DashTime: 0.4
+      DashSpeed: 20
       DashCoolTime: 0
       Delay: 0

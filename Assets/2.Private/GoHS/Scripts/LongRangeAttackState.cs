@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Windows;
 
 [System.Serializable]
 
@@ -65,18 +66,29 @@ public class LongRangeAttackState : BaseState
             if (stateDelayTimer <= 0)
                 break;
 
+            if (player.CurState != E_State.LongRangeAttack)
+                break;
+
             stateDelayTimer -= Time.deltaTime;
 
             yield return null;
         }
 
         attackStack = 0;
-        player.ChangeState(E_State.Idle);
+
+        if(player.CurState == E_State.LongRangeAttack)
+        {
+            player.ChangeState(E_State.Idle);
+        }
+
         player.Refernece.Animator.SetBool("LongRangeAttack", false);
     }
 
     public override void Update()
     {
+        player.Refernece.Animator.SetFloat("VelocityX", player.InputX);
+        player.Refernece.Animator.SetFloat("VelocityZ", player.InputZ);
+
         AlignCamForward();
 
         // 점프 진행했을때
@@ -142,6 +154,9 @@ public class LongRangeAttackState : BaseState
 
     public void Attack()
     {
+        if (player.CurState == E_State.Dash)
+            return;
+
         int curHand = player.Refernece.Animator.GetInteger("ThrowHand");
         int nextHand = (curHand + 1) % 2;
         player.Refernece.Animator.SetInteger("ThrowHand", nextHand);
