@@ -4,7 +4,6 @@ using Zenject;
 [System.Serializable]
 public class IdleState : BaseState
 {
-    [Inject] private InputManager inputManager;
 
     public IdleState(ProjectPlayer player) : base(player)
     {

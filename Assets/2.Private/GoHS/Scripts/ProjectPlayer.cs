@@ -99,10 +99,12 @@ public class ProjectPlayer : MonoBehaviour
         {E_State.Dash, new List<E_State>(){ E_State.Idle ,E_State.DashMeleeAttack}  },
 
         // Drain 상태
-        {E_State.Drain, new List<E_State>(){ E_State.Idle,E_State.Move,E_State.Jump,E_State.Dash }  }, 
+        {E_State.Drain, new List<E_State>(){ E_State.Idle, }  }, 
 
         // 원거리 공격 상태
-        {E_State.LongRangeAttack, new List<E_State>(){ E_State.Idle,E_State.Move,E_State.Jump,E_State.Dash, E_State.LongRangeAttack }  },
+        {E_State.LongRangeAttack, new List<E_State>(){ E_State.Idle,E_State.Move,E_State.Jump,E_State.Dash, E_State.LongRangeAttack,
+            E_State.Drain,E_State.LongRangeSkill_1, E_State.LongRangeSkill_2, E_State.LongRangeSkill_3, E_State.LongRangeSkill_4, E_State.LongRangeSkill_5,
+            E_State.MeleeSkill_1, E_State.MeleeSkill_2 }  },
 
         // 원거리 스킬 1번 상태
         {E_State.LongRangeSkill_1, new List<E_State>(){ E_State.Idle }  },

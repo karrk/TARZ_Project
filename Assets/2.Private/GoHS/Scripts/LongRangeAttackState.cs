@@ -66,13 +66,21 @@ public class LongRangeAttackState : BaseState
             if (stateDelayTimer <= 0)
                 break;
 
+            if (player.CurState != E_State.LongRangeAttack)
+                break;
+
             stateDelayTimer -= Time.deltaTime;
 
             yield return null;
         }
 
         attackStack = 0;
-        player.ChangeState(E_State.Idle);
+
+        if(player.CurState == E_State.LongRangeAttack)
+        {
+            player.ChangeState(E_State.Idle);
+        }
+
         player.Refernece.Animator.SetBool("LongRangeAttack", false);
     }
 
