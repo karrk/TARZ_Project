@@ -76,7 +76,7 @@ MonoBehaviour:
       DashCoolTime: 1
       UseStamina: 0
     DrainSetting:
-      DrainSpeed: 2
+      DrainSpeed: 3
       ViewArea: 0
       MaxViewArea: 10
       ViewSpeed: 10
@@ -117,6 +117,13 @@ MonoBehaviour:
       RotateSpeed: 750
       RotateTime: 4
       Radius: 3.4
+      Damage: 0
+      ViewArea: 0
+      ViewAngle: 0
+      TargetMask:
+        serializedVersion: 2
+        m_Bits: 0
+      Delay: 0
     DashMeleeAttackSetting:
       Delay: 0.5
     MeleeSkill1Setting:

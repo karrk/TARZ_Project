@@ -108,6 +108,10 @@ public class DrainState : BaseState
                 {
                     drainable.DrainTowards(player.transform.position, player.Setting.DrainSetting.DrainSpeed);
                     Debug.Log($"빨아들이는중 {target.name}");
+
+                    Rigidbody rigid = target.GetComponent<Rigidbody>();
+                    rigid.velocity = Vector3.zero;
+                    rigid.angularVelocity = Vector3.zero;
                 }
 
             }
