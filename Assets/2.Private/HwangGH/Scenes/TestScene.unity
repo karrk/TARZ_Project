@@ -202,7 +202,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2323a5f0509992544a531f2c6966db7e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2054675339}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2323a5f0509992544a531f2c6966db7e,
         type: 3}
@@ -262,8 +266,8 @@ MonoBehaviour:
         Gimmick 1 Start","Instant":true,"SharedFloatcurHP":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"bossMonsterHp","IsShared":true,"IsGlobal":true,"SinglemValue":100},"Int32maxHP":100,"SharedBoolisGimmick1Active":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"isGimmick1Active","IsShared":true,"IsGlobal":true,"Tooltip":"\ubcf4\uc2a4
         \uae30\ubbf91 \uacf5\uaca9","BooleanmValue":true}},{"Type":"Gimmick1State","NodeData":{"Offset":"(-71.99512,122.647491)"},"ID":12,"Name":"Gimmick
         1 State","Instant":true,"SharedBoolisGimmick1Active":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"isGimmick1Active","IsShared":true,"IsGlobal":true,"Tooltip":"\ubcf4\uc2a4
-        \uae30\ubbf91 \uacf5\uaca9","BooleanmValue":true}},{"Type":"SummonLightning","NodeData":{"Offset":"(45.0048828,122.647491)"},"ID":13,"Name":"Summon
-        Lightning","Instant":true,"SharedBoolsummonLitning":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"summonLightning","IsShared":true,"IsGlobal":true,"BooleanmValue":false}},{"Type":"LightningTimerStart","NodeData":{"Offset":"(184.504883,124.647491)"},"ID":14,"Name":"Lightning
+        \uae30\ubbf91 \uacf5\uaca9","BooleanmValue":true}},{"Type":"SummonLightning","NodeData":{"Offset":"(125.004883,122.647491)"},"ID":13,"Name":"Summon
+        Lightning","Instant":true,"SharedBoolsummonLitning":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"summonLightning","IsShared":true,"IsGlobal":true,"BooleanmValue":false},"SharedColliderlightningCollider":{"Type":"BehaviorDesigner.Runtime.SharedCollider","Name":null},"SharedGameObjectplayer":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null}},{"Type":"LightningTimerStart","NodeData":{"Offset":"(264.504883,124.647491)"},"ID":14,"Name":"Lightning
         Timer Start","Instant":true,"SharedFloatlightningTimer":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"LightningTimer","IsShared":true,"IsGlobal":true,"SinglemValue":42.7877769}}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Parallel","NodeData":{"Offset":"(157.790283,163.189484)"},"ID":15,"Name":"CanAttack","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CanAttack","NodeData":{"Offset":"(-81.74507,114.397308)"},"ID":16,"Name":"Can
         Attack","Instant":true,"SharedBoolsummonLightning":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"summonLightning","IsShared":true,"IsGlobal":true,"BooleanmValue":false},"SharedFloatlightningTimer":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"LightningTimer","IsShared":true,"IsGlobal":true,"SinglemValue":42.7877769},"Singlen2":2},{"Type":"LightningAttack","NodeData":{"Offset":"(30.0048828,112.647491)"},"ID":17,"Name":"Lightning
         Attack","Instant":true},{"Type":"LightningTimerReset","NodeData":{"Offset":"(160.004883,110.647491)"},"ID":18,"Name":"Lightning
@@ -277,8 +281,8 @@ MonoBehaviour:
         Normal Attack","Instant":true,"SharedIntattackCount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":"AttackCount","IsShared":true,"IsGlobal":true,"Int32mValue":5},"Int32n5":10},{"Type":"BossNormalAttack","NodeData":{"Offset":"(54.660614,96.00395)"},"ID":30,"Name":"Boss
         Normal Attack","Instant":true,"SharedGameObjectselfObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Monster","IsShared":true,"IsGlobal":true},"SharedGameObjecttargetObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Player","IsShared":true,"IsGlobal":true}},{"Type":"MonsterDamagedAction","NodeData":{"Offset":"(193.504883,104.647491)"},"ID":31,"Name":"Monster
         Damaged Action","Instant":true,"SinglemonsterHp":0,"SharedFloatmaxHP":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"bossMonsterHp","IsShared":true,"IsGlobal":true,"SinglemValue":100}},{"Type":"PlusAttackCount","NodeData":{"Offset":"(306.040527,104.354309)"},"ID":32,"Name":"Plus
-        Attack Count","Instant":true,"SharedIntattackCount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0}},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(469.955963,100)"},"ID":33,"Name":"ReddefineAttackRange","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CountingNormalAttack","NodeData":{"Offset":"(1.8869648,114.752945)"},"ID":34,"Name":"Counting
-        Normal Attack","Instant":true,"SharedIntattackCount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":"AttackCount","IsShared":true,"IsGlobal":true,"Int32mValue":5},"Int32n5":5},{"Type":"IncreaseAttackRange","NodeData":{"Offset":"(164.843018,115.085526)"},"ID":35,"Name":"Increase
+        Attack Count","Instant":true,"SharedIntattackCount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0}},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(449.955963,100)"},"ID":33,"Name":"ReddefineAttackRange","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CountingNormalAttack","NodeData":{"Offset":"(1.8869648,114.752945)"},"ID":34,"Name":"Counting
+        Normal Attack","Instant":true,"SharedIntattackCount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":"AttackCount","IsShared":true,"IsGlobal":true,"Int32mValue":5},"Int32n5":5},{"Type":"IncreaseAttackRange","NodeData":{"Offset":"(164.843018,105.085526)"},"ID":35,"Name":"Increase
         Attack Range","Instant":true,"SharedFloatattackRange":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"AttackRange","IsShared":true,"IsGlobal":true,"SinglemValue":5},"SharedFloatattackRange2":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":10}}]}]}]}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(2098.50269,167.035355)"},"ID":36,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CountingNormalAttack","NodeData":{"Offset":"(-7.857622,170.64946)"},"ID":37,"Name":"Counting
         Normal Attack","Instant":true,"SharedIntattackCount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":"AttackCount","IsShared":true,"IsGlobal":true,"Int32mValue":5},"Int32n5":10},{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(173.62648,172.306229)"},"ID":38,"Name":"Selector","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"ProbabilityDecorator","NodeData":{"Offset":"(0,130)"},"ID":39,"Name":"Probability
         Decorator","Instant":true,"SharedFloatprobability":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":3},"Singlen1":3,"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(0,120)"},"ID":40,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"rangedAttack","NodeData":{"Offset":"(-1.49511719,101.647461)"},"ID":41,"Name":"Ranged
@@ -821,6 +825,8 @@ GameObject:
   - component: {fileID: 1708703427}
   - component: {fileID: 1708703426}
   - component: {fileID: 1708703425}
+  - component: {fileID: 1708703430}
+  - component: {fileID: 1708703429}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -917,6 +923,102 @@ Transform:
   - {fileID: 783335002}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &1708703429
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1708703424}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &1708703430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1708703424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ca13bff5df259449b7e3d8143e95edd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCurHp: 0
+  playerMaxHp: 0
+--- !u!1 &2054675338
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2054675339}
+  - component: {fileID: 2054675340}
+  m_Layer: 0
+  m_Name: Lightning
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2054675339
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2054675338}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 109351446}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &2054675340
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2054675338}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 7
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2100143330
 GameObject:
   m_ObjectHideFlags: 0
