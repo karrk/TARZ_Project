@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class MeleeSkill_2 : BaseState
 {
@@ -9,7 +10,7 @@ public class MeleeSkill_2 : BaseState
     {
     }
 
-    private GameObject hitBox => player.Refernece.DashMeleeAttackHitBox;
+    private GameObject hitBox => player.Refernece.MeleeSkill2HitBox;
 
     [SerializeField] private float dashTime;         // 현재 대쉬 지속 시간
     private Vector3 dashDirection;  // 대쉬 방향
@@ -39,12 +40,15 @@ public class MeleeSkill_2 : BaseState
             dashDirection = player.transform.forward;
         }
 
+        Quaternion rotation = Quaternion.LookRotation(dashDirection);
+        //player.transform.rotation = Quaternion.Lerp(player.transform.rotation, rotation, 500f * Time.deltaTime);
+        player.transform.rotation = rotation;
 
         Debug.Log("근접 스킬 2번 시전 시작!");
         player.Refernece.Animator.SetTrigger("MeleeSkill_2");
 
 
-        player.StartCoroutine(DelayCoroutine());
+        hitBox.SetActive(true);
     }
 
     public override void Update()

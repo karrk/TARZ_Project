@@ -142,6 +142,9 @@ public class LongRangeAttackState : BaseState
 
     public void Attack()
     {
+        if (player.CurState == E_State.Dash)
+            return;
+
         int curHand = player.Refernece.Animator.GetInteger("ThrowHand");
         int nextHand = (curHand + 1) % 2;
         player.Refernece.Animator.SetInteger("ThrowHand", nextHand);
