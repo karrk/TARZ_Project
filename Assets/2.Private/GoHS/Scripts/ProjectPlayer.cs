@@ -8,6 +8,8 @@ public enum E_State { Idle, Move, Jump, Dash, LongRangeAttack, Drain,
                       LongRangeSkill_1, LongRangeSkill_2, LongRangeSkill_3,LongRangeSkill_4 , LongRangeSkill_5,
                       DashMeleeAttack, MeleeSkill_1, MeleeSkill_2,  Size }      // 우선적으로 선언한 상태
 
+public enum E_SkillState { MeleeSkill1 = 1, MeleeSkill2, LongRangeSkill5 }
+
 [Serializable]
 public class PlayerReferences
 {
@@ -363,8 +365,6 @@ public class ProjectPlayer : MonoBehaviour
 
     private void Update()
     {
-        Refernece.Animator.SetFloat("VelocityX", InputX);
-        Refernece.Animator.SetFloat("VelocityZ", InputZ);
 
         states[(int)curState].Update();
     }

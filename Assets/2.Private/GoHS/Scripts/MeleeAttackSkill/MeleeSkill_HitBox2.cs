@@ -27,7 +27,7 @@ public class MeleeSkill_HitBox2 : MonoBehaviour
             IPushable pushable = other.GetComponent<IPushable>();
             if(pushable != null)
             {
-                pushable.Push(player.transform.position, other.transform.position);
+                pushable.Push(player.transform.position, E_SkillState.MeleeSkill2);
             }
         }
     }
