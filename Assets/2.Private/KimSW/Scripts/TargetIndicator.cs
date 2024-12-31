@@ -53,7 +53,9 @@ public class TargetIndicator : MonoBehaviour
         gameObject.SetActive(true);
 
     }
-
+    /// <summary>
+    /// 인디케이터 비활성화
+    /// </summary>
     public void DisableIndicator()
     {
         gameObject.SetActive(false);
