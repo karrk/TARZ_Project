@@ -66,7 +66,8 @@ public class MoveState : BaseState
         if (moveDirection != Vector3.zero)
         {
             Quaternion rotation = Quaternion.LookRotation(moveDirection);
-            player.transform.rotation = Quaternion.Lerp(player.transform.rotation, rotation, 30f * Time.deltaTime);
+            //player.transform.rotation = Quaternion.Lerp(player.transform.rotation, rotation, 500f * Time.deltaTime);
+            player.transform.rotation = rotation;
         }
 
     }

@@ -40,7 +40,8 @@ public class JumpState : BaseState
         if (moveDirection != Vector3.zero)
         {
             Quaternion rotation = Quaternion.LookRotation(moveDirection);
-            player.transform.rotation = Quaternion.Lerp(player.transform.rotation, rotation, 15f * Time.deltaTime);
+            //player.transform.rotation = Quaternion.Lerp(player.transform.rotation, rotation, 500f * Time.deltaTime);
+            player.transform.rotation = rotation;
         }
 
     }

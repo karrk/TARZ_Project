@@ -74,7 +74,7 @@ public class LongRangeSkill_3 : BaseState
         {
             if (hitBox != null)
             {
-                Vector3 spawnPos = player.transform.position + player.transform.forward * 2f;
+                Vector3 spawnPos = player.transform.position + player.transform.forward;
                 GameObject newHitBox = GameObject.Instantiate(hitBox, spawnPos, player.transform.rotation);
                 punchObjList.Add(newHitBox);
 

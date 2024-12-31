@@ -37,7 +37,9 @@ public class DashState : BaseState
             dashDirection = player.transform.forward;
         }
 
-
+        Quaternion rotation = Quaternion.LookRotation(dashDirection);
+        //player.transform.rotation = Quaternion.Lerp(player.transform.rotation, rotation, 500f * Time.deltaTime);
+        player.transform.rotation = rotation;
 
 
 

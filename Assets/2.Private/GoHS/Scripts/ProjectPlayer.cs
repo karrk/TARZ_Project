@@ -6,7 +6,7 @@ using Zenject;
 
 public enum E_State { Idle, Move, Jump, Dash, LongRangeAttack, Drain, 
                       LongRangeSkill_1, LongRangeSkill_2, LongRangeSkill_3,LongRangeSkill_4 , LongRangeSkill_5,
-                      DashMeleeAttack, MeleeSkill_1,  Size }      // 우선적으로 선언한 상태
+                      DashMeleeAttack, MeleeSkill_1, MeleeSkill_2,  Size }      // 우선적으로 선언한 상태
 
 [Serializable]
 public class PlayerReferences
@@ -15,17 +15,21 @@ public class PlayerReferences
     public Rigidbody Rigid;
     public Animator Animator;
     public Transform MuzzlePoint;
+    public GameObject Skill1_ArmUnit;
     public GameObject Skill1HitBox;
     public GameObject Skill3HitBox;
+    public GameObject Skill4_ArmUnit;
     public GameObject Skill5Garbages;
     public GameObject DashMeleeAttackHitBox;
+    public GameObject MeleeSkill2HitBox;
     public CapsuleCollider Coll;
 }
 
 public class ProjectPlayer : MonoBehaviour
 {
     [Header("State")]
-    [SerializeField] protected E_State curState = E_State.Idle;
+    [SerializeField] E_State curState = E_State.Idle;
+    public E_State CurState { get { return curState; } } 
 
     [Inject] private ProjectInstaller.PlayerSettings setting;
     public ProjectInstaller.PlayerSettings Setting => setting;
@@ -38,13 +42,14 @@ public class ProjectPlayer : MonoBehaviour
     private DashState dashState;
     public LongRangeAttackState longRangeAttackState;
     private DrainState drainState;
-    private LongRangeSkill_1 longRangeSkill_1State;
+    public LongRangeSkill_1 longRangeSkill_1State;
     private LongRangeSkill_2 longRangeSkill_2State;
     private LongRangeSkill_3 longRangeSkill_3State;
-    private LongRangeSkill_4 longRangeSkill_4State;
+    public LongRangeSkill_4 longRangeSkill_4State;
     private LongRangeSkill_5 longRangeSkill_5State;
     public DashMeleeAttack dashMeleeAttackState;
     public MeleeSkill_1 meleeSkill_1State;
+    public MeleeSkill_2 meleeSkill_2State;
 
     [Header("프로퍼티")]
     [SerializeField] private Camera cam;                                                // 카메라 변수
@@ -78,12 +83,12 @@ public class ProjectPlayer : MonoBehaviour
         // Idle 상태
         { E_State.Idle, new List<E_State>(){ E_State.Move,E_State.Jump,E_State.Dash,E_State.LongRangeAttack,
             E_State.Drain,E_State.LongRangeSkill_1, E_State.LongRangeSkill_2, E_State.LongRangeSkill_3, E_State.LongRangeSkill_4, E_State.LongRangeSkill_5,
-            E_State.MeleeSkill_1} },
+            E_State.MeleeSkill_1, E_State.MeleeSkill_2} },
 
         // Move 상태
         {E_State.Move, new List<E_State>(){ E_State.Idle,E_State.Jump,E_State.Dash,E_State.LongRangeAttack,
             E_State.Drain,E_State.LongRangeSkill_1, E_State.LongRangeSkill_2, E_State.LongRangeSkill_3, E_State.LongRangeSkill_4, E_State.LongRangeSkill_5,
-            E_State.MeleeSkill_1}  },
+            E_State.MeleeSkill_1, E_State.MeleeSkill_2}  },
 
         // Jump 상태
         {E_State.Jump, new List<E_State>(){ E_State.Idle,E_State.LongRangeAttack }  },
@@ -118,6 +123,9 @@ public class ProjectPlayer : MonoBehaviour
         // 근접 스킬 1번 상태
         {E_State.MeleeSkill_1, new List<E_State>(){ E_State.Idle }  },
 
+        // 근접 스킬 2번 상태
+        {E_State.MeleeSkill_2, new List<E_State>(){ E_State.Idle }  },
+
     };
 
     private bool ValidNextAction(E_State nextState)
@@ -142,6 +150,7 @@ public class ProjectPlayer : MonoBehaviour
         longRangeSkill_5State = new LongRangeSkill_5(this);
         dashMeleeAttackState = new DashMeleeAttack(this);
         meleeSkill_1State = new MeleeSkill_1(this);
+        meleeSkill_2State = new MeleeSkill_2(this);
 
         states[(int)E_State.Idle] = idleState;
         states[(int)E_State.Move] = walkState;
@@ -156,6 +165,7 @@ public class ProjectPlayer : MonoBehaviour
         states[(int)E_State.LongRangeSkill_5] = longRangeSkill_5State;
         states[(int)E_State.DashMeleeAttack] = dashMeleeAttackState;
         states[(int)E_State.MeleeSkill_1] = meleeSkill_1State;
+        states[(int)E_State.MeleeSkill_2] = meleeSkill_2State;
 
     }
 
@@ -171,6 +181,7 @@ public class ProjectPlayer : MonoBehaviour
         inputManager.PressedXKey += Jump;
         
         inputManager.PressedL1Key += MeleeSkill_1;
+        inputManager.OnControlledDPAD += MeleeSkill_2;
     }
 
     private IEnumerator CheckGround()
@@ -313,6 +324,11 @@ public class ProjectPlayer : MonoBehaviour
     {
         // TODO : 스킬을 사용할 수 있는 조건을 여기에 달아야 할까? 우선적으로 생각중
         ChangeState(E_State.MeleeSkill_1);
+    }
+
+    private void MeleeSkill_2(Vector3 vector)
+    {
+        ChangeState(E_State.MeleeSkill_2);
     }
 
     private void LongRangeSkill_1()
