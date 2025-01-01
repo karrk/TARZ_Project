@@ -80,7 +80,7 @@ public class PoolManager : MonoBehaviour
         if (obj == null) 
             return null;
 
-        return GetObject(type).GetComponent<T>();
+        return obj.GetComponent<T>();
     }
 
     /// <summary>

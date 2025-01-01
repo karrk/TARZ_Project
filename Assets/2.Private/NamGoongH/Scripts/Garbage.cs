@@ -56,7 +56,7 @@ public class Garbage : MonoBehaviour, IDrainable, IPooledObject
         // 몬스터와 충돌한 경우
         if (collisionTag == "Monster" && IsProjectile == true)
         {
-            Debug.Log("Hit Monster!");
+            //Debug.Log("Hit Monster!");
 
             IDamagable monster = collision.gameObject.GetComponent<IDamagable>();
             if(monster != null)
@@ -67,11 +67,10 @@ public class Garbage : MonoBehaviour, IDrainable, IPooledObject
             // 투척물 소멸
             //Destroy(gameObject);
             Return();
-            return;
         }
 
         // 바닥 또는 기본 환경과 충돌한 경우
-        if (collisionTag == "Ground" || collisionTag == "Environment")
+        else if (collisionTag == "Ground" || collisionTag == "Environment")
         {
             if (isImmediatelyReturnMode == true)
                 Return();

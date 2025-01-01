@@ -152,10 +152,7 @@ public class LongRangeAttackState : BaseState
         int nextHand = (curHand + 1) % 2;
         player.Refernece.Animator.SetInteger("ThrowHand", nextHand);
 
-
-
         player.Refernece.Shooter.FireItem();    // 총알 발사
-
 
         if (attackStack < MAXSTACK && usedJumpAttack == false)  // 현재 스택이 최대 스택보다 낮다면
         {
