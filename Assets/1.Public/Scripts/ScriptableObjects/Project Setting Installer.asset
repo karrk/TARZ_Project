@@ -19,6 +19,7 @@ MonoBehaviour:
       type: 3}
     PlayerEquipments: {fileID: 7972474522850331046, guid: cf0ffd896d4d6e54a975c73312767b06,
       type: 3}
+    camController: {fileID: 0}
   pooledPrefabs:
     Monster:
       list:
@@ -54,6 +55,12 @@ MonoBehaviour:
     Dist: -7.5
     RotationSpeed: 2
     SmoothSpeed: 0.125
+  lockOnSetting:
+    targetLayer:
+      serializedVersion: 2
+      m_Bits: 4096
+    viewArea: 10
+    viewAngle: 360
   inventorySettings:
     ItemInventoryCount: 12
     equipmentSprite: {fileID: 0}
@@ -77,7 +84,7 @@ MonoBehaviour:
       DashTime: 0.3
       DashSpeed: 15
       DashCoolTime: 1
-      UseStamina: 0
+      UseStamina: 40
     DrainSetting:
       DrainSpeed: 2
       ViewArea: 0

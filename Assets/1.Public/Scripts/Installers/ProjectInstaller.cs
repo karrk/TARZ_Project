@@ -66,6 +66,14 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
     }
 
     #region 캐릭터 관련 설정
+
+    [Serializable]
+    public class PlayerBaseStats
+    {
+        public float Hp;
+        public float Atk;
+    }
+
     [Serializable]
     public class PlayerSettings
     {
@@ -203,12 +211,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
 
     #endregion
 
-    [Serializable]
-    public class PlayerBaseStats
-    {
-        public float Hp;
-        public float Atk;
-    }
+    #region 게임 프리팹
 
     [Serializable]
     public class NormalPrefab
@@ -224,13 +227,9 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         public GameObject[] Garbages;
     }
 
-    [Serializable]
-    public class PooledPrefab
-    {
-        public Prefabs<E_Monster> Monster;
-        public Prefabs<E_VFX> VFX;
-        public Prefabs<E_Garbage> Garbages;
-    }
+    #endregion
+
+    #region 카메라 설정
 
     [Serializable]
     public class CameraSetting
@@ -240,6 +239,26 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
 
         public float RotationSpeed;
         public float SmoothSpeed;
+    }
+
+    [Serializable]
+    public class LockOnSetting
+    {
+        public LayerMask targetLayer;
+        public float viewArea;
+        [Range(0, 360)] public float viewAngle; 
+    }
+
+    #endregion
+
+    #region 오브젝트 풀 설정
+
+    [Serializable]
+    public class PooledPrefab
+    {
+        public Prefabs<E_Monster> Monster;
+        public Prefabs<E_VFX> VFX;
+        public Prefabs<E_Garbage> Garbages;
     }
 
     [Serializable]
@@ -308,6 +327,10 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         }
     }
 
+    #endregion
+
+    #region 오디오 설정
+
     /// <summary>
     /// 프로젝트내에서 사용할 오디오소스 목록
     /// </summary>
@@ -351,4 +374,6 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
             SFXPlayer.transform.SetParent(tempDir);
         }
     }
+
+    #endregion
 }

@@ -1,4 +1,5 @@
 using ModestTree;
+using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 
@@ -9,6 +10,7 @@ public class PlayerInstaller : MonoInstaller
     public override void InstallBindings()
     {
         InstallPlayer();
+        InstallCamera();
     }
 
     private void InstallPlayer()
@@ -24,4 +26,9 @@ public class PlayerInstaller : MonoInstaller
         Container.Bind<Shooter>().AsSingle().NonLazy();
     }
 
+    private void InstallCamera()
+    {
+        CameraController controller = Camera.main.AddComponent<CameraController>();
+        Container.Inject(controller);
+    }
 }
