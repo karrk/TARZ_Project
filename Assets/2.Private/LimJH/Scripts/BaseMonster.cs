@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using BehaviorDesigner.Runtime;
 using Zenject;
@@ -18,11 +16,27 @@ public class BaseMonster : MonoBehaviour, IDamagable
 
     private LayerMask garbageLayer;
 
+    [Inject] ProjectPlayer player;
     [Inject] SkillManager SkillManager;
 
     private void Awake()
     {
         behaviorTree = GetComponent<BehaviorTree>(); // BehaviorTree 컴포넌트를 찾음
+    }
+
+    private void OnEnable()
+    {
+        if (behaviorTree != null)
+        {
+            behaviorTree.SetVariableValue("selfObject", this.gameObject);
+
+            // "targetObject"에 플레이어 설정
+            behaviorTree.SetVariableValue("targetObject", player.gameObject);
+        }
+        else
+        {
+            Debug.Log("비트리 없음");
+        }
     }
 
     //public void TakeDamage(float damage)
@@ -39,7 +53,7 @@ public class BaseMonster : MonoBehaviour, IDamagable
     //}
 
 
-    protected void Update()
+    protected virtual void Update()
     {
         if (behaviorTree != null && behaviorTree.GetVariable("health") != null)
         {

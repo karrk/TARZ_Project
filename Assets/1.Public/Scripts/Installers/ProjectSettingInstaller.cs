@@ -10,6 +10,7 @@ public class ProjectSettingInstaller : ScriptableObjectInstaller<ProjectSettingI
     public ProjectInstaller.PlayerBaseStats playerBaseStats; 
     public ProjectInstaller.CameraSetting camSetting;
 
+    public ProjectInstaller.InventorySetting inventorySettings;
     public ProjectInstaller.PlayerSettings playerSettings;
 
     public override void InstallBindings()
@@ -20,6 +21,6 @@ public class ProjectSettingInstaller : ScriptableObjectInstaller<ProjectSettingI
         Container.BindInstance(playerBaseStats);
         Container.BindInstance(camSetting);
         Container.BindInstance(playerSettings);
-        
-        }
+        Container.BindInstance(inventorySettings);
+    }
 }

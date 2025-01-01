@@ -72,6 +72,7 @@ public class ProjectPlayer : MonoBehaviour
 
     [Inject] private InputManager inputManager;
     [Inject] private SkillManager skillManager;
+    [Inject] private Shooter shooter;
 
     [SerializeField] public PlayerReferences Refernece;
 
@@ -138,6 +139,7 @@ public class ProjectPlayer : MonoBehaviour
     private void Awake()
     {
         cam = Camera.main;
+        Refernece.Shooter = this.shooter;
 
         idleState = new IdleState(this);
         walkState = new MoveState(this);

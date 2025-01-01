@@ -3865,7 +3865,6 @@ GameObject:
   - component: {fileID: 726719191030262112}
   - component: {fileID: 9054078597359120966}
   - component: {fileID: 6174339517248486042}
-  - component: {fileID: 824026980931313999}
   m_Layer: 0
   m_Name: ProjectPlayer
   m_TagString: Untagged
@@ -3917,7 +3916,6 @@ MonoBehaviour:
   inputZ: 0
   groundBoxHeight: 0.15
   Refernece:
-    Shooter: {fileID: 824026980931313999}
     Rigid: {fileID: 6174339517248486042}
     Animator: {fileID: 4780658996693449557}
     MuzzlePoint: {fileID: 3295809978564738148}
@@ -3995,19 +3993,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &824026980931313999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7501606899982736315}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73467fd903a7a204c9004d1f19d81b49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firePoint: {fileID: 3295809978564738148}
 --- !u!1 &7510644566747437619
 GameObject:
   m_ObjectHideFlags: 0

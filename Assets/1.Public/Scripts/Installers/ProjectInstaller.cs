@@ -6,16 +6,15 @@ using Zenject;
 public class ProjectInstaller : MonoInstaller<ProjectInstaller>
 {
     [Inject] private NormalPrefab prefabs;
-    public LayerMask garbageLayer;
+    //public LayerMask garbageLayer;
 
     public override void InstallBindings()
     {
         InstallMisc();
-        InstallInput();
         InstallSignal();
         InstallData();
-        InstallPools();
-        InstallGarbage();
+        InstallManagers();
+        InstallInventory();
     }
 
     private void InstallMisc()
@@ -25,20 +24,14 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         Container.Bind<SoundSource>().AsSingle().NonLazy();
 
         Container.Bind<CoroutineHelper>().FromNewComponentOnRoot().AsSingle().NonLazy();
-
-        Container.Bind<PlayerEquipment>().FromComponentInNewPrefab(prefabs.PlayerEquipments)
-            .AsSingle().NonLazy();
+        Container.Bind<GarbageQueue>().AsSingle();
+        Container.BindInterfacesAndSelfTo<PlayerUIModel>().AsSingle().NonLazy();
     }
     
-    private void InstallInput()
-    {
-        Container.BindInterfacesAndSelfTo<InputManager>().AsSingle().NonLazy();
-    }
-
     private void InstallSignal()
     {
-        SignalBusInstaller.Install(Container);
-        Container.DeclareSignal<StageEndSignal>();
+        //SignalBusInstaller.Install(Container);
+        //Container.DeclareSignal<UIModelReadySignal>();
     }
 
     private void InstallData()
@@ -49,18 +42,30 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         Container.BindInterfacesAndSelfTo<DataSlots>().AsSingle().NonLazy();
     }
 
-    private void InstallPools()
+    private void InstallManagers()
     {
         Container.Bind<PoolManager>().FromComponentInNewPrefab(prefabs.PoolManager)
             .AsSingle().NonLazy();
+
+        Container.Bind<SkillManager>().AsSingle().NonLazy();
+
+        Container.BindInterfacesAndSelfTo<InputManager>().AsSingle().NonLazy();
     }
 
-    private void InstallGarbage()
+    private void InstallInventory()
     {
-        Container.Bind<GarbageQueue>().AsSingle();
-        Container.BindInstance(garbageLayer).AsSingle();
+        Container.BindInterfacesAndSelfTo<ItemInventory>().AsSingle().Lazy();
+        Container.BindInterfacesAndSelfTo<PlayerEquipment>().AsSingle().NonLazy();
     }
 
+    [Serializable]
+    public class InventorySetting
+    {
+        public int ItemInventoryCount;
+        public EquipmentSprite equipmentSprite;
+    }
+
+    #region 캐릭터 관련 설정
     [Serializable]
     public class PlayerSettings
     {
@@ -194,12 +199,12 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
             public float DashCoolTime;
             public float Delay;
         }
-
     }
 
+    #endregion
 
     [Serializable]
-    public  class PlayerBaseStats
+    public class PlayerBaseStats
     {
         public float Hp;
         public float Atk;

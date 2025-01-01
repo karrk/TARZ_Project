@@ -1,4 +1,4 @@
-using UniRx;
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -7,16 +7,13 @@ public enum E_EquipmentsType
     Head, Chest, Glasses, Arm, Leg, Earing, Ring, Boots, Necklace, Size
 }
 
-public class ItemInventory : MonoBehaviour
+public class ItemInventory : IInitializable
 {
-    [Inject]
-    InGameUI inGameUI;
+    [Inject] private ProjectInstaller.InventorySetting setting;
 
-    [Inject]
-    PlayerEquipment playerEquipment;
+    //[Inject] private InGameUI inGameUI;
 
-    [SerializeField] EquipmentSprite equipmentSprite;
-
+    [Inject] private PlayerEquipment playerEquipment;
 
     private Equipment[] items;
     private Equipment[] equipments;
@@ -24,31 +21,25 @@ public class ItemInventory : MonoBehaviour
     public Equipment[] Items { get { return items; } }
     public Equipment[] Equipments { get { return equipments; } }
 
- 
     int hasItemCount;
 
+    //[SerializeField] int inventorySize;
 
-    [SerializeField] int inventorySize;
+    public event Action<int, Sprite> OnGetItem;
+    public event Action OnChangeStatusInfo;
 
-
-
-
-    private void Awake()
+    public void Initialize()
     {
-        items = new Equipment[inventorySize];
+        items = new Equipment[setting.ItemInventoryCount];
         equipments = new Equipment[(int)E_EquipmentsType.Size];
-
     }
 
     public void GetItem()
     {
 
-
-
-
-        if (hasItemCount < inventorySize)
+        if (hasItemCount < setting.ItemInventoryCount)
         {
-            Equipment item = Equipment.GenerateEquipment((E_EquipmentsType)(Random.Range(0, (int)E_EquipmentsType.Size)), Random.Range(1, 4));
+            Equipment item = Equipment.GenerateEquipment((E_EquipmentsType)(UnityEngine.Random.Range(0, (int)E_EquipmentsType.Size)), UnityEngine.Random.Range(1, 4));
             //  Equipment item = new Equipment(itemInfos[Random.Range(0, itemInfos.Length)]);
 
 
@@ -59,7 +50,8 @@ public class ItemInventory : MonoBehaviour
                 {
                     items[i] = item;
 
-                    inGameUI.InventoryPanel.GetItem(i, equipmentSprite.spriteType[(int)item.type].sprite[item.grade - 1]);
+                    //inGameUI.InventoryPanel.GetItem(i, setting.equipmentSprite.spriteType[(int)item.type].sprite[item.grade - 1]);
+                    OnGetItem?.Invoke(i, setting.equipmentSprite.spriteType[(int)item.type].sprite[item.grade - 1]);
 
                     return;
                 }
@@ -87,7 +79,8 @@ public class ItemInventory : MonoBehaviour
         hasItemCount--;
         items[num] = null;
 
-        inGameUI.StatusInformationPanel.UpdateStatusInfo();
+        //inGameUI.StatusInformationPanel.UpdateStatusInfo();
+        OnChangeStatusInfo?.Invoke();
     }
     /// <summary>
     /// 장비 해제 시 호출 되는 함수
@@ -96,7 +89,8 @@ public class ItemInventory : MonoBehaviour
     {
         playerEquipment.UnequipItem(num);
         equipments[num] = null;
-        inGameUI.StatusInformationPanel.UpdateStatusInfo();
+        //inGameUI.StatusInformationPanel.UpdateStatusInfo();
+        OnChangeStatusInfo?.Invoke();
     }
 
 
@@ -105,6 +99,9 @@ public class ItemInventory : MonoBehaviour
         hasItemCount--;
         items[num] = null;
 
-        inGameUI.StatusInformationPanel.UpdateStatusInfo();
+        //inGameUI.StatusInformationPanel.UpdateStatusInfo();
+        OnChangeStatusInfo?.Invoke();
     }
+
+    
 }

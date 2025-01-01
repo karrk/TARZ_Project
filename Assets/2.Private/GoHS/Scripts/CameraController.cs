@@ -25,8 +25,8 @@ public class CameraController : MonoBehaviour
     [HideInInspector]
     [SerializeField] private List<Transform> targets = new List<Transform>();   // 감지된 오브젝트를 담아두는 배열. 현재로선 사용안되도 됨
 
-    private float currenX = 0f;
-    private float currenY = 0f;
+    //private float currenX = 0f;
+    //private float currenY = 0f;
 
     private Vector3 current;
 

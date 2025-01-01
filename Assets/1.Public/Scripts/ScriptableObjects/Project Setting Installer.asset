@@ -15,7 +15,7 @@ MonoBehaviour:
   prefab:
     PoolManager: {fileID: 1544817659041836364, guid: a5e628768368342448b9fe97d1a85ce2,
       type: 3}
-    Player: {fileID: 5467619441096975080, guid: 5daeecfe9a52f3c45ba0659631db63d9,
+    Player: {fileID: 7501606899982736315, guid: 0c45545b5ac752243ae16e97f66501c6,
       type: 3}
     PlayerEquipments: {fileID: 7972474522850331046, guid: cf0ffd896d4d6e54a975c73312767b06,
       type: 3}
@@ -54,6 +54,9 @@ MonoBehaviour:
     Dist: -7.5
     RotationSpeed: 2
     SmoothSpeed: 0.125
+  inventorySettings:
+    ItemInventoryCount: 12
+    equipmentSprite: {fileID: 0}
   playerSettings:
     BasicSetting:
       SkillAnchor:

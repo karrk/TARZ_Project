@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using UnityEngine.Windows;
 
 [System.Serializable]
 
@@ -11,11 +10,11 @@ public class LongRangeAttackState : BaseState
     }
 
     private Vector3 moveDirection;
-    private float attackDelayTimer = 0f;    // 공격 딜레이 타이머           TODO : 사용 안해도 될 수 있음. 
+    //private float attackDelayTimer = 0f;    // 공격 딜레이 타이머           TODO : 사용 안해도 될 수 있음. 
     private float stateDelayTimer = 0f;     // 상태 딜레이 타이머
     private int attackStack = 0;            // 현재 공격 스택        
     private const int MAXSTACK = 4;         // 최종 공격 스택
-    private bool isAttackDelaing;
+    //private bool isAttackDelaing;
     private Coroutine waitRoutine;
     private bool usedJumpAttack = false;
 

@@ -1,43 +1,27 @@
+using ModestTree;
 using UnityEngine;
 using Zenject;
 
 public class PlayerInstaller : MonoInstaller
 {
-    [SerializeField] ProjectPlayer player;
+    [Inject] private ProjectInstaller.NormalPrefab prefabs;
 
     public override void InstallBindings()
     {
-        InstallPlayerComponent();
-        //InstallPlayerStates();
-        InstallCamera();
+        InstallPlayer();
     }
 
-    private void InstallPlayerComponent()
+    private void InstallPlayer()
     {
-        Container
-            .Bind<ProjectPlayer>()
-            .FromInstance(player)
-            .AsSingle()
+        Assert.That(FindObjectOfType<CharacterSpawner>() != null);
+
+        Vector3 pos = FindFirstObjectByType<CharacterSpawner>().transform.position;
+
+        Container.Bind<ProjectPlayer>().FromComponentsInNewPrefab(prefabs.Player).AsSingle()
+            .OnInstantiated<ProjectPlayer>((_, obj) => { obj.transform.position = pos; })
             .NonLazy();
+
+        Container.Bind<Shooter>().AsSingle().NonLazy();
     }
 
-    private void InstallPlayerStates()
-    {
-        Container.Bind<IdleState>().AsSingle();
-        Container.Bind<MoveState>().AsSingle();
-        Container.Bind<JumpState>().AsSingle();
-        Container.Bind<DashState>().AsSingle();
-        Container.Bind<LongRangeAttackState>().AsSingle();
-        Container.Bind<DrainState>().AsSingle();
-        Container.Bind<LongRangeSkill_1>().AsSingle();
-        Container.Bind<LongRangeSkill_2>().AsSingle();
-        Container.Bind<LongRangeSkill_3>().AsSingle();
-        Container.Bind<LongRangeSkill_5>().AsSingle();
-        Container.Bind<LongRangeSkill_4>().AsSingle();
-    }
-
-    private void InstallCamera()
-    {
-
-    }
 }

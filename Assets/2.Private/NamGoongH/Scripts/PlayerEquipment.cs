@@ -1,15 +1,14 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using Zenject;
 
-public class PlayerEquipment : MonoBehaviour
+public class PlayerEquipment : IInitializable
 {
     private Equipment[] equippedItems; // 현재 장착된 아이템
     private Dictionary<E_StatType, float> totalStats; // 합산된 스탯
 
     public Dictionary<E_StatType, float> TotalStats { get { return totalStats; } }
 
-    private void Awake()
+    public void Initialize()
     {
         equippedItems = new Equipment[(int)E_EquipmentsType.Size];
         totalStats = new Dictionary<E_StatType, float>();

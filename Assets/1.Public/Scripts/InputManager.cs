@@ -1,12 +1,11 @@
 using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Zenject;
 
 /// <summary>
 /// 유저의 입력을 받아들여 필요한 클래스에서 이벤트를 활용해 기능을 연동하기 위한 클래스
 /// </summary>
-public class InputManager : IInitializable, ITickable
+public class InputManager :ITickable
 {
     /// <summary>
     /// 좌측 스틱 컨트롤러 조작시 발생되는 이벤트입니다.
@@ -93,12 +92,6 @@ public class InputManager : IInitializable, ITickable
     private bool enteredL2;
     private bool pressingAkey;
 
-    [Inject] private SignalBus signal;
-
-    public void Initialize()
-    {
-        signal.Subscribe<StageEndSignal>(ResetEvents);
-    }
 
     private void ResetEvents()
     {
