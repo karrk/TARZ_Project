@@ -133,7 +133,7 @@ public class LongRangeAttackState : BaseState
         if (moveDirection.magnitude < 1)
             moveDirection *= moveDirection.sqrMagnitude;
 
-        player.transform.Translate(moveDirection * player.Setting.BasicSetting.MoveSpeed * Time.deltaTime, Space.World);
+        player.transform.Translate(moveDirection * player.MoveSpeed * Time.deltaTime, Space.World);
 
         if (moveDirection != Vector3.zero)
         {

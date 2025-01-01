@@ -111,8 +111,8 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
             public float[] SkillAnchor;
             public float MaxMana;
             public float ThrowingSpeed;
-            public float MoveSpeed;
             public float StaminaChargeWaitTime;
+            public float BasicPower;
         }
 
         [Serializable]
@@ -230,7 +230,6 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
     {
         public GameObject PoolManager;
         public GameObject Player;
-        public GameObject PlayerEquipments;
     }
 
     [Serializable]

@@ -68,10 +68,11 @@ public class ProjectPlayer : MonoBehaviour
 
     public float InputZ { get { return inputZ; } set { inputZ = value; } }
 
+    public float MoveSpeed => stats.MovementSpeed;
+
     [SerializeField] private float groundBoxHeight;
 
     [Inject] private InputManager inputManager;
-    //[Inject] private SkillManager skillManager;
     [Inject] private PlayerStats stats;
     [Inject] private Shooter shooter;
 

@@ -14,7 +14,7 @@ public class Garbage : MonoBehaviour, IDrainable, IPooledObject
 
     public GameObject MyObj => this.gameObject;
 
-    private float playerAttackPower;
+    private float power;
 
     private bool isImmediatelyReturnMode;
 
@@ -61,7 +61,7 @@ public class Garbage : MonoBehaviour, IDrainable, IPooledObject
             IDamagable monster = collision.gameObject.GetComponent<IDamagable>();
             if(monster != null)
             {
-                monster.TakeHit(playerAttackPower, true);
+                monster.TakeHit(power, true);
             }
 
             // 투척물 소멸
@@ -90,10 +90,10 @@ public class Garbage : MonoBehaviour, IDrainable, IPooledObject
     }
 
     // 플레이어에 의해 발사되었음을 설정
-    public void SetAsProjectile(float attackPower)
+    public void SetAsProjectile(float power)
     {
         IsProjectile = true;
-        playerAttackPower = attackPower;
+        this.power = power;
     }
 
     public void Return()

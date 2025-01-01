@@ -26,12 +26,16 @@ public class PlayerSkillSliderView : SliderView
     /// </summary>
     public void SetGaugePointCheck()
     {
+        float temp = slider.value;
+
         for (int i = 0; i < settings.BasicSetting.SkillAnchor.Length; i++)
         {
             slider.value = slider.maxValue * settings.BasicSetting.SkillAnchor[i];
             Instantiate(markerPrefab, markerTransform.position, Quaternion.identity).transform.SetParent(slider.transform);
 
         }
+
+        slider.value = temp;
 
 
     }

@@ -17,9 +17,6 @@ MonoBehaviour:
       type: 3}
     Player: {fileID: 7501606899982736315, guid: 0c45545b5ac752243ae16e97f66501c6,
       type: 3}
-    PlayerEquipments: {fileID: 7972474522850331046, guid: cf0ffd896d4d6e54a975c73312767b06,
-      type: 3}
-    camController: {fileID: 0}
   pooledPrefabs:
     Monster:
       list:
@@ -48,8 +45,20 @@ MonoBehaviour:
     - {fileID: 3111731739044657598, guid: 35d9e1dce6b43fc4eaa38281d70b02b8, type: 3}
     - {fileID: 3111731739044657598, guid: 735d6edfd94719943be3fba04f8d9f29, type: 3}
   playerBaseStats:
-    Hp: 10
-    Atk: 1
+    CriticalChance: 0
+    CriticalDamage: 0
+    AttackPower: 1
+    SkillAttackPower: 0
+    ElementaAttackPower: 0
+    BasicAttackPower: 0
+    Luck: 0
+    ThrowableItemCapacity: 30
+    ExperienceGain: 0
+    ManaAbsorption: 10
+    StaminaRecoveryRate: 0.1
+    MaxStamina: 80
+    MaxHealth: 100
+    MovementSpeed: 3
   camSetting:
     Height: 4
     Dist: -7.5
@@ -72,11 +81,10 @@ MonoBehaviour:
       - 0.7
       - 0.8
       - 1
-      GaugeValue: 10
+      MaxMana: 100
       ThrowingSpeed: 10
-      MoveSpeed: 3
       StaminaChargeWaitTime: 1.5
-      StaminaChargeValue: 0.1
+      BasicPower: 1
     JumpSetting:
       JumpPower: 5
       UseStamina: 30

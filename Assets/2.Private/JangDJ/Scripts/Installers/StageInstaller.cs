@@ -7,6 +7,7 @@ public class StageInstaller : MonoInstaller
     public override void InstallBindings()
     {
         Container.BindInterfacesAndSelfTo<CheatManager>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<StageController>().AsSingle().NonLazy();
     }
 
 }

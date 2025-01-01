@@ -5,8 +5,10 @@ using Zenject;
 
 public class StageController : IInitializable
 {
+    [Inject] private PlayerStats playerStats;
+
     public void Initialize()
     {
-
+        playerStats.RenewalStat();
     }
 }
