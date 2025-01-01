@@ -10,6 +10,7 @@ public class InGameUIInstaller : MonoInstaller
         //Container.Bind<TargetIndicator>().FromComponentInHierarchy().AsSingle();
         
         Container.BindInterfacesTo<PlayerUIPresenter>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<UIConnector>().AsSingle().NonLazy();
     }
 
    
