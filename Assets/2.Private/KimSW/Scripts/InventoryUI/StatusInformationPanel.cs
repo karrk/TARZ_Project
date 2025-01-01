@@ -39,12 +39,12 @@ public class StatusInformationPanel : MonoBehaviour
         stringBuilder.Clear();
         stringBuilder.Append("체력");
         stringBuilder.Append("  ");
-        stringBuilder.Append(status.Hp);
+        stringBuilder.Append(status.MaxHealth);
         stringBuilder.Append("\n");
 
         stringBuilder.Append("공격력");
         stringBuilder.Append("  ");
-        stringBuilder.Append(status.Atk);
+        stringBuilder.Append(status.AttackPower);
         stringBuilder.Append("\n");
 
         characterInformation.text = stringBuilder.ToString();

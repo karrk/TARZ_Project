@@ -47,7 +47,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         Container.Bind<PoolManager>().FromComponentInNewPrefab(prefabs.PoolManager)
             .AsSingle().NonLazy();
 
-        Container.Bind<SkillManager>().AsSingle().NonLazy();
+        //Container.Bind<SkillManager>().AsSingle().NonLazy();
 
         Container.BindInterfacesAndSelfTo<InputManager>().AsSingle().NonLazy();
     }
@@ -56,6 +56,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
     {
         Container.BindInterfacesAndSelfTo<ItemInventory>().AsSingle().Lazy();
         Container.BindInterfacesAndSelfTo<PlayerEquipment>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<PlayerStats>().AsSingle().NonLazy();
     }
 
     [Serializable]
@@ -70,8 +71,20 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
     [Serializable]
     public class PlayerBaseStats
     {
-        public float Hp;
-        public float Atk;
+        public float CriticalChance;
+        public float CriticalDamage;
+        public float AttackPower;
+        public float SkillAttackPower;
+        public float ElementaAttackPower;
+        public float BasicAttackPower;
+        public float Luck;
+        public int ThrowableItemCapacity;
+        public float ExperienceGain;
+        public float ManaAbsorption;
+        public float StaminaRecoveryRate;
+        public float MaxStamina;
+        public float MaxHealth;
+        public float MovementSpeed;       
     }
 
     [Serializable]
@@ -96,11 +109,10 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         public class BasicSettings
         {
             public float[] SkillAnchor;
-            public float GaugeValue;
+            public float MaxMana;
             public float ThrowingSpeed;
             public float MoveSpeed;
             public float StaminaChargeWaitTime;
-            public float StaminaChargeValue;
         }
 
         [Serializable]

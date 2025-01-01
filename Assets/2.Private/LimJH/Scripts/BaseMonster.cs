@@ -17,7 +17,7 @@ public class BaseMonster : MonoBehaviour, IDamagable
     private LayerMask garbageLayer;
 
     [Inject] ProjectPlayer player;
-    [Inject] SkillManager SkillManager;
+    [Inject] PlayerStats playerStats;
 
     private void Awake()
     {
@@ -79,7 +79,7 @@ public class BaseMonster : MonoBehaviour, IDamagable
     {
         if(chargable == true)
         {
-            SkillManager.UpdateSkillGauge();
+            playerStats.ChargeMana();
         }
 
         this.health -= value * damageReducation;

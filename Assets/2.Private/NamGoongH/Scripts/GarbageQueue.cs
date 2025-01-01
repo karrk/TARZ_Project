@@ -1,14 +1,19 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class GarbageQueue
 {
     [SerializeField]
     private List<E_Garbage> garbageIndexList = new List<E_Garbage>(); // 인덱스를 저장하는 리스트 (FIFO)
-    
-    public event Action ChangedInventory;
-    public int Count => garbageIndexList.Count;
+
+    [Inject] private PlayerStats playerStats;
+
+    public event Action ChangedInventoryCount;
+
+    public int CurCount => garbageIndexList.Count;
+    public int Size => garbageIndexList.Capacity;
 
     /// <summary>
     /// 리스트에 투척물 인덱스 추가
@@ -22,7 +27,7 @@ public class GarbageQueue
             Debug.Log($"Item index added: {garbageIndex}. Queue size: {garbageIndexList.Count}");
             PrintQueue();
 
-            ChangedInventory?.Invoke();
+            ChangedInventoryCount?.Invoke();
         }
         else
         {
@@ -45,7 +50,7 @@ public class GarbageQueue
             // 인덱스에 해당하는 프리팹 반환
             if (garbageIndex > E_Garbage.Basic && garbageIndex < E_Garbage.Size)
             {
-                ChangedInventory?.Invoke();
+                ChangedInventoryCount?.Invoke();
                 return garbageIndex;
             }
             else
@@ -69,5 +74,7 @@ public class GarbageQueue
         }
         Debug.Log(queueContent + "END");
     }
-    #endif
+
+    
+#endif
 }
