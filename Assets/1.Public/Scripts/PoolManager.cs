@@ -12,6 +12,8 @@ public class PoolManager : MonoBehaviour
 
     private Dictionary<E_PoolType, Dictionary<Enum, ObjPool>> pools = new Dictionary<E_PoolType, Dictionary<Enum, ObjPool>>();
 
+    public bool IsInited { get; private set; }
+
     private void CreateMainDirectory()
     {
         MainDirectory = new GameObject().transform;
@@ -47,6 +49,8 @@ public class PoolManager : MonoBehaviour
             pools[E_PoolType.Garbage][item.Key]
                 = new ObjPool(container, item.Value, 5, MainDirectory);
         }
+
+        IsInited = true;
     }
 
     /// <summary>
