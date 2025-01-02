@@ -16,7 +16,6 @@ public class DashState : BaseState
         Debug.Log("Dash 상태 진입!");
 
         dashTime = player.Setting.DashSetting.DashTime;         // 플레이어 스크립트에서 설정한 지속시간만큼 설정
-        player.candash = true;
 
 
         // 플레이어 입력방향에 따라 대쉬 방향 설정
@@ -41,17 +40,16 @@ public class DashState : BaseState
         //player.transform.rotation = Quaternion.Lerp(player.transform.rotation, rotation, 500f * Time.deltaTime);
         player.transform.rotation = rotation;
 
-
-
+        player.candash = true;
     }
 
     public override void Update()
     {
         //Debug.Log("Dash 진행중");
-        if(player.candash)
+        if (player.candash)
         {
             player.Refernece.Animator.SetTrigger("Dash");
-            player.Refernece.Rigid.AddForce(dashDirection * player.Setting.DashSetting.DashSpeed, ForceMode.Impulse);
+            player.Refernece.Rigid.AddForce(dashDirection * player.Setting.DashSetting.DashSpeed, ForceMode.VelocityChange);
             player.candash = false;
 
 
@@ -66,6 +64,8 @@ public class DashState : BaseState
             else
             {
                 Debug.Log("대쉬 진행됨");
+                player.Refernece.Rigid.velocity = Vector3.zero;
+                player.Refernece.Rigid.angularVelocity = Vector3.zero;
                 player.ChangeState(E_State.Idle);
             }
 
@@ -74,8 +74,11 @@ public class DashState : BaseState
 
     private IEnumerator DashCooldownRoutine()
     {
-        player.candash = false; 
-        yield return new WaitForSeconds(player.Setting.DashSetting.DashCoolTime);
-        player.candash = true;
+        player.Refernece.Animator.SetTrigger("Dash");
+        player.Refernece.Rigid.AddForce(dashDirection * player.Setting.DashSetting.DashSpeed, ForceMode.VelocityChange);
+        yield return new WaitForSeconds(player.Setting.DashSetting.DashTime);
+
+        Debug.Log("대쉬 진행됨");
+        player.ChangeState(E_State.Idle);
     }
 }

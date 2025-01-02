@@ -40,6 +40,8 @@ public class CameraController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;   // 마우스 커서를 고정
         this.player = player.transform;
         manager.OnControlledRightStick += HandleCameraRotation;
+        manager.OnDownL2Key += LockOnDown;
+        manager.OnUpL2Key += LockOnUp;
         CamSetting(setting);
     }
 
@@ -55,21 +57,13 @@ public class CameraController : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.J))
         {
-           if(!isLockOn)
-            {
-                LockOn();
-            }
-           else
-            {
-                return;
-            }
+
 
         }
 
         if(Input.GetKeyUp(KeyCode.J))
         {
-            monster = null;
-            isLockOn = false;
+
         }
     }
     
@@ -230,5 +224,23 @@ public class CameraController : MonoBehaviour
     public Vector3 GetAngle(float AngleInDegree)
     {
         return new Vector3(Mathf.Sin(AngleInDegree * Mathf.Deg2Rad), 0, Mathf.Cos(AngleInDegree * Mathf.Deg2Rad));
+    }
+
+    private void LockOnDown()
+    {
+        if (!isLockOn)
+        {
+            LockOn();
+        }
+        else
+        {
+            return;
+        }
+    }
+
+    private void LockOnUp()
+    {
+        monster = null;
+        isLockOn = false;
     }
 }

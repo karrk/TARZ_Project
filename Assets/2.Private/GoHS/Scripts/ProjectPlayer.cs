@@ -248,9 +248,14 @@ public class ProjectPlayer : MonoBehaviour
     /// </summary>
     private void Drain()
     {
-        ChangeState(E_State.Drain);
+        if (curState == E_State.Idle || curState == E_State.Move || curState == E_State.LongRangeAttack)
+        {
 
-        DrainRoutine = StartCoroutine(DecreaseStamina(setting.DrainSetting.UseStamina, setting.DrainSetting.DecreaseInterval));
+            ChangeState(E_State.Drain);
+
+            DrainRoutine = StartCoroutine(DecreaseStamina(setting.DrainSetting.UseStamina, setting.DrainSetting.DecreaseInterval));
+        }
+
     }
 
     /// <summary>
@@ -298,35 +303,43 @@ public class ProjectPlayer : MonoBehaviour
     /// </summary>
     private void UseLongRangeSkill()
     {
-        int skillNumber = skillManager.UseSkill();
-
-        if (skillNumber == 0)
-            return;
-
-        switch (skillNumber)
+        if (curState == E_State.Idle || curState == E_State.Move || curState == E_State.LongRangeAttack)
         {
-            case 1:
-                LongRangeSkill_1();
-                break;
-            case 2:
-                LongRangeSkill_2();
-                break;
-            case 3:
-                LongRangeSkill_3();
-                break;
-            case 4:
-                LongRangeSkill_4();
-                break;
-            case 5:
-                LongRangeSkill_5();
-                break;
+            int skillNumber = skillManager.UseSkill();
 
+            if (skillNumber == 0)
+                return;
+
+
+
+            switch (skillNumber)
+            {
+                case 1:
+                    LongRangeSkill_1();
+                    break;
+                case 2:
+                    LongRangeSkill_2();
+                    break;
+                case 3:
+                    LongRangeSkill_3();
+                    break;
+                case 4:
+                    LongRangeSkill_4();
+                    break;
+                case 5:
+                    LongRangeSkill_5();
+                    break;
+
+            }
         }
+
+
     }
 
     private void MeleeSkill_1()
     {
         // TODO : 스킬을 사용할 수 있는 조건을 여기에 달아야 할까? 우선적으로 생각중
+
         ChangeState(E_State.MeleeSkill_1);
     }
 
@@ -337,31 +350,42 @@ public class ProjectPlayer : MonoBehaviour
 
     private void LongRangeSkill_1()
     {
+
         // TODO : 스킬을 사용할 수 있는 조건을 여기에 달아야 할까? 우선적으로 생각중
+
+
         ChangeState(E_State.LongRangeSkill_1);
     }
 
     private void LongRangeSkill_2()
     {
         // TODO : 스킬을 사용할 수 있는 조건을 여기에 달아야 할까? 우선적으로 생각중
+
+
         ChangeState(E_State.LongRangeSkill_2);
     }
 
     private void LongRangeSkill_3()
     {
         // TODO : 스킬을 사용할 수 있는 조건을 여기에 달아야 할까? 우선적으로 생각중
+
+     
         ChangeState(E_State.LongRangeSkill_3);
     }
 
     private void LongRangeSkill_4()
     {
         // TODO : 스킬을 사용할 수 있는 조건을 여기에 달아야 할까? 우선적으로 생각중
+
+
         ChangeState(E_State.LongRangeSkill_4);
     }
 
     private void LongRangeSkill_5()
     {
         // TODO : 스킬을 사용할 수 있는 조건을 여기에 달아야 할까? 우선적으로 생각중
+
+
         ChangeState(E_State.LongRangeSkill_5);
     }
 
