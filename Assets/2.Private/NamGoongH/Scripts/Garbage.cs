@@ -42,7 +42,7 @@ public class Garbage : MonoBehaviour, IDrainable, IPooledObject
             // 플레이어와 투척물 간의 충돌 무시
             if (playerCollider != null && garbageCollider != null)
             {
-                Physics.IgnoreCollision(playerCollider, garbageCollider);
+                Physics.IgnoreCollision(playerCollider , garbageCollider);
             }
         }
     }

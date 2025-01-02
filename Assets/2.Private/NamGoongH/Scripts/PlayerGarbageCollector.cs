@@ -32,6 +32,24 @@ public class PlayerGarbageCollector : MonoBehaviour
         }
     }
 
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if(IsInLayerMask(collision.gameObject,garbageLayer))
+    //    {
+    //        Garbage garbage = collision.gameObject.GetComponent<Garbage>(); // 투척물 컴포넌트 가져오기
+    //        if (garbage != null)
+    //        {
+    //            garbageQueue.AddItem(garbage.garbageIndex); // 투척물의 인덱스를 큐에 추가
+    //            //Destroy(other.gameObject); // 투척물 오브젝트 제거
+
+    //            if (garbage.TryGetComponent<IPooledObject>(out IPooledObject obj))
+    //                obj.Return();
+    //            else
+    //                Destroy(collision.gameObject);
+    //        }
+    //    }
+    //}
+
     /// <summary>
     /// 특정 GameObject가 주어진 LayerMask에 포함되어 있는지 확인
     /// </summary>
