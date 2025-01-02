@@ -2,7 +2,7 @@ using UnityEngine;
 using BehaviorDesigner.Runtime;
 using Zenject;
 
-public class BaseMonster : MonoBehaviour, IDamagable
+public class BaseMonster : MonoBehaviour, IDamagable, IPushable
 {
     public float health;
     public float damageReducation = 1f;
@@ -167,5 +167,14 @@ public class BaseMonster : MonoBehaviour, IDamagable
         Gizmos.DrawLine(transform.position, transform.position + forward);
         Gizmos.DrawLine(transform.position, transform.position + leftBoundary);
         Gizmos.DrawLine(transform.position, transform.position + rightBoundary);
+    }
+
+    public void Push(Vector3 pos, E_SkillState skillType)
+    {
+        behaviorTree.SetVariableValue("playerVector", pos);
+
+        behaviorTree.SetVariableValue("skillType", (int)skillType); 
+
+        Debug.Log($"{gameObject.name} pushed by {skillType}");
     }
 }
