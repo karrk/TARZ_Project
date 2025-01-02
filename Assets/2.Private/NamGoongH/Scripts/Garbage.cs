@@ -14,7 +14,7 @@ public class Garbage : MonoBehaviour, IDrainable, IPooledObject
 
     public GameObject MyObj => this.gameObject;
 
-    private float playerAttackPower;
+    private float power;
 
     private bool isImmediatelyReturnMode;
 
@@ -56,22 +56,21 @@ public class Garbage : MonoBehaviour, IDrainable, IPooledObject
         // 몬스터와 충돌한 경우
         if (collisionTag == "Monster" && IsProjectile == true)
         {
-            Debug.Log("Hit Monster!");
+            //Debug.Log("Hit Monster!");
 
             IDamagable monster = collision.gameObject.GetComponent<IDamagable>();
             if(monster != null)
             {
-                monster.TakeHit(playerAttackPower, true);
+                monster.TakeHit(power, true);
             }
 
             // 투척물 소멸
             //Destroy(gameObject);
             Return();
-            return;
         }
 
         // 바닥 또는 기본 환경과 충돌한 경우
-        if (collisionTag == "Ground" || collisionTag == "Environment")
+        else if (collisionTag == "Ground" || collisionTag == "Environment")
         {
             if (isImmediatelyReturnMode == true)
                 Return();
@@ -91,10 +90,10 @@ public class Garbage : MonoBehaviour, IDrainable, IPooledObject
     }
 
     // 플레이어에 의해 발사되었음을 설정
-    public void SetAsProjectile(float attackPower)
+    public void SetAsProjectile(float power)
     {
         IsProjectile = true;
-        playerAttackPower = attackPower;
+        this.power = power;
     }
 
     public void Return()

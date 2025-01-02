@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Zenject;
 
 /// <summary>
@@ -8,6 +7,8 @@ using Zenject;
 /// </summary>
 public class InputManager : IInitializable, ITickable
 {
+    [Inject] private SignalBus signal;
+
     /// <summary>
     /// 좌측 스틱 컨트롤러 조작시 발생되는 이벤트입니다.
     /// 데스크탑 환경에서는 WASD 키 입력시 발생됩니다.
@@ -93,14 +94,8 @@ public class InputManager : IInitializable, ITickable
     private bool enteredL2;
     private bool pressingAkey;
 
-    [Inject] private SignalBus signal;
 
-    public void Initialize()
-    {
-        signal.Subscribe<StageEndSignal>(ResetEvents);
-    }
-
-    private void ResetEvents()
+    private void DisconnectActions()
     {
         OnControlledLeftStick = null;
         OnControlledRightStick = null;
@@ -114,6 +109,11 @@ public class InputManager : IInitializable, ITickable
         PressedR1Key = null;
         OnDownL2Key = null;
         OnUpL2Key = null;
+    }
+
+    public void Initialize()
+    {
+        signal.Subscribe<StageEndSignal>(DisconnectActions);
     }
 
     public void Tick()

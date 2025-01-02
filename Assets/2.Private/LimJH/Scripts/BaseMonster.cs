@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using BehaviorDesigner.Runtime;
 using Zenject;
 
-public class BaseMonster : MonoBehaviour, IDamagable
+public class BaseMonster : MonoBehaviour, IDamagable, IPushable
 {
     public float health;
     public float damageReducation = 1f;
@@ -18,11 +16,27 @@ public class BaseMonster : MonoBehaviour, IDamagable
 
     private LayerMask garbageLayer;
 
-    [Inject] SkillManager SkillManager;
+    [Inject] ProjectPlayer player;
+    [Inject] PlayerStats playerStats;
 
     private void Awake()
     {
         behaviorTree = GetComponent<BehaviorTree>(); // BehaviorTree 컴포넌트를 찾음
+    }
+
+    private void OnEnable()
+    {
+        if (behaviorTree != null)
+        {
+            behaviorTree.SetVariableValue("selfObject", this.gameObject);
+
+            // "targetObject"에 플레이어 설정
+            behaviorTree.SetVariableValue("targetObject", player.gameObject);
+        }
+        else
+        {
+            Debug.Log("비트리 없음");
+        }
     }
 
     //public void TakeDamage(float damage)
@@ -39,7 +53,7 @@ public class BaseMonster : MonoBehaviour, IDamagable
     //}
 
 
-    protected void Update()
+    protected virtual void Update()
     {
         if (behaviorTree != null && behaviorTree.GetVariable("health") != null)
         {
@@ -65,7 +79,7 @@ public class BaseMonster : MonoBehaviour, IDamagable
     {
         if(chargable == true)
         {
-            SkillManager.UpdateSkillGauge();
+            playerStats.ChargeMana();
         }
 
         this.health -= value * damageReducation;
@@ -153,5 +167,14 @@ public class BaseMonster : MonoBehaviour, IDamagable
         Gizmos.DrawLine(transform.position, transform.position + forward);
         Gizmos.DrawLine(transform.position, transform.position + leftBoundary);
         Gizmos.DrawLine(transform.position, transform.position + rightBoundary);
+    }
+
+    public void Push(Vector3 pos, E_SkillState skillType)
+    {
+        behaviorTree.SetVariableValue("playerVector", pos);
+
+        behaviorTree.SetVariableValue("skillType", (int)skillType); 
+
+        Debug.Log($"{gameObject.name} pushed by {skillType}");
     }
 }

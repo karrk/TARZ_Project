@@ -4,7 +4,7 @@ using Zenject;
 public class CheatManager : ITickable
 {
     [Inject] private GarbageQueue garbageManager;
-    [Inject] private SkillManager skillManager;
+    [Inject] private PlayerStats stat;
 
     public void Tick()
     {
@@ -29,6 +29,6 @@ public class CheatManager : ITickable
 
     private void GetGauge()
     {
-        skillManager.UpdateSkillGauge();
+        stat.ChargeMana();
     }
 }

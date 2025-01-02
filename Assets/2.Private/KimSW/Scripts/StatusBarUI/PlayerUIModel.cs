@@ -1,15 +1,15 @@
 using DG.Tweening;
-using System.Collections;
-using System.Collections.Generic;
 using UniRx;
-using UnityEngine;
+using Zenject;
 
-public class PlayerUIModel : MonoBehaviour
+// 프로젝트 컨텍스트
+public class PlayerUIModel : IInitializable
 {
-    
+    [Inject] private PlayerStats stats;
+    [Inject] private GarbageQueue garbages;
 
-    public ReactiveProperty<int> MaxHp;
-    public ReactiveProperty<int> Hp;
+    public ReactiveProperty<float> MaxHp;
+    public ReactiveProperty<float> Hp;
     public ReactiveProperty<float> MaxStamina;
     public ReactiveProperty<float> Stamina;
     public ReactiveProperty<float> SkillGauge ;
@@ -19,24 +19,23 @@ public class PlayerUIModel : MonoBehaviour
 
     public ReactiveProperty<int> TargetEXP;
     public ReactiveProperty<int> CurrentEXP;
-  
-
-
-    private void Awake()
+    
+    public void Initialize()
     {
-        MaxHp = new ReactiveProperty<int>(100);
-        Hp.Value = MaxHp.Value;
-        MaxStamina = new ReactiveProperty<float>(100);
-        Stamina.Value = MaxStamina.Value;
-        SkillGauge = new ReactiveProperty<float>(0);
+        MaxHp = new ReactiveProperty<float>(stats.MaxHealth);
+        //Hp.Value = MaxHp.Value;
+        Hp = new ReactiveProperty<float>(stats.CurHealth);
+        MaxStamina = new ReactiveProperty<float>(stats.MaxStamina);
+        Stamina = new ReactiveProperty<float>(stats.CurStamina);
+        //Stamina.Value = MaxStamina.Value;
+        SkillGauge = new ReactiveProperty<float>(stats.CurMana);
 
-        GarbageCount = new ReactiveProperty<int>(0);
-        MaxGarbageCount = new ReactiveProperty<int>(50);
- 
+        GarbageCount = new ReactiveProperty<int>(garbages.Count);
+        MaxGarbageCount = new ReactiveProperty<int>((int)stats.ThrowCapacity);
+
         TargetEXP = new ReactiveProperty<int>(0);
         CurrentEXP = new ReactiveProperty<int>(0);
     }
-
 
     public void RollingValue()
     {
