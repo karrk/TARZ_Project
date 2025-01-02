@@ -106,7 +106,11 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable
         if (GetAngleHit(target.transform))
         {
             float finalDamage = damage;
-            player.TakeDamage(finalDamage);
+            IDamagable damagable = target.GetComponent<IDamagable>();
+            if(damagable != null)
+            {
+                damagable.TakeHit(finalDamage, false);
+            }
             attackCount++;
             Debug.Log($"{finalDamage}의 데미지를 {target.name}에게 주었습니다.");
         }
