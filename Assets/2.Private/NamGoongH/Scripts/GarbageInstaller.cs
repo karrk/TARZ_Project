@@ -21,7 +21,7 @@ public class GarbageInstaller : MonoInstaller
         //Container.BindInstance(garbageLayer).AsSingle();
 
         // GarbageCollector와 Shooter 바인딩
-        Container.Bind<PlayerGarbageCollector>().FromComponentInHierarchy().AsSingle();
+        //Container.Bind<PlayerGarbageCollector>().FromComponentInHierarchy().AsSingle();
         //Container.Bind<Shooter>().FromComponentInHierarchy().AsSingle().NonLazy();
     }
 }

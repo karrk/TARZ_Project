@@ -35,7 +35,7 @@ public class JumpState : BaseState
         Vector3 moveDirection = forward * player.InputZ + right * player.InputX;
         moveDirection.Normalize();
 
-        player.transform.Translate(moveDirection * player.Setting.BasicSetting.MoveSpeed * Time.deltaTime, Space.World);
+        player.transform.Translate(moveDirection * player.MoveSpeed * Time.deltaTime, Space.World);
 
         if (moveDirection != Vector3.zero)
         {

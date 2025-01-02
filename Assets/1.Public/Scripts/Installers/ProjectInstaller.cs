@@ -6,16 +6,15 @@ using Zenject;
 public class ProjectInstaller : MonoInstaller<ProjectInstaller>
 {
     [Inject] private NormalPrefab prefabs;
-    public LayerMask garbageLayer;
+    //public LayerMask garbageLayer;
 
     public override void InstallBindings()
     {
         InstallMisc();
-        InstallInput();
         InstallSignal();
         InstallData();
-        InstallPools();
-        InstallGarbage();
+        InstallManagers();
+        InstallInventory();
     }
 
     private void InstallMisc()
@@ -25,16 +24,10 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         Container.Bind<SoundSource>().AsSingle().NonLazy();
 
         Container.Bind<CoroutineHelper>().FromNewComponentOnRoot().AsSingle().NonLazy();
-
-        Container.Bind<PlayerEquipment>().FromComponentInNewPrefab(prefabs.PlayerEquipments)
-            .AsSingle().NonLazy();
+        Container.Bind<GarbageQueue>().AsSingle();
+        Container.BindInterfacesAndSelfTo<PlayerUIModel>().AsSingle().NonLazy();
     }
     
-    private void InstallInput()
-    {
-        Container.BindInterfacesAndSelfTo<InputManager>().AsSingle().NonLazy();
-    }
-
     private void InstallSignal()
     {
         SignalBusInstaller.Install(Container);
@@ -49,16 +42,49 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         Container.BindInterfacesAndSelfTo<DataSlots>().AsSingle().NonLazy();
     }
 
-    private void InstallPools()
+    private void InstallManagers()
     {
         Container.Bind<PoolManager>().FromComponentInNewPrefab(prefabs.PoolManager)
             .AsSingle().NonLazy();
+
+        //Container.Bind<SkillManager>().AsSingle().NonLazy();
+
+        Container.BindInterfacesAndSelfTo<InputManager>().AsSingle().NonLazy();
     }
 
-    private void InstallGarbage()
+    private void InstallInventory()
     {
-        Container.Bind<GarbageQueue>().AsSingle();
-        Container.BindInstance(garbageLayer).AsSingle();
+        Container.BindInterfacesAndSelfTo<ItemInventory>().AsSingle().Lazy();
+        Container.BindInterfacesAndSelfTo<PlayerEquipment>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<PlayerStats>().AsSingle().NonLazy();
+    }
+
+    [Serializable]
+    public class InventorySetting
+    {
+        public int ItemInventoryCount;
+        public EquipmentSprite equipmentSprite;
+    }
+
+    #region 캐릭터 관련 설정
+
+    [Serializable]
+    public class PlayerBaseStats
+    {
+        public float CriticalChance;
+        public float CriticalDamage;
+        public float AttackPower;
+        public float SkillAttackPower;
+        public float ElementaAttackPower;
+        public float BasicAttackPower;
+        public float Luck;
+        public int ThrowableItemCapacity;
+        public float ExperienceGain;
+        public float ManaAbsorption;
+        public float StaminaRecoveryRate;
+        public float MaxStamina;
+        public float MaxHealth;
+        public float MovementSpeed;       
     }
 
     [Serializable]
@@ -83,11 +109,10 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         public class BasicSettings
         {
             public float[] SkillAnchor;
-            public float GaugeValue;
+            public float MaxMana;
             public float ThrowingSpeed;
-            public float MoveSpeed;
             public float StaminaChargeWaitTime;
-            public float StaminaChargeValue;
+            public float BasicPower;
         }
 
         [Serializable]
@@ -168,6 +193,11 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
             public float RotateSpeed;
             public float RotateTime;
             public float Radius;
+            public float Damage;
+            public float ViewArea;
+            public float ViewAngle;
+            public LayerMask TargetMask;
+            public float Delay;
         }
 
         [Serializable]
@@ -194,23 +224,17 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
             public float DashCoolTime;
             public float Delay;
         }
-
     }
 
+    #endregion
 
-    [Serializable]
-    public  class PlayerBaseStats
-    {
-        public float Hp;
-        public float Atk;
-    }
+    #region 게임 프리팹
 
     [Serializable]
     public class NormalPrefab
     {
         public GameObject PoolManager;
         public GameObject Player;
-        public GameObject PlayerEquipments;
     }
 
     [Serializable]
@@ -219,13 +243,9 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         public GameObject[] Garbages;
     }
 
-    [Serializable]
-    public class PooledPrefab
-    {
-        public Prefabs<E_Monster> Monster;
-        public Prefabs<E_VFX> VFX;
-        public Prefabs<E_Garbage> Garbages;
-    }
+    #endregion
+
+    #region 카메라 설정
 
     [Serializable]
     public class CameraSetting
@@ -235,6 +255,26 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
 
         public float RotationSpeed;
         public float SmoothSpeed;
+    }
+
+    [Serializable]
+    public class LockOnSetting
+    {
+        public LayerMask targetLayer;
+        public float viewArea;
+        [Range(0, 360)] public float viewAngle; 
+    }
+
+    #endregion
+
+    #region 오브젝트 풀 설정
+
+    [Serializable]
+    public class PooledPrefab
+    {
+        public Prefabs<E_Monster> Monster;
+        public Prefabs<E_VFX> VFX;
+        public Prefabs<E_Garbage> Garbages;
     }
 
     [Serializable]
@@ -303,6 +343,10 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         }
     }
 
+    #endregion
+
+    #region 오디오 설정
+
     /// <summary>
     /// 프로젝트내에서 사용할 오디오소스 목록
     /// </summary>
@@ -346,4 +390,6 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
             SFXPlayer.transform.SetParent(tempDir);
         }
     }
+
+    #endregion
 }

@@ -1,15 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using BehaviorDesigner.Runtime;
-
 public class EliteMonster1 : BaseMonster
 {
     public bool canJumpAttack = true;
     public float jumpAttackCoolTime;
 
 
-    private void Update()
+    protected override void Update()
     {
         base.Update();
 

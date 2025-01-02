@@ -17,6 +17,8 @@ public class MeleeSkill_1 : BaseState
         Debug.Log("근접 스킬 1 시작!");
         curDelay = player.Setting.MeleeSkill1Setting.Delay;
 
+        player.Refernece.Animator.SetTrigger("MeleeSkill_1");
+
     }
 
     public override void Update()
@@ -33,7 +35,6 @@ public class MeleeSkill_1 : BaseState
                 isStartSkill = true;
                 GetTarget();
                 Debug.Log("근접 스킬 1번 활성화됨");
-                curDelay = player.Setting.Skill2Setting.Delay;
             }
             else
             {

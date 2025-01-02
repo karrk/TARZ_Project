@@ -1,7 +1,10 @@
 using UnityEngine;
+using Zenject;
 
 public class InGameUI : BindUI
 {
+    [Inject] private ItemInventory itemInventory;
+
     private InventoryPanel inventoryPanel;
     private InventorySetPanel inventorySetPanel;
     private ItemInformationPanel itemInformationPanel;
@@ -45,8 +48,9 @@ public class InGameUI : BindUI
     }
     private void Start()
     {
+        itemInventory.OnGetItem += (num, sprite) => { InventoryPanel.GetItem(num, sprite); };
+        itemInventory.OnChangeStatusInfo += () => { StatusInformationPanel.UpdateStatusInfo(); };
 
-   
         currentMenu = statusBarPanel;
 
     }

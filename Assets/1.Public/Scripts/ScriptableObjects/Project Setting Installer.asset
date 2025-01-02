@@ -15,9 +15,7 @@ MonoBehaviour:
   prefab:
     PoolManager: {fileID: 1544817659041836364, guid: a5e628768368342448b9fe97d1a85ce2,
       type: 3}
-    Player: {fileID: 5467619441096975080, guid: 5daeecfe9a52f3c45ba0659631db63d9,
-      type: 3}
-    PlayerEquipments: {fileID: 7972474522850331046, guid: cf0ffd896d4d6e54a975c73312767b06,
+    Player: {fileID: 7501606899982736315, guid: 0c45545b5ac752243ae16e97f66501c6,
       type: 3}
   pooledPrefabs:
     Monster:
@@ -47,13 +45,34 @@ MonoBehaviour:
     - {fileID: 3111731739044657598, guid: 35d9e1dce6b43fc4eaa38281d70b02b8, type: 3}
     - {fileID: 3111731739044657598, guid: 735d6edfd94719943be3fba04f8d9f29, type: 3}
   playerBaseStats:
-    Hp: 10
-    Atk: 1
+    CriticalChance: 0
+    CriticalDamage: 0
+    AttackPower: 1
+    SkillAttackPower: 0
+    ElementaAttackPower: 0
+    BasicAttackPower: 0
+    Luck: 0
+    ThrowableItemCapacity: 30
+    ExperienceGain: 0
+    ManaAbsorption: 10
+    StaminaRecoveryRate: 0.1
+    MaxStamina: 80
+    MaxHealth: 100
+    MovementSpeed: 3
   camSetting:
     Height: 4
     Dist: -7.5
     RotationSpeed: 2
     SmoothSpeed: 0.125
+  lockOnSetting:
+    targetLayer:
+      serializedVersion: 2
+      m_Bits: 4096
+    viewArea: 10
+    viewAngle: 360
+  inventorySettings:
+    ItemInventoryCount: 12
+    equipmentSprite: {fileID: 0}
   playerSettings:
     BasicSetting:
       SkillAnchor:
@@ -62,11 +81,10 @@ MonoBehaviour:
       - 0.7
       - 0.8
       - 1
-      GaugeValue: 10
+      MaxMana: 100
       ThrowingSpeed: 10
-      MoveSpeed: 3
       StaminaChargeWaitTime: 1.5
-      StaminaChargeValue: 0.1
+      BasicPower: 1
     JumpSetting:
       JumpPower: 5
       UseStamina: 30
@@ -74,9 +92,9 @@ MonoBehaviour:
       DashTime: 0.3
       DashSpeed: 15
       DashCoolTime: 1
-      UseStamina: 0
+      UseStamina: 40
     DrainSetting:
-      DrainSpeed: 2
+      DrainSpeed: 3
       ViewArea: 0
       MaxViewArea: 10
       ViewSpeed: 10
@@ -117,6 +135,13 @@ MonoBehaviour:
       RotateSpeed: 750
       RotateTime: 4
       Radius: 3.4
+      Damage: 0
+      ViewArea: 0
+      ViewAngle: 0
+      TargetMask:
+        serializedVersion: 2
+        m_Bits: 0
+      Delay: 0
     DashMeleeAttackSetting:
       Delay: 0.5
     MeleeSkill1Setting:
