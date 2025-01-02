@@ -51,6 +51,7 @@ public class ItemInventory : IInitializable
                     items[i] = item;
 
                     //inGameUI.InventoryPanel.GetItem(i, setting.equipmentSprite.spriteType[(int)item.type].sprite[item.grade - 1]);
+             
                     OnGetItem?.Invoke(i, setting.equipmentSprite.spriteType[(int)item.type].sprite[item.grade - 1]);
 
                     return;

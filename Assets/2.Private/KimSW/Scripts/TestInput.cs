@@ -33,7 +33,7 @@ public class TestInput : MonoBehaviour
         }
 
         playerModel.Stamina.Value += Time.deltaTime * 100;
-
+        /*
         if (Input.GetMouseButtonDown(0))
         {
 
@@ -55,7 +55,7 @@ public class TestInput : MonoBehaviour
             playerModel.TargetEXP.Value += 500;
 
         }
-
+        */
      
     }
 }
