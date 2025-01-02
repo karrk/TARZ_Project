@@ -1,7 +1,8 @@
+using System;
 using UnityEngine;
 using Zenject;
 
-public class UIConnector : IInitializable
+public class UIConnector : IInitializable, IDisposable
 {
     [Inject] private PlayerUIModel ui;
 
@@ -9,12 +10,15 @@ public class UIConnector : IInitializable
 
     public void Initialize()
     {
+        Debug.Log("UI 커넥터 이닛");
+
         stats.OnChangedCurThrowCount += (value) => { ui.GarbageCount.Value = (int)value; };
         stats.OnChangedMaxThrowCount += SetMaxGarbageCapacity;
 
         stats.OnChangedCurMana += SetCurManaGauge;
 
         stats.OnChangedCurStamina += (value) => { ui.Stamina.Value = value; };
+        // TODO 함수로 제작
 
         stats.OnChangedMaxStamina += SetMaxStaminaGauge;
 
@@ -22,6 +26,21 @@ public class UIConnector : IInitializable
         stats.OnChangedCurHP += SetCurHP;
 
         ManualUpdate();
+    }
+
+    public void Dispose()
+    {
+        stats.OnChangedCurThrowCount -= (value) => { ui.GarbageCount.Value = (int)value; };
+        stats.OnChangedMaxThrowCount -= SetMaxGarbageCapacity;
+
+        stats.OnChangedCurMana -= SetCurManaGauge;
+
+        stats.OnChangedCurStamina -= (value) => { ui.Stamina.Value = value; };
+
+        stats.OnChangedMaxStamina -= SetMaxStaminaGauge;
+
+        stats.OnChangedMaxHP -= SetMaxHP;
+        stats.OnChangedCurHP -= SetCurHP;
     }
 
     private void ManualUpdate()
@@ -57,6 +76,8 @@ public class UIConnector : IInitializable
     {
         ui.MaxHp.Value = (int)value;
     }
+
+    
 
     //private void Set
 }

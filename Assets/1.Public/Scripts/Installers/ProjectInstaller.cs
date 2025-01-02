@@ -30,8 +30,8 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
     
     private void InstallSignal()
     {
-        //SignalBusInstaller.Install(Container);
-        //Container.DeclareSignal<UIModelReadySignal>();
+        SignalBusInstaller.Install(Container);
+        Container.DeclareSignal<StageEndSignal>();
     }
 
     private void InstallData()

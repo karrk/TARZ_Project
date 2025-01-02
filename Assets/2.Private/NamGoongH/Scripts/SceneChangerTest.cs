@@ -1,9 +1,10 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using Zenject;
 
 public class SceneLoadTester : MonoBehaviour 
 {
     [SerializeField] private string sceneName;
+    [Inject] private SignalBus signal;
 
     //private void Update() 
     //{
@@ -17,6 +18,8 @@ public class SceneLoadTester : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
+            signal.Fire<StageEndSignal>();
+
             SceneChanger.LoadScene(sceneName);
         }
     }

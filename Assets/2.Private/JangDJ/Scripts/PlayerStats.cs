@@ -34,6 +34,7 @@ public class PlayerStats : IInitializable
     private float maxStamina;
     public float MaxStamina => maxStamina;
     private float curStamina;
+    public float CurStamina => curStamina;
 
     public float CurHealth { get; private set; }
     public float MaxHealth { get; private set; }

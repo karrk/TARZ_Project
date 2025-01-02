@@ -2,10 +2,14 @@ using DG.Tweening;
 using UniRx;
 using Zenject;
 
+// 프로젝트 컨텍스트
 public class PlayerUIModel : IInitializable
 {
-    public ReactiveProperty<int> MaxHp;
-    public ReactiveProperty<int> Hp;
+    [Inject] private PlayerStats stats;
+    [Inject] private GarbageQueue garbages;
+
+    public ReactiveProperty<float> MaxHp;
+    public ReactiveProperty<float> Hp;
     public ReactiveProperty<float> MaxStamina;
     public ReactiveProperty<float> Stamina;
     public ReactiveProperty<float> SkillGauge ;
@@ -18,16 +22,16 @@ public class PlayerUIModel : IInitializable
     
     public void Initialize()
     {
-        MaxHp = new ReactiveProperty<int>(100);
+        MaxHp = new ReactiveProperty<float>(stats.MaxHealth);
         //Hp.Value = MaxHp.Value;
-        Hp = new ReactiveProperty<int>(MaxHp.Value);
-        MaxStamina = new ReactiveProperty<float>(100);
-        Stamina = new ReactiveProperty<float>(MaxStamina.Value);
+        Hp = new ReactiveProperty<float>(stats.CurHealth);
+        MaxStamina = new ReactiveProperty<float>(stats.MaxStamina);
+        Stamina = new ReactiveProperty<float>(stats.CurStamina);
         //Stamina.Value = MaxStamina.Value;
-        SkillGauge = new ReactiveProperty<float>(0);
+        SkillGauge = new ReactiveProperty<float>(stats.CurMana);
 
-        GarbageCount = new ReactiveProperty<int>(0);
-        MaxGarbageCount = new ReactiveProperty<int>(50);
+        GarbageCount = new ReactiveProperty<int>(garbages.Count);
+        MaxGarbageCount = new ReactiveProperty<int>((int)stats.ThrowCapacity);
 
         TargetEXP = new ReactiveProperty<int>(0);
         CurrentEXP = new ReactiveProperty<int>(0);

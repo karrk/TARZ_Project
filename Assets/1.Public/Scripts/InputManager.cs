@@ -5,8 +5,10 @@ using Zenject;
 /// <summary>
 /// 유저의 입력을 받아들여 필요한 클래스에서 이벤트를 활용해 기능을 연동하기 위한 클래스
 /// </summary>
-public class InputManager :ITickable
+public class InputManager : IInitializable, ITickable
 {
+    [Inject] private SignalBus signal;
+
     /// <summary>
     /// 좌측 스틱 컨트롤러 조작시 발생되는 이벤트입니다.
     /// 데스크탑 환경에서는 WASD 키 입력시 발생됩니다.
@@ -93,7 +95,7 @@ public class InputManager :ITickable
     private bool pressingAkey;
 
 
-    private void ResetEvents()
+    private void DisconnectActions()
     {
         OnControlledLeftStick = null;
         OnControlledRightStick = null;
@@ -107,6 +109,11 @@ public class InputManager :ITickable
         PressedR1Key = null;
         OnDownL2Key = null;
         OnUpL2Key = null;
+    }
+
+    public void Initialize()
+    {
+        signal.Subscribe<StageEndSignal>(DisconnectActions);
     }
 
     public void Tick()
