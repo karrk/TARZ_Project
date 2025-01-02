@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using UnityEngine.Windows;
 
 [System.Serializable]
 
@@ -11,11 +10,11 @@ public class LongRangeAttackState : BaseState
     }
 
     private Vector3 moveDirection;
-    private float attackDelayTimer = 0f;    // 공격 딜레이 타이머           TODO : 사용 안해도 될 수 있음. 
+    //private float attackDelayTimer = 0f;    // 공격 딜레이 타이머           TODO : 사용 안해도 될 수 있음. 
     private float stateDelayTimer = 0f;     // 상태 딜레이 타이머
     private int attackStack = 0;            // 현재 공격 스택        
     private const int MAXSTACK = 4;         // 최종 공격 스택
-    private bool isAttackDelaing;
+    //private bool isAttackDelaing;
     private Coroutine waitRoutine;
     private bool usedJumpAttack = false;
 
@@ -142,7 +141,7 @@ public class LongRangeAttackState : BaseState
         if (moveDirection.magnitude < 1)
             moveDirection *= moveDirection.sqrMagnitude;
 
-        player.transform.Translate(moveDirection * player.Setting.BasicSetting.MoveSpeed * Time.deltaTime, Space.World);
+        player.transform.Translate(moveDirection * player.MoveSpeed * Time.deltaTime, Space.World);
 
         if (moveDirection != Vector3.zero)
         {
@@ -161,10 +160,7 @@ public class LongRangeAttackState : BaseState
         int nextHand = (curHand + 1) % 2;
         player.Refernece.Animator.SetInteger("ThrowHand", nextHand);
 
-
-
         player.Refernece.Shooter.FireItem();    // 총알 발사
-
 
         if (attackStack < MAXSTACK && usedJumpAttack == false)  // 현재 스택이 최대 스택보다 낮다면
         {

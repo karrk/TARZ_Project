@@ -5,52 +5,40 @@ using Zenject;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private Transform player;          // 플레이어 위치
+    
     [SerializeField] private Vector3 offset;            // 설정한 오프셋
 
     [SerializeField] private float rotationSpeed = 2f;   // 카메라 회전 속도
     [SerializeField] private float smoothSpeed = 0.125f; // 부드러운 이동 속도
 
-    // 판정 범위 거리
-    [SerializeField] private float viewArea;
-
-    // 판정 범위 각도
-    [Range(0, 360)]
-    [SerializeField] private float viewAngle;
-
-    // 충돌 감지 대상
-    [SerializeField] private LayerMask targetMask;
-
     // 충돌 감지된 오브젝트들을 담는 리스트
-    [HideInInspector]
-    [SerializeField] private List<Transform> targets = new List<Transform>();   // 감지된 오브젝트를 담아두는 배열. 현재로선 사용안되도 됨
+    [HideInInspector] private List<Transform> targets = new List<Transform>();   // 감지된 오브젝트를 담아두는 배열. 현재로선 사용안되도 됨
 
-    private float currenX = 0f;
-    private float currenY = 0f;
+    [Inject] private ProjectPlayer player;          // 플레이어 위치
+    [Inject] private InputManager input;
+    [Inject] private ProjectInstaller.CameraSetting camSetting;
+    [Inject] private ProjectInstaller.LockOnSetting lockOnSetting;
 
     private Vector3 current;
 
     private bool isLockOn = false;
     public bool IsLockOn {  get { return isLockOn; } set { isLockOn = value; } }
 
-
-    [Inject]
-    private void Init(ProjectPlayer player, ProjectInstaller.CameraSetting setting, InputManager manager)
+    private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;   // 마우스 커서를 고정
-        this.player = player.transform;
-        manager.OnControlledRightStick += HandleCameraRotation;
-        manager.OnDownL2Key += LockOnDown;
-        manager.OnUpL2Key += LockOnUp;
-        CamSetting(setting);
+        Cursor.lockState = CursorLockMode.Locked;
+        input.OnControlledRightStick += HandleCameraRotation;
+        CamSetting();
+        input.OnDownL2Key += LockOnDown;
+        input.OnUpL2Key += LockOnUp;
     }
 
-    private void CamSetting(ProjectInstaller.CameraSetting setting)
+    private void CamSetting()
     {
-        offset.y = setting.Height;
-        offset.z = setting.Dist;
-        rotationSpeed = setting.RotationSpeed;
-        smoothSpeed = setting.SmoothSpeed;
+        offset.y = camSetting.Height;
+        offset.z = camSetting.Dist;
+        rotationSpeed = camSetting.RotationSpeed;
+        smoothSpeed = camSetting.SmoothSpeed;
     }
 
     private void Update()
@@ -79,10 +67,10 @@ public class CameraController : MonoBehaviour
 
     private void HandleCameraRotation(Vector3 vec)
     {
-        if(isLockOn)
+        if (isLockOn)
         {
             return;
-        }            
+        }
 
         current.x += vec.x * rotationSpeed;
         current.y -= vec.y * rotationSpeed;
@@ -100,24 +88,24 @@ public class CameraController : MonoBehaviour
     {
         if(isLockOn && monster != null)
         {
-            Vector3 directionToMonster = (monster.transform.position - player.position);
+            Vector3 directionToMonster = (monster.transform.position - player.transform.position);
             directionToMonster.y = 0;
             directionToMonster.Normalize();
             Quaternion lockOnRotation = Quaternion.LookRotation(directionToMonster);
 
-            transform.position = player.position + offset.z * directionToMonster + offset.y * Vector3.up;
+            transform.position = player.transform.position + offset.z * directionToMonster + offset.y * Vector3.up;
 
             //Vector3 resultDirection = new Vector3(directionToMonster.x, directionToMonster.y, directionToMonster.z);
             //transform.position = player.position + resultDirection;
-            transform.LookAt(player.position);
+            transform.LookAt(player.transform.position);
         }
         else
         {
             Quaternion rotation = Quaternion.Euler(0, current.x, 0f);
             //Vector3 desiredPosition = target.position + rotation * offset;
             //transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
-            transform.position = player.position + rotation * offset;
-            transform.LookAt(player.position);
+            transform.position = player.transform.position + rotation * offset;
+            transform.LookAt(player.transform.position);
         }
 
     }
@@ -178,16 +166,16 @@ public class CameraController : MonoBehaviour
     public void GetTarget()
     {
         targets.Clear();    // 배열 초기화
-        Collider[] TargetCollider = Physics.OverlapSphere(player.transform.position, viewArea, targetMask);
+        Collider[] TargetCollider = Physics.OverlapSphere(player.transform.position, lockOnSetting.viewArea, lockOnSetting.targetLayer);
 
         for (int i = 0; i < TargetCollider.Length; i++) // 감지된 콜라이더 
         {
             Transform target = TargetCollider[i].transform;
             Vector3 direction = target.position - player.transform.position;
 
-            if (Vector3.Dot(direction.normalized, player.transform.forward) > GetAngle(viewAngle / 2).z)
+            if (Vector3.Dot(direction.normalized, player.transform.forward) > GetAngle(lockOnSetting.viewAngle / 2).z)
             {
-                Debug.Log(GetAngle(viewAngle / 2).z);
+                //Debug.Log(GetAngle(lockOnSetting.viewAngle / 2).z);
 
                 IDamagable damagable = target.GetComponent<IDamagable>();
                 if (damagable != null)
@@ -210,7 +198,7 @@ public class CameraController : MonoBehaviour
 
         foreach (Transform target in targets)
         {
-            float distance = Vector3.Distance(player.position, target.position);
+            float distance = Vector3.Distance(player.transform.position, target.position);
             if (distance < minDistance)
             {
                 minDistance = distance;

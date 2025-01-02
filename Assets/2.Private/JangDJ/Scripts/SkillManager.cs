@@ -4,85 +4,47 @@ using Zenject;
 
 public class SkillManager
 {
-    [Inject] private ProjectInstaller.PlayerSettings setting;
-    [Inject] private PlayerUIModel playerModel;
-    [Inject] private CoroutineHelper helper;
+    //[Inject] private ProjectInstaller.PlayerSettings setting;
+    //[Inject] private PlayerUIModel playerModel;
+    //[Inject] private CoroutineHelper helper;
+    //[Inject] private PlayerStats playerStats;
 
-    private float skillGauge = 0;
+    //private bool usedStamina;
 
-    private bool usedStamina;
+    //private Coroutine staminaChargeRoutine;
 
-    private Coroutine staminaChargeRoutine;
+    //public bool UseStamina(float stamina)
+    //{
+    //    if (playerModel.Stamina.Value < stamina)
+    //        return false;
 
-    public int UseSkill()
-    {
-        int count = 0;
-        float rate = skillGauge / 100f;
+    //    playerModel.Stamina.Value -= stamina;
 
-        for (int i = 0; i < setting.BasicSetting.SkillAnchor.Length; i++)
-        {
-            if(rate < setting.BasicSetting.SkillAnchor[i])
-            {
-                break;
-            }
+    //    usedStamina = true;
 
-            count++;
-        }
+    //    if (staminaChargeRoutine != null)
+    //        helper.StopCoroutine(staminaChargeRoutine);
 
-        RemoveSkillGauge(count);
+    //    staminaChargeRoutine = helper.StartCoroutine(WaitStaminaCharge());
 
-        return count;
-    }
+    //    return true;
+    //}
 
-    public bool UseStamina(float stamina)
-    {
-        if (playerModel.Stamina.Value < stamina)
-            return false;
+    //private IEnumerator WaitStaminaCharge()
+    //{
+    //    usedStamina = false;
+    //    yield return new WaitForSeconds(setting.BasicSetting.StaminaChargeWaitTime);
 
-        playerModel.Stamina.Value -= stamina;
+    //    while (true)
+    //    {
+    //        if (usedStamina == true || playerModel.Stamina.Value >= playerModel.MaxStamina.Value)
+    //            break;
 
-        usedStamina = true;
+    //        playerModel.Stamina.Value += playerStats.StaminaRecoveryRate;
 
-        if (staminaChargeRoutine != null)
-            helper.StopCoroutine(staminaChargeRoutine);
-
-        staminaChargeRoutine = helper.StartCoroutine(WaitStaminaCharge());
-
-        return true;
-    }
-
-    public void UpdateSkillGauge()
-    {
-        this.skillGauge += setting.BasicSetting.GaugeValue;
-        this.skillGauge = Mathf.Clamp(skillGauge, 0, 100);
-        playerModel.SkillGauge.Value = skillGauge;
-    }
-
-    private void RemoveSkillGauge(int skillNumber)
-    {
-        if (skillNumber == 0)
-            return;
-
-        float needPoint = setting.BasicSetting.SkillAnchor[skillNumber-1];
-        skillGauge -= needPoint * 100;
-        playerModel.SkillGauge.Value = skillGauge;
-    }
-
-    private IEnumerator WaitStaminaCharge()
-    {
-        usedStamina = false;
-        yield return new WaitForSeconds(setting.BasicSetting.StaminaChargeWaitTime);
-
-        while (true)
-        {
-            if (usedStamina == true || playerModel.Stamina.Value >= playerModel.MaxStamina.Value)
-                break;
-
-            playerModel.Stamina.Value += setting.BasicSetting.StaminaChargeValue;
-
-            yield return null;
-        }
-    }
+    //        yield return null;
+    //    }
+    //}
 
     
 }

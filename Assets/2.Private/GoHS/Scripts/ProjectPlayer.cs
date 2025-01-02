@@ -68,10 +68,13 @@ public class ProjectPlayer : MonoBehaviour
 
     public float InputZ { get { return inputZ; } set { inputZ = value; } }
 
+    public float MoveSpeed => stats.MovementSpeed;
+
     [SerializeField] private float groundBoxHeight;
 
     [Inject] private InputManager inputManager;
-    [Inject] private SkillManager skillManager;
+    [Inject] private PlayerStats stats;
+    [Inject] private Shooter shooter;
 
     [SerializeField] public PlayerReferences Refernece;
 
@@ -140,6 +143,7 @@ public class ProjectPlayer : MonoBehaviour
     private void Awake()
     {
         cam = Camera.main;
+        Refernece.Shooter = this.shooter;
 
         idleState = new IdleState(this);
         walkState = new MoveState(this);
@@ -211,7 +215,8 @@ public class ProjectPlayer : MonoBehaviour
 
     private void Jump()
     {
-        if (IsGrounded == false || skillManager.UseStamina(setting.JumpSetting.UseStamina) == false)
+        //if (IsGrounded == false || skillManager.UseStamina(setting.JumpSetting.UseStamina) == false)
+        if (IsGrounded == false || stats.UseStamina(setting.JumpSetting.UseStamina) == false)
             return;
 
         ChangeState(E_State.Jump);
@@ -275,7 +280,8 @@ public class ProjectPlayer : MonoBehaviour
 
         while (true)
         {
-            if (skillManager.UseStamina(needStamina) == false)
+            //if (skillManager.UseStamina(needStamina) == false)
+            if (stats.UseStamina(needStamina) == false)
                 break;
 
             yield return intervalSec;
@@ -289,7 +295,8 @@ public class ProjectPlayer : MonoBehaviour
     /// </summary>
     private void Dash()
     {
-        bool useAccept = skillManager.UseStamina(setting.DashSetting.UseStamina);
+        //bool useAccept = skillManager.UseStamina(setting.DashSetting.UseStamina);
+        bool useAccept = stats.UseStamina(setting.DashSetting.UseStamina);
 
         if (useAccept == false)
             return;
@@ -305,7 +312,7 @@ public class ProjectPlayer : MonoBehaviour
     {
         if (curState == E_State.Idle || curState == E_State.Move || curState == E_State.LongRangeAttack)
         {
-            int skillNumber = skillManager.UseSkill();
+            int skillNumber = stats.UseSkill();
 
             if (skillNumber == 0)
                 return;

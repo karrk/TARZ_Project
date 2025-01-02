@@ -1,134 +1,123 @@
-using DG.Tweening;
+using System;
+using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
 using Zenject;
-public class PlayerUIPresenter : MonoBehaviour
+public class PlayerUIPresenter : IInitializable, IDisposable
 {
     [Inject]
     InGameUI inGameUI;
 
-    [Inject] 
-    PlayerUIModel playerModel;
+    [Inject]
+    PlayerUIModel playerModel; // 씬컨텍스트 요소인데,
 
+    private List<IDisposable> list = new List<IDisposable>();
 
-
-
-    void Start()
+    public void Dispose()
     {
+        //Debug.Log("UI 프레젠터 해제");
 
+        foreach (var item in list)
+        {
+            item.Dispose();
+        }
 
-        SetUniRxEvent();
-      
+        list.Clear();
     }
 
+    public void Initialize()
+    {
+        //Debug.Log("UI 프레젠터 이닛");
+        SetUniRxEvent();
+    }
 
     public void SetUniRxEvent()
     {
-        playerModel.MaxHp
+        list.Add(playerModel.MaxHp
         .Where(value => value >= 0)
-        .Subscribe(value => inGameUI.StatusBarPanel.PlayerHpSliderView.SetSliderMax(value))
-        .AddTo(this);
+        .Subscribe(value => inGameUI.StatusBarPanel.PlayerHpSliderView.SetSliderMax(value)));
 
-        playerModel.Hp
+        list.Add(playerModel.Hp
         .Where(value => playerModel.Hp.Value < 0)
-        .Subscribe(value => { playerModel.Hp.Value = 0; })
-        .AddTo(this);
+        .Subscribe(value => { playerModel.Hp.Value = 0; }));
 
-        playerModel.Hp
+        list.Add(playerModel.Hp
        .Where(value => playerModel.Hp.Value > playerModel.MaxHp.Value)
-       .Subscribe(value => { playerModel.Hp.Value = playerModel.MaxHp.Value; })
-       .AddTo(this);
+       .Subscribe(value => { playerModel.Hp.Value = playerModel.MaxHp.Value; }));
 
-        playerModel.Hp
+        list.Add(playerModel.Hp
        .Where(value => value >= 0)
        .Where(value => value <= playerModel.MaxHp.Value)
-       .Subscribe(value => inGameUI.StatusBarPanel.PlayerHpSliderView.SetSlider(value))
-       .AddTo(this);
+       .Subscribe(value => inGameUI.StatusBarPanel.PlayerHpSliderView.SetSlider(value)));
 
 
-        playerModel.MaxStamina
+        list.Add(playerModel.MaxStamina
         .Where(value => value >= 0)
-        .Subscribe(value => inGameUI.StatusBarPanel.PlayerStaminaSliderView.SetSliderMax(value))
-        .AddTo(this);
+        .Subscribe(value => inGameUI.StatusBarPanel.PlayerStaminaSliderView.SetSliderMax(value)));
 
-        playerModel.Stamina
+        list.Add(playerModel.Stamina
         .Where(value => playerModel.Stamina.Value < 0)
-        .Subscribe(value => { playerModel.Stamina.Value = 0; })
-        .AddTo(this);
+        .Subscribe(value => { playerModel.Stamina.Value = 0; }));
 
-        playerModel.Stamina
+        list.Add(playerModel.Stamina
        .Where(value => playerModel.Stamina.Value > playerModel.MaxStamina.Value)
-       .Subscribe(value => { playerModel.Stamina.Value = playerModel.MaxStamina.Value; })
-       .AddTo(this);
+       .Subscribe(value => { playerModel.Stamina.Value = playerModel.MaxStamina.Value; }));
 
 
-        playerModel.Stamina
+        list.Add(playerModel.Stamina
        .Where(value => value >= 0)
        .Where(value => value <= playerModel.MaxStamina.Value)
-       .Subscribe(value => inGameUI.StatusBarPanel.PlayerStaminaSliderView.SetSlider(value))
-       .AddTo(this);
+       .Subscribe(value => inGameUI.StatusBarPanel.PlayerStaminaSliderView.SetSlider(value)));
 
 
-        playerModel.SkillGauge
+        list.Add(playerModel.SkillGauge
         .Where(value => playerModel.SkillGauge.Value < 0)
-        .Subscribe(value => { playerModel.SkillGauge.Value = 0; })
-        .AddTo(this);
+        .Subscribe(value => { playerModel.SkillGauge.Value = 0; }));
 
-        playerModel.SkillGauge
+        list.Add(playerModel.SkillGauge
        .Where(value => playerModel.SkillGauge.Value > 100)
-       .Subscribe(value => { playerModel.SkillGauge.Value = 100; })
-       .AddTo(this);
+       .Subscribe(value => { playerModel.SkillGauge.Value = 100; }));
 
-        playerModel.SkillGauge
+        list.Add(playerModel.SkillGauge
        .Where(value => value >= 0)
        .Where(value => value <= 100)
-       .Subscribe(value => inGameUI.StatusBarPanel.PlayerSkillSliderView.SetSlider(value))
-       .AddTo(this);
+       .Subscribe(value => inGameUI.StatusBarPanel.PlayerSkillSliderView.SetSlider(value)));
 
-
-
-        playerModel.MaxGarbageCount
+        list.Add(playerModel.MaxGarbageCount
         .Where(value => value >= 0)
-        .Subscribe(value => inGameUI.StatusBarPanel.GarbageInventoryView.SetTextMax(value))
-        .AddTo(this);
+        .Subscribe(value => inGameUI.StatusBarPanel.GarbageInventoryView.SetTextMax(value)));
 
-        playerModel.GarbageCount
+        list.Add(playerModel.GarbageCount
         .Where(value => playerModel.GarbageCount.Value < 0)
-        .Subscribe(value => { playerModel.GarbageCount.Value = 0; })
-        .AddTo(this);
+        .Subscribe(value => { playerModel.GarbageCount.Value = 0; }));
 
-        playerModel.GarbageCount
+        list.Add(playerModel.GarbageCount
        .Where(value => playerModel.GarbageCount.Value > playerModel.MaxGarbageCount.Value)
-       .Subscribe(value => { playerModel.GarbageCount.Value = playerModel.MaxGarbageCount.Value; })
-       .AddTo(this);
+       .Subscribe(value => { playerModel.GarbageCount.Value = playerModel.MaxGarbageCount.Value; }));
 
-        playerModel.GarbageCount
+        list.Add(playerModel.GarbageCount
        .Where(value => value >= 0)
        .Where(value => value <= playerModel.MaxGarbageCount.Value)
-       .Subscribe(value => inGameUI.StatusBarPanel.GarbageInventoryView.SetText(value))
-       .AddTo(this);
+       .Subscribe(value => inGameUI.StatusBarPanel.GarbageInventoryView.SetText(value)));
 
 
 
-        playerModel.TargetEXP
+        list.Add(playerModel.TargetEXP
        .Where(value => playerModel.TargetEXP.Value < 0)
-       .Subscribe(value => { playerModel.TargetEXP.Value = 0; })
-       .AddTo(this);
+       .Subscribe(value => { playerModel.TargetEXP.Value = 0; }));
 
 
-        playerModel.TargetEXP
+        list.Add(playerModel.TargetEXP
          .Where(value => value >= 0)
-         .Subscribe(value => playerModel.RollingValue())
-         .AddTo(this);
+         .Subscribe(value => playerModel.RollingValue()));
 
 
 
-        playerModel.CurrentEXP
+        list.Add(playerModel.CurrentEXP
           .Where(value => value >= 0)
-          .Subscribe(value => inGameUI.StatusBarPanel.PlayerExpView.SetExpText(value))
-          .AddTo(this);
+          .Subscribe(value => inGameUI.StatusBarPanel.PlayerExpView.SetExpText(value)));
 
-       
+
     }
 
 

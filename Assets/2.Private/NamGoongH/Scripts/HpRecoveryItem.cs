@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class HpRecoveryItem : MonoBehaviour
 {
-    [SerializeField] private int healAmount = 20;
+    //[SerializeField] private int healAmount = 20;
 
     private void OnTriggerEnter(Collider other)
     {
