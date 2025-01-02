@@ -31,7 +31,7 @@ public class BossNormalAttack : Action
         if (selfObject.Value != null)
         {
             animator = selfObject.Value.GetComponent<Animator>();
-            animator.SetBool("isAttack", true);
+            animator.SetTrigger("Punch");
 
             // 테스크 실행 => while 현재 애니메이션이 재생중인지 확인을해서 끝난시점을 잡고 OnEnd 내부 로직을 실행시키고 return TaskStatus.Success; 화이팅
             AttackRoutine(baseMonster).Forget();
@@ -112,7 +112,7 @@ public class BossNormalAttack : Action
             await UniTask.Yield();
         }
 
-        animator.SetBool("isAttack", false);
+        animator.SetTrigger("Punch");
 
         return TaskStatus.Success;
     }
