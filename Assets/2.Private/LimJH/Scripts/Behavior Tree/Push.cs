@@ -5,6 +5,7 @@ using BehaviorDesigner.Runtime.Tasks;
 public class Push : Action
 {
     public SharedGameObject targetObject;   
+    public SharedVector3 playerVector;
     public float pushDistance = 5f;         // 밀려날 거리
     public float pushSpeed = 2f;            // 밀려나는 속도
 
@@ -15,7 +16,8 @@ public class Push : Action
 
         // 플레이어 위치와 몬스터 위치를 기준으로 방향 계산
         Vector3 monsterPosition = transform.position;//selfObject로 수정(?)
-        Vector3 direction = (monsterPosition - targetObject.Value.transform.position).normalized;
+        Vector3 direction = (monsterPosition - playerVector.Value).normalized;
+        //Vector3 direction = (monsterPosition - targetObject.Value.transform.position).normalized;
 
         // 목표 위치 계산
         targetPosition = monsterPosition + direction * pushDistance;
