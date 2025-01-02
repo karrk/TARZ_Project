@@ -24,22 +24,13 @@ public class CameraController : MonoBehaviour
     private bool isLockOn = false;
     public bool IsLockOn {  get { return isLockOn; } set { isLockOn = value; } }
 
-    //[Inject]
-    //private void Init(ProjectPlayer player, ProjectInstaller.CameraSetting camSetting,
-    //    ProjectInstaller.LockOnSetting lockOnSetting, InputManager manager)
-    //{
-    //    Cursor.lockState = CursorLockMode.Locked;   // 마우스 커서를 고정
-    //    this.player = player.transform;
-    //    manager.OnControlledRightStick += HandleCameraRotation;
-    //    CamSetting(camSetting);
-    //    this.lockOnSetting = lockOnSetting;
-    //}
-
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         input.OnControlledRightStick += HandleCameraRotation;
         CamSetting();
+        input.OnDownL2Key += LockOnDown;
+        input.OnUpL2Key += LockOnUp;
     }
 
     private void CamSetting()
@@ -54,21 +45,13 @@ public class CameraController : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.J))
         {
-           if(!isLockOn)
-            {
-                LockOn();
-            }
-           else
-            {
-                return;
-            }
+
 
         }
 
         if(Input.GetKeyUp(KeyCode.J))
         {
-            monster = null;
-            isLockOn = false;
+
         }
     }
     
@@ -229,5 +212,23 @@ public class CameraController : MonoBehaviour
     public Vector3 GetAngle(float AngleInDegree)
     {
         return new Vector3(Mathf.Sin(AngleInDegree * Mathf.Deg2Rad), 0, Mathf.Cos(AngleInDegree * Mathf.Deg2Rad));
+    }
+
+    private void LockOnDown()
+    {
+        if (!isLockOn)
+        {
+            LockOn();
+        }
+        else
+        {
+            return;
+        }
+    }
+
+    private void LockOnUp()
+    {
+        monster = null;
+        isLockOn = false;
     }
 }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-public class SceneLoadTester : MonoBehaviour 
+public class SceneLoadTest : MonoBehaviour 
 {
     [SerializeField] private string sceneName;
     [Inject] private SignalBus signal;
