@@ -7,11 +7,21 @@ using System.Threading;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class KeyImage : MonoBehaviour
 {
-    [SerializeField] GameObject keyImages;
-  
+    [System.Serializable]
+    public class KeySprite
+    {
+        public Sprite[] sprite;
+    }
+
+    [SerializeField] Image[] keyImages;
+    [SerializeField] KeySprite[] keySprites;
+
+ 
+
     public float checkTime;
     public CancellationTokenSource cancell = new CancellationTokenSource();
 
@@ -38,18 +48,29 @@ public class KeyImage : MonoBehaviour
 
             var controllers = Input.GetJoystickNames();
 
-          
-
-            // 컨트롤러
-            if (controllers[0].Length > 0)
+            if (controllers.Length <= 0)
             {
-                keyImages.SetActive(false);
+                for (int i = 0; i < keyImages.Length; i++) {
+                    keyImages[i].sprite = keySprites[0].sprite[i];
+                }
+
+            }
+            // 컨트롤러
+            else if (controllers[0].Length > 0)
+            {
+                for (int i = 0; i < keyImages.Length; i++)
+                {
+                    keyImages[i].sprite = keySprites[1].sprite[i];
+                }
 
             }
             // 키마
             else if (controllers[0].Length == 0)
             {
-                keyImages.SetActive(true);
+                for (int i = 0; i < keyImages.Length; i++)
+                {
+                    keyImages[i].sprite = keySprites[0].sprite[i];
+                }
             }
 
 
