@@ -60,7 +60,7 @@ MonoBehaviour:
     MaxHealth: 100
     MovementSpeed: 3
   camSetting:
-    Height: 4
+    Height: 3
     Dist: -7.5
     RotationSpeed: 2
     SmoothSpeed: 0.125
@@ -136,11 +136,11 @@ MonoBehaviour:
       RotateTime: 4
       Radius: 3.4
       Damage: 0
-      ViewArea: 0
-      ViewAngle: 0
+      ViewArea: 5
+      ViewAngle: 360
       TargetMask:
         serializedVersion: 2
-        m_Bits: 0
+        m_Bits: 4096
       Delay: 0
     DashMeleeAttackSetting:
       Delay: 0.5
