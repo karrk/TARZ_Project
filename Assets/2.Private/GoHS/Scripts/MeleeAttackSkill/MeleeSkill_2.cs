@@ -21,6 +21,7 @@ public class MeleeSkill_2 : BaseState
         dashTime = player.Setting.MeleeSkill2Setting.DashTime;         
         player.candash = true;
 
+        Physics.IgnoreLayerCollision(player.gameObject.layer, LayerMask.NameToLayer("Monster"), true);
 
         // 플레이어 입력방향에 따라 대쉬 방향 설정
         Vector3 forward = player.Cam.transform.forward;
@@ -49,13 +50,14 @@ public class MeleeSkill_2 : BaseState
 
 
         hitBox.SetActive(true);
+
+        player.Refernece.Rigid.AddForce(dashDirection * player.Setting.MeleeSkill2Setting.DashSpeed, ForceMode.VelocityChange);
     }
 
     public override void Update()
     {
         if (dashTime > 0f)
         {
-            player.transform.Translate(dashDirection * player.Setting.MeleeSkill2Setting.DashSpeed * Time.deltaTime, Space.World);
             dashTime -= Time.deltaTime;
         }
         else
@@ -69,6 +71,7 @@ public class MeleeSkill_2 : BaseState
     public override void Exit()
     {
         hitBox.SetActive(false);
+        Physics.IgnoreLayerCollision(player.gameObject.layer, LayerMask.NameToLayer("Monster"), false);
     }
 
     private IEnumerator DelayCoroutine()

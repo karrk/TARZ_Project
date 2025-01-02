@@ -171,6 +171,8 @@ public class LongRangeAttackState : BaseState
 
     public override void Exit()
     {
+
+        player.Refernece.Animator.SetBool("LongRangeAttack", false);
         //Debug.Log("@@@@@@@@@@@@@@@@@@@@@@원거리 공격상태 해제됨");
         //attackStack = 0;    // 공격 스택 초기화
         //player.Refernece.Animator.SetBool("LongRangeAttack", false);

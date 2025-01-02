@@ -27,7 +27,7 @@ public class PlayerReferences
     public CapsuleCollider Coll;
 }
 
-public class ProjectPlayer : MonoBehaviour
+public class ProjectPlayer : MonoBehaviour, IDamagable
 {
     [Header("State")]
     [SerializeField] E_State curState = E_State.Idle;
@@ -456,4 +456,8 @@ public class ProjectPlayer : MonoBehaviour
         }
     }
 
+    public void TakeHit(float value, bool chargable = false)
+    {
+        stats.AddHP(-value); 
+    }
 }
