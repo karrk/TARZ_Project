@@ -8,7 +8,8 @@ using UnityEngine;
 public class TargetIndicator : MonoBehaviour
 {
     [SerializeField] Transform playerTransform;
-    [SerializeField] Transform target;
+    //  [SerializeField] Transform target;
+    [SerializeField] Vector3 target;
     [SerializeField] TMP_Text disText;
     [SerializeField] float offset;
 
@@ -39,15 +40,16 @@ public class TargetIndicator : MonoBehaviour
     private void Update()
     {
         ClampTarget();
-        Distance.Value = (int)Vector3.Distance(playerTransform.position, target.position);
-
+        //     Distance.Value = (int)Vector3.Distance(playerTransform.position, target.position);
+        Distance.Value = (int)Vector3.Distance(playerTransform.position, target);
     }
 
     /// <summary>
     /// 인디케이터 활성화
     /// </summary>
     /// <param name="target"> 목표 위치 설정 </param>
-    public void EnableIndicator(Transform target)
+    //   public void EnableIndicator(Transform target)
+    public void EnableIndicator(Vector3 target)
     {
         this.target = target;
         gameObject.SetActive(true);
@@ -59,15 +61,18 @@ public class TargetIndicator : MonoBehaviour
     public void DisableIndicator()
     {
         gameObject.SetActive(false);
-        this.target = null;
+        //      this.target = null;
+        this.target = Vector3.zero;
     }
 
     void ClampTarget()
     {
-        if (target is null)
-            return;
+        if(target == Vector3.zero) return;
+    //   if (target is null)
+    //        return;
 
-        Vector3 targetVec = mainCam.WorldToScreenPoint(target.position);
+        //    Vector3 targetVec = mainCam.WorldToScreenPoint(target.position);
+        Vector3 targetVec = mainCam.WorldToScreenPoint(target);
         transform.position = targetVec;
 
 

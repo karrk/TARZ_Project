@@ -9034,6 +9034,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Potal
       objectReference: {fileID: 0}
+    - target: {fileID: 2247490343831321836, guid: 47a139a51e68178489494513bc0a7233,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4178831504096562558, guid: 47a139a51e68178489494513bc0a7233,
         type: 3}
       propertyPath: sceneName
