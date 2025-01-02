@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneLoadTester : MonoBehaviour 
+public class SceneLoadTest : MonoBehaviour 
 {
     [SerializeField] private string sceneName;
 
