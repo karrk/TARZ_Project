@@ -32,6 +32,7 @@ public class ChapterSelectorActivator : MonoBehaviour
         if (isPlayerInRange && Input.GetKeyDown(KeyCode.F))
         {
             chapterSelector.gameObject.SetActive(true);
+            interationUI.SetActive(false);
         }
     }
 }
