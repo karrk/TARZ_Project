@@ -6,6 +6,7 @@ public class Knockdown : Action
 {
     public SharedGameObject targetObject;
     public SharedVector3 playerVector;
+    public SharedInt skillType;
 
     public float pushDistance = 5f;         // 밀려날 거리
     public float pushSpeed = 2f;            // 밀려나는 속도
@@ -37,6 +38,7 @@ public class Knockdown : Action
         // 목표 지점에 도달했는지 확인
         if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
         {
+            skillType.Value = 0;
             return TaskStatus.Success;
         }
 
