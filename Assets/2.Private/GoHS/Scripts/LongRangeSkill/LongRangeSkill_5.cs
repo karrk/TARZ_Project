@@ -18,6 +18,7 @@ public class LongRangeSkill_5 : BaseState
     public override void Enter()
     {
         player.StartCoroutine(ActionSkill());
+        player.Refernece.Animator.SetBool("LongRange5", true);
     }
 
     private IEnumerator ActionSkill()
@@ -42,6 +43,8 @@ public class LongRangeSkill_5 : BaseState
         Shoot();
         yield return new WaitForSeconds(player.Setting.Skill5Setting.EndDelay);
 
+
+        player.Refernece.Animator.SetBool("LongRange5", false);
         player.ChangeState(E_State.Idle);
     }
 
@@ -61,6 +64,8 @@ public class LongRangeSkill_5 : BaseState
             dir = (randPos - AnchorPos).normalized;
             player.Refernece.Shooter.FireItem(randPos, dir);
         }
+
+        player.Refernece.Animator.SetTrigger("LongRange5_End");
     }
 
     private Vector3 GetRandomPos()
