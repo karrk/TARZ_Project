@@ -21,7 +21,7 @@ public class MeleeSkill_HitBox2 : MonoBehaviour
             IDamagable damagable = other.GetComponent<IDamagable>();
             if (damagable != null)
             {
-                damagable.TakeHit(skillDamage, true);
+                damagable.TakeHit(skillDamage, false);
             }
 
             IPushable pushable = other.GetComponent<IPushable>();
