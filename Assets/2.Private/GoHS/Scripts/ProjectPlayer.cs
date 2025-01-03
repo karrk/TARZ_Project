@@ -189,7 +189,7 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
         inputManager.PressedXKey += Jump;
         
         inputManager.PressedL1Key += MeleeSkill_1;
-        //inputManager.OnControlledDPAD += MeleeSkill_2;
+        inputManager.OnControlledDPAD += MeleeSkill_2;
     }
 
     private IEnumerator CheckGround()
