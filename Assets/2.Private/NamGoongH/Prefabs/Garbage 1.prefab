@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6310246106574679366}
   - component: {fileID: -6580178284625493388}
   - component: {fileID: -3855020330026580299}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Garbage 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 2313737893750025777, guid: 840d4cb99e87e61499452358514ab336, type: 3}
 --- !u!64 &6310246106574679366

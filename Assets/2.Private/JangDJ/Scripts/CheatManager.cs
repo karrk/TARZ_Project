@@ -23,7 +23,7 @@ public class CheatManager : ITickable
     {
         for (int i = 0; i < 10; i++)
         {
-            garbageManager.AddItem(Random.Range((int)E_Garbage.Test2, (int)E_Garbage.Size));
+            garbageManager.AddItem(Random.Range((int)E_Garbage.Garbage1, (int)E_Garbage.Size));
         }
     }
 
