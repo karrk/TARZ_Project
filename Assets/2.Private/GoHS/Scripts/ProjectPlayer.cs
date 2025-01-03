@@ -295,6 +295,9 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
     /// </summary>
     private void Dash()
     {
+        if (IsGrounded == false)
+            return;
+
         //bool useAccept = skillManager.UseStamina(setting.DashSetting.UseStamina);
         bool useAccept = stats.UseStamina(setting.DashSetting.UseStamina);
 
