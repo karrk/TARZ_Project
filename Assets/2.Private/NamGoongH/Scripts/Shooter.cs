@@ -49,7 +49,7 @@ public class Shooter
 
     public void FireItem(Vector3 firePos, Vector3 dir, float damage)
     {
-        garbageQueue.AddItem(UnityEngine.Random.Range((int)E_Garbage.Test2, (int)E_Garbage.Size));
+        garbageQueue.AddItem(UnityEngine.Random.Range((int)E_Garbage.Garbage1, (int)E_Garbage.Size));
         E_Garbage idx = garbageQueue.GetNextGarbageIndex();
 
         Garbage garbage = manager.GetObject<Garbage>(idx);

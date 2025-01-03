@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -7959760515647177990}
   - component: {fileID: -9073065486288531211}
   - component: {fileID: -2204385074967222026}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Garbage 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 3496807170244802132, guid: 09098e69b9dd5e840bed82e380fe0988, type: 3}
 --- !u!64 &-7959760515647177990
@@ -170,5 +170,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb53e34bbe3b13f46b1ab91cfd15780d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  garbageIndex: 0
-  garbageType: -1
+  garbageIndex: 3
+  garbageType: 3

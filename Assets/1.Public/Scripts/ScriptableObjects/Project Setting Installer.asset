@@ -34,16 +34,28 @@ MonoBehaviour:
           Prefab: {fileID: 3111731739044657598, guid: 27e16f93793d35c4e898bbd5137f188b,
             type: 3}
         - Type: 1
-          Prefab: {fileID: 3111731739044657598, guid: 35d9e1dce6b43fc4eaa38281d70b02b8,
+          Prefab: {fileID: 3339285038920912654, guid: c331cfb0bcd32cf4795ca73bd48f4059,
             type: 3}
         - Type: 2
-          Prefab: {fileID: 3111731739044657598, guid: 735d6edfd94719943be3fba04f8d9f29,
+          Prefab: {fileID: 3175357615363626697, guid: d07ca7c3b8b9d48478be3f269e7583c5,
+            type: 3}
+        - Type: 3
+          Prefab: {fileID: 6191559965192559360, guid: 05c9a700f4204464ab1d61f015104a39,
+            type: 3}
+        - Type: 4
+          Prefab: {fileID: 8847753906531737805, guid: 1648469a9f8d46946a626b99e4ed8ab5,
+            type: 3}
+        - Type: 5
+          Prefab: {fileID: 1134474963432908769, guid: e7d093322ff250b4bab5fe934d7cea52,
             type: 3}
   garbagePrefabs:
     Garbages:
     - {fileID: 3111731739044657598, guid: 27e16f93793d35c4e898bbd5137f188b, type: 3}
-    - {fileID: 3111731739044657598, guid: 35d9e1dce6b43fc4eaa38281d70b02b8, type: 3}
-    - {fileID: 3111731739044657598, guid: 735d6edfd94719943be3fba04f8d9f29, type: 3}
+    - {fileID: 3339285038920912654, guid: c331cfb0bcd32cf4795ca73bd48f4059, type: 3}
+    - {fileID: 3175357615363626697, guid: d07ca7c3b8b9d48478be3f269e7583c5, type: 3}
+    - {fileID: 6191559965192559360, guid: 05c9a700f4204464ab1d61f015104a39, type: 3}
+    - {fileID: 8847753906531737805, guid: 1648469a9f8d46946a626b99e4ed8ab5, type: 3}
+    - {fileID: 1134474963432908769, guid: e7d093322ff250b4bab5fe934d7cea52, type: 3}
   playerBaseStats:
     CriticalChance: 0
     CriticalDamage: 0
