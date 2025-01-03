@@ -88,6 +88,8 @@ public class InputManager : IInitializable, ITickable
     /// </summary>
     public event Action OnUpL2Key;
 
+
+
     private Vector3 moveVec;
     private Vector3 rotVec;
     private Vector3 arrowVec;
@@ -208,6 +210,8 @@ public class InputManager : IInitializable, ITickable
         }
     }
 
+    private bool isPressedR2 = false;
+
     /// <summary>
     /// 좌클릭, 우측 트리거
     /// </summary>
@@ -215,10 +219,15 @@ public class InputManager : IInitializable, ITickable
     {
         // 좌클릭은 가능 , 조이스틱 R2 기능 안함
 
-        if (Input.GetButtonDown("R2") && Input.GetAxisRaw("R2")==1)
+        if (isPressedR2 == false && (Input.GetButtonDown("R2") || Input.GetAxisRaw("R2") == 1))
         {
+            //Debug.Log("R2");
+            isPressedR2 = true;
             PressedR2Key?.Invoke();
-            Debug.Log("R2");
+        }
+        else if (isPressedR2 == true && (Input.GetButtonUp("R2") || Input.GetAxisRaw("R2") == 0))
+        {
+            isPressedR2 = false;
         }
     }
 

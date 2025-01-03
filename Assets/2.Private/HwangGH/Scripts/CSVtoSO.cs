@@ -1,14 +1,12 @@
 using UnityEngine;
-using UnityEditor;
 using System.IO;
-using DG.Tweening.Plugins.Core.PathCore;
 
 
 public class CSVtoSO
 {
     private static string monsterCSVPath = Application.dataPath + "\\2.Private\\HwangGH\\MonsterDatatables";
 
-    [MenuItem("Utilities/Generate MonsterSO")]
+    //[MenuItem("Utilities/Generate MonsterSO")]
     public static void GenerateMonsterSO()
     {
         if (Directory.Exists($"{monsterCSVPath}") == false)
@@ -59,9 +57,9 @@ public class CSVtoSO
             monsterSO.BerserkSkill2CastProbability = float.Parse(values[21]);
             monsterSO.BerserkSkill3CastProbability = float.Parse(values[22]);
 
-            AssetDatabase.CreateAsset(monsterSO, $"Assets/2.Private/HwangGH/MonsterDatatables/{monsterSO.monsterName}.asset");
+            //AssetDatabase.CreateAsset(monsterSO, $"Assets/2.Private/HwangGH/MonsterDatatables/{monsterSO.monsterName}.asset");
         }
 
-        AssetDatabase.SaveAssets();
+        //AssetDatabase.SaveAssets();
     }
 }
