@@ -103,6 +103,7 @@ public class InputManager : IInitializable, ITickable
         PressedXKey = null;
         PressedYKey = null;
         PressedAKey = null;
+        OnUpAkey = null;
         PressedBKey = null;
         PressedR2Key = null;
         PressedL1Key = null;
