@@ -19,7 +19,7 @@ public class DashMeleeAttack_HitBox : MonoBehaviour
             IDamagable damagable = other.GetComponent<IDamagable>();
             if (damagable != null)
             {
-                damagable.TakeHit(skillDamage, true);
+                damagable.TakeHit(skillDamage, false);
             }
         }
     }
