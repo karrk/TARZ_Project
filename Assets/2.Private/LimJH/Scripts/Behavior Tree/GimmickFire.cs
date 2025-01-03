@@ -1,8 +1,6 @@
 using UnityEngine;
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
-using BehaviorDesigner.Runtime.Tasks.Unity.UnityGameObject;
-using UnityEditor.Experimental.GraphView;
 using System.Collections.Generic;
 
 public class GimmickFire : Action

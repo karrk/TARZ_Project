@@ -10,38 +10,32 @@ public class Shooter
     private GarbageQueue garbageQueue; // GarbageQueue 참조
     private PoolManager manager;
     private ProjectInstaller.PlayerSettings setting;
-    private PlayerStats stat;
 
     [Inject]
     public void Construct(GarbageQueue garbageQueue, 
         ProjectInstaller.PlayerSettings setting,
-        PoolManager manager, ProjectPlayer player
-        , PlayerStats stat)
+        PoolManager manager, ProjectPlayer player)
     {
         this.garbageQueue = garbageQueue;
         this.manager = manager;
         this.setting = setting;
         this.muzzlePoint = player.Refernece.MuzzlePoint;
-        this.stat = stat;
     }
 
     /// <summary>
     /// 받아온 프리탭을 발사함
     /// </summary>
-    public void FireItem()
+    public void FireItem(float damage)
     {
         // 다음 아이템의 프리팹 가져오기
         E_Garbage idx = garbageQueue.GetNextGarbageIndex();
-
-        float power = idx == E_Garbage.Basic ?
-            setting.BasicSetting.BasicPower : stat.Atk;
 
         Garbage garbage = manager.GetObject<Garbage>(idx);
 
         if (garbage == null)
             return;
 
-        garbage.SetAsProjectile(power);
+        garbage.SetAsProjectile(damage);
 
         if(garbage.TryGetComponent<Rigidbody>(out Rigidbody rb) == false)
         {
@@ -53,13 +47,10 @@ public class Shooter
         rb.AddForce(muzzlePoint.forward * setting.BasicSetting.ThrowingSpeed, ForceMode.Impulse);
     }
 
-    public void FireItem(Vector3 firePos, Vector3 dir)
+    public void FireItem(Vector3 firePos, Vector3 dir, float damage)
     {
-        garbageQueue.AddItem(UnityEngine.Random.Range((int)E_Garbage.Test2, (int)E_Garbage.Size));
+        garbageQueue.AddItem(UnityEngine.Random.Range((int)E_Garbage.Garbage1, (int)E_Garbage.Size));
         E_Garbage idx = garbageQueue.GetNextGarbageIndex();
-
-        float power = idx == E_Garbage.Basic ?
-            setting.BasicSetting.BasicPower : stat.Atk;
 
         Garbage garbage = manager.GetObject<Garbage>(idx);
 
@@ -68,7 +59,7 @@ public class Shooter
 
         garbage.SetImmediateMode();
 
-        garbage.SetAsProjectile(power);
+        garbage.SetAsProjectile(damage);
 
         if (garbage.TryGetComponent<Rigidbody>(out Rigidbody rb) == false)
         {
