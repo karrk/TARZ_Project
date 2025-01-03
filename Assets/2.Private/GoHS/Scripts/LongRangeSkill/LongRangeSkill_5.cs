@@ -62,7 +62,7 @@ public class LongRangeSkill_5 : BaseState
         {
             randPos = GetRandomPos();
             dir = (randPos - AnchorPos).normalized;
-            player.Refernece.Shooter.FireItem(randPos, dir);
+            player.Refernece.Shooter.FireItem(randPos, dir, 500);
         }
 
         player.Refernece.Animator.SetTrigger("LongRange5_End");

@@ -73,7 +73,7 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
     [SerializeField] private float groundBoxHeight;
 
     [Inject] private InputManager inputManager;
-    [Inject] private PlayerStats stats;
+    [Inject] public PlayerStats stats { get; private set; }
     [Inject] private Shooter shooter;
 
     [SerializeField] public PlayerReferences Refernece;
