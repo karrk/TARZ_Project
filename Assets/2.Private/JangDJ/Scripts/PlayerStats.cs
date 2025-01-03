@@ -1,6 +1,6 @@
-using Cysharp.Threading.Tasks;
 using System;
-using System.Threading;
+using System.Collections;
+using UnityEngine;
 using Zenject;
 
 // 프로젝트 컨텍스트 - 씬 전환시에도 상태를 유지시키기 위함
@@ -9,6 +9,7 @@ public class PlayerStats : IInitializable
     [Inject] private ProjectInstaller.PlayerSettings setting;
     [Inject] private ProjectInstaller.PlayerBaseStats baseStat;
     [Inject] private PlayerEquipment equips;
+    [Inject] private CoroutineHelper helper;
 
     public event Action<float> OnChangedCurMana;
     public event Action<float> OnChangedMaxHP;
@@ -131,7 +132,7 @@ public class PlayerStats : IInitializable
     #region 스테미너
 
     private bool usedStamina = false;
-    private CancellationTokenSource staminaThreadToken;
+    private Coroutine ChargeRoutine;
 
     /// <summary>
     /// 행동에 필요한 스테미너를 사용할 수 있는지 판별합니다.
@@ -148,18 +149,18 @@ public class PlayerStats : IInitializable
 
         OnChangedCurStamina?.Invoke(curStamina);
 
-        staminaThreadToken?.Cancel();
-        staminaThreadToken = new CancellationTokenSource();
+        if (ChargeRoutine != null)
+            helper.StopCoroutine(ChargeRoutine);
 
-        StaminaChargeRoutine(staminaThreadToken.Token).Forget();
+        helper.StartCoroutine(StaminaChargeRoutine());
 
         return true;
     }
 
-    private async UniTask StaminaChargeRoutine(CancellationToken token)
+    private IEnumerator StaminaChargeRoutine()
     {
+        yield return new WaitForSeconds(setting.BasicSetting.StaminaChargeWaitTime);
         usedStamina = false;
-        await UniTask.Delay((int)(setting.BasicSetting.StaminaChargeWaitTime * 1000));
 
         while (true)
         {
@@ -169,7 +170,7 @@ public class PlayerStats : IInitializable
             curStamina = Math.Clamp(curStamina + staminaRecoveryRate, 0, maxStamina);
             OnChangedCurStamina?.Invoke(curStamina);
 
-            await UniTask.Yield(PlayerLoopTiming.Update);
+            yield return null;
         }
     }
 
