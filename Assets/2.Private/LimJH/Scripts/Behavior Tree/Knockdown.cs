@@ -4,14 +4,14 @@ using BehaviorDesigner.Runtime.Tasks;
 
 public class Knockdown : Action
 {
-    public SharedGameObject targetObject;
     public SharedVector3 playerVector;
-    public SharedInt skillType;
 
     public float pushDistance = 5f;         // 밀려날 거리
-    public float pushSpeed = 2f;            // 밀려나는 속도
+    public float pushSpeed = 20f;            // 밀려나는 속도
+    public float maxDuration = 1f;          // 최대 지속 시간
 
     private Vector3 targetPosition;         // 몬스터가 밀려날 목표 위치
+    private float elapsedTime;              // 경과 시간
 
     public override void OnStart()
     {
@@ -27,18 +27,15 @@ public class Knockdown : Action
 
     public override TaskStatus OnUpdate()
     {
-        if (targetObject.Value == null)
-        {
-            return TaskStatus.Failure;
-        }
+        elapsedTime += Time.deltaTime;
 
         // 몬스터를 목표 위치로 이동
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, pushSpeed * Time.deltaTime);
 
         // 목표 지점에 도달했는지 확인
-        if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
+        if (Vector3.Distance(transform.position, targetPosition) < 0.5f || elapsedTime >= maxDuration)
         {
-            skillType.Value = 0;
+            elapsedTime = 0;
             return TaskStatus.Success;
         }
 

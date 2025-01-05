@@ -33,7 +33,10 @@ public class GarbageSpawner : MonoBehaviour
     {
         foreach (Transform spawnPoint in spawnPoints)
         {
-            int randomIndex = Random.Range((int)E_Garbage.Test2, (int)E_Garbage.Size);
+            if (spawnPoint == null)
+                continue;
+
+            int randomIndex = Random.Range((int)E_Garbage.Garbage1, (int)E_Garbage.Size);
             GameObject obj = manager.GetObject((E_Garbage)randomIndex);
             obj.transform.position = spawnPoint.position;
         }

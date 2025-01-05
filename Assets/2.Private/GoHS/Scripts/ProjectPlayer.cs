@@ -73,7 +73,7 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
     [SerializeField] private float groundBoxHeight;
 
     [Inject] private InputManager inputManager;
-    [Inject] private PlayerStats stats;
+    [Inject] public PlayerStats stats { get; private set; }
     [Inject] private Shooter shooter;
 
     [SerializeField] public PlayerReferences Refernece;
@@ -189,7 +189,7 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
         inputManager.PressedXKey += Jump;
         
         inputManager.PressedL1Key += MeleeSkill_1;
-        //inputManager.OnControlledDPAD += MeleeSkill_2;
+        inputManager.OnControlledDPAD += MeleeSkill_2;
     }
 
     private IEnumerator CheckGround()
@@ -295,6 +295,9 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
     /// </summary>
     private void Dash()
     {
+        if (IsGrounded == false)
+            return;
+
         //bool useAccept = skillManager.UseStamina(setting.DashSetting.UseStamina);
         bool useAccept = stats.UseStamina(setting.DashSetting.UseStamina);
 

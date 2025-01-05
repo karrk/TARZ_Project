@@ -214,6 +214,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
             public float ViewAngle;
             public LayerMask TargetMask;
             public float Delay;
+            public float Zoffset;
         }
 
         [Serializable]

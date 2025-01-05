@@ -51,8 +51,6 @@ public class LongRangeSkill_4 : BaseState
 
         Debug.Log($"스킬 범위 중심 : {center}");
 
-        yield return new WaitForSeconds(player.Setting.Skill4Setting.Delay);
-
         Collider[] hitcolliders = Physics.OverlapSphere(center, player.Setting.Skill4Setting.Radius, player.Setting.Skill4Setting.TargetMask);
         foreach (Collider hitCollider in hitcolliders)
         {
@@ -62,6 +60,8 @@ public class LongRangeSkill_4 : BaseState
                 damagable.TakeHit(player.Setting.Skill4Setting.Damage, false);
             }
         }
+
+        yield return new WaitForSeconds(player.Setting.Skill4Setting.Delay);
 
         player.ChangeState(E_State.Idle);
     }

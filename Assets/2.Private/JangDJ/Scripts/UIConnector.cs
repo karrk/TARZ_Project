@@ -10,7 +10,7 @@ public class UIConnector : IInitializable, IDisposable
 
     public void Initialize()
     {
-        Debug.Log("UI 커넥터 이닛");
+        //Debug.Log("UI 커넥터 이닛");
 
         stats.OnChangedCurThrowCount += (value) => { ui.GarbageCount.Value = (int)value; };
         stats.OnChangedMaxThrowCount += SetMaxGarbageCapacity;

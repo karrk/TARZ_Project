@@ -29,8 +29,12 @@ public enum E_Garbage
 {
     None = -1,
     Basic,
-    Test2,
-    Test3,
+    Garbage1,
+    Garbage2,
+    Garbage3,
+    Garbage4,
+    Garbage5,
+    
 
     Size
 }
