@@ -32,6 +32,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
     {
         SignalBusInstaller.Install(Container);
         Container.DeclareSignal<StageEndSignal>();
+        Container.DeclareSignal<PlayerDeadSignal>();
     }
 
     private void InstallData()
@@ -215,6 +216,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
             public LayerMask TargetMask;
             public float Delay;
             public float Zoffset;
+            public float CoolTime;
         }
 
         [Serializable]
@@ -222,8 +224,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         {
             public float DashTime;
             public float DashSpeed;
-            public float DashCoolTime;
-            public float Delay;
+            public float CoolTime;
         }
     }
 

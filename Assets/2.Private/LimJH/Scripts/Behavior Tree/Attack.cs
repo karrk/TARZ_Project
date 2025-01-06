@@ -56,8 +56,10 @@ public class Attack : Action
             }
             await UniTask.Yield();
         }
-
-        animator.SetBool("isAttack", false);
+        if (selfObject.Value != null)
+        {
+            animator.SetBool("isAttack", false);
+        }
 
         return TaskStatus.Success;
     }

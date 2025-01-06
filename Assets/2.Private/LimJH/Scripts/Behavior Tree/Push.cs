@@ -8,7 +8,7 @@ public class Push : Action
     public SharedInt skillType;
 
     public float pushDistance = 5f;         // 밀려날 거리
-    public float pushSpeed = 20f;            // 밀려나는 속도
+    public float pushSpeed = 10f;            // 밀려나는 속도
     public float maxDuration = 1f;          // 최대 지속 시간
 
     private Vector3 targetPosition;         // 몬스터가 밀려날 목표 위치

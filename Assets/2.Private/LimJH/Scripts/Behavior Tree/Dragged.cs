@@ -8,7 +8,7 @@ public class Dragged : Action
     public SharedInt skillType;
 
     public float maxDuration = 1f;          // 최대 지속 시간
-    public float gatherSpeed = 5f;          // 모이는 속도
+    public float gatherSpeed = 10f;          // 모이는 속도
     public float gatherRadius = 1f;         // 목표 지점에 도달했다고 간주하는 거리
     private float elapsedTime;              // 경과 시간
 

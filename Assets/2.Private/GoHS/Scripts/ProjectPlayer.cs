@@ -4,9 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public enum E_State { Idle, Move, Jump, Dash, LongRangeAttack, Drain, 
-                      LongRangeSkill_1, LongRangeSkill_2, LongRangeSkill_3,LongRangeSkill_4 , LongRangeSkill_5,
-                      DashMeleeAttack, MeleeSkill_1, MeleeSkill_2,  Size }      // 우선적으로 선언한 상태
+public enum E_State
+{
+    Idle, Move, Jump, Dash, LongRangeAttack, Drain,
+    LongRangeSkill_1, LongRangeSkill_2, LongRangeSkill_3, LongRangeSkill_4, LongRangeSkill_5,
+    DashMeleeAttack, MeleeSkill_1, MeleeSkill_2, Dead, Size
+}      // 우선적으로 선언한 상태
 
 public enum E_SkillState { MeleeSkill1 = 1, MeleeSkill2, LongRangeSkill5 }
 
@@ -31,7 +34,7 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
 {
     [Header("State")]
     [SerializeField] E_State curState = E_State.Idle;
-    public E_State CurState { get { return curState; } } 
+    public E_State CurState { get { return curState; } }
 
     [Inject] private ProjectInstaller.PlayerSettings setting;
     public ProjectInstaller.PlayerSettings Setting => setting;
@@ -52,6 +55,7 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
     public DashMeleeAttack dashMeleeAttackState;
     public MeleeSkill_1 meleeSkill_1State;
     public MeleeSkill_2 meleeSkill_2State;
+    public DeadState deadState;
 
     [Header("프로퍼티")]
     [SerializeField] private Camera cam;                                                // 카메라 변수
@@ -75,11 +79,12 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
     [Inject] private InputManager inputManager;
     [Inject] public PlayerStats stats { get; private set; }
     [Inject] private Shooter shooter;
-
+    [Inject] private SignalBus signal;
+    public SignalBus Signal { get { return signal; } }
+ 
     [SerializeField] public PlayerReferences Refernece;
 
     private Coroutine CheckGroundRoutine;
-    private Coroutine DrainRoutine;
 
     [HideInInspector] public bool IsJumpAttack = false;
 
@@ -88,50 +93,64 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
         // Idle 상태
         { E_State.Idle, new List<E_State>(){ E_State.Move,E_State.Jump,E_State.Dash,E_State.LongRangeAttack,
             E_State.Drain,E_State.LongRangeSkill_1, E_State.LongRangeSkill_2, E_State.LongRangeSkill_3, E_State.LongRangeSkill_4, E_State.LongRangeSkill_5,
-            E_State.MeleeSkill_1, E_State.MeleeSkill_2} },
+            E_State.MeleeSkill_1, E_State.MeleeSkill_2,
+            E_State.Dead} },
 
         // Move 상태
         {E_State.Move, new List<E_State>(){ E_State.Idle,E_State.Jump,E_State.Dash,E_State.LongRangeAttack,
             E_State.Drain,E_State.LongRangeSkill_1, E_State.LongRangeSkill_2, E_State.LongRangeSkill_3, E_State.LongRangeSkill_4, E_State.LongRangeSkill_5,
-            E_State.MeleeSkill_1, E_State.MeleeSkill_2}  },
+            E_State.MeleeSkill_1, E_State.MeleeSkill_2,
+            E_State.Dead}  },
 
         // Jump 상태
-        {E_State.Jump, new List<E_State>(){ E_State.Idle,E_State.LongRangeAttack }  },
+        {E_State.Jump, new List<E_State>(){ E_State.Idle,E_State.LongRangeAttack,
+            E_State.Dead}  },
 
         // Dash 상태
-        {E_State.Dash, new List<E_State>(){ E_State.Idle ,E_State.DashMeleeAttack}  },
+        {E_State.Dash, new List<E_State>(){ E_State.Idle ,E_State.DashMeleeAttack,
+            E_State.Dead}  },
 
         // Drain 상태
-        {E_State.Drain, new List<E_State>(){ E_State.Idle, }  }, 
+        {E_State.Drain, new List<E_State>(){ E_State.Idle,
+            E_State.Dead}  }, 
 
         // 원거리 공격 상태
         {E_State.LongRangeAttack, new List<E_State>(){ E_State.Idle,E_State.Move,E_State.Jump,E_State.Dash, E_State.LongRangeAttack,
             E_State.Drain,E_State.LongRangeSkill_1, E_State.LongRangeSkill_2, E_State.LongRangeSkill_3, E_State.LongRangeSkill_4, E_State.LongRangeSkill_5,
-            E_State.MeleeSkill_1, E_State.MeleeSkill_2 }  },
+            E_State.MeleeSkill_1, E_State.MeleeSkill_2,
+            E_State.Dead}  },
 
         // 원거리 스킬 1번 상태
-        {E_State.LongRangeSkill_1, new List<E_State>(){ E_State.Idle }  },
+        {E_State.LongRangeSkill_1, new List<E_State>(){ E_State.Idle,
+        E_State.Dead}  },
 
         // 원거리 스킬 2번 상태
-        {E_State.LongRangeSkill_2, new List<E_State>(){ E_State.Idle }  },
+        {E_State.LongRangeSkill_2, new List<E_State>(){ E_State.Idle,
+        E_State.Dead}  },
 
         // 원거리 스킬 3번 상태
-        {E_State.LongRangeSkill_3, new List<E_State>(){ E_State.Idle }  },
+        {E_State.LongRangeSkill_3, new List<E_State>(){ E_State.Idle,
+        E_State.Dead}  },
 
         // 원거리 스킬 4번 상태
-        {E_State.LongRangeSkill_4, new List<E_State>(){ E_State.Idle }  },
+        {E_State.LongRangeSkill_4, new List<E_State>(){ E_State.Idle,
+        E_State.Dead}  },
 
         // 원거리 스킬 5번 상태
-        {E_State.LongRangeSkill_5, new List<E_State>(){ E_State.Idle }  },
+        {E_State.LongRangeSkill_5, new List<E_State>(){ E_State.Idle,
+        E_State.Dead}  },
 
         // 대쉬 근접 공격 상태
-        {E_State.DashMeleeAttack, new List<E_State>(){ E_State.Idle }  },
+        {E_State.DashMeleeAttack, new List<E_State>(){ E_State.Idle,
+        E_State.Dead}  },
 
         // 근접 스킬 1번 상태
-        {E_State.MeleeSkill_1, new List<E_State>(){ E_State.Idle }  },
+        {E_State.MeleeSkill_1, new List<E_State>(){ E_State.Idle,
+        E_State.Dead}  },
 
         // 근접 스킬 2번 상태
-        {E_State.MeleeSkill_2, new List<E_State>(){ E_State.Idle }  },
+        {E_State.MeleeSkill_2, new List<E_State>(){ E_State.Idle,
+        E_State.Dead}  },
 
     };
 
@@ -159,6 +178,7 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
         dashMeleeAttackState = new DashMeleeAttack(this);
         meleeSkill_1State = new MeleeSkill_1(this);
         meleeSkill_2State = new MeleeSkill_2(this);
+        deadState = new DeadState(this);
 
         states[(int)E_State.Idle] = idleState;
         states[(int)E_State.Move] = walkState;
@@ -174,6 +194,8 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
         states[(int)E_State.DashMeleeAttack] = dashMeleeAttackState;
         states[(int)E_State.MeleeSkill_1] = meleeSkill_1State;
         states[(int)E_State.MeleeSkill_2] = meleeSkill_2State;
+        states[(int)E_State.Dead] = deadState; 
+
 
     }
 
@@ -187,7 +209,7 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
         inputManager.PressedR2Key += Fire;
         inputManager.PressedBKey += Dash;
         inputManager.PressedXKey += Jump;
-        
+
         inputManager.PressedL1Key += MeleeSkill_1;
         inputManager.OnControlledDPAD += MeleeSkill_2;
     }
@@ -195,12 +217,12 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
     private IEnumerator CheckGround()
     {
         yield return new WaitForSeconds(0.2f);
-        Vector3 halfSize = Vector3.one * (Refernece.Coll.radius * Mathf.Sqrt(2))/2;
+        Vector3 halfSize = Vector3.one * (Refernece.Coll.radius * Mathf.Sqrt(2)) / 2;
         halfSize.y = groundBoxHeight;
 
         while (true)
         {
-            if (Physics.BoxCast(transform.position + Vector3.up * 0.05f, halfSize, Vector3.down, Quaternion.identity, groundBoxHeight, 1<<6))
+            if (Physics.BoxCast(transform.position + Vector3.up * 0.05f, halfSize, Vector3.down, Quaternion.identity, groundBoxHeight, 1 << 6))
             {
                 IsGrounded = true;
                 jumpState.ResetJump();
@@ -229,12 +251,12 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
 
     private void Fire()
     {
-        if(curState == E_State.Dash)
+        if (curState == E_State.Dash)
         {
             ChangeState(E_State.DashMeleeAttack);
             return;
         }
-        else if(curState == E_State.Jump)
+        else if (curState == E_State.Jump)
         {
             IsJumpAttack = true;
         }
@@ -255,10 +277,9 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
     {
         if (curState == E_State.Idle || curState == E_State.Move || curState == E_State.LongRangeAttack)
         {
-
             ChangeState(E_State.Drain);
 
-            DrainRoutine = StartCoroutine(DecreaseStamina(setting.DrainSetting.UseStamina, setting.DrainSetting.DecreaseInterval));
+            stats.UseStamina(10, StopDrain);
         }
 
     }
@@ -268,26 +289,8 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
     /// </summary>
     private void StopDrain()
     {
+        stats.SetForceStopUseStamina();
         drainState.StopDrain();
-
-        if (DrainRoutine != null)
-            StopCoroutine(DrainRoutine);
-    }
-
-    private IEnumerator DecreaseStamina(float needStamina, float interval)
-    {
-        WaitForSeconds intervalSec = new WaitForSeconds(interval);
-
-        while (true)
-        {
-            //if (skillManager.UseStamina(needStamina) == false)
-            if (stats.UseStamina(needStamina) == false)
-                break;
-
-            yield return intervalSec;
-        }
-
-        StopDrain();
     }
 
     /// <summary>
@@ -349,13 +352,26 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
     private void MeleeSkill_1()
     {
         // TODO : 스킬을 사용할 수 있는 조건을 여기에 달아야 할까? 우선적으로 생각중
-
-        ChangeState(E_State.MeleeSkill_1);
+        if(meleeSkill_1State.CanSkill == true)
+        {
+            ChangeState(E_State.MeleeSkill_1);
+        }
+        else
+        {
+            Debug.Log("근접 스킬 1번 쿨타임중입니다.");
+        }
     }
 
     private void MeleeSkill_2(Vector3 vector)
     {
-        ChangeState(E_State.MeleeSkill_2);
+        if(meleeSkill_2State.CanSkill == true)
+        {
+            ChangeState(E_State.MeleeSkill_2);
+        }
+        else
+        {
+            Debug.Log("근접 스킬 2번 쿨타임중입니다.");
+        }
     }
 
     private void LongRangeSkill_1()
@@ -379,7 +395,7 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
     {
         // TODO : 스킬을 사용할 수 있는 조건을 여기에 달아야 할까? 우선적으로 생각중
 
-     
+
         ChangeState(E_State.LongRangeSkill_3);
     }
 
@@ -443,14 +459,14 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
 
     private void DrawGroundBox()
     {
-        if(Application.isPlaying == false)
+        if (Application.isPlaying == false)
         {
             Gizmos.color = Color.blue;
 
             Gizmos.DrawCube(transform.position + Vector3.down * groundBoxHeight / 2 + Vector3.up * 0.05f,
                 new Vector3(Refernece.Coll.radius * Mathf.Sqrt(2), groundBoxHeight, Refernece.Coll.radius * Mathf.Sqrt(2)));
         }
-        else if(IsGrounded == false)
+        else if (IsGrounded == false)
         {
             Gizmos.color = Color.blue;
 
@@ -461,6 +477,13 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
 
     public void TakeHit(float value, bool chargable = false)
     {
-        stats.AddHP(-value); 
+        if(stats.AddHP(-value))
+        {
+            ChangeState(E_State.Dead);
+        }
+        else
+        {
+            return;
+        }
     }
 }
