@@ -22,12 +22,15 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable
     private void Awake()
     {
         behaviorTree = GetComponent<BehaviorTree>(); // BehaviorTree 컴포넌트를 찾음
+        behaviorTree.SetVariableValue("my", this.gameObject);
     }
 
     private void OnEnable()
     {
         if (behaviorTree != null)
         {
+            
+
             behaviorTree.SetVariableValue("selfObject", this.gameObject);
 
             // "targetObject"에 플레이어 설정
