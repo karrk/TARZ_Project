@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using Zenject;
 
@@ -43,16 +44,7 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKey(KeyCode.J))
-        {
 
-
-        }
-
-        if(Input.GetKeyUp(KeyCode.J))
-        {
-
-        }
     }
     
 
@@ -230,5 +222,25 @@ public class CameraController : MonoBehaviour
     {
         monster = null;
         isLockOn = false;
+    }
+
+    private void CheckWall()
+    {
+        Vector3 playerPosition = player.transform.position;
+        Vector3 cameraPosition = transform.position;
+
+        Ray ray = new Ray(playerPosition, cameraPosition - playerPosition );
+        RaycastHit hit;
+
+        if(Physics.Raycast(ray, out hit, offset.z ))
+        {
+            Vector3 hitPoint = hit.point;
+            transform.position = hitPoint + hit.normal * 0.1f;
+        }
+        else
+        {
+            Quaternion rotation = Quaternion.Euler(0, current.x, 0);
+            transform.position = player.transform.position + rotation * offset;
+        }
     }
 }
