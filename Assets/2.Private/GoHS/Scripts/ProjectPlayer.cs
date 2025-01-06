@@ -79,7 +79,6 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
     [SerializeField] public PlayerReferences Refernece;
 
     private Coroutine CheckGroundRoutine;
-    private Coroutine DrainRoutine;
 
     [HideInInspector] public bool IsJumpAttack = false;
 
@@ -255,10 +254,9 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
     {
         if (curState == E_State.Idle || curState == E_State.Move || curState == E_State.LongRangeAttack)
         {
-
             ChangeState(E_State.Drain);
 
-            DrainRoutine = StartCoroutine(DecreaseStamina(setting.DrainSetting.UseStamina, setting.DrainSetting.DecreaseInterval));
+            stats.UseStamina(10, StopDrain);
         }
 
     }
@@ -268,26 +266,8 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
     /// </summary>
     private void StopDrain()
     {
+        stats.SetForceStopUseStamina();
         drainState.StopDrain();
-
-        if (DrainRoutine != null)
-            StopCoroutine(DrainRoutine);
-    }
-
-    private IEnumerator DecreaseStamina(float needStamina, float interval)
-    {
-        WaitForSeconds intervalSec = new WaitForSeconds(interval);
-
-        while (true)
-        {
-            //if (skillManager.UseStamina(needStamina) == false)
-            if (stats.UseStamina(needStamina) == false)
-                break;
-
-            yield return intervalSec;
-        }
-
-        StopDrain();
     }
 
     /// <summary>
