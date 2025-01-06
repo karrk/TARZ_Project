@@ -6,9 +6,42 @@ public class InteractionObject : MonoBehaviour
 {
     [SerializeField] private GameObject[] battleItemPrefab; // 배틀 아이템 배열
 
+    public GameObject interationUI;
+
+    private bool isPlayerInRange = false;
+    private bool isItemSpawned = false;
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player") && isItemSpawned == false)
+        {
+            interationUI.SetActive(true);
+            isPlayerInRange = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            interationUI.SetActive(false);
+            isPlayerInRange = false;
+        }
+    }
+
+    private void Update()
+    {
+        if (isPlayerInRange && Input.GetKeyDown(KeyCode.F))
+        {
+            Interact();
+            interationUI.SetActive(false);
+        }
+    }
+
     public void Interact()
     {
         SpawnRandomItem();
+        isItemSpawned = true;
     }
 
     private void SpawnRandomItem()
