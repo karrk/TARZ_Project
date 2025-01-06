@@ -7357,7 +7357,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1663649418372517984}
-  - component: {fileID: 8437977114702582050}
   - component: {fileID: 3582520999975720585}
   - component: {fileID: 4753079367106349594}
   - component: {fileID: 1965699570917936733}
@@ -22082,7 +22081,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 0}
-  target: {fileID: 0}
+  target: {x: 0, y: 0, z: 0}
   disText: {fileID: 2400964386077456352}
   offset: 30
   Distance:
@@ -30542,33 +30541,6 @@ MonoBehaviour:
       Version: 1.7.11
   gizmoViewMode: 2
   showBehaviorDesignerGizmo: 1
---- !u!54 &8437977114702582050
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2043975591120685786}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!222 &8444276210766189042
 CanvasRenderer:
   m_ObjectHideFlags: 0
