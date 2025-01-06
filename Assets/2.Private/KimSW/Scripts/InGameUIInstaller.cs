@@ -16,6 +16,9 @@ public class InGameUIInstaller : MonoInstaller
         //Container.Bind<PlayerUIPresenter>().FromComponentInHierarchy().AsSingle();
         Container.BindInterfacesTo<PlayerUIPresenter>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<UIConnector>().AsSingle().NonLazy();
+
+
+        Container.Bind<EquipmentManager>().FromComponentInHierarchy().AsSingle();
     }
 
    
