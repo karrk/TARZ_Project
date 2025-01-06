@@ -9,7 +9,7 @@ public class InteractionObject : MonoBehaviour
     public GameObject interationUI;
 
     private bool isPlayerInRange = false;
-    private bool isItemSpawned = false;
+    [SerializeField] private bool isItemSpawned = false;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -50,7 +50,7 @@ public class InteractionObject : MonoBehaviour
         GameObject prefabToSpawn = battleItemPrefab[random];
 
         // 상호작용한 물체의 앞쪽에 생성
-        Vector3 spawnPosition = transform.position + transform.forward * 1.5f;
+        Vector3 spawnPosition = transform.position + transform.up * -1.5f + transform.forward * 1.0f;
 
         // 아이템 생성
         GameObject spawnedItem = Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
