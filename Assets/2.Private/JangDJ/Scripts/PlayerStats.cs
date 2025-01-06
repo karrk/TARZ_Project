@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -133,6 +134,7 @@ public class PlayerStats : IInitializable
 
     private bool usedStamina = false;
     private Coroutine ChargeRoutine;
+    private bool forceStopUseStamina = false;
 
     /// <summary>
     /// 행동에 필요한 스테미너를 사용할 수 있는지 판별합니다.
@@ -155,6 +157,48 @@ public class PlayerStats : IInitializable
         helper.StartCoroutine(StaminaChargeRoutine());
 
         return true;
+    }
+
+    public void SetForceStopUseStamina()
+    {
+        forceStopUseStamina = true;
+    }
+
+    public async void UseStamina(float needValue, Action endAction)
+    {
+        usedStamina = true;
+        forceStopUseStamina = false;
+
+        if (ChargeRoutine != null)
+            helper.StopCoroutine(ChargeRoutine);
+
+        await UseStaminaRoutine(needValue, endAction);
+
+        helper.StartCoroutine(StaminaChargeRoutine());
+    }
+
+    private async UniTask UseStaminaRoutine(float value, Action endAction)
+    {
+        float needStamina = value * Time.deltaTime;
+
+        while (true)
+        {
+            if (curStamina < needStamina || forceStopUseStamina == true)
+                break;
+
+            curStamina = Math.Clamp(curStamina - needStamina, 0, maxStamina);
+
+            OnChangedCurStamina?.Invoke(curStamina);
+
+            await UniTask.Yield(PlayerLoopTiming.Update);
+        }
+
+        if(forceStopUseStamina == false)
+        {
+            endAction.Invoke();
+        }
+
+        usedStamina = false;
     }
 
     private IEnumerator StaminaChargeRoutine()
