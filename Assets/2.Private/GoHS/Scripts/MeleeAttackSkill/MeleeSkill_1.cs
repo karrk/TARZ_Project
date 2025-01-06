@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class MeleeSkill_1 : BaseState
 {
@@ -8,17 +9,24 @@ public class MeleeSkill_1 : BaseState
     {
     }
 
-    [SerializeField] private float delay;
-    [SerializeField] private float curDelay;
+    [SerializeField] private float curDelay;    // 시전중
+    [SerializeField] private float coolTime;    // 쿨타임
     private bool isStartSkill;
+
+    private bool canSkill = true;               // 지금 스킬을 사용할 수 있는가?
+    public bool CanSkill { get { return canSkill; } set { canSkill = value; } }
 
     public override void Enter()
     {
         Debug.Log("근접 스킬 1 시작!");
         curDelay = player.Setting.MeleeSkill1Setting.Delay;
+        coolTime = player.Setting.MeleeSkill1Setting.CoolTime;
 
         player.Refernece.Animator.SetTrigger("MeleeSkill_1");
 
+
+        canSkill = false;
+        player.StartCoroutine(CoolTimeCoroutine());
     }
 
     public override void Update()
@@ -68,7 +76,7 @@ public class MeleeSkill_1 : BaseState
                 IDamagable damagable = target.GetComponent<IDamagable>();
                 if (damagable != null)
                 {
-                    damagable.TakeHit(player.Setting.MeleeSkill1Setting.Damage, true);
+                    damagable.TakeHit(player.Setting.MeleeSkill1Setting.Damage, false);
                 }
 
                 // 플레이어의 3만큼(아마 변경 필요) 앞 방향으로 몬스터에게 위치 전달 
@@ -85,5 +93,11 @@ public class MeleeSkill_1 : BaseState
     public Vector3 GetAngle(float AngleInDegree)
     {
         return new Vector3(Mathf.Sin(AngleInDegree * Mathf.Deg2Rad), 0, Mathf.Cos(AngleInDegree * Mathf.Deg2Rad));
+    }
+
+    private IEnumerator CoolTimeCoroutine()
+    {
+        yield return new WaitForSeconds(coolTime);
+        canSkill = true;
     }
 }

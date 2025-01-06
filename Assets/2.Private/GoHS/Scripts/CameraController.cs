@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using Zenject;
 
@@ -43,16 +44,7 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKey(KeyCode.J))
-        {
 
-
-        }
-
-        if(Input.GetKeyUp(KeyCode.J))
-        {
-
-        }
     }
     
 
@@ -63,6 +55,7 @@ public class CameraController : MonoBehaviour
 
         //HandleCameraRotation();
         FollowTarget();
+
     }
 
     private void HandleCameraRotation(Vector3 vec)
@@ -94,18 +87,15 @@ public class CameraController : MonoBehaviour
             Quaternion lockOnRotation = Quaternion.LookRotation(directionToMonster);
 
             transform.position = player.transform.position + offset.z * directionToMonster + offset.y * Vector3.up;
-
-            //Vector3 resultDirection = new Vector3(directionToMonster.x, directionToMonster.y, directionToMonster.z);
-            //transform.position = player.position + resultDirection;
             transform.LookAt(player.transform.position);
+            CheckWall();
         }
         else
         {
             Quaternion rotation = Quaternion.Euler(0, current.x, 0f);
-            //Vector3 desiredPosition = target.position + rotation * offset;
-            //transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
             transform.position = player.transform.position + rotation * offset;
             transform.LookAt(player.transform.position);
+            CheckWall();
         }
 
     }
@@ -118,30 +108,6 @@ public class CameraController : MonoBehaviour
     /// </summary>
     private void LockOn()
     {
-        //if (!isLockOn)
-        //{
-        //    GetTarget();
-        //    if (targets.Count > 0)
-        //    {
-        //        monster = GetTargetMonster();
-        //        if (monster != null)
-        //        {
-        //            isLockOn = true;
-        //            Debug.Log("락온 기능 활성화");
-        //        }
-        //    }
-        //    else
-        //    {
-        //        IsLockOn = false;
-        //        Debug.Log("감지된 몬스터가 없습니다.");
-        //    }
-        //}
-        //else
-        //{
-        //    isLockOn = false;
-        //    monster = null;
-        //    Debug.Log("락온 기능 비활성화");
-        //}
 
         GetTarget();
         if (targets.Count > 0)
@@ -230,5 +196,28 @@ public class CameraController : MonoBehaviour
     {
         monster = null;
         isLockOn = false;
+    }
+
+    private void CheckWall()
+    {
+        Vector3 playerPosition = new Vector3(player.transform.position.x, player.transform.position.y + 2 , player.transform.position.z);
+        Vector3 cameraPosition = transform.position;
+
+        Ray ray = new Ray(playerPosition, (cameraPosition - playerPosition ) * Mathf.Abs(offset.z));
+
+        Debug.DrawRay(playerPosition, (cameraPosition - playerPosition) * Mathf.Abs(offset.z), Color.red);
+
+        if(Physics.Raycast(ray, out RaycastHit hit, Mathf.Abs(offset.z)))
+        {
+            Debug.Log("벽 확인 됨");
+            Vector3 hitPoint = hit.point;
+            transform.position = hit.point + hit.normal * 0.5f;
+        }
+        else
+        {
+            Debug.Log("벽 확인 안됨");
+            //Quaternion rotation = Quaternion.Euler(0, current.x, 0);
+            //transform.position = player.transform.position + rotation * offset;
+        }
     }
 }
