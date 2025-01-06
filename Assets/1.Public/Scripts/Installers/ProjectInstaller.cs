@@ -215,6 +215,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
             public LayerMask TargetMask;
             public float Delay;
             public float Zoffset;
+            public float CoolTime;
         }
 
         [Serializable]
@@ -222,8 +223,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         {
             public float DashTime;
             public float DashSpeed;
-            public float DashCoolTime;
-            public float Delay;
+            public float CoolTime;
         }
     }
 

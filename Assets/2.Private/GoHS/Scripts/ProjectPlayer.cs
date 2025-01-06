@@ -4,9 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public enum E_State { Idle, Move, Jump, Dash, LongRangeAttack, Drain, 
-                      LongRangeSkill_1, LongRangeSkill_2, LongRangeSkill_3,LongRangeSkill_4 , LongRangeSkill_5,
-                      DashMeleeAttack, MeleeSkill_1, MeleeSkill_2,  Size }      // 우선적으로 선언한 상태
+public enum E_State
+{
+    Idle, Move, Jump, Dash, LongRangeAttack, Drain,
+    LongRangeSkill_1, LongRangeSkill_2, LongRangeSkill_3, LongRangeSkill_4, LongRangeSkill_5,
+    DashMeleeAttack, MeleeSkill_1, MeleeSkill_2, Size
+}      // 우선적으로 선언한 상태
 
 public enum E_SkillState { MeleeSkill1 = 1, MeleeSkill2, LongRangeSkill5 }
 
@@ -31,7 +34,7 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
 {
     [Header("State")]
     [SerializeField] E_State curState = E_State.Idle;
-    public E_State CurState { get { return curState; } } 
+    public E_State CurState { get { return curState; } }
 
     [Inject] private ProjectInstaller.PlayerSettings setting;
     public ProjectInstaller.PlayerSettings Setting => setting;
@@ -186,7 +189,7 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
         inputManager.PressedR2Key += Fire;
         inputManager.PressedBKey += Dash;
         inputManager.PressedXKey += Jump;
-        
+
         inputManager.PressedL1Key += MeleeSkill_1;
         inputManager.OnControlledDPAD += MeleeSkill_2;
     }
@@ -194,12 +197,12 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
     private IEnumerator CheckGround()
     {
         yield return new WaitForSeconds(0.2f);
-        Vector3 halfSize = Vector3.one * (Refernece.Coll.radius * Mathf.Sqrt(2))/2;
+        Vector3 halfSize = Vector3.one * (Refernece.Coll.radius * Mathf.Sqrt(2)) / 2;
         halfSize.y = groundBoxHeight;
 
         while (true)
         {
-            if (Physics.BoxCast(transform.position + Vector3.up * 0.05f, halfSize, Vector3.down, Quaternion.identity, groundBoxHeight, 1<<6))
+            if (Physics.BoxCast(transform.position + Vector3.up * 0.05f, halfSize, Vector3.down, Quaternion.identity, groundBoxHeight, 1 << 6))
             {
                 IsGrounded = true;
                 jumpState.ResetJump();
@@ -228,12 +231,12 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
 
     private void Fire()
     {
-        if(curState == E_State.Dash)
+        if (curState == E_State.Dash)
         {
             ChangeState(E_State.DashMeleeAttack);
             return;
         }
-        else if(curState == E_State.Jump)
+        else if (curState == E_State.Jump)
         {
             IsJumpAttack = true;
         }
@@ -329,13 +332,26 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
     private void MeleeSkill_1()
     {
         // TODO : 스킬을 사용할 수 있는 조건을 여기에 달아야 할까? 우선적으로 생각중
-
-        ChangeState(E_State.MeleeSkill_1);
+        if(meleeSkill_1State.CanSkill == true)
+        {
+            ChangeState(E_State.MeleeSkill_1);
+        }
+        else
+        {
+            Debug.Log("근접 스킬 1번 쿨타임중입니다.");
+        }
     }
 
     private void MeleeSkill_2(Vector3 vector)
     {
-        ChangeState(E_State.MeleeSkill_2);
+        if(meleeSkill_2State.CanSkill == true)
+        {
+            ChangeState(E_State.MeleeSkill_2);
+        }
+        else
+        {
+            Debug.Log("근접 스킬 2번 쿨타임중입니다.");
+        }
     }
 
     private void LongRangeSkill_1()
@@ -359,7 +375,7 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
     {
         // TODO : 스킬을 사용할 수 있는 조건을 여기에 달아야 할까? 우선적으로 생각중
 
-     
+
         ChangeState(E_State.LongRangeSkill_3);
     }
 
@@ -423,14 +439,14 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
 
     private void DrawGroundBox()
     {
-        if(Application.isPlaying == false)
+        if (Application.isPlaying == false)
         {
             Gizmos.color = Color.blue;
 
             Gizmos.DrawCube(transform.position + Vector3.down * groundBoxHeight / 2 + Vector3.up * 0.05f,
                 new Vector3(Refernece.Coll.radius * Mathf.Sqrt(2), groundBoxHeight, Refernece.Coll.radius * Mathf.Sqrt(2)));
         }
-        else if(IsGrounded == false)
+        else if (IsGrounded == false)
         {
             Gizmos.color = Color.blue;
 
@@ -441,6 +457,6 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
 
     public void TakeHit(float value, bool chargable = false)
     {
-        stats.AddHP(-value); 
+        stats.AddHP(-value);
     }
 }
