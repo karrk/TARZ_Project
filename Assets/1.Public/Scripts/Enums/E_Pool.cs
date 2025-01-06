@@ -13,8 +13,8 @@ public enum E_PoolType
 public enum E_Monster
 {
     None = -1,
-    TestA,
-    TestB,
+    BasicMob1,
+    BasicMob2,
 
 }
 

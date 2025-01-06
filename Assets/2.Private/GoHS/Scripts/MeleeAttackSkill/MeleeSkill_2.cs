@@ -16,9 +16,15 @@ public class MeleeSkill_2 : BaseState
     private Vector3 dashDirection;  // 대쉬 방향
 
 
+    [SerializeField] private float coolTime;
+    private bool canSkill = true;
+    public bool CanSkill { get { return canSkill; } set { canSkill = value; } }
+
+
     public override void Enter()
     {
-        dashTime = player.Setting.MeleeSkill2Setting.DashTime;         
+        dashTime = player.Setting.MeleeSkill2Setting.DashTime;      
+        coolTime = player.Setting.MeleeSkill2Setting.CoolTime;
         player.candash = true;
 
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Monster"), true);
@@ -52,6 +58,9 @@ public class MeleeSkill_2 : BaseState
         hitBox.SetActive(true);
 
         player.Refernece.Rigid.AddForce(dashDirection * player.Setting.MeleeSkill2Setting.DashSpeed, ForceMode.VelocityChange);
+
+        canSkill = false;
+        player.StartCoroutine(CoolTimeCoroutine());
     }
 
     public override void Update()
@@ -74,10 +83,9 @@ public class MeleeSkill_2 : BaseState
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Monster"), false);
     }
 
-    private IEnumerator DelayCoroutine()
+    private IEnumerator CoolTimeCoroutine()
     {
-        hitBox.SetActive(true);
-        yield return new WaitForSeconds(player.Setting.MeleeSkill2Setting.Delay);
-        player.ChangeState(E_State.Idle);
+        yield return new WaitForSeconds(coolTime);
+        canSkill = true;
     }
 }
