@@ -32,6 +32,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
     {
         SignalBusInstaller.Install(Container);
         Container.DeclareSignal<StageEndSignal>();
+        Container.DeclareSignal<PlayerDeadSignal>();
     }
 
     private void InstallData()
