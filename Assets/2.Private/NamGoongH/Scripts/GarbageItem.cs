@@ -14,7 +14,7 @@ public class GarbageItem : MonoBehaviour
             {
                 for (int i = 0; i < addCount; i++)
                 {
-                    garbageQueue.AddItem(Random.Range(1,3));
+                    garbageQueue.AddItem(garbageIndex);
                 }
                 Destroy(gameObject);
             }
