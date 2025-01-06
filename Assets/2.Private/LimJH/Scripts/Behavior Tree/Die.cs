@@ -24,11 +24,11 @@ public class Die : Action
                 //selfObject.Value.SetActive(false);
 
                 // Collider 비활성화
-                Collider collider = selfObject.Value.GetComponent<Collider>();
+                /*Collider collider = selfObject.Value.GetComponent<Collider>();
                 if (collider != null)
                 {
                     collider.enabled = false;
-                }
+                }*/
 
 
                 // 애니메이션이 끝났으면 게임 오브젝트 삭제
