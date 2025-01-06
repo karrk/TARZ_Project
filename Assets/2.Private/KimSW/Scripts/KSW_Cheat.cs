@@ -44,7 +44,7 @@ public class KSW_Cheat : MonoBehaviour
             targetPos.x += Random.Range(-5,5);
             targetPos.z += Random.Range(-5, 5);
 
-            Garbage garbage = poolManager.GetObject<Garbage>(E_Garbage.Test2);
+            Garbage garbage = poolManager.GetObject<Garbage>(E_Garbage.Garbage1);
             garbage.transform.position = targetPos;
 
         }
