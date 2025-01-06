@@ -165,8 +165,8 @@ MonoBehaviour:
         m_Bits: 4096
       Delay: 0.5
       Zoffset: 0
+      CoolTime: 3
     MeleeSkill2Setting:
       DashTime: 0.4
       DashSpeed: 20
-      DashCoolTime: 0
-      Delay: 0
+      CoolTime: 3

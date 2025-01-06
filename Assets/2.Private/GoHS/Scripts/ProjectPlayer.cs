@@ -8,7 +8,7 @@ public enum E_State
 {
     Idle, Move, Jump, Dash, LongRangeAttack, Drain,
     LongRangeSkill_1, LongRangeSkill_2, LongRangeSkill_3, LongRangeSkill_4, LongRangeSkill_5,
-    DashMeleeAttack, MeleeSkill_1, MeleeSkill_2, Size
+    DashMeleeAttack, MeleeSkill_1, MeleeSkill_2, Dead, Size
 }      // 우선적으로 선언한 상태
 
 public enum E_SkillState { MeleeSkill1 = 1, MeleeSkill2, LongRangeSkill5 }
@@ -55,6 +55,7 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
     public DashMeleeAttack dashMeleeAttackState;
     public MeleeSkill_1 meleeSkill_1State;
     public MeleeSkill_2 meleeSkill_2State;
+    public DeadState deadState;
 
     [Header("프로퍼티")]
     [SerializeField] private Camera cam;                                                // 카메라 변수
@@ -78,7 +79,9 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
     [Inject] private InputManager inputManager;
     [Inject] public PlayerStats stats { get; private set; }
     [Inject] private Shooter shooter;
-
+    [Inject] private SignalBus signal;
+    public SignalBus Signal { get { return signal; } }
+ 
     [SerializeField] public PlayerReferences Refernece;
 
     private Coroutine CheckGroundRoutine;
@@ -91,50 +94,64 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
         // Idle 상태
         { E_State.Idle, new List<E_State>(){ E_State.Move,E_State.Jump,E_State.Dash,E_State.LongRangeAttack,
             E_State.Drain,E_State.LongRangeSkill_1, E_State.LongRangeSkill_2, E_State.LongRangeSkill_3, E_State.LongRangeSkill_4, E_State.LongRangeSkill_5,
-            E_State.MeleeSkill_1, E_State.MeleeSkill_2} },
+            E_State.MeleeSkill_1, E_State.MeleeSkill_2,
+            E_State.Dead} },
 
         // Move 상태
         {E_State.Move, new List<E_State>(){ E_State.Idle,E_State.Jump,E_State.Dash,E_State.LongRangeAttack,
             E_State.Drain,E_State.LongRangeSkill_1, E_State.LongRangeSkill_2, E_State.LongRangeSkill_3, E_State.LongRangeSkill_4, E_State.LongRangeSkill_5,
-            E_State.MeleeSkill_1, E_State.MeleeSkill_2}  },
+            E_State.MeleeSkill_1, E_State.MeleeSkill_2,
+            E_State.Dead}  },
 
         // Jump 상태
-        {E_State.Jump, new List<E_State>(){ E_State.Idle,E_State.LongRangeAttack }  },
+        {E_State.Jump, new List<E_State>(){ E_State.Idle,E_State.LongRangeAttack,
+            E_State.Dead}  },
 
         // Dash 상태
-        {E_State.Dash, new List<E_State>(){ E_State.Idle ,E_State.DashMeleeAttack}  },
+        {E_State.Dash, new List<E_State>(){ E_State.Idle ,E_State.DashMeleeAttack,
+            E_State.Dead}  },
 
         // Drain 상태
-        {E_State.Drain, new List<E_State>(){ E_State.Idle, }  }, 
+        {E_State.Drain, new List<E_State>(){ E_State.Idle,
+            E_State.Dead}  }, 
 
         // 원거리 공격 상태
         {E_State.LongRangeAttack, new List<E_State>(){ E_State.Idle,E_State.Move,E_State.Jump,E_State.Dash, E_State.LongRangeAttack,
             E_State.Drain,E_State.LongRangeSkill_1, E_State.LongRangeSkill_2, E_State.LongRangeSkill_3, E_State.LongRangeSkill_4, E_State.LongRangeSkill_5,
-            E_State.MeleeSkill_1, E_State.MeleeSkill_2 }  },
+            E_State.MeleeSkill_1, E_State.MeleeSkill_2,
+            E_State.Dead}  },
 
         // 원거리 스킬 1번 상태
-        {E_State.LongRangeSkill_1, new List<E_State>(){ E_State.Idle }  },
+        {E_State.LongRangeSkill_1, new List<E_State>(){ E_State.Idle,
+        E_State.Dead}  },
 
         // 원거리 스킬 2번 상태
-        {E_State.LongRangeSkill_2, new List<E_State>(){ E_State.Idle }  },
+        {E_State.LongRangeSkill_2, new List<E_State>(){ E_State.Idle,
+        E_State.Dead}  },
 
         // 원거리 스킬 3번 상태
-        {E_State.LongRangeSkill_3, new List<E_State>(){ E_State.Idle }  },
+        {E_State.LongRangeSkill_3, new List<E_State>(){ E_State.Idle,
+        E_State.Dead}  },
 
         // 원거리 스킬 4번 상태
-        {E_State.LongRangeSkill_4, new List<E_State>(){ E_State.Idle }  },
+        {E_State.LongRangeSkill_4, new List<E_State>(){ E_State.Idle,
+        E_State.Dead}  },
 
         // 원거리 스킬 5번 상태
-        {E_State.LongRangeSkill_5, new List<E_State>(){ E_State.Idle }  },
+        {E_State.LongRangeSkill_5, new List<E_State>(){ E_State.Idle,
+        E_State.Dead}  },
 
         // 대쉬 근접 공격 상태
-        {E_State.DashMeleeAttack, new List<E_State>(){ E_State.Idle }  },
+        {E_State.DashMeleeAttack, new List<E_State>(){ E_State.Idle,
+        E_State.Dead}  },
 
         // 근접 스킬 1번 상태
-        {E_State.MeleeSkill_1, new List<E_State>(){ E_State.Idle }  },
+        {E_State.MeleeSkill_1, new List<E_State>(){ E_State.Idle,
+        E_State.Dead}  },
 
         // 근접 스킬 2번 상태
-        {E_State.MeleeSkill_2, new List<E_State>(){ E_State.Idle }  },
+        {E_State.MeleeSkill_2, new List<E_State>(){ E_State.Idle,
+        E_State.Dead}  },
 
     };
 
@@ -162,6 +179,7 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
         dashMeleeAttackState = new DashMeleeAttack(this);
         meleeSkill_1State = new MeleeSkill_1(this);
         meleeSkill_2State = new MeleeSkill_2(this);
+        deadState = new DeadState(this);
 
         states[(int)E_State.Idle] = idleState;
         states[(int)E_State.Move] = walkState;
@@ -177,6 +195,8 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
         states[(int)E_State.DashMeleeAttack] = dashMeleeAttackState;
         states[(int)E_State.MeleeSkill_1] = meleeSkill_1State;
         states[(int)E_State.MeleeSkill_2] = meleeSkill_2State;
+        states[(int)E_State.Dead] = deadState; 
+
 
     }
 
@@ -477,6 +497,13 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
 
     public void TakeHit(float value, bool chargable = false)
     {
-        stats.AddHP(-value);
+        if(stats.AddHP(-value))
+        {
+            ChangeState(E_State.Dead);
+        }
+        else
+        {
+            return;
+        }
     }
 }

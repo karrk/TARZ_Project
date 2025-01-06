@@ -26,4 +26,9 @@ public class AnimationEventController : MonoBehaviour
     {
         player.longRangeSkill_4State.LongRangeSkill_4_On();
     }
+
+    public void GameOver()
+    {
+        player.deadState.GameOver();
+    }
 }
