@@ -14,7 +14,7 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable
 
     public BehaviorTree behaviorTree;
 
-    private LayerMask garbageLayer;
+    //private LayerMask garbageLayer;
 
     [Inject] ProjectPlayer player;
     [Inject] PlayerStats playerStats;
@@ -63,17 +63,17 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable
         {
             behaviorTree.SetVariableValue("attackCount", attackCount);
         }
-        if (Input.GetKeyDown(KeyCode.G))
+        /*if (Input.GetKeyDown(KeyCode.G))
         {
             health--;
-        }
+        }*/
     }
 
 
-    public bool IsInLayerMask(GameObject obj, LayerMask layerMask)
+    /*public bool IsInLayerMask(GameObject obj, LayerMask layerMask)
     {
         return (layerMask.value & (1 << obj.layer)) > 0;
-    }
+    }*/
 
     public void TakeHit(float value, bool chargable = false)
     {
