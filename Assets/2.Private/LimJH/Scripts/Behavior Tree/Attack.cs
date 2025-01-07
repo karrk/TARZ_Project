@@ -3,7 +3,7 @@ using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 using Cysharp.Threading.Tasks;
 
-public class Attack : Action
+public class Attack : BaseAction
 {
     /*public SharedFloat attackDamage;
     public SharedInt attackCount;
@@ -12,53 +12,48 @@ public class Attack : Action
     public float attackRange;
     public float angle;*/
 
-    public SharedGameObject selfObject;
-    public SharedGameObject targetObject;
+    //public SharedGameObject selfObject;
+    //public SharedGameObject targetObject;
 
-    private Animator animator; // Animator 컴포넌트
+    //private Animator animator; // Animator 컴포넌트
 
-    private BaseMonster baseMonster;
+    //private BaseMonster baseMonster;
 
     public override void OnStart()
     {
-
-        if (baseMonster == null)
-        {
-            baseMonster = gameObject.GetComponent<BaseMonster>();
-        }
+        base.OnStart();
 
         // Animator 컴포넌트 가져오기
-        if (selfObject.Value != null)
+        if (mob != null)
         {
-            animator = selfObject.Value.GetComponent<Animator>();
-            animator.SetBool("isAttack", true);
+            mob.Reference.Anim.SetBool("isAttack", true);
 
             // 테스크 실행 => while 현재 애니메이션이 재생중인지 확인을해서 끝난시점을 잡고 OnEnd 내부 로직을 실행시키고 return TaskStatus.Success; 화이팅
-            AttackRoutine(baseMonster).Forget();
+            AttackRoutine().Forget();
         }
     }
 
-    private async UniTask<TaskStatus> AttackRoutine(BaseMonster baseMonster)
+    private async UniTask<TaskStatus> AttackRoutine()
     {
-        if (targetObject.Value == null)
-        {
-            Debug.LogWarning("타겟 오브젝트가 존재하지 않습니다.");
-            return TaskStatus.Failure;
-        }
+        //if (targetObject.Value == null)
+        //{
+        //    Debug.LogWarning("타겟 오브젝트가 존재하지 않습니다.");
+        //    return TaskStatus.Failure;
+        //}
 
         // 애니메이션이 종료될 때까지 대기
-        while (animator != null)
+        while (mob.Reference.Anim != null)
         {
-            AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+            AnimatorStateInfo stateInfo = mob.Reference.Anim.GetCurrentAnimatorStateInfo(0);
             if (stateInfo.IsName("Jake_Attack") && stateInfo.normalizedTime >= 1.0f)
             {
-                break;            
+                break;
             }
             await UniTask.Yield();
         }
-        if (selfObject.Value != null)
+        if (mob != null)
         {
-            animator.SetBool("isAttack", false);
+            mob.Reference.Anim.SetBool("isAttack", false);
         }
 
         return TaskStatus.Success;

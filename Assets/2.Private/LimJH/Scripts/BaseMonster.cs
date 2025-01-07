@@ -1,74 +1,64 @@
 using UnityEngine;
-using BehaviorDesigner.Runtime;
 using Zenject;
+using System;
+using UnityEngine.AI;
 
 public class BaseMonster : MonoBehaviour, IDamagable, IPushable
 {
-    public float health;
-    public float damageReducation = 1f;
-    public float damage;
-    public int attackCount;
+    [SerializeField]
+    private ProjectInstaller.BaseMonsterStat stat;
+    public ProjectInstaller.BaseMonsterStat Stat => stat;
 
-    public float angle;
-    public float attackRange;
+    #region Injects
 
-    public BehaviorTree behaviorTree;
-
-    //private LayerMask garbageLayer;
-
+    [Inject] private ProjectInstaller.BaseMonsterStat originStat;
     [Inject] ProjectPlayer player;
     [Inject] PlayerStats playerStats;
 
+    #endregion
+
+    #region Refs
+
+    [SerializeField] private MonsterReference reference;
+    public MonsterReference Reference => reference;
+
+    [SerializeField] private DraggedOption drag;
+    public DraggedOption Drag => drag;
+
+    [SerializeField] private PushOption push;
+    public PushOption Pushed => push;
+
+    [SerializeField] private KnockDownOption knock;
+    public KnockDownOption Knock => knock;
+
+    #endregion
+
+    #region Props
+
+    public bool IsOnDamaged { get; private set; }
+    public float Dist => Vector3.Distance(transform.position, player.transform.position);
+    public Vector3 PlayerPos => player.transform.position;
+    public Vector3 SkillPos { get; private set; }
+    public E_SkillType SkillType { get; private set; }
+
+    #endregion
+
+    public int attackCount; // 기믹 ?? 용도?
+
     private void Awake()
     {
-        behaviorTree = GetComponent<BehaviorTree>(); // BehaviorTree 컴포넌트를 찾음
+        Init();
     }
 
-    private void OnEnable()
+    public void Init()
     {
-        if (behaviorTree != null)
-        {
-            behaviorTree.SetVariableValue("selfObject", this.gameObject);
-
-            // "targetObject"에 플레이어 설정
-            behaviorTree.SetVariableValue("targetObject", player.gameObject);
-        }
-        else
-        {
-            Debug.Log("비트리 없음");
-        }
+        originStat.SendToCopyStats<ProjectInstaller.BaseMonsterStat>(ref stat);
     }
 
-    //public void TakeDamage(float damage)
-    //{
-    //    health -= (damage * damageReducation);
-    //    Debug.Log($"Health: {health}");
-    //    SkillManager.UpdateGauge();
-    //}
-
-    //public void TakeDamageNotFillGauge(float damage)
-    //{
-    //    health -= (damage * damageReducation);
-    //    Debug.Log($"Health: {health}");
-    //}
-
-
-    protected virtual void Update()
+    public void ResetDamageState()
     {
-        if (behaviorTree != null && behaviorTree.GetVariable("health") != null)
-        {
-            behaviorTree.SetVariableValue("health", health);
-        }
-        if (behaviorTree.GetVariable("attackCount") != null)
-        {
-            behaviorTree.SetVariableValue("attackCount", attackCount);
-        }
-        /*if (Input.GetKeyDown(KeyCode.G))
-        {
-            health--;
-        }*/
+        IsOnDamaged = false;
     }
-
 
     /*public bool IsInLayerMask(GameObject obj, LayerMask layerMask)
     {
@@ -82,8 +72,10 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable
             playerStats.ChargeMana();
         }
 
-        this.health -= value * damageReducation;
-        Debug.Log($"Health: {health}");
+        stat.Health -= value * stat.DamageReducation;
+        Debug.Log($"Health: {stat.Health}");
+
+        IsOnDamaged = true;
     }
 
     public void PerformAttack(GameObject target)
@@ -105,7 +97,7 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable
         // 타겟이 내각 및 거리 조건을 만족하는지 확인
         if (GetAngleHit(target.transform))
         {
-            float finalDamage = damage;
+            float finalDamage = stat.Damage;
             IDamagable damagable = target.GetComponent<IDamagable>();
             if(damagable != null)
             {
@@ -122,12 +114,9 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable
 
     public void EndAttack()
     {
-        // 애니메이션 이벤트에 의해 호출되는 메서드
-        var target = behaviorTree.GetVariable("targetObject").GetValue() as GameObject;
-
-        if (target != null)
+        if (player != null)
         {
-            PerformAttack(target);
+            PerformAttack(player.gameObject);
         }
         else
         {
@@ -141,10 +130,10 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable
         Vector3 directionToTarget = (target.position - transform.position).normalized;
         float angleToTarget = Vector3.Angle(transform.forward, directionToTarget);
 
-        if (angleToTarget < angle / 2) // 내각 체크
+        if (angleToTarget < stat.Angle / 2) // 내각 체크
         {
             float distanceToTarget = Vector3.Distance(transform.position, target.position);
-            if (distanceToTarget <= attackRange) // 거리 체크
+            if (distanceToTarget <= stat.AttackRange) // 거리 체크
             {
                 return true; // 타격 성공
             }
@@ -157,14 +146,14 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable
     {
         // 공격 범위 원을 그리기
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
+        Gizmos.DrawWireSphere(transform.position, stat.AttackRange);
 
         // 공격 각도를 표시하기 위한 전방 벡터
-        Vector3 forward = transform.forward * attackRange;
+        Vector3 forward = transform.forward * stat.AttackRange;
 
         // 각도의 왼쪽과 오른쪽 끝점을 계산
-        Vector3 leftBoundary = Quaternion.Euler(0, -angle / 2, 0) * forward;
-        Vector3 rightBoundary = Quaternion.Euler(0, angle / 2, 0) * forward;
+        Vector3 leftBoundary = Quaternion.Euler(0, -1* stat.Angle / 2, 0) * forward;
+        Vector3 rightBoundary = Quaternion.Euler(0, stat.Angle / 2, 0) * forward;
 
         // 전방과 각도 경계를 선으로 표시
         Gizmos.color = Color.yellow;
@@ -173,12 +162,52 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable
         Gizmos.DrawLine(transform.position, transform.position + rightBoundary);
     }
 
-    public void Push(Vector3 pos, E_SkillState skillType)
+    public void Push(Vector3 pos, E_SkillType skillType)
     {
-        behaviorTree.SetVariableValue("playerVector", pos);
+        SkillPos = pos;
+        this.SkillType = skillType;
 
-        behaviorTree.SetVariableValue("skillType", (int)skillType); 
-
-        Debug.Log($"{gameObject.name} pushed by {skillType}");
+        //Debug.Log($"{gameObject.name} pushed by {skillType}");
     }
+
+    public void ResetSkillType()
+    {
+        SkillType = E_SkillType.None;
+        SkillPos = Vector3.down;
+    }
+
+    protected virtual void Update()
+    {
+    }
+}
+
+[Serializable]
+public class MonsterReference
+{
+    public Animator Anim;
+    public Collider Coll;
+    public Rigidbody Rb;
+    public NavMeshAgent Nav; 
+}
+
+[Serializable]
+public class DraggedOption
+{
+    public float MaxDuration;
+    public float GatherSpeed;
+    public float GatherRad;
+}
+
+[Serializable]
+public class PushOption
+{
+    public float MaxDuration;
+    public float PushDist;
+    public float PushSpeed;
+}
+
+[Serializable]
+public class KnockDownOption
+{
+    public float DownDration;
 }
