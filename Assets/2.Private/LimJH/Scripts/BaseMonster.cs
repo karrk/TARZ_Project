@@ -60,10 +60,10 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable
         IsOnDamaged = false;
     }
 
-    public bool IsInLayerMask(GameObject obj, LayerMask layerMask)
+    /*public bool IsInLayerMask(GameObject obj, LayerMask layerMask)
     {
         return (layerMask.value & (1 << obj.layer)) > 0;
-    }
+    }*/
 
     public void TakeHit(float value, bool chargable = false)
     {
