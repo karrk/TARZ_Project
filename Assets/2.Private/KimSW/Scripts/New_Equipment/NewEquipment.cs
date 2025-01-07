@@ -16,7 +16,6 @@ public class NewEquipment : ScriptableObject
 
     public RarityTier rarityTier;
 
-    public int maxUpgradeLevel;
     public int upgradeLevel;
 
     public OptionType optionType;
