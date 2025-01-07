@@ -393,4 +393,42 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
     }
 
     #endregion
+
+    public abstract class MonsterStat
+    {
+        public float Health;
+        public float DamageReducation;
+        public float Damage;
+        public float Angle;
+        public float AttackRange;
+        public float MoveSpeed;
+        public float InAttackRange;
+        public float DetectRange;
+        public float RotateSpeed;
+        public float MaxRotateTime;
+        public float StopDist;
+
+        public virtual void SendToCopyStats<T>(ref T target) where T : MonsterStat, new()
+        {
+            if (target == null)
+                target = new T();
+
+            target.Health = this.Health;
+            target.DamageReducation = this.DamageReducation;
+            target.Damage = this.Damage;
+            target.Angle = this.Angle;
+            target.AttackRange = this.AttackRange;
+            target.MoveSpeed = this.MoveSpeed;
+            target.InAttackRange = this.InAttackRange;
+            target.DetectRange = this.DetectRange;
+            target.RotateSpeed = this.RotateSpeed;
+            target.MaxRotateTime = this.MaxRotateTime;
+            target.StopDist = this.StopDist;
+        }
+    }
+    
+    [Serializable]
+    public class BaseMonsterStat : MonsterStat
+    {
+    }
 }

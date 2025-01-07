@@ -11,7 +11,7 @@ public enum E_State
     DashMeleeAttack, MeleeSkill_1, MeleeSkill_2, Size
 }      // 우선적으로 선언한 상태
 
-public enum E_SkillState { MeleeSkill1 = 1, MeleeSkill2, LongRangeSkill5 }
+public enum E_SkillType { None, MeleeSkill1 = 1, MeleeSkill2, LongRangeSkill5 }
 
 [Serializable]
 public class PlayerReferences

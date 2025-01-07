@@ -2,21 +2,21 @@ using UnityEngine;
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 
-public class InitializeCollider : Action
+public class InitializeCollider : BaseCondition
 {
-    public SharedGameObject selfObject;
+    private Collider coll;
 
-	public override TaskStatus OnUpdate()
+    public override void OnStart()
+    {
+        base.OnStart();
+        coll = mob.GetComponent<Collider>();
+    }
+
+    public override TaskStatus OnUpdate()
 	{
-        if (selfObject != null && selfObject.Value != null)
+        if (mob != null)
         {
-
-            // Collider 비활성화
-            Collider collider = selfObject.Value.GetComponent<Collider>();
-            if (collider != null)
-            {
-                collider.enabled = false;
-            }
+            coll.enabled = false;
 
             return TaskStatus.Success;
         }

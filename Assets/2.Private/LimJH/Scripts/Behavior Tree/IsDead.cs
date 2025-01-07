@@ -7,7 +7,7 @@ public class IsDead : BaseCondition
     public override TaskStatus OnUpdate()
     {
         // 체력이 0 이하일 경우 Success 반환
-        if (mob.health <= 0)
+        if (mob.Stat.Health <= 0)
         {
             return TaskStatus.Success; // 체력이 0 이하일 때만 성공으로 처리
         }

@@ -83,7 +83,7 @@ public class MeleeSkill_1 : BaseState
                 IPushable pushable = target.GetComponent<IPushable>();
                 if (pushable != null)
                 {
-                    pushable.Push(new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z + player.Setting.MeleeSkill1Setting.Zoffset), E_SkillState.MeleeSkill1);
+                    pushable.Push(new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z + player.Setting.MeleeSkill1Setting.Zoffset), E_SkillType.MeleeSkill1);
                 }
 
             }

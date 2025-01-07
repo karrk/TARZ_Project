@@ -2,23 +2,16 @@ using UnityEngine;
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 
-public class Die : Action
+public class Die : BaseCondition
 {
-    public SharedFloat health; // 몬스터의 체력
-    public SharedGameObject selfObject;
-
-
-    private Animator animator;
-
     public override TaskStatus OnUpdate()
     {
-
         // 체력이 0 이하일 경우 죽음 처리
-        if (health.Value <= 0)
+        if (mob.Stat.Health <= 0)
         {
-            if (selfObject != null && selfObject.Value != null)
+            if (mob != null)
             {
-                Debug.Log($"{selfObject.Value.name}이 죽었습니다!");
+                Debug.Log($"{mob.name}이 죽었습니다!");
 
                 // 몬스터를 비활성화하려면
                 //selfObject.Value.SetActive(false);
@@ -32,7 +25,7 @@ public class Die : Action
 
 
                 // 애니메이션이 끝났으면 게임 오브젝트 삭제
-                GameObject.Destroy(selfObject.Value);
+                GameObject.Destroy(mob.gameObject);
                 return TaskStatus.Success; // 죽음 처리 완료
 
                 /*if (IsDieAnimationFinished())

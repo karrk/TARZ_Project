@@ -100,7 +100,7 @@ public class LongRangeSkill_5 : BaseState
                 IPushable pushable = target.GetComponent<IPushable>();
                 if (pushable != null)
                 {
-                    pushable.Push(player.transform.position, E_SkillState.LongRangeSkill5);
+                    pushable.Push(player.transform.position, E_SkillType.LongRangeSkill5);
                 }
 
             }
