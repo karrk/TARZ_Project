@@ -2,23 +2,13 @@ using UnityEngine;
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 
-public class IsTakeDamage : Conditional
+public class IsTakeDamage : BaseCondition
 {
-	public SharedGameObject selfObject;
-	public SharedFloat health;
-	private float curHealth;
-
-    public override void OnStart()
-    {
-		curHealth = health.Value;
-    }
-
     public override TaskStatus OnUpdate()
 	{
-
-		if (curHealth != health.Value)
+		if (mob.IsOnDamaged == true)
 		{
-            curHealth = health.Value;
+			mob.ResetDamageState();
             return TaskStatus.Success;
         }
 

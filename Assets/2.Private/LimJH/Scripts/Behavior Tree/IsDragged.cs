@@ -2,12 +2,25 @@ using UnityEngine;
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 
-public class IsDragged : Conditional
+public class IsDragged : BaseCondition
 {
-    public SharedInt attackType; // 공격 타입 (공유 변수로 설정)
+    private bool Test = false;
 
     public override TaskStatus OnUpdate()
     {
-        return attackType.Value == 1 ? TaskStatus.Success : TaskStatus.Failure;
+        E_SkillType type = mob.SkillType;
+
+        if(type == E_SkillType.MeleeSkill1 /*&& Test == false*/)
+        {
+            //Test = true;
+            return TaskStatus.Success;
+        }
+        else
+        {
+            return TaskStatus.Failure;
+        }
+
+        return mob.SkillType == E_SkillType.MeleeSkill1 
+            ? TaskStatus.Success : TaskStatus.Failure;
     }
 }

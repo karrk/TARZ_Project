@@ -1829,13 +1829,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b63c4c4705e46724692cf9a90d004ea8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 3
-  damageReducation: 1
-  damage: 1
+  stat:
+    Health: 0
+    DamageReducation: 0
+    Damage: 0
+    Angle: 0
+    AttackRange: 0
+    MoveSpeed: 0
+    InAttackRange: 0
+    DetectRange: 0
+    RotateSpeed: 0
+    MaxRotateTime: 0
+    StopDist: 0
+  reference:
+    Anim: {fileID: 8158601638827991980}
+    Coll: {fileID: 2930164507820503807}
+    Rb: {fileID: 876391276103265379}
+    Nav: {fileID: 200489379315688345}
+  drag:
+    MaxDuration: 1
+    GatherSpeed: 10
+    GatherRad: 1
+  push:
+    MaxDuration: 1
+    PushDist: 5
+    PushSpeed: 10
+  knock:
+    DownDration: 2
   attackCount: 0
-  angle: 60
-  attackRange: 2.5
-  behaviorTree: {fileID: 0}
 --- !u!114 &2509264447243533069
 MonoBehaviour:
   m_ObjectHideFlags: 0

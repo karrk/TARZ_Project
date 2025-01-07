@@ -2,20 +2,11 @@ using UnityEngine;
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 
-public class ResetAttackType : Action
+public class ResetAttackType : BaseAction
 {
-    public SharedInt skillType;
-
-    public override void OnStart()
-	{
-		
-	}
-
 	public override TaskStatus OnUpdate()
 	{
-
-		skillType.Value = 0;
-
+		mob.ResetSkillType();
 		return TaskStatus.Success;
 	}
 }
