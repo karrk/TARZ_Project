@@ -1,18 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using Zenject;
 
-public class EquipmentSelectPanel : MonoBehaviour
+public class EquipmentSelectPanel : MonoBehaviour, IOpenCloseMenu
 {
-    // Start is called before the first frame update
-    void Start()
+    [Inject] InGameUI inGameUI;
+
+    [SerializeField] GameObject firstSelected;
+
+    public void OpenUIPanel()
     {
-        
+        inGameUI.StatusBarPanel.OffUIPanel();
+        gameObject.SetActive(true);
+
+        EventSystem.current.SetSelectedGameObject(firstSelected);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void CloseUIPanel()
     {
-        
+        inGameUI.CurrentMenu = inGameUI.StatusBarPanel;
+        inGameUI.CurrentMenu.OpenUIPanel();
+        gameObject.SetActive(false);
     }
 }

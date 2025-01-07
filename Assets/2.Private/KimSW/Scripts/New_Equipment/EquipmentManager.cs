@@ -8,7 +8,7 @@ public class EquipmentManager : MonoBehaviour
 {
 
     [Inject]
-    InGameUI gameUI;
+    InGameUI inGameUI;
 
     public List<InteractEquipment> interactEquipments = new List<InteractEquipment>();
 
@@ -20,15 +20,18 @@ public class EquipmentManager : MonoBehaviour
      .Subscribe(x =>
      {
 
-         gameUI.EquipmentGetPanel.gameObject.SetActive(true);
+         inGameUI.EquipmentGetPanel.gameObject.SetActive(true);
 
 
          if (Input.GetKeyDown(KeyCode.F))
          {
              interactEquipments[0].RemoveInstance();
              interactEquipments.Remove(interactEquipments[0]);
-             gameUI.EquipmentGetPanel.gameObject.SetActive(false);
-             gameUI.EquipmentSelectPanel.gameObject.SetActive(true);
+             inGameUI.EquipmentGetPanel.gameObject.SetActive(false);
+
+             inGameUI.CurrentMenu = inGameUI.EquipmentSelectPanel;
+             inGameUI.CurrentMenu.OpenUIPanel();
+
          }
 
      });
@@ -38,7 +41,7 @@ public class EquipmentManager : MonoBehaviour
           .Where(x => interactEquipments.Count == 0)
           .Subscribe(x =>
           {
-              gameUI.EquipmentGetPanel.gameObject.SetActive(false);
+              inGameUI.EquipmentGetPanel.gameObject.SetActive(false);
 
           });
             }
