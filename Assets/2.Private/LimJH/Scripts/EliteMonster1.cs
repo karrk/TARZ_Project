@@ -8,9 +8,9 @@ public class EliteMonster1 : BaseMonster
     {
         base.Update();
 
-        if (behaviorTree != null && behaviorTree.GetVariable("canJumpAttack") != null)
-        {
-            behaviorTree.SetVariableValue("canJumpAttack", canJumpAttack);
-        }
+        //if (behaviorTree != null && behaviorTree.GetVariable("canJumpAttack") != null)
+        //{
+        //    behaviorTree.SetVariableValue("canJumpAttack", canJumpAttack);
+        //}
     }
 }

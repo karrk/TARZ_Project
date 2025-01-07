@@ -2,12 +2,11 @@ using UnityEngine;
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 
-public class IsPush : Conditional
+public class IsPush : BaseCondition
 {
-    public SharedInt attackType; // 공격 타입 (공유 변수로 설정)
-
     public override TaskStatus OnUpdate()
     {
-        return attackType.Value == 2 ? TaskStatus.Success : TaskStatus.Failure;
+        return mob.SkillType == E_SkillType.MeleeSkill2 ? 
+            TaskStatus.Success : TaskStatus.Failure;
     }
 }
