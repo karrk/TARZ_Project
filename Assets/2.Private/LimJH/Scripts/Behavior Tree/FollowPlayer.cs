@@ -1,24 +1,36 @@
 using UnityEngine;
+using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
+using UnityEngine.AI;
 
-public class FollowPlayer : BaseCondition
+public class FollowPlayer : BaseAction
 {
+    //public SharedGameObject selfObject; // 몬스터 오브젝트
+    //public SharedGameObject targetObject; // 추적 대상 (Behavior Designer에서 설정 가능)
+    //public SharedFloat speed; // 이동 속도
+    //public SharedFloat stoppingDistance;
+
+    //private NavMeshAgent agent;
+    //private Animator animator; // Animator 컴포넌트
+
     public override void OnStart()
     {
         base.OnStart();
 
         // NavMeshAgent 컴포넌트를 가져옴
-        if (mob.Reference.Nav != null)
+        if (mob != null)
         {
             mob.Reference.Anim.SetBool("isMove", true);
-
-            mob.Reference.Nav.isStopped = false;
-            mob.Reference.Nav.stoppingDistance = mob.Stat.StopDist;
-            mob.Reference.Nav.speed = mob.Stat.MoveSpeed;
-        }
-        else
-        {
-            Debug.Log("Nav 가 없음");
+            if (mob.Reference.Nav != null)
+            {
+                mob.Reference.Nav.isStopped = false;
+                mob.Reference.Nav.stoppingDistance = mob.Stat.StopDist;
+                mob.Reference.Nav.speed = mob.Stat.MoveSpeed; // 이동 속도 설정
+            }
+            else
+            {
+                //Debug.LogError($"{selfObject.Value.name}에 NavMeshAgent가 없습니다.");
+            }
         }
     }
 
@@ -39,9 +51,10 @@ public class FollowPlayer : BaseCondition
         // 대상 위치 설정
         mob.Reference.Nav.SetDestination(mob.PlayerPos);
 
+
         // 이동 완료 여부 확인
-        if (!mob.Reference.Nav.pathPending &&
-            mob.Reference.Nav.remainingDistance <= mob.Reference.Nav.stoppingDistance + 0.1f)
+        if (!mob.Reference.Nav.pathPending && mob.Reference.Nav.remainingDistance <= 
+            mob.Reference.Nav.stoppingDistance + 0.1f)
         {
             return TaskStatus.Success; // 목표 지점에 도달
         }

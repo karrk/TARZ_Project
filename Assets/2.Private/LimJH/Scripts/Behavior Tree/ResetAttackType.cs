@@ -2,7 +2,7 @@ using UnityEngine;
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 
-public class ResetAttackType : BaseCondition
+public class ResetAttackType : BaseAction
 {
 	public override TaskStatus OnUpdate()
 	{

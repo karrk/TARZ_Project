@@ -2,24 +2,16 @@ using UnityEngine;
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 
-public class InitializeCollider : BaseCondition
+public class InitializeCollider : BaseAction
 {
-    private Collider coll;
-
-    public override void OnStart()
-    {
-        base.OnStart();
-        coll = mob.GetComponent<Collider>();
-    }
-
     public override TaskStatus OnUpdate()
-	{
+    {
         if (mob != null)
         {
-            coll.enabled = false;
+            mob.Reference.Coll.enabled = false;
 
             return TaskStatus.Success;
         }
         return TaskStatus.Running;
-	}
+    }
 }
