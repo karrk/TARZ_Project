@@ -2,18 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-enum RarityLevel { }
-enum OptionType { }
+public enum RarityTier { COMMON,RARE, UNIQUE, LEGENDARY, SIZE }
+public enum OptionType { MOVESPD,ATK,ATKSPD,HP,INVENTORY,GAUGEINC,STAMINA,LUCK,SIZE }
 
+public enum EquipmentType { BOOTS,ARM,EARING,RING,NECKLACE,LEG,CHEST,BACKPACK, SIZE }
 
-public class NewEquipment : MonoBehaviour
+[CreateAssetMenu(fileName = "NewEquipment", menuName = "NewEquipment", order = int.MinValue)]
+public class NewEquipment : ScriptableObject
 {
-    int id;
-    string equipmentName;
-    string description;
-    RarityLevel rarityLevel;
-    int upgradeLevel;
-    OptionType optionType;
-    float optionValue;
-    Sprite illust;
+    public int id;
+    public string equipmentName;
+    public string description;
+
+    public RarityTier rarityTier;
+
+    public int upgradeLevel;
+
+    public OptionType optionType;
+    public EquipmentType equipmentType;
+
+    public float optionValue;
+
+    public Sprite illust;
 }

@@ -17,6 +17,8 @@ public class InGameUI : BindUI
     private EquipmentGetPanel equipmentGetPanel;
     private EquipmentSelectPanel equipmentSelectPanel;
 
+    private EquipmentManager equipmentManager;
+
 
     public InventoryPanel InventoryPanel { get { return inventoryPanel; } }
     public InventorySetPanel InventorySetPanel { get { return inventorySetPanel; } }
@@ -39,6 +41,8 @@ public class InGameUI : BindUI
 
     public EquipmentSelectPanel EquipmentSelectPanel { get { return equipmentSelectPanel; } }
 
+    public EquipmentManager EquipmentManager { get { return equipmentManager; } }
+
 
     private IOpenCloseMenu currentMenu;
 
@@ -58,6 +62,7 @@ public class InGameUI : BindUI
         optionPanel = GetUI<OptionPanel>("OptionPanel");
         equipmentGetPanel = GetUI<EquipmentGetPanel>("EquipmentGetPanel");
         equipmentSelectPanel = GetUI<EquipmentSelectPanel>("EquipmentSelectPanel");
+        equipmentManager = GetUI<EquipmentManager>("EquipmentManager");
     }
     private void Start()
     {
