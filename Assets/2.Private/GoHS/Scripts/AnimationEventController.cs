@@ -31,4 +31,9 @@ public class AnimationEventController : MonoBehaviour
     {
         player.deadState.GameOver();
     }
+
+    public void DashEffectOn()
+    {
+        player.Refernece.EffectController.DashEffect();
+    }
 }
