@@ -8,7 +8,7 @@ using Zenject;
 public class InteractEquipment : MonoBehaviour
 {
     [Inject]
-    EquipmentManager equipmentManager;
+    InGameUI gameUI;
 
     Transform player;
 
@@ -27,7 +27,7 @@ public class InteractEquipment : MonoBehaviour
         .Subscribe(x => {
             
                 isInteract = true;
-                equipmentManager.interactEquipments.Add(this);
+            gameUI.EquipmentManager.interactEquipments.Add(this);
             
         });
 
@@ -37,7 +37,7 @@ public class InteractEquipment : MonoBehaviour
        .Subscribe(x => {
           
                isInteract = false;
-               equipmentManager.interactEquipments.Remove(this);
+           gameUI.EquipmentManager.interactEquipments.Remove(this);
            
        });
 
