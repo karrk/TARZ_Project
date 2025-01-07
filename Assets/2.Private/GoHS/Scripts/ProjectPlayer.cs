@@ -28,6 +28,7 @@ public class PlayerReferences
     public GameObject DashMeleeAttackHitBox;
     public GameObject MeleeSkill2HitBox;
     public CapsuleCollider Coll;
+    public EffectController EffectController;
 }
 
 public class ProjectPlayer : MonoBehaviour, IDamagable
