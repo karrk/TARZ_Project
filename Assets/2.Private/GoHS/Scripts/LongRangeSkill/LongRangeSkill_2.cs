@@ -124,6 +124,7 @@ public class LongRangeSkill_2 : BaseState
     private IEnumerator DelayCoroutine()
     {
         GetTarget();
+        player.Refernece.EffectController.LongRangeSkill_2Effect();
         yield return new WaitForSeconds(curDelay);
         player.ChangeState(E_State.Idle);
     }

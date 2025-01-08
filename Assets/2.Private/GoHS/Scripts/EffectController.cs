@@ -12,7 +12,7 @@ public class EffectController : MonoBehaviour
     [SerializeField] private ParticleSystem longRangeSkill_1;
 
     // 원거리 스킬 2번
-    [SerializeField] private GameObject longRangeSkill_2;
+    [SerializeField] private ParticleSystem longRangeSkill_2;
 
     // 원거리 스킬 4번
     [SerializeField] private GameObject longRangeSkill_4;
@@ -48,7 +48,7 @@ public class EffectController : MonoBehaviour
 
     public void LongRangeSkill_2Effect()
     {
-
+        longRangeSkill_2.Play();
     }
 
     #endregion
