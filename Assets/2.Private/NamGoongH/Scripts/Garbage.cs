@@ -85,7 +85,7 @@ public class Garbage : MonoBehaviour, IDrainable, IPooledObject
             }
             // 투척물 상태 해제
             IsProjectile = false;
-            Debug.Log("Garbage hit the ground and is no longer a projectile.");
+            //Debug.Log("Garbage hit the ground and is no longer a projectile.");
         }
     }
 
