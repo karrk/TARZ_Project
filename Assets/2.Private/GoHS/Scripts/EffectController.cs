@@ -24,6 +24,9 @@ public class EffectController : MonoBehaviour
     // 근거리 스킬 1번
     [SerializeField] private ParticleSystem MeleeSkill_1;
 
+    // 근거리 스킬 2번
+    [SerializeField] private GameObject MeleeSkill_2;
+
     #region 대쉬
     public void DashEffect()
     {
@@ -59,7 +62,7 @@ public class EffectController : MonoBehaviour
     private IEnumerator Delay_LongRangeSkill_4Coroutine()
     {
         longRangeSkill_4.SetActive(true);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         longRangeSkill_4.SetActive(false);
     }
     #endregion
@@ -83,6 +86,20 @@ public class EffectController : MonoBehaviour
     public void MeleeSkill_1Effect()
     {
         MeleeSkill_1.Play();
+    }
+
+    #endregion
+
+    #region 근거리 스킬 2번
+
+    public void MeleeSkill_2Effect_Start()
+    {
+        MeleeSkill_2.SetActive(true);
+    }
+
+    public void MeleeSkill_2Effect_End()
+    {
+        MeleeSkill_2.SetActive(false);
     }
 
     #endregion

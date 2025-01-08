@@ -156,7 +156,12 @@ MonoBehaviour:
         serializedVersion: 2
         m_Bits: 4096
       Delay: 0.5
-      Zoffset: 0
+      Zoffset: 3
+      CoolTime: 0
+    MeleeSkill2Setting:
+      DashTime: 0.4
+      DashSpeed: 20
+      CoolTime: 0
   baseMonsterSetting:
     Health: 100
     DamageReducation: 1
@@ -169,8 +174,3 @@ MonoBehaviour:
     RotateSpeed: 5
     MaxRotateTime: 2
     StopDist: 1.5
-      CoolTime: 3
-    MeleeSkill2Setting:
-      DashTime: 0.4
-      DashSpeed: 20
-      CoolTime: 3
