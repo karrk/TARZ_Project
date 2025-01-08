@@ -5,21 +5,32 @@ using UnityEngine;
 public class EffectController : MonoBehaviour
 {
     // 대쉬 이펙트
-    [SerializeField] public ParticleSystem Dash_LeftHand; 
-    [SerializeField] public ParticleSystem Dash_RightHand;
-    
+    [SerializeField] private ParticleSystem Dash_LeftHand; 
+    [SerializeField] private ParticleSystem Dash_RightHand;
 
+    // 원거리 스킬 5번
+    [SerializeField] private GameObject longRangeSkill_4;
 
-
+    #region 대쉬
     public void DashEffect()
     {
         Dash_LeftHand.Play();
         Dash_RightHand.Play();
     }
+    #endregion
 
-    //private void OnParticleSystemStopped()
-    //{
-    //    Dash_LeftHand.Stop();
-    //    Dash_RightHand.Stop();
-    //}
+    #region 원거리 스킬 4번
+    public void LongRangeSkill_4Effect()
+    {
+        StartCoroutine(Delay_LongRangeSkill_4Coroutine());
+    }
+
+    private IEnumerator Delay_LongRangeSkill_4Coroutine()
+    {
+        longRangeSkill_4.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        longRangeSkill_4.SetActive(false);
+    }
+    #endregion
+
 }

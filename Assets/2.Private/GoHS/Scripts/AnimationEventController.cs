@@ -32,8 +32,13 @@ public class AnimationEventController : MonoBehaviour
         player.deadState.GameOver();
     }
 
-    public void DashEffectOn()
+    public void Dash_EffectOn()
     {
         player.Refernece.EffectController.DashEffect();
+    }
+
+    public void LongRangeSkill_4_EffectOn()
+    {
+        player.Refernece.EffectController.LongRangeSkill_4Effect();
     }
 }

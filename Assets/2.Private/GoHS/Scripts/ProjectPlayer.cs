@@ -447,7 +447,7 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
     {
         Gizmos.color = Color.yellow;
         Vector3 center = transform.position + transform.forward * 6f;
-        Gizmos.DrawWireSphere(center, 3f);
+        Gizmos.DrawWireSphere(center, 5f);
 
         Gizmos.color = Color.red;
         if (setting != null)
