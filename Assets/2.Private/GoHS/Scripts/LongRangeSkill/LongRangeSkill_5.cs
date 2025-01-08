@@ -19,6 +19,7 @@ public class LongRangeSkill_5 : BaseState
     {
         player.StartCoroutine(ActionSkill());
         player.Refernece.Animator.SetBool("LongRange5", true);
+        player.Refernece.EffectController.LongRangeSkill_5Effect_Start();
     }
 
     private IEnumerator ActionSkill()
@@ -40,6 +41,7 @@ public class LongRangeSkill_5 : BaseState
         }
 
         garbages.SetActive(false);
+        player.Refernece.EffectController.LongRangeSkill_5Effect_End();
         Shoot();
         yield return new WaitForSeconds(player.Setting.Skill5Setting.EndDelay);
 

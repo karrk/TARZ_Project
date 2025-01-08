@@ -41,4 +41,14 @@ public class AnimationEventController : MonoBehaviour
     {
         player.Refernece.EffectController.LongRangeSkill_4Effect();
     }
+
+    //public void LongRangeSkill_5_Effect_Start()
+    //{
+    //    player.Refernece.EffectController.LongRangeSkill_5Effect_Start();
+    //}
+
+    //public void LongRangeSkill_5_Effect_End()
+    //{
+    //    player.Refernece.EffectController.LongRangeSkill_5Effect_End();
+    //}
 }

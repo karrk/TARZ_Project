@@ -8,8 +8,11 @@ public class EffectController : MonoBehaviour
     [SerializeField] private ParticleSystem Dash_LeftHand; 
     [SerializeField] private ParticleSystem Dash_RightHand;
 
-    // 원거리 스킬 5번
+    // 원거리 스킬 4번
     [SerializeField] private GameObject longRangeSkill_4;
+
+    // 원거리 스킬 5번
+    [SerializeField] private GameObject longRangeSkill_5;
 
     #region 대쉬
     public void DashEffect()
@@ -30,6 +33,19 @@ public class EffectController : MonoBehaviour
         longRangeSkill_4.SetActive(true);
         yield return new WaitForSeconds(1f);
         longRangeSkill_4.SetActive(false);
+    }
+    #endregion
+
+    #region 원거리 스킬 5번
+
+    public void LongRangeSkill_5Effect_Start()
+    {
+        longRangeSkill_5.SetActive(true);
+    }
+
+    public void LongRangeSkill_5Effect_End()
+    {
+        longRangeSkill_5.SetActive(false);
     }
     #endregion
 
