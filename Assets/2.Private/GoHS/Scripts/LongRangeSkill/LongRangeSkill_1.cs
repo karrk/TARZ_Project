@@ -41,6 +41,7 @@ public class LongRangeSkill_1 : BaseState
         }
 
         armUnit.SetActive(true);
+        player.Refernece.EffectController.UseSkillEffect();
     }
 
     public override void Update()

@@ -8,11 +8,17 @@ public class EffectController : MonoBehaviour
     [SerializeField] private ParticleSystem Dash_LeftHand; 
     [SerializeField] private ParticleSystem Dash_RightHand;
 
+    // 원거리 스킬 사용시 이펙트
+    [SerializeField] private ParticleSystem useSkill;
+
     // 원거리 스킬 1번
     [SerializeField] private ParticleSystem longRangeSkill_1;
 
     // 원거리 스킬 2번
     [SerializeField] private ParticleSystem longRangeSkill_2;
+
+    // 원거리 스킬 3번
+    [SerializeField] private ParticleSystem longRangeSkill_3;
 
     // 원거리 스킬 4번
     [SerializeField] private GameObject longRangeSkill_4;
@@ -49,6 +55,15 @@ public class EffectController : MonoBehaviour
     public void LongRangeSkill_2Effect()
     {
         longRangeSkill_2.Play();
+    }
+
+    #endregion
+
+    #region 원거리 스킬 3번
+
+    public void LongRangeSkill_3Effect()
+    {
+        longRangeSkill_3.Play();
     }
 
     #endregion
@@ -100,6 +115,15 @@ public class EffectController : MonoBehaviour
     public void MeleeSkill_2Effect_End()
     {
         MeleeSkill_2.SetActive(false);
+    }
+
+    #endregion
+
+    #region 원거리 스킬 사용 시
+
+    public void UseSkillEffect()
+    {
+        useSkill.Play();
     }
 
     #endregion

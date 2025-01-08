@@ -19,6 +19,8 @@ public class LongRangeSkill_5 : BaseState
     {
         player.StartCoroutine(ActionSkill());
         player.Refernece.Animator.SetBool("LongRange5", true);
+
+        player.Refernece.EffectController.UseSkillEffect();
         player.Refernece.EffectController.LongRangeSkill_5Effect_Start();
     }
 
