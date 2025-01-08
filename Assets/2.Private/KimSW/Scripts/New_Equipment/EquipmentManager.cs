@@ -18,6 +18,9 @@ public class EquipmentManager : MonoBehaviour
     public List<NewEquipment> equipped = new List<NewEquipment>();
     public int[] equippedLevel = new int[5];
 
+    [SerializeField] float[] rarityProbability;
+
+
     private void Start()
     {
         SetInteract();
@@ -90,6 +93,7 @@ public class EquipmentManager : MonoBehaviour
                 {
                     newEquipments.Remove(newEquipment);
                 }
+                inGameUI.EquipmentSelectPanel.LevelUpSlot(i, equippedLevel[i]);
 
                 return;
             }
@@ -106,6 +110,9 @@ public class EquipmentManager : MonoBehaviour
                     newEquipments.Remove(newEquipment);
                 }
 
+                inGameUI.EquipmentSelectPanel.ChangeSlot(i);
+                inGameUI.EquipmentSelectPanel.LevelUpSlot(i, equippedLevel[i]);
+
                 return;
             }
 
@@ -113,6 +120,9 @@ public class EquipmentManager : MonoBehaviour
 
         equipped.Add(newEquipment);
         equippedLevel[equipped.Count - 1]++;
+
+        inGameUI.EquipmentSelectPanel.SetSlot(equipped.Count - 1);
+        inGameUI.EquipmentSelectPanel.LevelUpSlot(equipped.Count - 1, equippedLevel[equipped.Count - 1]);
 
         // 1레벨이 최대치면 습득 하자마자 리스트에서 제거
         if (newEquipment.upgradeLevel <= equippedLevel[equipped.Count-1])
@@ -127,7 +137,11 @@ public class EquipmentManager : MonoBehaviour
         {
             EquippedFullSizeCheck();
         }
+
+
+        
     }
+
 
   
     // 낮은 레어리티 아이템 제거
@@ -178,4 +192,82 @@ public class EquipmentManager : MonoBehaviour
     }
 
 
+    public void SetProbability()
+    {
+        for (int i = 0; i < rarityProbability.Length; i++)
+        {
+            bool isStock = false;
+            foreach (var item in newEquipments)
+            {
+                if ((int)item.rarityTier == i )
+                {
+                    isStock = true;
+                }
+
+            }
+
+            if (!isStock)
+            {
+                if (rarityProbability[i] > -1)
+                {
+                    if (rarityProbability.Length - 1 == i)
+                    {
+                        if (rarityProbability[0] < 0)
+                        {
+                            rarityProbability[0] = 0;
+                        }
+
+                        rarityProbability[0] += rarityProbability[i];
+                        rarityProbability[i] = -1;
+
+                        i = 0;
+                        continue;
+                    }
+                    else
+                    {
+                        if(rarityProbability[i + 1] < 0)
+                        {
+                            rarityProbability[i + 1] = 0;
+                        }
+
+                        rarityProbability[i + 1] += rarityProbability[i];
+                        rarityProbability[i] = -1;
+                        i--;
+                        continue;
+                    }
+                }
+            }
+        }
+
+    }
+    public int GetProbability()
+    {
+        SetProbability();
+
+        float ran = Random.Range(0, 101);
+
+        int result = 0;
+        float temp = 0;
+        for (int i = 0; i < rarityProbability.Length; i++)
+        {
+            if (i == 0)
+            {
+                if (0 <= ran && ran < rarityProbability[0])
+                {
+                    result = 0;
+                    break;
+                }
+            }
+            else
+            {
+                temp += rarityProbability[i - 1];
+                if (temp <= ran && ran < temp + rarityProbability[i])
+                {
+                    result = i;
+                }
+            }
+        }
+
+        return result;
+    }
 }
