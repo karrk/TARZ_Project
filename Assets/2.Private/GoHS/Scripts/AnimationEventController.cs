@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,9 +23,24 @@ public class AnimationEventController : MonoBehaviour
         player.longRangeSkill_1State.LongRangeSkill_1_On();
     }
 
+    public void LongRangeSkill_2()
+    {
+        player.longRangeSkill_2State.LongRangeSkill_2_On();
+    }
+
     public void LongRangeSkill_4()
     {
         player.longRangeSkill_4State.LongRangeSkill_4_On();
+    }
+
+    public void LongRangeSkill_4_EffectOn()
+    {
+        player.Refernece.EffectController.LongRangeSkill_4Effect();
+    }
+
+    public void MeleeSkill_1_EffectOn()
+    {
+        player.Refernece.EffectController.MeleeSkill_1Effect();
     }
 
     public void GameOver()
@@ -37,10 +53,7 @@ public class AnimationEventController : MonoBehaviour
         player.Refernece.EffectController.DashEffect();
     }
 
-    public void LongRangeSkill_4_EffectOn()
-    {
-        player.Refernece.EffectController.LongRangeSkill_4Effect();
-    }
+
 
     //public void LongRangeSkill_5_Effect_Start()
     //{

@@ -75,6 +75,7 @@ public class LongRangeSkill_1 : BaseState
     public void LongRangeSkill_1_On()
     {
         player.StartCoroutine(DelayCoroutine());
+        player.Refernece.EffectController.LongRangeSkill_1Effect();
     }
         
     private IEnumerator DelayCoroutine()

@@ -22,6 +22,7 @@ public class PlayerReferences
     public Transform MuzzlePoint;
     public GameObject Skill1_ArmUnit;
     public GameObject Skill1HitBox;
+    public GameObject Skill2_ArmUnit;
     public GameObject Skill3HitBox;
     public GameObject Skill4_ArmUnit;
     public GameObject Skill5Garbages;
@@ -49,7 +50,7 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
     public LongRangeAttackState longRangeAttackState;
     private DrainState drainState;
     public LongRangeSkill_1 longRangeSkill_1State;
-    private LongRangeSkill_2 longRangeSkill_2State;
+    public LongRangeSkill_2 longRangeSkill_2State;
     private LongRangeSkill_3 longRangeSkill_3State;
     public LongRangeSkill_4 longRangeSkill_4State;
     private LongRangeSkill_5 longRangeSkill_5State;

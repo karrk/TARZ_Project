@@ -8,11 +8,21 @@ public class EffectController : MonoBehaviour
     [SerializeField] private ParticleSystem Dash_LeftHand; 
     [SerializeField] private ParticleSystem Dash_RightHand;
 
+    // 원거리 스킬 1번
+    [SerializeField] private ParticleSystem longRangeSkill_1;
+
+    // 원거리 스킬 2번
+    [SerializeField] private GameObject longRangeSkill_2;
+
     // 원거리 스킬 4번
     [SerializeField] private GameObject longRangeSkill_4;
 
     // 원거리 스킬 5번
-    [SerializeField] private GameObject longRangeSkill_5;
+    [SerializeField] private GameObject longRangeSkill_5_Wind;
+    [SerializeField] private ParticleSystem longRangeSkill_5_End;
+
+    // 근거리 스킬 1번
+    [SerializeField] private ParticleSystem MeleeSkill_1;
 
     #region 대쉬
     public void DashEffect()
@@ -20,6 +30,24 @@ public class EffectController : MonoBehaviour
         Dash_LeftHand.Play();
         Dash_RightHand.Play();
     }
+    #endregion
+
+    #region 원거리 스킬 1번
+
+    public void LongRangeSkill_1Effect()
+    {
+        longRangeSkill_1.Play();
+    }
+
+    #endregion
+
+    #region 원거리 스킬 2번
+
+    public void LongRangeSkill_2Effect()
+    {
+
+    }
+
     #endregion
 
     #region 원거리 스킬 4번
@@ -40,13 +68,22 @@ public class EffectController : MonoBehaviour
 
     public void LongRangeSkill_5Effect_Start()
     {
-        longRangeSkill_5.SetActive(true);
+        longRangeSkill_5_Wind.SetActive(true);
     }
 
     public void LongRangeSkill_5Effect_End()
     {
-        longRangeSkill_5.SetActive(false);
+        longRangeSkill_5_Wind.SetActive(false);
+        longRangeSkill_5_End.Play();
     }
     #endregion
 
+    #region 근거리 스킬 1번
+
+    public void MeleeSkill_1Effect()
+    {
+        MeleeSkill_1.Play();
+    }
+
+    #endregion
 }
