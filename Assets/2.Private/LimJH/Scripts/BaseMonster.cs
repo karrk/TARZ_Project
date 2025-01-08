@@ -3,17 +3,20 @@ using Zenject;
 using System;
 using UnityEngine.AI;
 
-public class BaseMonster : MonoBehaviour, IDamagable, IPushable
+public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
 {
     [SerializeField]
     private ProjectInstaller.BaseMonsterStat stat;
     public ProjectInstaller.BaseMonsterStat Stat => stat;
 
+    private ProjectPlayer player;
+    [SerializeField] private E_Monster type;
+
     #region Injects
 
     [Inject] private ProjectInstaller.BaseMonsterStat originStat;
-    [Inject] ProjectPlayer player;
     [Inject] PlayerStats playerStats;
+    [Inject] private PoolManager manager;
 
     #endregion
 
@@ -41,18 +44,24 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable
     public Vector3 SkillPos { get; private set; }
     public E_SkillType SkillType { get; private set; }
 
+    public Enum MyType => type;
+
+    public GameObject MyObj => this.gameObject;
+
     #endregion
 
     public int attackCount; // 기믹 ?? 용도?
 
-    private void Awake()
+    public void Init(ProjectPlayer player)
     {
-        Init();
+        Reference.Nav.enabled = true;
+        originStat.SendToCopyStats<ProjectInstaller.BaseMonsterStat>(ref stat);
+        this.player = player;
     }
 
-    public void Init()
+    private void OnDisable()
     {
-        originStat.SendToCopyStats<ProjectInstaller.BaseMonsterStat>(ref stat);
+        Reference.Nav.enabled = false;
     }
 
     public void ResetDamageState()
@@ -178,6 +187,11 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable
 
     protected virtual void Update()
     {
+    }
+
+    public void Return()
+    {
+        manager.Return(this);
     }
 }
 
