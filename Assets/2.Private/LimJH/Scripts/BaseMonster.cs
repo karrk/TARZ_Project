@@ -17,6 +17,7 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
     [Inject] private ProjectInstaller.BaseMonsterStat originStat;
     [Inject] PlayerStats playerStats;
     [Inject] private PoolManager manager;
+    [Inject] private SignalBus signal;
 
     #endregion
 
@@ -51,6 +52,11 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
     #endregion
 
     public int attackCount; // 기믹 ?? 용도?
+
+    private void Awake()
+    {
+        signal.Subscribe<StageEndSignal>(Return);
+    }
 
     public void Init(ProjectPlayer player)
     {
