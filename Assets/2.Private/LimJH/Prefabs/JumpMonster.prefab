@@ -174,7 +174,7 @@ GameObject:
   - component: {fileID: 460517723101815142}
   - component: {fileID: 8549264284049050068}
   m_Layer: 12
-  m_Name: EliteMonster1
+  m_Name: JumpMonster
   m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -245,7 +245,7 @@ MonoBehaviour:
     MaxRotateTime: 0
     StopDist: 0
     canJumpAttack: 0
-  type: 2
+  type: 3
   reference:
     Anim: {fileID: 5319549081127871000}
     Coll: {fileID: 8549264284049050068}

@@ -26,6 +26,15 @@ MonoBehaviour:
         - Type: 0
           Prefab: {fileID: 4631580359735930775, guid: 4013b3696dc896548a565b47ab36716b,
             type: 3}
+        - Type: 1
+          Prefab: {fileID: 5011961818549860546, guid: 5001d6ba7c081aa4cb13e640aa5b2343,
+            type: 3}
+        - Type: 2
+          Prefab: {fileID: 9033396301897224197, guid: 3584a3f554ba5564498f047f45e74768,
+            type: 3}
+        - Type: 3
+          Prefab: {fileID: 789139032559144387, guid: 197dfa8656a8d5b40b4a1f81fc3cff4e,
+            type: 3}
     VFX:
       list:
         pairInfo:
@@ -207,6 +216,6 @@ MonoBehaviour:
       MaxRotateTime: 2
       StopDist: 1.5
       canJumpAttack: 1
-      soundSetting:
+  soundSetting:
     Player:
-      Audio: {fileID: 8300000, guid: 7a4f2b951fbb18c40b051320f75ba8dd, type: 3}
+      Audio: {fileID: 0}

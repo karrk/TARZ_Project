@@ -13,10 +13,12 @@ public enum E_PoolType
 public enum E_Monster
 {
     None = -1,
-    BasicMob1,
-    RangeMob2,
-    EliteMob1,
-
+    BasicMob,
+    RangeMob,
+    DogMob,
+    JumpMob,
+    BombMob,
+    BossMob,
 }
 
 public enum E_VFX
