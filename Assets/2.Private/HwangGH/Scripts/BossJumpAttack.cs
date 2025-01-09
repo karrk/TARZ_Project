@@ -23,6 +23,7 @@ public class BossJumpAttack : Action
     public override void OnAwake()
     {
 		targetObject = GameObject.FindGameObjectWithTag("Player");
+        bossmonster = GetComponent<BaseBossMonster>();
     }
 
     public override void OnStart()
@@ -96,7 +97,7 @@ public class BossJumpAttack : Action
     private System.Collections.IEnumerator CoolTimeJumpAttack()
     {
         yield return new WaitForSeconds(bossmonster.bossMonsterJumpAttackCool); // 쿨타임 대기
-        bossJumpAttack.bossJumpOnOff = true; // 점프 공격 가능 상태로 복구
+        bossJumpOnOff = true; // 점프 공격 가능 상태로 복구
         Debug.Log("점프 공격 쿨타임 종료");
     }
 

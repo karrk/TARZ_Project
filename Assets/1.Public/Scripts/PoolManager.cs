@@ -21,6 +21,11 @@ public class PoolManager : MonoBehaviour
         MainDirectory.SetParent(transform);
     }
 
+    private void Awake()
+    {
+        RegistPools();
+    }
+
     public void RegistPools()
     {
         CreateMainDirectory();

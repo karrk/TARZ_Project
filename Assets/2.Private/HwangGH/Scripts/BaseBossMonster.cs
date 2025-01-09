@@ -7,5 +7,5 @@ public class BaseBossMonster : BaseMonster
 {
     public float bossMonsterJumpAttackCool;
 
-    
+    public int attackCountCool;
 }

@@ -41,6 +41,7 @@ public class LongRangeSkill_1 : BaseState
         }
 
         armUnit.SetActive(true);
+        player.Refernece.EffectController.UseSkillEffect();
     }
 
     public override void Update()
@@ -75,6 +76,7 @@ public class LongRangeSkill_1 : BaseState
     public void LongRangeSkill_1_On()
     {
         player.StartCoroutine(DelayCoroutine());
+        player.Refernece.EffectController.LongRangeSkill_1Effect();
     }
         
     private IEnumerator DelayCoroutine()

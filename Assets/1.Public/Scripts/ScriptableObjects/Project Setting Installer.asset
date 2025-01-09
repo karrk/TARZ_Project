@@ -17,10 +17,15 @@ MonoBehaviour:
       type: 3}
     Player: {fileID: 7501606899982736315, guid: 0c45545b5ac752243ae16e97f66501c6,
       type: 3}
+    SoundManager: {fileID: 1130853315265817023, guid: 733eaeb5f1cd005488b620caf7d86cf3,
+      type: 3}
   pooledPrefabs:
     Monster:
       list:
-        pairInfo: []
+        pairInfo:
+        - Type: 0
+          Prefab: {fileID: 4631580359735930775, guid: 4013b3696dc896548a565b47ab36716b,
+            type: 3}
     VFX:
       list:
         pairInfo:
@@ -96,7 +101,7 @@ MonoBehaviour:
       DashTime: 0.3
       DashSpeed: 15
       DashCoolTime: 1
-      UseStamina: 40
+      UseStamina: 0
     DrainSetting:
       DrainSpeed: 3
       ViewArea: 0
@@ -124,8 +129,8 @@ MonoBehaviour:
     Skill3Setting:
       Delay: 1
     Skill4Setting:
-      Radius: 3
-      zOffset: 4
+      Radius: 5
+      zOffset: 6
       Delay: 1.5
       Damage: 350
       TargetMask:
@@ -156,11 +161,11 @@ MonoBehaviour:
         serializedVersion: 2
         m_Bits: 4096
       Delay: 0.5
-      Zoffset: 0
+      Zoffset: 3
       CoolTime: 0
     MeleeSkill2Setting:
-      DashTime: 0
-      DashSpeed: 0
+      DashTime: 0.4
+      DashSpeed: 20
       CoolTime: 0
   monsterStatSetting:
     BaseMobStat:
@@ -202,3 +207,6 @@ MonoBehaviour:
       MaxRotateTime: 2
       StopDist: 1.5
       canJumpAttack: 1
+      soundSetting:
+    Player:
+      Audio: {fileID: 8300000, guid: 7a4f2b951fbb18c40b051320f75ba8dd, type: 3}

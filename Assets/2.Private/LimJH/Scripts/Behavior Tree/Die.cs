@@ -25,7 +25,7 @@ public class Die : BaseAction
 
 
                 // 애니메이션이 끝났으면 게임 오브젝트 삭제
-                GameObject.Destroy(my.Value);
+                mob.Return();
                 return TaskStatus.Success; // 죽음 처리 완료
 
                 /*if (IsDieAnimationFinished())

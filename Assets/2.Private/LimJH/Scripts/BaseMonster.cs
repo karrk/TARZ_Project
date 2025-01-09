@@ -2,8 +2,9 @@ using UnityEngine;
 using Zenject;
 using System;
 using UnityEngine.AI;
+using Unity.VisualScripting;
 
-public class BaseMonster : MonoBehaviour, IDamagable, IPushable
+public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
 {
     /*public enum IAttackRange
     {
@@ -25,11 +26,17 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable
 
     [SerializeField] private E_Monster type = E_Monster.None;
 
+    private ProjectPlayer player;
+    [SerializeField] private E_Monster type;
+
     #region Injects
+
 
     [Inject] private ProjectInstaller.MonsterStats originStats;
     [Inject] ProjectPlayer player;
     [Inject] PlayerStats playerStats;
+    [Inject] private PoolManager manager;
+    [Inject] private SignalBus signal;
 
     #endregion
     
@@ -58,14 +65,33 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable
     public Vector3 SkillPos { get; private set; }
     public E_SkillType SkillType { get; private set; }
 
+    public Enum MyType => type;
+
+    public GameObject MyObj => this.gameObject;
+
     #endregion
 
     public int attackCount; // 기믹 ?? 용도?
+    public event Action OnDead;
 
     private void Awake()
     {
+        signal.Subscribe<StageEndSignal>(Return);
         SelectStat();
-        Init();
+    }
+
+    public void Init(ProjectPlayer player)
+    {
+        Reference.Nav.enabled = true;
+        Reference.Coll.enabled = true;
+        originStat.SendToCopyStats<ProjectInstaller.MonsterStat>(ref stat);
+        this.player = player;
+    }
+
+    private void OnDisable()
+    {
+        Reference.Nav.enabled = false;
+        OnDead = null;
     }
 
     private void SelectStat()
@@ -86,11 +112,6 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable
         }
     }
 
-    public void Init()
-    {
-        originStat.SendToCopyStats<ProjectInstaller.MonsterStat>(ref stat);
-    }
-
     public void ResetDamageState()
     {
         IsOnDamaged = false;
@@ -109,7 +130,11 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable
         }
 
         stat.Health -= value * stat.DamageReducation;
-        Debug.Log($"Health: {stat.Health}");
+
+        if (stat.Health <= 0)
+            OnDead?.Invoke();
+
+        //Debug.Log($"Health: {stat.Health}");
 
         IsOnDamaged = true;
     }
@@ -272,6 +297,11 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable
 
     protected virtual void Update()
     {
+    }
+
+    public void Return()
+    {
+        manager.Return(this);
     }
 }
 

@@ -8,6 +8,8 @@ TagManager:
   - Monster
   - Ground
   - Environment
+  - ship
+  - asteroid
   layers:
   - Default
   - TransparentFX
@@ -16,7 +18,7 @@ TagManager:
   - Water
   - UI
   - Ground
-  - 
+  - SpawnTrigger
   - 
   - 
   - GHS
