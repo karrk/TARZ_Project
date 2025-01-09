@@ -1032,6 +1032,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b63c4c4705e46724692cf9a90d004ea8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 0}
+  firePoint: {fileID: 0}
   stat:
     Health: 0
     DamageReducation: 0
@@ -1044,6 +1046,7 @@ MonoBehaviour:
     RotateSpeed: 0
     MaxRotateTime: 0
     StopDist: 0
+  type: 0
   reference:
     Anim: {fileID: 8522007710125607252}
     Coll: {fileID: 8372804371624976041}

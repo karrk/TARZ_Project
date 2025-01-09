@@ -2,7 +2,7 @@ using UnityEngine;
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 
-public class JumpAttack : Action
+public class JumpAttack : BaseAction
 {
     public SharedGameObject targetObject; // 공격 대상
     public SharedFloat attackDamage;      // 공격 데미지
@@ -30,17 +30,17 @@ public class JumpAttack : Action
         startPosition = transform.position;
 
         // 목표 위치는 타겟 위치의 위쪽 (기본 점프 높이 적용)
-        targetPosition = new Vector3(targetObject.Value.transform.position.x,
-                                     targetObject.Value.transform.position.y + jumpHeight.Value,
+        targetPosition = new Vector3(transform.position.x,
+                                     transform.position.y + jumpHeight.Value,
                                      targetObject.Value.transform.position.z);
 
         // 점프 애니메이션 트리거 추가 가능
         Debug.Log("점프 시작!");
 
         // 점프 공격 불가능 상태로 설정
-        if (eliteMonster != null)
+        if (mob != null)
         {
-            eliteMonster.canJumpAttack = false; // 점프 공격 비활성화
+            mob.Stat.canJumpAttack = false; // 점프 공격 비활성화
         }
     }
 
@@ -97,7 +97,7 @@ public class JumpAttack : Action
     private System.Collections.IEnumerator StartJumpAttackCooldown(EliteMonster1 monster)
     {
         yield return new WaitForSeconds(monster.jumpAttackCoolTime); // 쿨타임 대기
-        monster.canJumpAttack = true; // 점프 공격 가능 상태로 복구
+        mob.Stat.canJumpAttack = true; // 점프 공격 가능 상태로 복구
         Debug.Log("점프 공격 쿨타임 종료");
     }
 }
