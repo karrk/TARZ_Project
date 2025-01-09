@@ -2,6 +2,7 @@ using UnityEngine;
 using Zenject;
 using System;
 using UnityEngine.AI;
+using Unity.VisualScripting;
 
 public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
 {
@@ -52,6 +53,7 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
     #endregion
 
     public int attackCount; // 기믹 ?? 용도?
+    public event Action OnDead;
 
     private void Awake()
     {
@@ -61,6 +63,7 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
     public void Init(ProjectPlayer player)
     {
         Reference.Nav.enabled = true;
+        Reference.Coll.enabled = true;
         originStat.SendToCopyStats<ProjectInstaller.BaseMonsterStat>(ref stat);
         this.player = player;
     }
@@ -68,6 +71,7 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
     private void OnDisable()
     {
         Reference.Nav.enabled = false;
+        OnDead = null;
     }
 
     public void ResetDamageState()
@@ -88,7 +92,11 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
         }
 
         stat.Health -= value * stat.DamageReducation;
-        Debug.Log($"Health: {stat.Health}");
+
+        if (stat.Health <= 0)
+            OnDead?.Invoke();
+
+        //Debug.Log($"Health: {stat.Health}");
 
         IsOnDamaged = true;
     }
