@@ -12,7 +12,7 @@ public class EquipmentSelectButton : MonoBehaviour
     InGameUI inGameUI;
 
     [SerializeField] Image buttonImage;
-
+    
     [SerializeField] Image sprite;
     [SerializeField] TMP_Text descriptionText;
 
