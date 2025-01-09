@@ -79,6 +79,8 @@ public class EquipmentSelectButton : MonoBehaviour
 
     public void SelectButton()
     {
+        Time.timeScale = 1.0f;
+
         if (equipment)
         {
             inGameUI.EquipmentManager.AddEquipped(equipment);

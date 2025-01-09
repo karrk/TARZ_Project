@@ -27,12 +27,13 @@ public class EquipmentSelectPanel : MonoBehaviour, IOpenCloseMenu
         gameObject.SetActive(true);
 
         SetChoice();
-
+        Time.timeScale = 0f;
         EventSystem.current.SetSelectedGameObject(firstSelected);
     }
 
     public void CloseUIPanel()
     {
+        Time.timeScale = 1.0f;
         inGameUI.CurrentMenu = inGameUI.StatusBarPanel;
         inGameUI.CurrentMenu.OpenUIPanel();
         gameObject.SetActive(false);
