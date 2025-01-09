@@ -395,7 +395,15 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
 
     #endregion
 
-    public abstract class MonsterStat
+    [Serializable]
+    public class MonsterStats
+    {
+        public MonsterStat BaseMobStat;
+        public MonsterStat RangeMobStat;
+    }
+
+    [Serializable]
+    public class MonsterStat
     {
         public float Health;
         public float DamageReducation;
@@ -426,10 +434,5 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
             target.MaxRotateTime = this.MaxRotateTime;
             target.StopDist = this.StopDist;
         }
-    }
-    
-    [Serializable]
-    public class BaseMonsterStat : MonsterStat
-    {
     }
 }
