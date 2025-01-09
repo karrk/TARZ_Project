@@ -51,6 +51,8 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         //Container.Bind<SkillManager>().AsSingle().NonLazy();
 
         Container.BindInterfacesAndSelfTo<InputManager>().AsSingle().NonLazy();
+
+        Container.Bind<SoundManager>().FromComponentInNewPrefab(prefabs.SoundManager).AsSingle().NonLazy();
     }
 
     private void InstallInventory()
@@ -58,6 +60,35 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         Container.BindInterfacesAndSelfTo<ItemInventory>().AsSingle().Lazy();
         Container.BindInterfacesAndSelfTo<PlayerEquipment>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<PlayerStats>().AsSingle().NonLazy();
+    }
+
+    [Serializable]
+    public class SoundSetting
+    {
+        public BGMSettings BGM;
+        public SFXSettings SFX;
+        public PlayerSettings Player;
+
+
+        [Serializable]
+        public class BGMSettings
+        {
+
+        }
+
+        [Serializable]
+        public class SFXSettings
+        {
+
+        }
+
+        [Serializable]
+        public class PlayerSettings
+        {
+            public AudioClip Audio;
+        }
+
+
     }
 
     [Serializable]
@@ -237,6 +268,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
     {
         public GameObject PoolManager;
         public GameObject Player;
+        public GameObject SoundManager;
     }
 
     [Serializable]

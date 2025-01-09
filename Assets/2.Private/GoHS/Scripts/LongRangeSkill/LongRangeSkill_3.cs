@@ -39,6 +39,8 @@ public class LongRangeSkill_3 : BaseState
             player.transform.rotation = Quaternion.Euler(playerEuler.x, cameraEuler.y, cameraEuler.z);
 
         }
+
+        player.Refernece.EffectController.UseSkillEffect();
     }
 
     public override void Update()
@@ -69,6 +71,7 @@ public class LongRangeSkill_3 : BaseState
         float interval = 0.05f;  // 생성되는 간격
         int spawnCount = 25;    // 생성 횟수
         List<GameObject> punchObjList = new List<GameObject>();
+        bool toggle = true;
 
         for (int i = 0; i < spawnCount; i++)
         {
@@ -79,6 +82,17 @@ public class LongRangeSkill_3 : BaseState
                 punchObjList.Add(newHitBox);
 
                 newHitBox.SetActive(true);
+
+                if(toggle)
+                {
+                    player.Refernece.EffectController.LongRangeSkill_3Effect();
+                }
+                else
+                {
+
+                }
+
+                toggle = !toggle;
 
                 Debug.Log($"{i}번 펀치 생성함");
 
