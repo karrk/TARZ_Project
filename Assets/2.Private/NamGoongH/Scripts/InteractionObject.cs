@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class InteractionObject : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class InteractionObject : MonoBehaviour
 
     private bool isPlayerInRange = false;
     [SerializeField] private bool isItemSpawned = false;
+
+    [Inject] private GarbageQueue garbageQueue;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -50,10 +53,18 @@ public class InteractionObject : MonoBehaviour
         GameObject prefabToSpawn = battleItemPrefab[random];
 
         // 상호작용한 물체의 앞쪽에 생성
-        Vector3 spawnPosition = transform.position + transform.up * -1.5f + transform.forward * 1.0f;
+        Vector3 spawnPosition = transform.position + transform.up * 1.5f + transform.forward * 1.0f;
 
         // 아이템 생성
         GameObject spawnedItem = Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
+
+        // 초기화 메서드 호출
+        var itemComponent = spawnedItem.GetComponent<GarbageItem>();
+        if (itemComponent != null)
+        {
+            itemComponent.Initialize(garbageQueue);
+        }
+
         Debug.Log($"Spawned {prefabToSpawn.name}");
     }
 }
