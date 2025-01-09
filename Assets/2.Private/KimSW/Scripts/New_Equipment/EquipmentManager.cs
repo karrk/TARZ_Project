@@ -11,6 +11,8 @@ public class EquipmentManager : MonoBehaviour
     [Inject]
     InGameUI inGameUI;
 
+    [SerializeField] EquipmentCSVParser csvParser;
+
     public List<InteractEquipment> interactEquipments = new List<InteractEquipment>();
 
     public List<NewEquipment> newEquipments = new List<NewEquipment>();
@@ -24,6 +26,10 @@ public class EquipmentManager : MonoBehaviour
     private void Start()
     {
         SetInteract();
+
+        newEquipments = csvParser.newEquipments;
+
+
     }
 
 
@@ -55,23 +61,7 @@ public class EquipmentManager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        /*
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            if (newEquipments.Count > 0)
-            {
-                AddEquipped(GetEquipment());
-            }
-            else
-            {
-                Debug.Log("장비 풀 골드획득");
-            }
-            
-        }
-        */
-    }
+    
 
     public NewEquipment GetEquipment()
     {
