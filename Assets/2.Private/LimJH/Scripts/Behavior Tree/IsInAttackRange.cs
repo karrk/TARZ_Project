@@ -7,7 +7,7 @@ public class IsInAttackRange : BaseCondition
     {
         if (mob == null)
         {
-            Debug.LogWarning("SelfObject or TargetObject is null!");
+            Debug.LogWarning("몬스터가 존재하지 않습니다!");
             return TaskStatus.Failure;
         }
 

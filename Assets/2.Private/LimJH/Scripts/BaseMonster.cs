@@ -6,21 +6,40 @@ using Unity.VisualScripting;
 
 public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
 {
+    /*public enum IAttackRange
+    {
+        Melee,  // 근접
+        Ranged  // 원거리
+    }
+
+    public IAttackRange AttackType { get; private set; } = IAttackRange.Melee;*/
+
+    [SerializeField] private GameObject projectilePrefab;
+
+    [SerializeField] private Transform firePoint;
+
     [SerializeField]
-    private ProjectInstaller.BaseMonsterStat stat;
-    public ProjectInstaller.BaseMonsterStat Stat => stat;
+    private ProjectInstaller.MonsterStat stat;
+    public ProjectInstaller.MonsterStat Stat => stat;
+
+    private ProjectInstaller.MonsterStat originStat;
+
+    [SerializeField] private E_Monster type = E_Monster.None;
 
     private ProjectPlayer player;
     [SerializeField] private E_Monster type;
 
     #region Injects
 
-    [Inject] private ProjectInstaller.BaseMonsterStat originStat;
+
+    [Inject] private ProjectInstaller.MonsterStats originStats;
+    [Inject] ProjectPlayer player;
     [Inject] PlayerStats playerStats;
     [Inject] private PoolManager manager;
     [Inject] private SignalBus signal;
 
     #endregion
+    
 
     #region Refs
 
@@ -58,13 +77,14 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
     private void Awake()
     {
         signal.Subscribe<StageEndSignal>(Return);
+        SelectStat();
     }
 
     public void Init(ProjectPlayer player)
     {
         Reference.Nav.enabled = true;
         Reference.Coll.enabled = true;
-        originStat.SendToCopyStats<ProjectInstaller.BaseMonsterStat>(ref stat);
+        originStat.SendToCopyStats<ProjectInstaller.MonsterStat>(ref stat);
         this.player = player;
     }
 
@@ -72,6 +92,24 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
     {
         Reference.Nav.enabled = false;
         OnDead = null;
+    }
+
+    private void SelectStat()
+    {
+        switch (type)
+        {
+            case E_Monster.BasicMob1:
+                originStat = originStats.BaseMobStat;
+                break;
+
+            case E_Monster.RangeMob2:
+                originStat = originStats.RangeMobStat;
+                break;
+
+            case E_Monster.EliteMob1:
+                originStat = originStats.EliteMobStat;
+                break;
+        }
     }
 
     public void ResetDamageState()
@@ -101,7 +139,19 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
         IsOnDamaged = true;
     }
 
-    public void PerformAttack(GameObject target)
+    /*public void PerformAttack(GameObject target) //수정필요
+    {
+        if (AttackType == IAttackRange.Melee)
+        {
+            EndAttack();
+        }
+        else if (AttackType == IAttackRange.Ranged)
+        {
+            ThrowAttack();
+        }
+    }*/
+
+    public void PerformMeleeAttack(GameObject target)
     {
         if (target == null)
         {
@@ -139,7 +189,7 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
     {
         if (player != null)
         {
-            PerformAttack(player.gameObject);
+            PerformMeleeAttack(player.gameObject);
         }
         else
         {
@@ -163,6 +213,52 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
         }
 
         return false; // 타격 실패
+    }
+
+    public void PerformRangedAttack(GameObject target)
+    {
+        if (target == null)
+        {
+            Debug.LogWarning("타겟이 설정되지 않았습니다.");
+            return;
+        }
+
+        // 투사체 프리팹이 있는지 확인
+        if (projectilePrefab == null)
+        {
+            Debug.LogError("투사체 프리팹이 설정되지 않았습니다.");
+            return;
+        }
+
+        // 투사체 생성
+        GameObject projectile = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
+
+        // 투사체 발사 방향 계산
+        Vector3 direction = (target.transform.position - transform.position).normalized;
+
+        // Rigidbody 컴포넌트를 가져와 힘을 가함
+        Rigidbody rb = projectile.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            float launchForce = 20f; // 발사 힘
+            rb.AddForce(direction * launchForce, ForceMode.Impulse);
+        }
+
+        Debug.Log($"투사체가 {target.name}을 향해 발사되었습니다.");
+
+        attackCount++;
+    }
+
+    public void ThrowAttack()
+    {
+        if (player != null)
+        {
+            PerformRangedAttack(player.gameObject);
+        }
+        else
+        {
+            Debug.LogWarning("타겟이 설정되지 않았습니다.");
+        }
     }
 
     private void OnDrawGizmos()

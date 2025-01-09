@@ -2,27 +2,24 @@ using UnityEngine;
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 
-public class IsInJumpAttack : Conditional
+public class IsInJumpAttack : BaseCondition
 {
-    public SharedGameObject selfObject;
-    public SharedGameObject targetObject;
-    public SharedFloat detectRange;
-    public SharedBool canJumpAttack;
 
     public override TaskStatus OnUpdate()
     {
-        if (selfObject.Value == null || targetObject.Value == null)
+        if (mob == null)
         {
-            Debug.LogWarning("SelfObject or TargetObject is null!");
+            Debug.LogWarning("몬스터가 존재하지 않습니다!");
             return TaskStatus.Failure;
         }
-        float distance =
+
+        /*float distance =
             Vector3.Distance(selfObject.Value.transform.position,
-            targetObject.Value.transform.position);
+            targetObject.Value.transform.position);*/
 
         //Debug.Log(distance);
         
-        if (distance <= detectRange.Value && canJumpAttack.Value)
+        if (mob.Dist <= mob.Stat.InAttackRange && mob.Stat.canJumpAttack)
         {
             return TaskStatus.Success;
         }

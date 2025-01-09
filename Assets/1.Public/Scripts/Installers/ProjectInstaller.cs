@@ -427,7 +427,16 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
 
     #endregion
 
-    public abstract class MonsterStat
+    [Serializable]
+    public class MonsterStats
+    {
+        public MonsterStat BaseMobStat;
+        public MonsterStat RangeMobStat;
+        public MonsterStat EliteMobStat;
+    }
+
+    [Serializable]
+    public class MonsterStat
     {
         public float Health;
         public float DamageReducation;
@@ -440,6 +449,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         public float RotateSpeed;
         public float MaxRotateTime;
         public float StopDist;
+        public bool canJumpAttack;
 
         public virtual void SendToCopyStats<T>(ref T target) where T : MonsterStat, new()
         {
@@ -457,11 +467,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
             target.RotateSpeed = this.RotateSpeed;
             target.MaxRotateTime = this.MaxRotateTime;
             target.StopDist = this.StopDist;
+            target.canJumpAttack = this.canJumpAttack;
         }
-    }
-    
-    [Serializable]
-    public class BaseMonsterStat : MonsterStat
-    {
     }
 }
