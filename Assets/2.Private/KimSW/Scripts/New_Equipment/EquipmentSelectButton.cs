@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,11 +23,30 @@ public class EquipmentSelectButton : MonoBehaviour
 
     NewEquipment equipment;
 
+    StringBuilder sb = new StringBuilder();
+
     public void SetInfo(NewEquipment newEquipment)
     {
         equipment = newEquipment;
         sprite.sprite = equipment.illust;
-        descriptionText.text = equipment.equipmentName;
+
+        sb.Clear();
+        sb.Append(equipment.equipmentName);
+        sb.Append("\n\n");
+        sb.Append($"{equipment.optionType}\n");
+
+        string value = "0";
+
+        foreach ( var item in inGameUI.EquipmentManager.equipped)
+        {
+            if (item.equipmentType == equipment.equipmentType)
+            {
+                value = item.optionValue.ToString();
+            }
+        }
+        sb.Append($"{value} > {equipment.optionValue}");
+
+        descriptionText.text = sb.ToString();
 
         upgradeLayout.RemoveFill();
         upgradeLayout.SetLayout(newEquipment.upgradeLevel);
