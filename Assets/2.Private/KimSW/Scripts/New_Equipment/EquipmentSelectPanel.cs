@@ -27,12 +27,13 @@ public class EquipmentSelectPanel : MonoBehaviour, IOpenCloseMenu
         gameObject.SetActive(true);
 
         SetChoice();
-
+        Time.timeScale = 0f;
         EventSystem.current.SetSelectedGameObject(firstSelected);
     }
 
     public void CloseUIPanel()
     {
+        Time.timeScale = 1.0f;
         inGameUI.CurrentMenu = inGameUI.StatusBarPanel;
         inGameUI.CurrentMenu.OpenUIPanel();
         gameObject.SetActive(false);
@@ -40,13 +41,12 @@ public class EquipmentSelectPanel : MonoBehaviour, IOpenCloseMenu
 
     public void SetChoice()
     {
+        int debug = 0;
+
         // 선택지가 없을때
         if (inGameUI.EquipmentManager.newEquipments.Count == 0){
-
-            for (int i = 0; i < buttons.Length; i++)
-            {
-                buttons[i].SetGold();
-            }
+            SetGoldSlot();
+           
 
             return;
         }
@@ -77,15 +77,36 @@ public class EquipmentSelectPanel : MonoBehaviour, IOpenCloseMenu
 
         for (int i = 0; i < 3; i++)
         {
-            NewEquipment equipment = inGameUI.EquipmentManager.GetEquipment();
+            NewEquipment equipment = inGameUI.EquipmentManager.GetEquipment(rarityProbability[i]);
 
+      
+            if(equipment == null)
+            {
+              
+                Debug.Log("null값 발생 " + i);
+                Debug.Log(rarityProbability[i]);
+                SetGoldSlot();
+                return;
+            }
 
+            debug++;
+            if (debug > 1000)
+            {
+                Debug.Log("무한루프발생!");
+                Debug.Log(i);
+                Debug.Log(equipment.rarityTier);
+                Debug.Log(rarityCount[(int)equipment.rarityTier]);
+                Debug.Log("무한루프발생");
+                SetGoldSlot();
+                return;
+            }
+            /*
             //레어도 체크
             if (rarityProbability[i] != (int)equipment.rarityTier)
             {
                 i--;
                 continue;
-            }
+            }*/
 
             //중복체크
             bool overlap = false;
@@ -140,6 +161,14 @@ public class EquipmentSelectPanel : MonoBehaviour, IOpenCloseMenu
         }
 
       
+    }
+
+    public void SetGoldSlot()
+    {
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            buttons[i].SetGold();
+        }
     }
 
     public void SetSlot(int num)

@@ -2,9 +2,14 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public class EquipmentCSVParser : MonoBehaviour
 {
+
+    public List<NewEquipment> newEquipments = new List<NewEquipment>();
+
+
     private void Awake()
     {
 #if UNITY_EDITOR
@@ -89,7 +94,45 @@ public class EquipmentCSVParser : MonoBehaviour
 
             newEquipment.optionValue = int.Parse(values[5]);
 
-            AssetDatabase.CreateAsset(newEquipment, $"Assets/2.Private/KimSW/Prefabs/Required/InGame/NewEquipmentSO/{newEquipment.id}.asset");
+
+            switch (values[6])
+            {
+                case "BOOTS":
+                    newEquipment.equipmentType = EquipmentType.BOOTS;
+                    break;
+                case "ARM":
+                    newEquipment.equipmentType = EquipmentType.ARM;
+                    break;
+                case "EARRING":
+                    newEquipment.equipmentType = EquipmentType.EARRING;
+                    break;
+                case "RING":
+                    newEquipment.equipmentType = EquipmentType.RING;
+                    break;
+                case "NECKLACE":
+                    newEquipment.equipmentType = EquipmentType.NECKLACE;
+                    break;
+                case "LEG":
+                    newEquipment.equipmentType = EquipmentType.LEG;
+                    break;
+                case "CHEST":
+                    newEquipment.equipmentType = EquipmentType.CHEST;
+                    break;
+                case "BACKPACK":
+                    newEquipment.equipmentType = EquipmentType.BACKPACK;
+                    break;
+                default:
+                    newEquipment.equipmentType = EquipmentType.SIZE;
+                    break;
+            }
+
+            newEquipment.illust = Addressables.LoadAssetAsync<Sprite>(values[7]).WaitForCompletion();
+
+            newEquipment.description = values[8];
+
+            newEquipments.Add(newEquipment);
+
+            // AssetDatabase.CreateAsset(newEquipment, $"Assets/2.Private/KimSW/Prefabs/Required/InGame/NewEquipmentSO/{newEquipment.id}.asset");
         }
 
 
