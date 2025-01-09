@@ -37,9 +37,9 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
 
     private void InstallData()
     {
-        Container.BindInterfacesAndSelfTo<CSVLoader>().AsSingle().NonLazy();
-        Container.Bind<DataBase>().AsSingle().NonLazy();
-        Container.Bind<DataParser>().AsSingle();
+        //Container.BindInterfacesAndSelfTo<CSVLoader>().AsSingle().NonLazy();
+        //Container.Bind<DataBase>().AsSingle().NonLazy();
+        //Container.Bind<DataParser>().AsSingle();
         Container.BindInterfacesAndSelfTo<DataSlots>().AsSingle().NonLazy();
     }
 
