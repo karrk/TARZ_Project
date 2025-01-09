@@ -31,8 +31,8 @@ public class MonsterSpawner : MonoBehaviour
         {
             BaseMonster mob = manager.GetObject<BaseMonster>(creator.Type);
             mob.transform.position = creator.transform.position;
-            mob.transform.forward = creator.transform.forward;
-            //mob.Init(player);
+            mob.transform.rotation = Quaternion.Euler(0,Random.Range(0,359),0);
+            mob.Init(player);
         }
     }
 }

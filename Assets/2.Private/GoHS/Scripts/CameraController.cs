@@ -209,13 +209,13 @@ public class CameraController : MonoBehaviour
 
         if(Physics.Raycast(ray, out RaycastHit hit, Mathf.Abs(offset.z)))
         {
-            Debug.Log("벽 확인 됨");
+            //Debug.Log("벽 확인 됨");
             Vector3 hitPoint = hit.point;
             transform.position = hit.point + hit.normal * 0.5f;
         }
         else
         {
-            Debug.Log("벽 확인 안됨");
+            //Debug.Log("벽 확인 안됨");
             //Quaternion rotation = Quaternion.Euler(0, current.x, 0);
             //transform.position = player.transform.position + rotation * offset;
         }

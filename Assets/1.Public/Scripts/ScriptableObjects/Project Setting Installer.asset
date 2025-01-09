@@ -22,7 +22,10 @@ MonoBehaviour:
   pooledPrefabs:
     Monster:
       list:
-        pairInfo: []
+        pairInfo:
+        - Type: 0
+          Prefab: {fileID: 4631580359735930775, guid: 4013b3696dc896548a565b47ab36716b,
+            type: 3}
     VFX:
       list:
         pairInfo:
