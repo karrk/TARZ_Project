@@ -190,6 +190,8 @@ MonoBehaviour:
       MaxRotateTime: 2
       StopDist: 1.5
       canJumpAttack: 0
+      jumpHeight: 0
+      jumpDuration: 0
     RangeMobStat:
       Health: 100
       DamageReducation: 1
@@ -203,19 +205,38 @@ MonoBehaviour:
       MaxRotateTime: 2
       StopDist: 1.5
       canJumpAttack: 0
-    EliteMobStat:
+      jumpHeight: 0
+      jumpDuration: 0
+    DogMobStat:
+      Health: 0
+      DamageReducation: 0
+      Damage: 0
+      Angle: 0
+      AttackRange: 0
+      MoveSpeed: 0
+      InAttackRange: 0
+      DetectRange: 0
+      RotateSpeed: 0
+      MaxRotateTime: 0
+      StopDist: 0
+      canJumpAttack: 0
+      jumpHeight: 0
+      jumpDuration: 0
+    JumpMobStat:
       Health: 500
       DamageReducation: 1
       Damage: 10
       Angle: 90
       AttackRange: 4
-      MoveSpeed: 3
-      InAttackRange: 2
+      MoveSpeed: 2
+      InAttackRange: 4
       DetectRange: 10
       RotateSpeed: 5
       MaxRotateTime: 2
       StopDist: 1.5
       canJumpAttack: 1
+      jumpHeight: 4
+      jumpDuration: 2
   soundSetting:
     Player:
       Audio: {fileID: 0}

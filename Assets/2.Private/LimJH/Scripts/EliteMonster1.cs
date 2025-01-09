@@ -1,8 +1,10 @@
+using System.Diagnostics;
+using UnityEngine;
+
 public class EliteMonster1 : BaseMonster
 {
-    public bool canJumpAttack = true;
     public float jumpAttackCoolTime;
-
+    [SerializeField] private GameObject shockwavePrefab;
 
     protected override void Update()
     {
@@ -12,5 +14,16 @@ public class EliteMonster1 : BaseMonster
         //{
         //    behaviorTree.SetVariableValue("canJumpAttack", canJumpAttack);
         //}
+    }
+
+    public void EndJumpAttack()
+    {
+        if (shockwavePrefab == null)
+        {
+            UnityEngine.Debug.LogError("충격파 프리팹이 설정되지 않았습니다.");
+            return;
+        }
+
+        GameObject projectile = Instantiate(shockwavePrefab, transform.position, Quaternion.identity);
     }
 }

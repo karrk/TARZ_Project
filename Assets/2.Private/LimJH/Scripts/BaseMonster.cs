@@ -109,7 +109,7 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
                 break;
 
             case E_Monster.JumpMob:
-                originStat = originStats.EliteMobStat;
+                originStat = originStats.JumpMobStat;
                 break;
 
             case E_Monster.BombMob:

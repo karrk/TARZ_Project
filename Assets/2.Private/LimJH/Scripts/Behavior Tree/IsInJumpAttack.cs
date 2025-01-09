@@ -13,13 +13,13 @@ public class IsInJumpAttack : BaseCondition
             return TaskStatus.Failure;
         }
 
-        /*float distance =
-            Vector3.Distance(selfObject.Value.transform.position,
-            targetObject.Value.transform.position);*/
+        float distance =
+            Vector3.Distance(transform.position,
+            mob.PlayerPos);
 
         //Debug.Log(distance);
         
-        if (mob.Dist <= mob.Stat.InAttackRange && mob.Stat.canJumpAttack)
+        if (distance <= mob.Stat.InAttackRange && mob.Stat.canJumpAttack)
         {
             return TaskStatus.Success;
         }
