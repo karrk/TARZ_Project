@@ -27,13 +27,11 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
     [SerializeField] private E_Monster type = E_Monster.None;
 
     private ProjectPlayer player;
-    [SerializeField] private E_Monster type;
 
     #region Injects
 
 
     [Inject] private ProjectInstaller.MonsterStats originStats;
-    [Inject] ProjectPlayer player;
     [Inject] PlayerStats playerStats;
     [Inject] private PoolManager manager;
     [Inject] private SignalBus signal;
