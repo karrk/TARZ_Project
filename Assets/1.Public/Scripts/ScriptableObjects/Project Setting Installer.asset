@@ -17,6 +17,8 @@ MonoBehaviour:
       type: 3}
     Player: {fileID: 7501606899982736315, guid: 0c45545b5ac752243ae16e97f66501c6,
       type: 3}
+    SoundManager: {fileID: 1130853315265817023, guid: 733eaeb5f1cd005488b620caf7d86cf3,
+      type: 3}
   pooledPrefabs:
     Monster:
       list:
@@ -174,3 +176,6 @@ MonoBehaviour:
     RotateSpeed: 5
     MaxRotateTime: 2
     StopDist: 1.5
+  soundSetting:
+    Player:
+      Audio: {fileID: 8300000, guid: 7a4f2b951fbb18c40b051320f75ba8dd, type: 3}

@@ -40,6 +40,13 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
 
     [Inject] private ProjectInstaller.PlayerSettings setting;
     public ProjectInstaller.PlayerSettings Setting => setting;
+    
+
+
+    [Inject] private ProjectInstaller.SoundSetting soundSetting;
+    public ProjectInstaller.SoundSetting SoundSetting => soundSetting;
+
+    [Inject] [SerializeField] public SoundManager SoundManager;
 
     // 상태들 추가해주기
     protected BaseState[] states = new BaseState[(int)E_State.Size];
