@@ -175,6 +175,7 @@ MonoBehaviour:
       RotateSpeed: 5
       MaxRotateTime: 2
       StopDist: 1.5
+      canJumpAttack: 0
     RangeMobStat:
       Health: 100
       DamageReducation: 1
@@ -187,3 +188,17 @@ MonoBehaviour:
       RotateSpeed: 5
       MaxRotateTime: 2
       StopDist: 1.5
+      canJumpAttack: 0
+    EliteMobStat:
+      Health: 500
+      DamageReducation: 1
+      Damage: 10
+      Angle: 90
+      AttackRange: 4
+      MoveSpeed: 3
+      InAttackRange: 2
+      DetectRange: 10
+      RotateSpeed: 5
+      MaxRotateTime: 2
+      StopDist: 1.5
+      canJumpAttack: 1

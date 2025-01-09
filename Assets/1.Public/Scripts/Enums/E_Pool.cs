@@ -15,6 +15,7 @@ public enum E_Monster
     None = -1,
     BasicMob1,
     RangeMob2,
+    EliteMob1,
 
 }
 

@@ -74,11 +74,15 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable
         {
             case E_Monster.BasicMob1:
                 originStat = originStats.BaseMobStat;
-            break;
+                break;
 
             case E_Monster.RangeMob2:
                 originStat = originStats.RangeMobStat;
-            break;
+                break;
+
+            case E_Monster.EliteMob1:
+                originStat = originStats.EliteMobStat;
+                break;
         }
     }
 
