@@ -13,7 +13,7 @@ public class DashState : BaseState
 
     public override void Enter()
     {
-        Debug.Log("Dash 상태 진입!");
+        //Debug.Log("Dash 상태 진입!");
 
         dashTime = player.Setting.DashSetting.DashTime;         // 플레이어 스크립트에서 설정한 지속시간만큼 설정
 
@@ -41,6 +41,7 @@ public class DashState : BaseState
         player.transform.rotation = rotation;
 
         player.candash = true;
+        player.SoundManager.PlaySFX(player.SoundSetting.Player.Audio);
     }
 
     public override void Update()

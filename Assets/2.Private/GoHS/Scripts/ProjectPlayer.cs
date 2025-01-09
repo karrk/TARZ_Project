@@ -22,6 +22,7 @@ public class PlayerReferences
     public Transform MuzzlePoint;
     public GameObject Skill1_ArmUnit;
     public GameObject Skill1HitBox;
+    public GameObject Skill2_ArmUnit;
     public GameObject Skill3HitBox;
     public GameObject Skill4_ArmUnit;
     public GameObject Skill5Garbages;
@@ -39,6 +40,13 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
 
     [Inject] private ProjectInstaller.PlayerSettings setting;
     public ProjectInstaller.PlayerSettings Setting => setting;
+    
+
+
+    [Inject] private ProjectInstaller.SoundSetting soundSetting;
+    public ProjectInstaller.SoundSetting SoundSetting => soundSetting;
+
+    [Inject] [SerializeField] public SoundManager SoundManager;
 
     // 상태들 추가해주기
     protected BaseState[] states = new BaseState[(int)E_State.Size];
@@ -49,7 +57,7 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
     public LongRangeAttackState longRangeAttackState;
     private DrainState drainState;
     public LongRangeSkill_1 longRangeSkill_1State;
-    private LongRangeSkill_2 longRangeSkill_2State;
+    public LongRangeSkill_2 longRangeSkill_2State;
     private LongRangeSkill_3 longRangeSkill_3State;
     public LongRangeSkill_4 longRangeSkill_4State;
     private LongRangeSkill_5 longRangeSkill_5State;
@@ -447,7 +455,7 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
     {
         Gizmos.color = Color.yellow;
         Vector3 center = transform.position + transform.forward * 6f;
-        Gizmos.DrawWireSphere(center, 3f);
+        Gizmos.DrawWireSphere(center, 5f);
 
         Gizmos.color = Color.red;
         if (setting != null)

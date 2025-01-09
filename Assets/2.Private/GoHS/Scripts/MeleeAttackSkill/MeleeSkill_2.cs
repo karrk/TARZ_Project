@@ -53,7 +53,7 @@ public class MeleeSkill_2 : BaseState
 
         Debug.Log("근접 스킬 2번 시전 시작!");
         player.Refernece.Animator.SetTrigger("MeleeSkill_2");
-
+        player.Refernece.EffectController.MeleeSkill_2Effect_Start();
 
         hitBox.SetActive(true);
 
@@ -80,6 +80,7 @@ public class MeleeSkill_2 : BaseState
     public override void Exit()
     {
         hitBox.SetActive(false);
+        player.Refernece.EffectController.MeleeSkill_2Effect_End();
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Monster"), false);
     }
 

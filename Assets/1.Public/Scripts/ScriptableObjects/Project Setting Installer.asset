@@ -17,10 +17,15 @@ MonoBehaviour:
       type: 3}
     Player: {fileID: 7501606899982736315, guid: 0c45545b5ac752243ae16e97f66501c6,
       type: 3}
+    SoundManager: {fileID: 1130853315265817023, guid: 733eaeb5f1cd005488b620caf7d86cf3,
+      type: 3}
   pooledPrefabs:
     Monster:
       list:
-        pairInfo: []
+        pairInfo:
+        - Type: 0
+          Prefab: {fileID: 4631580359735930775, guid: 4013b3696dc896548a565b47ab36716b,
+            type: 3}
     VFX:
       list:
         pairInfo:
@@ -124,8 +129,8 @@ MonoBehaviour:
     Skill3Setting:
       Delay: 1
     Skill4Setting:
-      Radius: 3
-      zOffset: 4
+      Radius: 5
+      zOffset: 6
       Delay: 1.5
       Damage: 350
       TargetMask:
@@ -156,21 +161,52 @@ MonoBehaviour:
         serializedVersion: 2
         m_Bits: 4096
       Delay: 0.5
-      Zoffset: 0
-  baseMonsterSetting:
-    Health: 100
-    DamageReducation: 1
-    Damage: 10
-    Angle: 90
-    AttackRange: 3
-    MoveSpeed: 3
-    InAttackRange: 2
-    DetectRange: 10
-    RotateSpeed: 5
-    MaxRotateTime: 2
-    StopDist: 1.5
-      CoolTime: 3
+      Zoffset: 3
+      CoolTime: 0
     MeleeSkill2Setting:
       DashTime: 0.4
       DashSpeed: 20
-      CoolTime: 3
+      CoolTime: 0
+  monsterStatSetting:
+    BaseMobStat:
+      Health: 100
+      DamageReducation: 1
+      Damage: 10
+      Angle: 90
+      AttackRange: 3
+      MoveSpeed: 3
+      InAttackRange: 2
+      DetectRange: 10
+      RotateSpeed: 5
+      MaxRotateTime: 2
+      StopDist: 1.5
+      canJumpAttack: 0
+    RangeMobStat:
+      Health: 100
+      DamageReducation: 1
+      Damage: 10
+      Angle: 0
+      AttackRange: 0
+      MoveSpeed: 3
+      InAttackRange: 8
+      DetectRange: 10
+      RotateSpeed: 5
+      MaxRotateTime: 2
+      StopDist: 1.5
+      canJumpAttack: 0
+    EliteMobStat:
+      Health: 500
+      DamageReducation: 1
+      Damage: 10
+      Angle: 90
+      AttackRange: 4
+      MoveSpeed: 3
+      InAttackRange: 2
+      DetectRange: 10
+      RotateSpeed: 5
+      MaxRotateTime: 2
+      StopDist: 1.5
+      canJumpAttack: 1
+      soundSetting:
+    Player:
+      Audio: {fileID: 8300000, guid: 7a4f2b951fbb18c40b051320f75ba8dd, type: 3}

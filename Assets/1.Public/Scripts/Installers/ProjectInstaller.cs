@@ -37,9 +37,9 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
 
     private void InstallData()
     {
-        Container.BindInterfacesAndSelfTo<CSVLoader>().AsSingle().NonLazy();
-        Container.Bind<DataBase>().AsSingle().NonLazy();
-        Container.Bind<DataParser>().AsSingle();
+        //Container.BindInterfacesAndSelfTo<CSVLoader>().AsSingle().NonLazy();
+        //Container.Bind<DataBase>().AsSingle().NonLazy();
+        //Container.Bind<DataParser>().AsSingle();
         Container.BindInterfacesAndSelfTo<DataSlots>().AsSingle().NonLazy();
     }
 
@@ -51,6 +51,8 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         //Container.Bind<SkillManager>().AsSingle().NonLazy();
 
         Container.BindInterfacesAndSelfTo<InputManager>().AsSingle().NonLazy();
+
+        Container.Bind<SoundManager>().FromComponentInNewPrefab(prefabs.SoundManager).AsSingle().NonLazy();
     }
 
     private void InstallInventory()
@@ -58,6 +60,35 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         Container.BindInterfacesAndSelfTo<ItemInventory>().AsSingle().Lazy();
         Container.BindInterfacesAndSelfTo<PlayerEquipment>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<PlayerStats>().AsSingle().NonLazy();
+    }
+
+    [Serializable]
+    public class SoundSetting
+    {
+        public BGMSettings BGM;
+        public SFXSettings SFX;
+        public PlayerSettings Player;
+
+
+        [Serializable]
+        public class BGMSettings
+        {
+
+        }
+
+        [Serializable]
+        public class SFXSettings
+        {
+
+        }
+
+        [Serializable]
+        public class PlayerSettings
+        {
+            public AudioClip Audio;
+        }
+
+
     }
 
     [Serializable]
@@ -237,6 +268,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
     {
         public GameObject PoolManager;
         public GameObject Player;
+        public GameObject SoundManager;
     }
 
     [Serializable]
@@ -395,7 +427,16 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
 
     #endregion
 
-    public abstract class MonsterStat
+    [Serializable]
+    public class MonsterStats
+    {
+        public MonsterStat BaseMobStat;
+        public MonsterStat RangeMobStat;
+        public MonsterStat EliteMobStat;
+    }
+
+    [Serializable]
+    public class MonsterStat
     {
         public float Health;
         public float DamageReducation;
@@ -408,6 +449,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         public float RotateSpeed;
         public float MaxRotateTime;
         public float StopDist;
+        public bool canJumpAttack;
 
         public virtual void SendToCopyStats<T>(ref T target) where T : MonsterStat, new()
         {
@@ -425,11 +467,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
             target.RotateSpeed = this.RotateSpeed;
             target.MaxRotateTime = this.MaxRotateTime;
             target.StopDist = this.StopDist;
+            target.canJumpAttack = this.canJumpAttack;
         }
-    }
-    
-    [Serializable]
-    public class BaseMonsterStat : MonsterStat
-    {
     }
 }
