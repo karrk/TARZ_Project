@@ -1,38 +1,43 @@
-using System.Collections;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
 public class MonsterSpawner : MonoBehaviour
 {
-    [Inject] private PoolManager manager;
-    [Inject] private ProjectPlayer player;
+    [Inject] protected PoolManager manager;
+    [Inject] protected ProjectPlayer player;
 
-    private void Start()
+    protected virtual void Start()
     {
-        StartCoroutine(WaitSpawn());
+        SpawnMethod();
     }
 
-    private IEnumerator WaitSpawn()
+    protected virtual async void SpawnMethod()
     {
-        while (true)
-        {
-            if (manager.IsInited == true)
-                break;
-
-            yield return new WaitForSeconds(0.5f);
-        }
-
-        Spawn();
+        await Spawn();
     }
 
-    private void Spawn()
+    protected virtual async UniTask Spawn()
     {
+        await WaitPool();
+
         foreach (var creator in GetComponentsInChildren<MonsterCreate>())
         {
             BaseMonster mob = manager.GetObject<BaseMonster>(creator.Type);
             mob.transform.position = creator.transform.position;
             mob.transform.rotation = Quaternion.Euler(0,Random.Range(0,359),0);
             mob.Init(player);
+        }
+    }
+
+    protected async UniTask WaitPool()
+    {
+        while (true)
+        {
+            if (manager.IsInited == true)
+                break;
+
+            await UniTask.Delay(500);
         }
     }
 }
