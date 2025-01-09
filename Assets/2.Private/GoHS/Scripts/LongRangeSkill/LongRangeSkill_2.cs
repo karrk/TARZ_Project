@@ -1,22 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 [System.Serializable]
 public class LongRangeSkill_2 : BaseState
 {
+
+    private GameObject armUnit => player.Refernece.Skill2_ArmUnit;
+
     //[SerializeField] private ProjectPlayer player;
     [SerializeField] private float skillDamage;       // 스킬 공격력. 현재 기획서상 200 데미지
-
-    //public LongRangeSkill_2(ProjectPlayer player)
-    //{
-    //    this.player = player;
-    //    this.viewArea = 8f;             // 사정거리 우선 8f
-    //    this.viewAngle = 60f;           // 우선 60도
-    //    this.targetMask = LayerMask.GetMask("Monster");
-
-    //    this.delay = 0.5f;
-    //}
 
     // 판정 범위 거리
     [SerializeField] private float viewArea;
@@ -32,8 +26,6 @@ public class LongRangeSkill_2 : BaseState
     [HideInInspector]
     [SerializeField] private List<Transform> Targets = new List<Transform>();   // 감지된 오브젝트를 담아두는 배열. 현재로선 사용안되도 됨
 
-
-    [SerializeField] private float delay;
     [SerializeField] private float curDelay;
     private bool isStartSkill;
 
@@ -57,35 +49,44 @@ public class LongRangeSkill_2 : BaseState
             player.transform.rotation = Quaternion.Euler(playerEuler.x, cameraEuler.y, cameraEuler.z);
 
         }
+
+        armUnit.SetActive(true);
+        player.Refernece.EffectController.UseSkillEffect();
     }
 
-    public override void Update()
-    {
-        if (curDelay > 0f)
-        {
-            curDelay -= Time.deltaTime;
+    //public override void Update()
+    //{
+    //    if (curDelay > 0f)
+    //    {
+    //        curDelay -= Time.deltaTime;
 
-        }
-        else
-        {
-            if(!isStartSkill)
-            {
-                isStartSkill = true;
-                GetTarget();
-                Debug.Log("원거리 스킬 2 활성화됨");
-                curDelay = player.Setting.Skill2Setting.Delay;
-            }
-            else
-            {
-                Debug.Log("딜레이 다 지나감");
-                player.ChangeState(E_State.Idle);
-            }
-        }
+    //    }
+    //    else
+    //    {
+    //        if(!isStartSkill)
+    //        {
+    //            isStartSkill = true;
+    //            GetTarget();
+    //            Debug.Log("원거리 스킬 2 활성화됨");
+    //            curDelay = player.Setting.Skill2Setting.Delay;
+    //        }
+    //        else
+    //        {
+    //            Debug.Log("딜레이 다 지나감");
+    //            player.ChangeState(E_State.Idle);
+    //        }
+    //    }
+    //}
+
+    public void LongRangeSkill_2_On()
+    {
+        player.StartCoroutine(DelayCoroutine());
     }
 
     public override void Exit()
     {
         isStartSkill = false;
+        armUnit.SetActive(false);
     }
 
 
@@ -119,5 +120,13 @@ public class LongRangeSkill_2 : BaseState
     public Vector3 GetAngle(float AngleInDegree)
     {
         return new Vector3(Mathf.Sin(AngleInDegree * Mathf.Deg2Rad), 0, Mathf.Cos(AngleInDegree * Mathf.Deg2Rad));
+    }
+
+    private IEnumerator DelayCoroutine()
+    {
+        GetTarget();
+        player.Refernece.EffectController.LongRangeSkill_2Effect();
+        yield return new WaitForSeconds(curDelay);
+        player.ChangeState(E_State.Idle);
     }
 }

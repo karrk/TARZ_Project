@@ -8,15 +8,41 @@ public class UpgradeLayout : MonoBehaviour
    [SerializeField] GridLayoutGroup gridLayout;
     [SerializeField] GameObject obj;
 
-    [SerializeField] int cnt;
+    List<GameObject> fills = new List<GameObject>();
 
-    private void Start()
+    [SerializeField] float cellSizeX;
+
+    public void SetLayout(int level)
     {
-        gridLayout.cellSize = new Vector2(150 / cnt, 30);
+        gridLayout.cellSize = new Vector2(cellSizeX / level, 30);
 
-        for (int i = 0; i < cnt; i++)
+        for (int i = 0; i < level; i++)
         {
-            Instantiate(obj, transform);
+            fills.Add(Instantiate(obj, transform));
+            
         }
+
+        foreach (GameObject obj in fills)
+        {
+            obj.GetComponent<Image>().color = Color.gray;
+        }
+    }
+
+    public void ChangeFill(int level)
+    {
+        for (int i = 0; i < level; i++)
+        {
+            fills[i].GetComponent<Image>().color = Color.red;
+        }
+    }
+
+    public void RemoveFill()
+    {
+        foreach (GameObject obj in fills)
+        {
+            Destroy(obj);
+        }
+
+        fills.Clear();
     }
 }
