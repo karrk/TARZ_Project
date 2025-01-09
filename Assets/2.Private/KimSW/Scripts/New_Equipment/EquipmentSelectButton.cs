@@ -10,18 +10,21 @@ public class EquipmentSelectButton : MonoBehaviour
     [Inject]
     InGameUI inGameUI;
 
+    [SerializeField] Image buttonImage;
+
     [SerializeField] Image sprite;
     [SerializeField] TMP_Text descriptionText;
 
     [SerializeField] TMP_Text levelText;
     [SerializeField] UpgradeLayout upgradeLayout;
 
+    [SerializeField] Color[] rarityColor;
+
     NewEquipment equipment;
 
     public void SetInfo(NewEquipment newEquipment)
     {
         equipment = newEquipment;
-
         sprite.sprite = equipment.illust;
         descriptionText.text = equipment.equipmentName;
 
@@ -39,7 +42,7 @@ public class EquipmentSelectButton : MonoBehaviour
             }
         }
 
-        
+        buttonImage.color = rarityColor[(int)equipment.rarityTier];
     }
 
     public void SetGold()
@@ -50,6 +53,8 @@ public class EquipmentSelectButton : MonoBehaviour
         levelText.text = "";
         upgradeLayout.RemoveFill();
         upgradeLayout.SetLayout(0);
+
+        buttonImage.color = rarityColor[0];
     }
 
     public void SelectButton()
