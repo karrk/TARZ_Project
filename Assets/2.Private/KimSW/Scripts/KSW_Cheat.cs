@@ -27,10 +27,10 @@ public class KSW_Cheat : MonoBehaviour
 
     void Update()
     {
-        ResourceChaet();
-        DistanceCheat();
-        InvincibleCheat();
-        StopWatchCheat();
+        //ResourceChaet();
+        //DistanceCheat();
+        //InvincibleCheat();
+        //StopWatchCheat();
 
        
     }
