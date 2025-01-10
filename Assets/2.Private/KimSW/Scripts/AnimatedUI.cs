@@ -26,6 +26,8 @@ public class AnimatedUI : MonoBehaviour
         rectTransform.anchoredPosition = targetOffset;
     }
 
+   
+
     public void MoveOnUI()
     {
         
