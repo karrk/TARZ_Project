@@ -3,7 +3,6 @@ using Zenject;
 
 public class GarbageItem : MonoBehaviour
 {
-    [SerializeField] private int garbageIndex; // 투척물 인덱스
     [SerializeField] private int addCount = 10;     // 추가할 개수
 
     public GarbageQueue garbageQueue; // GarbageQueue 참조
@@ -30,7 +29,7 @@ public class GarbageItem : MonoBehaviour
             {
                 for (int i = 0; i < addCount; i++)
                 {
-                    garbageQueue.AddItem(garbageIndex);
+                    garbageQueue.AddItem(Random.Range(1, (int)E_Garbage.Size));
                 }
                 Destroy(gameObject);
             }
