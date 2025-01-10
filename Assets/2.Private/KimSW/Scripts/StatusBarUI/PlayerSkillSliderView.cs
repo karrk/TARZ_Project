@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Timeline;
@@ -10,10 +11,12 @@ public class PlayerSkillSliderView : SliderView
     [SerializeField] GameObject markerPrefab;
     [SerializeField] RectTransform markerTransform;
     [SerializeField] TMP_Text skillCountText;
+    [SerializeField] GameObject effect;
 
     [Inject]
     ProjectInstaller.PlayerSettings settings;
 
+    StringBuilder sb = new StringBuilder();
     void Start()
     {
         SetSliderMax(100);
@@ -45,6 +48,7 @@ public class PlayerSkillSliderView : SliderView
     public override void SetSlider(float value)
     {
         slider.value = value;
+        sb.Clear();
 
         int count = 0;
       
@@ -58,6 +62,19 @@ public class PlayerSkillSliderView : SliderView
            
 
         }
-        skillCountText.text = count.ToString();
+
+        sb.Append("스킬 레벨 ");
+        sb.Append(count);
+
+        skillCountText.text = sb.ToString();
+
+        if(count == 0)
+        {
+            effect.SetActive(false);
+        }
+        else
+        {
+            effect.SetActive(true);
+        }
     }
 }
