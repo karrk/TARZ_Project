@@ -144,59 +144,15 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "2D Vector",
-                    "id": "01951d01-0aa2-4926-8f30-9bdd8ec611f6",
-                    "path": "2DVector",
+                    "name": "",
+                    "id": "be212fb4-6974-415a-9aa2-5bec36be3c46",
+                    "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";JoyStick",
                     "action": "Move",
-                    "isComposite": true,
+                    "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "4db685d8-caa3-4fe4-943e-4563f3064f9c",
-                    "path": "<Gamepad>/leftStick/y",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";JoyStick",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "7eb9be25-f432-453b-b2c6-6e15e6e0d3f8",
-                    "path": "<Gamepad>/leftStick/y",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";JoyStick",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "6d0f6b61-892e-43d7-9bd8-5d620907a752",
-                    "path": "<Gamepad>/leftStick/x",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";JoyStick",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "e992d931-fc72-4014-adec-cce92a579335",
-                    "path": "<Gamepad>/leftStick/x",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";JoyStick",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 },
                 {
                     "name": "2D Vector",
@@ -255,11 +211,33 @@
                 },
                 {
                     "name": "",
+                    "id": "3b2980f7-5ccc-434c-b762-25e0f32675a8",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";JoyStick",
+                    "action": "Rot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "3fd04871-a8e0-4207-8a3a-2a31b7a783bd",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": ";PC",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e83fc58d-11ab-466e-8f25-43acb2f7c6c3",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";JoyStick",
                     "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -277,11 +255,33 @@
                 },
                 {
                     "name": "",
+                    "id": "cec29037-19e0-473d-b461-39ea71970da1",
+                    "path": "<XInputController>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";JoyStick",
+                    "action": "Drain",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "6058613c-aa4f-4f7a-8983-4f124c879f90",
                     "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": ";PC",
+                    "action": "Skill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2d20631e-7931-476a-8016-67751ab622c7",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "Skill",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -299,6 +299,17 @@
                 },
                 {
                     "name": "",
+                    "id": "9fafef56-49f0-4f1e-bb1c-58588ccbf22e",
+                    "path": "<XInputController>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";JoyStick",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "b0fcdf96-365c-4ca4-887c-d5370de57c09",
                     "path": "<Keyboard>/space",
                     "interactions": "",
@@ -310,11 +321,33 @@
                 },
                 {
                     "name": "",
+                    "id": "f4d1f85e-1d26-41a6-916f-9a58f84dcb95",
+                    "path": "<XInputController>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";JoyStick",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "9cd50bb5-74b6-4dd5-a522-602cd9d54aaa",
                     "path": "<Keyboard>/r",
                     "interactions": "",
                     "processors": "",
                     "groups": ";PC",
+                    "action": "Melee1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "228e519e-60ee-42f2-b0b9-1c017cd5b102",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";JoyStick",
                     "action": "Melee1",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -359,6 +392,50 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";PC",
+                    "action": "Melee2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "12d1f34c-ab9a-411c-a873-7c72f528dc63",
+                    "path": "<Gamepad>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";JoyStick",
+                    "action": "Melee2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6012ff62-548d-4e4c-9bb4-7339c6914e72",
+                    "path": "<Gamepad>/dpad/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";JoyStick",
+                    "action": "Melee2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3352bf4c-3b47-4ec8-a485-4e9d0ff253af",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";JoyStick",
+                    "action": "Melee2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cc999970-347b-4faa-8a04-4293533cd7e8",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";JoyStick",
                     "action": "Melee2",
                     "isComposite": false,
                     "isPartOfComposite": false

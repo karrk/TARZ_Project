@@ -75,7 +75,7 @@ public class CameraController : MonoBehaviour
         Vector2 value = obj.ReadValue<Vector2>();
 
         current.x += value.x * rotationSpeed;
-        current.y -= value.y * rotationSpeed;
+        current.y += value.y * rotationSpeed;
 
         current.y = Mathf.Clamp(current.y, 7, 7);
     }
