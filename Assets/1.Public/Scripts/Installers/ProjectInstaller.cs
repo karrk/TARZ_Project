@@ -434,6 +434,8 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         public MonsterStat RangeMobStat;
         public MonsterStat DogMobStat;
         public MonsterStat JumpMobStat;
+        public MonsterStat BombMobStat;
+        public MonsterStat BossMobStat;
     }
 
     [Serializable]
@@ -453,6 +455,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         public bool canJumpAttack;
         public float jumpHeight;
         public float jumpDuration;
+        public float changeSpeed;
 
         public virtual void SendToCopyStats<T>(ref T target) where T : MonsterStat, new()
         {
@@ -473,6 +476,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
             target.canJumpAttack = this.canJumpAttack;
             target.jumpHeight = this.jumpHeight;
             target.jumpDuration = this.jumpDuration;
+            target.changeSpeed = this.changeSpeed;
         }
     }
 }

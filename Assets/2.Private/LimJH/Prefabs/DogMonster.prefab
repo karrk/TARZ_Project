@@ -1844,6 +1844,8 @@ MonoBehaviour:
     MaxRotateTime: 0
     StopDist: 0
     canJumpAttack: 0
+    jumpHeight: 0
+    jumpDuration: 0
   type: 2
   reference:
     Anim: {fileID: 8158601638827991980}

@@ -35,6 +35,9 @@ MonoBehaviour:
         - Type: 3
           Prefab: {fileID: 789139032559144387, guid: 197dfa8656a8d5b40b4a1f81fc3cff4e,
             type: 3}
+        - Type: 4
+          Prefab: {fileID: 4095791648714568686, guid: 7807ba7acaaa1244e99fa83fcb88e387,
+            type: 3}
     VFX:
       list:
         pairInfo:
@@ -192,6 +195,7 @@ MonoBehaviour:
       canJumpAttack: 0
       jumpHeight: 0
       jumpDuration: 0
+      changeSpeed: 0
     RangeMobStat:
       Health: 100
       DamageReducation: 1
@@ -207,21 +211,23 @@ MonoBehaviour:
       canJumpAttack: 0
       jumpHeight: 0
       jumpDuration: 0
+      changeSpeed: 0
     DogMobStat:
-      Health: 0
-      DamageReducation: 0
-      Damage: 0
-      Angle: 0
-      AttackRange: 0
-      MoveSpeed: 0
-      InAttackRange: 0
-      DetectRange: 0
-      RotateSpeed: 0
-      MaxRotateTime: 0
-      StopDist: 0
+      Health: 70
+      DamageReducation: 1
+      Damage: 2
+      Angle: 90
+      AttackRange: 2
+      MoveSpeed: 3
+      InAttackRange: 2
+      DetectRange: 10
+      RotateSpeed: 5
+      MaxRotateTime: 2
+      StopDist: 1.5
       canJumpAttack: 0
       jumpHeight: 0
       jumpDuration: 0
+      changeSpeed: 0
     JumpMobStat:
       Health: 500
       DamageReducation: 1
@@ -237,6 +243,39 @@ MonoBehaviour:
       canJumpAttack: 1
       jumpHeight: 4
       jumpDuration: 2
+      changeSpeed: 0
+    BombMobStat:
+      Health: 400
+      DamageReducation: 1
+      Damage: 4
+      Angle: 90
+      AttackRange: 4
+      MoveSpeed: 3
+      InAttackRange: 4
+      DetectRange: 10
+      RotateSpeed: 5
+      MaxRotateTime: 2
+      StopDist: 1.5
+      canJumpAttack: 0
+      jumpHeight: 0
+      jumpDuration: 0
+      changeSpeed: 1
+    BossMobStat:
+      Health: 0
+      DamageReducation: 0
+      Damage: 0
+      Angle: 0
+      AttackRange: 0
+      MoveSpeed: 0
+      InAttackRange: 0
+      DetectRange: 0
+      RotateSpeed: 0
+      MaxRotateTime: 0
+      StopDist: 0
+      canJumpAttack: 0
+      jumpHeight: 0
+      jumpDuration: 0
+      changeSpeed: 0
   soundSetting:
     Player:
       Audio: {fileID: 0}

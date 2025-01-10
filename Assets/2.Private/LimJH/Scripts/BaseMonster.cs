@@ -105,7 +105,7 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
                 break;
 
             case E_Monster.DogMob:
-                //originStat = originStats.EliteMobStat;
+                originStat = originStats.DogMobStat;
                 break;
 
             case E_Monster.JumpMob:
@@ -113,11 +113,11 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
                 break;
 
             case E_Monster.BombMob:
-                //originStat = originStats.EliteMobStat;
+                originStat = originStats.BombMobStat;
                 break;
 
             case E_Monster.BossMob:
-                //originStat = originStats.EliteMobStat;
+                originStat = originStats.BossMobStat;
                 break;
         }
     }

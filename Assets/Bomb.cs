@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShokeWake : MonoBehaviour
+public class Bomb : MonoBehaviour
 {
+
     [SerializeField] private float power;
 
     private void Start()
@@ -36,7 +37,7 @@ public class ShokeWake : MonoBehaviour
 
         if (collisionTag == "Player")
         {
-            Debug.Log("충격파 플레이어에게 충돌");
+            Debug.Log("폭발 프리팹 플레이어에게 충돌");
 
             IDamagable player = collider.gameObject.GetComponent<IDamagable>();
             if (player != null)
