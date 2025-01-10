@@ -107,6 +107,15 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LockOn"",
+                    ""type"": ""Button"",
+                    ""id"": ""3c8d0afe-4dd4-45b3-8d36-4ace9fc500d7"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -461,6 +470,28 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""action"": ""Melee2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d4017d63-ab28-4bad-a679-336cd6b9c2a5"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";PC"",
+                    ""action"": ""LockOn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4d5a3d24-3f4b-4dee-8322-2bd0ced8711a"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";JoyStick"",
+                    ""action"": ""LockOn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -506,6 +537,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_PlayerAction_Jump = m_PlayerAction.FindAction("Jump", throwIfNotFound: true);
         m_PlayerAction_Melee1 = m_PlayerAction.FindAction("Melee1", throwIfNotFound: true);
         m_PlayerAction_Melee2 = m_PlayerAction.FindAction("Melee2", throwIfNotFound: true);
+        m_PlayerAction_LockOn = m_PlayerAction.FindAction("LockOn", throwIfNotFound: true);
     }
 
     ~@PlayerInputAction()
@@ -581,6 +613,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerAction_Jump;
     private readonly InputAction m_PlayerAction_Melee1;
     private readonly InputAction m_PlayerAction_Melee2;
+    private readonly InputAction m_PlayerAction_LockOn;
     public struct PlayerActionActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -594,6 +627,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_PlayerAction_Jump;
         public InputAction @Melee1 => m_Wrapper.m_PlayerAction_Melee1;
         public InputAction @Melee2 => m_Wrapper.m_PlayerAction_Melee2;
+        public InputAction @LockOn => m_Wrapper.m_PlayerAction_LockOn;
         public InputActionMap Get() { return m_Wrapper.m_PlayerAction; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -630,6 +664,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Melee2.started += instance.OnMelee2;
             @Melee2.performed += instance.OnMelee2;
             @Melee2.canceled += instance.OnMelee2;
+            @LockOn.started += instance.OnLockOn;
+            @LockOn.performed += instance.OnLockOn;
+            @LockOn.canceled += instance.OnLockOn;
         }
 
         private void UnregisterCallbacks(IPlayerActionActions instance)
@@ -661,6 +698,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Melee2.started -= instance.OnMelee2;
             @Melee2.performed -= instance.OnMelee2;
             @Melee2.canceled -= instance.OnMelee2;
+            @LockOn.started -= instance.OnLockOn;
+            @LockOn.performed -= instance.OnLockOn;
+            @LockOn.canceled -= instance.OnLockOn;
         }
 
         public void RemoveCallbacks(IPlayerActionActions instance)
@@ -707,5 +747,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnMelee1(InputAction.CallbackContext context);
         void OnMelee2(InputAction.CallbackContext context);
+        void OnLockOn(InputAction.CallbackContext context);
     }
 }

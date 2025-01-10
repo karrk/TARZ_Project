@@ -32,13 +32,21 @@ public class CameraController : MonoBehaviour
         input = new PlayerInputAction();
         input.Enable();
 
-        input.PlayerAction.Rot.performed += HandleCameraRotation;
+        input.PlayerAction.Rot.performed += SetDeltaValue;
+        input.PlayerAction.Rot.canceled += (_)=> { deltaVec = Vector2.zero; };
 
         Cursor.lockState = CursorLockMode.Locked;
-        //input.OnControlledRightStick += HandleCameraRotation;
         CamSetting();
-        //input.OnDownL2Key += LockOnDown;
-        //input.OnUpL2Key += LockOnUp;
+        input.PlayerAction.LockOn.started += (_) => { LockOnDown(); };
+        input.PlayerAction.LockOn.canceled += (_) => { LockOnUp(); };
+    }
+
+    private void SetDeltaValue(InputAction.CallbackContext obj)
+    {
+        Vector2 value = obj.ReadValue<Vector2>();
+
+        deltaVec.x = value.x;
+        deltaVec.y = value.y;
     }
 
     private void CamSetting()
@@ -49,33 +57,27 @@ public class CameraController : MonoBehaviour
         smoothSpeed = camSetting.SmoothSpeed;
     }
 
-    private void Update()
-    {
-
-    }
-    
-
     private void LateUpdate()
     {
         if (player == null)
             return;
 
-        //HandleCameraRotation();
+        HandleCameraRotation();
         FollowTarget();
 
     }
 
-    private void HandleCameraRotation(InputAction.CallbackContext obj)
+    private Vector2 deltaVec;
+
+    private void HandleCameraRotation()
     {
         if (isLockOn)
         {
             return;
         }
 
-        Vector2 value = obj.ReadValue<Vector2>();
-
-        current.x += value.x * rotationSpeed;
-        current.y += value.y * rotationSpeed;
+        current.x += deltaVec.x * rotationSpeed;
+        current.y += deltaVec.y * rotationSpeed;
 
         current.y = Mathf.Clamp(current.y, 7, 7);
     }
@@ -85,7 +87,7 @@ public class CameraController : MonoBehaviour
     /// </summary>
     private void FollowTarget()
     {
-        if(isLockOn && monster != null)
+        if(isLockOn && monster.activeInHierarchy)
         {
             Vector3 directionToMonster = (monster.transform.position - player.transform.position);
             directionToMonster.y = 0;
@@ -108,6 +110,10 @@ public class CameraController : MonoBehaviour
 
     public GameObject monster;
 
+    // 락온을 누르고 있는상태 => 몬스터가 죽으면
+    // 근데, 락온버튼을 떼지 않으면 락온 해제가 안됨
+
+    // 의도 : 락온을 하고있는 상태 => 몬스터가 죽음 => 락온이 끝나야함
 
     /// <summary>
     /// 락온기능 키고 끄는 함수
