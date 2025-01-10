@@ -62,6 +62,7 @@ public class StatusBarPanel : MonoBehaviour, IOpenCloseMenu
         inGameUI.CurrentMenu = inGameUI.InGameMenuPanel;
         inGameUI.CurrentMenu.OpenUIPanel();
 
+
         inGameUI.OffEnemyHP();
     }
 

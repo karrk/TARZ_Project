@@ -174,12 +174,23 @@ public class EquipmentManager : MonoBehaviour
      .Where(x => interactEquipments.Count > 0)
      .Subscribe(x =>
      {
+         if (inGameUI.CurrentMenu.Equals(inGameUI.InGameMenuPanel))
+         {
 
+             return;
+         }
+         if (inGameUI.CurrentMenu.Equals(inGameUI.OptionPanel))
+         {
+
+             return;
+         }
          inGameUI.EquipmentGetPanel.gameObject.SetActive(true);
 
 
          if (Input.GetKeyDown(KeyCode.F))
          {
+           
+             
              interactEquipments[0].RemoveInstance();
              interactEquipments.Remove(interactEquipments[0]);
              inGameUI.EquipmentGetPanel.gameObject.SetActive(false);

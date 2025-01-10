@@ -38,7 +38,7 @@ public class TestInput : MonoBehaviour
             inGameUI.InputCancel();
         }
 
-        playerModel.Stamina.Value += Time.deltaTime * 100;
+        //playerModel.Stamina.Value += Time.deltaTime * 100;
 
         if (Input.GetKeyDown(KeyCode.T))
         {
@@ -52,9 +52,9 @@ public class TestInput : MonoBehaviour
 
         }
 
-
-
         /*
+
+        
         if (Input.GetMouseButtonDown(0))
         {
 

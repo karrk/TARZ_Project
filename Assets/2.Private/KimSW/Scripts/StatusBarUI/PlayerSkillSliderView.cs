@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Timeline;
 using Zenject;
@@ -8,6 +9,7 @@ public class PlayerSkillSliderView : SliderView
 {
     [SerializeField] GameObject markerPrefab;
     [SerializeField] RectTransform markerTransform;
+    [SerializeField] TMP_Text skillCountText;
 
     [Inject]
     ProjectInstaller.PlayerSettings settings;
@@ -40,5 +42,22 @@ public class PlayerSkillSliderView : SliderView
 
     }
 
+    public override void SetSlider(float value)
+    {
+        slider.value = value;
 
+        int count = 0;
+      
+       
+        for (int i = 0; i < settings.BasicSetting.SkillAnchor.Length; i++)
+        {
+            if ((int)value >= (int)(settings.BasicSetting.SkillAnchor[i]*100))
+            {  
+                count++;
+            }
+           
+
+        }
+        skillCountText.text = count.ToString();
+    }
 }
