@@ -17,4 +17,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/2.Private/NamGoongH/Scenes/LoadingScene.unity
     guid: 01ef2394be559374cacfcec338eb06db
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: ed87dd8a7cef6c348bab00b4402bb32d,
+      type: 2}
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 951f6451f0be7d7478b0004185944a59,
+      type: 3}
