@@ -14,7 +14,11 @@ public class InGameMenuPanel : MonoBehaviour, IOpenCloseMenu
 
 
     [SerializeField] Button selectedButton;
-  
+
+    [SerializeField] Button exitChoiceButton;
+
+    [SerializeField] GameObject exitChoicePanel;
+
 
     public void ResumeGame()
     {
@@ -29,29 +33,53 @@ public class InGameMenuPanel : MonoBehaviour, IOpenCloseMenu
         OffUIPanel();
         inGameUI.CurrentMenu = inGameUI.OptionPanel;
         inGameUI.CurrentMenu.OpenUIPanel();
+
+        inGameUI.EquipmentSelectPanel.slotsPanel.SetActive(false);
     }
 
-    public void TutorialEnd()
+    public void OnKeyMenual()
     {
-        // 튜토리얼 종료
+        // 조작법 활성화
+        OffUIPanel();
+        inGameUI.CurrentMenu = inGameUI.MenualPanel;
+        inGameUI.CurrentMenu.OpenUIPanel();
+
+        inGameUI.EquipmentSelectPanel.slotsPanel.SetActive(false);
     }
 
     public void ExitGameScene()
+    { 
+        exitChoicePanel.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(exitChoiceButton.gameObject);
+    }
+
+    public void ConfirmExitPanel()
     {
-        // 게임씬 나가기
+        // 로비로 나가기
+    }
+
+    public void CancelExitPanel()
+    {
+        exitChoicePanel.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(selectedButton.gameObject);
     }
 
     public void OpenUIPanel()
     {
         gameObject.SetActive(true);
         EventSystem.current.SetSelectedGameObject(selectedButton.gameObject);
+
+        inGameUI.EquipmentSelectPanel.slotsPanel.SetActive(true);
     }
 
     public void CloseUIPanel()
     {
         gameObject.SetActive(false);
+        exitChoicePanel.SetActive(false);
         inGameUI.CurrentMenu = inGameUI.StatusBarPanel;
         inGameUI.CurrentMenu.OpenUIPanel();
+
+        inGameUI.EquipmentSelectPanel.slotsPanel.SetActive(false);
     }
 
     public void OffUIPanel()
