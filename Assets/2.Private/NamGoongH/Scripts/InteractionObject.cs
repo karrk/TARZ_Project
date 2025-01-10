@@ -54,8 +54,18 @@ public class InteractionObject : MonoBehaviour
 
     private void SpawnRandomItem()
     {
-        int random = Random.Range(0, battleItemPrefab.Length); // 0 = HP 아이템, 1 = 투척물 아이템
-        GameObject prefabToSpawn = battleItemPrefab[random];
+        GameObject prefabToSpawn;
+
+        // 랜덤으로 아이템을 선택
+        float randomRoll = Random.value;
+        if(randomRoll < 0.8f)
+        {
+            prefabToSpawn = battleItemPrefab[0]; // HP 아이템
+        }
+        else
+        {
+            prefabToSpawn = battleItemPrefab[1]; // 투척물 아이템
+        }
 
         // 상호작용한 물체의 앞쪽에 생성
         Vector3 spawnPosition = transform.position + transform.up * 1.5f + transform.forward * 1.0f;
