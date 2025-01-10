@@ -184,6 +184,12 @@ public class EquipmentManager : MonoBehaviour
 
              return;
          }
+         if (inGameUI.CurrentMenu.Equals(inGameUI.MenualPanel))
+         {
+
+             return;
+         }
+
          inGameUI.EquipmentGetPanel.gameObject.SetActive(true);
 
 

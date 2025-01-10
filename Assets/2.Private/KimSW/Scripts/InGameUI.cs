@@ -16,9 +16,12 @@ public class InGameUI : BindUI
     private InGameMenuPanel inGameMenuPanel;
     private EnemyStatusPanel enemyStatusPanel;
     private OptionPanel optionPanel;
+    private MenualPanel menualPanel;
+    private AlertText alertText;
     private TargetIndicator targetIndicator;
     private EquipmentGetPanel equipmentGetPanel;
     private EquipmentSelectPanel equipmentSelectPanel;
+    
 
     private EquipmentManager equipmentManager;
 
@@ -37,7 +40,8 @@ public class InGameUI : BindUI
     public EnemyStatusPanel EnemyStatusPanel { get { return enemyStatusPanel; } }
 
     public OptionPanel OptionPanel { get { return optionPanel; } }
-
+    public MenualPanel MenualPanel { get { return menualPanel; } }
+    public AlertText AlertText { get { return alertText; } }
     public TargetIndicator TargetIndicator { get { return targetIndicator; } }
 
     public EquipmentGetPanel EquipmentGetPanel { get { return equipmentGetPanel; } }
@@ -63,6 +67,8 @@ public class InGameUI : BindUI
         enemyStatusPanel = GetUI<EnemyStatusPanel>("EnemyStatusPanel");
         targetIndicator = GetUI<TargetIndicator>("TargetIndicator");
         optionPanel = GetUI<OptionPanel>("OptionPanel");
+        menualPanel = GetUI<MenualPanel>("MenualPanel");
+        alertText = GetUI<AlertText>("AlertText");
         equipmentGetPanel = GetUI<EquipmentGetPanel>("EquipmentGetPanel");
         equipmentSelectPanel = GetUI<EquipmentSelectPanel>("EquipmentSelectPanel");
         equipmentManager = GetUI<EquipmentManager>("EquipmentManager");

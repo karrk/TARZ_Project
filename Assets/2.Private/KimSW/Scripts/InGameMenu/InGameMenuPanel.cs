@@ -29,11 +29,18 @@ public class InGameMenuPanel : MonoBehaviour, IOpenCloseMenu
         OffUIPanel();
         inGameUI.CurrentMenu = inGameUI.OptionPanel;
         inGameUI.CurrentMenu.OpenUIPanel();
+
+        inGameUI.EquipmentSelectPanel.slotsPanel.SetActive(false);
     }
 
-    public void TutorialEnd()
+    public void OnKeyMenual()
     {
-        // 튜토리얼 종료
+        // 조작법 활성화
+        OffUIPanel();
+        inGameUI.CurrentMenu = inGameUI.MenualPanel;
+        inGameUI.CurrentMenu.OpenUIPanel();
+
+        inGameUI.EquipmentSelectPanel.slotsPanel.SetActive(false);
     }
 
     public void ExitGameScene()
