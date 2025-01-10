@@ -12,7 +12,7 @@ public class DashMeleeAttack : BaseState
 
     public override void Enter()
     {
-        Debug.Log("대쉬 근접 공격 시전 시작!");
+        //Debug.Log("대쉬 근접 공격 시전 시작!");
         player.Refernece.Animator.SetTrigger("DashMeleeAttack");
     }
 

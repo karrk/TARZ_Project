@@ -25,7 +25,7 @@ public class LongRangeSkill_3 : BaseState
 
     public override void Enter()
     {
-        Debug.Log("스킬 3 시전 시작!");
+        //Debug.Log("스킬 3 시전 시작!");
         curDelay = player.Setting.Skill3Setting.Delay;
 
         CameraController cameraController = player.Cam.GetComponent<CameraController>();
@@ -56,7 +56,7 @@ public class LongRangeSkill_3 : BaseState
             {
                 isStartSkill = true;
                 player.StartCoroutine(StartSkillCoroutine());
-                Debug.Log("원거리 스킬 3 활성화됨");
+                //Debug.Log("원거리 스킬 3 활성화됨");
             }
         }
     }
@@ -94,7 +94,7 @@ public class LongRangeSkill_3 : BaseState
 
                 toggle = !toggle;
 
-                Debug.Log($"{i}번 펀치 생성함");
+                //Debug.Log($"{i}번 펀치 생성함");
 
                 yield return new WaitForSeconds(interval);
             }
@@ -104,7 +104,7 @@ public class LongRangeSkill_3 : BaseState
         //{
         //    GameObject.Destroy(punchObj);
         //}
-        Debug.Log("모든 펀치 생성완료");
+        //Debug.Log("모든 펀치 생성완료");
         isStartSkill = false;
         player.ChangeState(E_State.Idle);
     }

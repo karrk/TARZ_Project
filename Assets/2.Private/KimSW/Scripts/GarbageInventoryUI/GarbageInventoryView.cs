@@ -17,12 +17,12 @@ public class GarbageInventoryView : AnimatedUI
     public  void SetText(float value)
     {
         currentText.text = value.ToString("000");
-        ShrunkAnimation(transform);
+        ShrunkAnimation(currentText.transform);
     }
 
     public  void SetTextMax(float value)
     {
         maxText.text = value.ToString("000");
-        ShrunkAnimation(transform);
+        ShrunkAnimation(currentText.transform);
     }
 }

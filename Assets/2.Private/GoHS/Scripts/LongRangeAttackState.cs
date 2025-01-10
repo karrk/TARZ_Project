@@ -165,7 +165,7 @@ public class LongRangeAttackState : BaseState
             attackStack++;  // 스택 1 추가
         }
 
-        Debug.Log(attackStack);
+        //Debug.Log(attackStack);
         player.Refernece.Shooter.FireItem(GetCalculatedDamage());    // 총알 발사
 
 

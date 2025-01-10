@@ -2,7 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.Windows;
 using Zenject;
+using static UnityEngine.Rendering.DebugUI;
 
 public enum E_State
 {
@@ -208,19 +211,57 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
 
     }
 
+    private PlayerInputAction input;
+
     private void Start()
     {
-        states[(int)curState].Enter();
-        inputManager.OnControlledLeftStick += Move;
-        inputManager.PressedAKey += Drain;
-        inputManager.OnUpAkey += StopDrain;
-        inputManager.PressedR1Key += UseLongRangeSkill;
-        inputManager.PressedR2Key += Fire;
-        inputManager.PressedBKey += Dash;
-        inputManager.PressedXKey += Jump;
+        input = new PlayerInputAction();
+        input.Enable();
 
-        inputManager.PressedL1Key += MeleeSkill_1;
-        inputManager.OnControlledDPAD += MeleeSkill_2;
+        input.PlayerAction.Move.performed += Move;
+        input.PlayerAction.Move.canceled += MoveCanceled;
+
+        input.PlayerAction.Fire.performed += (_) => { Fire(); };
+
+        input.PlayerAction.Drain.started += (_) => { Drain(); };
+        input.PlayerAction.Drain.canceled += (_)=> { StopDrain(); };
+
+        input.PlayerAction.Skill.performed += (_) => { UseLongRangeSkill(); };
+
+        input.PlayerAction.Dash.performed += (_) => { Dash(); };
+
+        input.PlayerAction.Jump.performed += (_) => { Jump(); };
+
+        input.PlayerAction.Melee1.performed += (_) => { MeleeSkill_1(); };
+        input.PlayerAction.Melee2.performed += (_) => { MeleeSkill_2(); };
+
+        states[(int)curState].Enter();
+        //inputManager.OnControlledLeftStick += Move;
+        //inputManager.PressedAKey += Drain;
+        //inputManager.OnUpAkey += StopDrain;
+        //inputManager.PressedR1Key += UseLongRangeSkill;
+        //inputManager.PressedR2Key += Fire;
+        //inputManager.PressedBKey += Dash;
+        //inputManager.PressedXKey += Jump;
+
+        //inputManager.PressedL1Key += MeleeSkill_1;
+        //inputManager.OnControlledDPAD += MeleeSkill_2;
+
+
+    }
+
+    private void MoveCanceled(InputAction.CallbackContext obj)
+    {
+        InputX = 0;
+        InputZ = 0;
+    }
+
+    private void Move(InputAction.CallbackContext obj)
+    {     
+        Vector2 value = obj.ReadValue<Vector2>();
+        
+        InputX = value.x;
+        InputZ = value.y;
     }
 
     private IEnumerator CheckGround()
@@ -273,11 +314,7 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
         ChangeState(E_State.LongRangeAttack);
     }
 
-    private void Move(Vector3 vector3)
-    {
-        InputX = vector3.x;
-        InputZ = vector3.z;
-    }
+    
 
     /// <summary>
     /// 드레인 실행 함수
@@ -367,11 +404,11 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
         }
         else
         {
-            Debug.Log("근접 스킬 1번 쿨타임중입니다.");
+            //Debug.Log("근접 스킬 1번 쿨타임중입니다.");
         }
     }
 
-    private void MeleeSkill_2(Vector3 vector)
+    private void MeleeSkill_2()
     {
         if(meleeSkill_2State.CanSkill == true)
         {
@@ -379,7 +416,7 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
         }
         else
         {
-            Debug.Log("근접 스킬 2번 쿨타임중입니다.");
+            //Debug.Log("근접 스킬 2번 쿨타임중입니다.");
         }
     }
 

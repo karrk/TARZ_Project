@@ -38,7 +38,7 @@ public class TargetTriggerMobSpawner : MonsterSpawner
 
         if(prevMobCount <= 0)
         {
-            await Spawn(NextCreators, true);
+            await Spawn(NextCreators, false);
         }
     }
 }

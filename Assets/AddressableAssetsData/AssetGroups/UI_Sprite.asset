@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: UI_Sprite
+  m_EditorClassIdentifier: 
+  m_GroupName: UI_Sprite
+  m_Data:
+    m_SerializedData: []
+  m_GUID: c9433873598897b4dae5f577a70ef764
+  m_SerializeEntries:
+  - m_GUID: 00fa3cb7ab43a874b8a552ba7bc29aed
+    m_Address: earring1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0d9b47fab72f2a747b163ddf3b1cf92d
+    m_Address: backpack1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 398344eea8694184caa1c9513995f57b
+    m_Address: ring1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 44015fdc5170ada4887c5bae76d195f8
+    m_Address: necklace1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4e463394579b6894b9dd502a26c3352d
+    m_Address: arm1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 84a4dd5eee6b9d34db44f615eb3fd403
+    m_Address: chest1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c8657ed5b737d584694a13c30a24193a
+    m_Address: leg1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fb33ece73cb5e664395d435d7730c78c
+    m_Address: boots1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 5f9b4f4786453e14096840388c2faac1, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 539125a32e21a284f80b85c59adbef11, type: 2}
+    - {fileID: 11400000, guid: 90bc41447d10a744b9b77343e7af99ae, type: 2}

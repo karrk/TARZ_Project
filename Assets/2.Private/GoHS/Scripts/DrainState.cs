@@ -41,7 +41,7 @@ public class DrainState : BaseState
 
     public override void Enter()
     {
-        Debug.Log("@@@@@@@@@@@@@@수집상태 진입 성공");
+        //Debug.Log("@@@@@@@@@@@@@@수집상태 진입 성공");
         player.Refernece.Animator.SetBool("Drain", true);
         isDrainMode = true;
     }
@@ -61,7 +61,7 @@ public class DrainState : BaseState
     {
         if(isDrainMode)
         {
-            Debug.Log("드레인 진행중!");
+            //Debug.Log("드레인 진행중!");
             IncreaseViewArea();
             GetTarget();
         }
@@ -107,7 +107,7 @@ public class DrainState : BaseState
                 if (drainable != null)
                 {
                     drainable.DrainTowards(player.transform.position, player.Setting.DrainSetting.DrainSpeed);
-                    Debug.Log($"빨아들이는중 {target.name}");
+                    //Debug.Log($"빨아들이는중 {target.name}");
 
                     Rigidbody rigid = target.GetComponent<Rigidbody>();
                     rigid.velocity = Vector3.zero;

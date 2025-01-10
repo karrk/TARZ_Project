@@ -5,6 +5,11 @@ public class TriggerMobSpawner : MonsterSpawner
 {
     protected BoxCollider coll;
 
+    private void Awake()
+    {
+        this.gameObject.layer = 7;
+    }
+
     protected override void Start()
     {
         coll = GetComponent<BoxCollider>();

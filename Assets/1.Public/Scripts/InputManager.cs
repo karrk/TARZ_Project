@@ -121,8 +121,8 @@ public class InputManager : IInitializable, ITickable
 
     public void Tick()
     {
-        InputAxis();
-        InputButtons();
+        //InputAxis();
+        //InputButtons();
     }
 
     private void InputAxis()

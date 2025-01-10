@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UniRx;
 using UniRx.Triggers;
+using UnityEditor;
 using UnityEngine;
 using Zenject;
 using static UnityEditor.Progress;
@@ -11,6 +12,8 @@ public class EquipmentManager : MonoBehaviour
     [Inject]
     InGameUI inGameUI;
 
+    [SerializeField] EquipmentCSVParser csvParser;
+
     public List<InteractEquipment> interactEquipments = new List<InteractEquipment>();
 
     public List<NewEquipment> newEquipments = new List<NewEquipment>();
@@ -20,10 +23,14 @@ public class EquipmentManager : MonoBehaviour
 
     [SerializeField] float[] rarityProbability;
 
-
+    List<NewEquipment> getEquipmentList = new List<NewEquipment>();
     private void Start()
     {
         SetInteract();
+
+        newEquipments = csvParser.newEquipments;
+
+
     }
 
 
@@ -55,33 +62,36 @@ public class EquipmentManager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        /*
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            if (newEquipments.Count > 0)
-            {
-                AddEquipped(GetEquipment());
-            }
-            else
-            {
-                Debug.Log("장비 풀 골드획득");
-            }
-            
-        }
-        */
-    }
+    
 
-    public NewEquipment GetEquipment()
+    public NewEquipment GetEquipment(int rarity)
     {
-        return newEquipments[Random.Range(0, newEquipments.Count)];
+        getEquipmentList.Clear();
+
+        foreach (var equipment in newEquipments)
+        {
+            if((int)equipment.rarityTier == rarity)
+            {
+                getEquipmentList.Add(equipment);
+            }
+        }
+
+        if (getEquipmentList.Count > 0)
+        {
+
+            return getEquipmentList[Random.Range(0, getEquipmentList.Count)];
+        }
+        else
+        {
+            return null;
+        }
+
     }
 
     public void AddEquipped(NewEquipment newEquipment)
     {
-
-       for(int i = 0; i < equipped.Count; i++)
+        SetProbability();
+        for (int i = 0; i < equipped.Count; i++)
         {
             if (equipped[i].id.Equals(newEquipment.id))
             {
@@ -164,12 +174,29 @@ public class EquipmentManager : MonoBehaviour
      .Where(x => interactEquipments.Count > 0)
      .Subscribe(x =>
      {
+         if (inGameUI.CurrentMenu.Equals(inGameUI.InGameMenuPanel))
+         {
+
+             return;
+         }
+         if (inGameUI.CurrentMenu.Equals(inGameUI.OptionPanel))
+         {
+
+             return;
+         }
+         if (inGameUI.CurrentMenu.Equals(inGameUI.MenualPanel))
+         {
+
+             return;
+         }
 
          inGameUI.EquipmentGetPanel.gameObject.SetActive(true);
 
 
          if (Input.GetKeyDown(KeyCode.F))
          {
+           
+             
              interactEquipments[0].RemoveInstance();
              interactEquipments.Remove(interactEquipments[0]);
              inGameUI.EquipmentGetPanel.gameObject.SetActive(false);
@@ -208,7 +235,7 @@ public class EquipmentManager : MonoBehaviour
 
             if (!isStock)
             {
-                if (rarityProbability[i] > -1)
+                if (rarityProbability[i] > 0)
                 {
                     if (rarityProbability.Length - 1 == i)
                     {
@@ -218,7 +245,7 @@ public class EquipmentManager : MonoBehaviour
                         }
 
                         rarityProbability[0] += rarityProbability[i];
-                        rarityProbability[i] = -1;
+                        rarityProbability[i] = 0;
 
                         i = 0;
                         continue;
@@ -231,7 +258,7 @@ public class EquipmentManager : MonoBehaviour
                         }
 
                         rarityProbability[i + 1] += rarityProbability[i];
-                        rarityProbability[i] = -1;
+                        rarityProbability[i] = 0;
                         i--;
                         continue;
                     }
@@ -244,7 +271,7 @@ public class EquipmentManager : MonoBehaviour
     {
         SetProbability();
 
-        float ran = Random.Range(0, 101);
+        float ran = Random.Range(1, 101);
 
         int result = 0;
         float temp = 0;
@@ -252,8 +279,9 @@ public class EquipmentManager : MonoBehaviour
         {
             if (i == 0)
             {
-                if (0 <= ran && ran < rarityProbability[0])
+                if (0 <= ran && ran <= rarityProbability[0])
                 {
+                    
                     result = 0;
                     break;
                 }
@@ -261,12 +289,16 @@ public class EquipmentManager : MonoBehaviour
             else
             {
                 temp += rarityProbability[i - 1];
-                if (temp <= ran && ran < temp + rarityProbability[i])
+               
+                if (temp <= ran && ran <= temp + rarityProbability[i])
                 {
                     result = i;
                 }
             }
         }
+
+
+        
 
         return result;
     }

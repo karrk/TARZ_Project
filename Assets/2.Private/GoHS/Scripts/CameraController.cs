@@ -1,7 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.Windows;
 using Zenject;
 
 public class CameraController : MonoBehaviour
@@ -16,7 +16,7 @@ public class CameraController : MonoBehaviour
     [HideInInspector] private List<Transform> targets = new List<Transform>();   // 감지된 오브젝트를 담아두는 배열. 현재로선 사용안되도 됨
 
     [Inject] private ProjectPlayer player;          // 플레이어 위치
-    [Inject] private InputManager input;
+    //[Inject] private InputManager input;
     [Inject] private ProjectInstaller.CameraSetting camSetting;
     [Inject] private ProjectInstaller.LockOnSetting lockOnSetting;
 
@@ -25,13 +25,28 @@ public class CameraController : MonoBehaviour
     private bool isLockOn = false;
     public bool IsLockOn {  get { return isLockOn; } set { isLockOn = value; } }
 
+    private PlayerInputAction input;
+
     private void Start()
     {
+        input = new PlayerInputAction();
+        input.Enable();
+
+        input.PlayerAction.Rot.performed += SetDeltaValue;
+        input.PlayerAction.Rot.canceled += (_)=> { deltaVec = Vector2.zero; };
+
         Cursor.lockState = CursorLockMode.Locked;
-        input.OnControlledRightStick += HandleCameraRotation;
         CamSetting();
-        input.OnDownL2Key += LockOnDown;
-        input.OnUpL2Key += LockOnUp;
+        input.PlayerAction.LockOn.started += (_) => { LockOnDown(); };
+        input.PlayerAction.LockOn.canceled += (_) => { LockOnUp(); };
+    }
+
+    private void SetDeltaValue(InputAction.CallbackContext obj)
+    {
+        Vector2 value = obj.ReadValue<Vector2>();
+
+        deltaVec.x = value.x;
+        deltaVec.y = value.y;
     }
 
     private void CamSetting()
@@ -42,36 +57,29 @@ public class CameraController : MonoBehaviour
         smoothSpeed = camSetting.SmoothSpeed;
     }
 
-    private void Update()
-    {
-
-    }
-    
-
     private void LateUpdate()
     {
         if (player == null)
             return;
 
-        //HandleCameraRotation();
+        HandleCameraRotation();
         FollowTarget();
 
     }
 
-    private void HandleCameraRotation(Vector3 vec)
+    private Vector2 deltaVec;
+
+    private void HandleCameraRotation()
     {
         if (isLockOn)
         {
             return;
         }
 
-        current.x += vec.x * rotationSpeed;
-        current.y -= vec.y * rotationSpeed;
+        current.x += deltaVec.x * rotationSpeed;
+        current.y += deltaVec.y * rotationSpeed;
 
         current.y = Mathf.Clamp(current.y, 7, 7);
-        //currenX += Input.GetAxis("Mouse X") * rotationSpeed;
-        //currenY -= Input.GetAxis("Mouse Y") * rotationSpeed;
-        //currenY = Mathf.Clamp(currenY, 7, 7);
     }
 
     /// <summary>
@@ -79,7 +87,7 @@ public class CameraController : MonoBehaviour
     /// </summary>
     private void FollowTarget()
     {
-        if(isLockOn && monster != null)
+        if(isLockOn && monster.activeInHierarchy
         {
             Vector3 directionToMonster = (monster.transform.position - player.transform.position);
             directionToMonster.y = 0;
@@ -88,13 +96,18 @@ public class CameraController : MonoBehaviour
 
             transform.position = player.transform.position + offset.z * directionToMonster + offset.y * Vector3.up;
             transform.LookAt(player.transform.position);
+
+
             CheckWall();
+
         }
         else
         {
+
             Quaternion rotation = Quaternion.Euler(0, current.x, 0f);
             transform.position = player.transform.position + rotation * offset;
             transform.LookAt(player.transform.position);
+
             CheckWall();
         }
 
@@ -102,13 +115,17 @@ public class CameraController : MonoBehaviour
 
     public GameObject monster;
 
+    // 락온을 누르고 있는상태 => 몬스터가 죽으면
+    // 근데, 락온버튼을 떼지 않으면 락온 해제가 안됨
+
+    // 의도 : 락온을 하고있는 상태 => 몬스터가 죽음 => 락온이 끝나야함
 
     /// <summary>
     /// 락온기능 키고 끄는 함수
     /// </summary>
     private void LockOn()
     {
-
+        //Debug.Log("락온 진행중");
         GetTarget();
         if (targets.Count > 0)
         {
@@ -116,13 +133,13 @@ public class CameraController : MonoBehaviour
             if (monster != null)
             {
                 isLockOn = true;
-                Debug.Log("락온 기능 활성화");
+                //Debug.Log("락온 기능 활성화");
             }
         }
         else
         {
             IsLockOn = false;
-            Debug.Log("감지된 몬스터가 없습니다.");
+            //Debug.Log("감지된 몬스터가 없습니다.");
         }
     }
 
