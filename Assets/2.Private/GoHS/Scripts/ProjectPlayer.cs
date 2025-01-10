@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Zenject;
 
 public enum E_State
@@ -208,8 +209,14 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
 
     }
 
+    private PlayerInput input;
+
     private void Start()
     {
+        input = GetComponent<PlayerInput>();
+
+        InputActionMap actionMap = input.actions.FindActionMap("PlayerAction");
+
         states[(int)curState].Enter();
         inputManager.OnControlledLeftStick += Move;
         inputManager.PressedAKey += Drain;
