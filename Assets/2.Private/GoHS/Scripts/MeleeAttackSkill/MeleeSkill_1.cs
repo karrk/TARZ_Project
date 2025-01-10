@@ -18,7 +18,7 @@ public class MeleeSkill_1 : BaseState
 
     public override void Enter()
     {
-        Debug.Log("근접 스킬 1 시작!");
+        //Debug.Log("근접 스킬 1 시작!");
         curDelay = player.Setting.MeleeSkill1Setting.Delay;
         coolTime = player.Setting.MeleeSkill1Setting.CoolTime;
 
@@ -42,11 +42,11 @@ public class MeleeSkill_1 : BaseState
             {
                 isStartSkill = true;
                 GetTarget();
-                Debug.Log("근접 스킬 1번 활성화됨");
+                //Debug.Log("근접 스킬 1번 활성화됨");
             }
             else
             {
-                Debug.Log("딜레이 다 지나감");
+                //Debug.Log("딜레이 다 지나감");
                 player.ChangeState(E_State.Idle);
             }
         }

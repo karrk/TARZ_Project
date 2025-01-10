@@ -6838,6 +6838,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4860989326562139296}
     m_Modifications:
+    - target: {fileID: 1167016871537902, guid: 7c8ae67b67e7eb94498af622745d92c9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1864792006492738, guid: 7c8ae67b67e7eb94498af622745d92c9, type: 3}
       propertyPath: m_Name
       value: PS_Plasma Gun_Left
@@ -6961,6 +6965,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4873407883720179234}
     m_Modifications:
+    - target: {fileID: 1697572148560643400, guid: 11dafea35a2f3cb42a634ae35728d86f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1761588341219571025, guid: 11dafea35a2f3cb42a634ae35728d86f,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -7689,6 +7698,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4860989326562139296}
     m_Modifications:
+    - target: {fileID: 1167016871537902, guid: 7c8ae67b67e7eb94498af622745d92c9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1864792006492738, guid: 7c8ae67b67e7eb94498af622745d92c9, type: 3}
       propertyPath: m_Name
       value: PS_Plasma Gun_Right

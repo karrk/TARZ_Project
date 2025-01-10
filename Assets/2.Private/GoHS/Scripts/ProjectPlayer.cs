@@ -404,7 +404,7 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
         }
         else
         {
-            Debug.Log("근접 스킬 1번 쿨타임중입니다.");
+            //Debug.Log("근접 스킬 1번 쿨타임중입니다.");
         }
     }
 
@@ -416,7 +416,7 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
         }
         else
         {
-            Debug.Log("근접 스킬 2번 쿨타임중입니다.");
+            //Debug.Log("근접 스킬 2번 쿨타임중입니다.");
         }
     }
 
