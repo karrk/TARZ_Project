@@ -5,7 +5,7 @@ using UnityEngine;
 public enum RarityTier { COMMON,RARE, UNIQUE, LEGENDARY, SIZE }
 public enum OptionType { MOVESPD,ATK,ATKSPD,HP,INVENTORY,GAUGEINC,STAMINA,LUCK,SIZE }
 
-public enum EquipmentType { BOOTS,ARM,EARING,RING,NECKLACE,LEG,CHEST,BACKPACK, SIZE }
+public enum EquipmentType { BOOTS,ARM,EARRING,RING,NECKLACE,LEG,CHEST,BACKPACK, SIZE }
 
 [CreateAssetMenu(fileName = "NewEquipment", menuName = "NewEquipment", order = int.MinValue)]
 public class NewEquipment : ScriptableObject

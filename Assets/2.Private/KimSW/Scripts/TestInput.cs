@@ -19,6 +19,7 @@ public class TestInput : MonoBehaviour
 
     void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.Z))
         {
             inventory.GetItem();
@@ -27,6 +28,7 @@ public class TestInput : MonoBehaviour
         {
             inGameUI.OnInventory();
         }
+        */
         if (Input.GetButtonDown("Cancel"))
         {
             inGameUI.InputCancel();
