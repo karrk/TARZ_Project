@@ -16,7 +16,7 @@ public class LongRangeSkill_4 : BaseState
 
     public override void Enter()
     {
-        Debug.Log("원거리 스킬 4번 실행!");
+        //Debug.Log("원거리 스킬 4번 실행!");
 
         CameraController cameraController = player.Cam.GetComponent<CameraController>();
 
@@ -51,7 +51,7 @@ public class LongRangeSkill_4 : BaseState
         // 플레이어 앞쪽의 원 중심 계산
         Vector3 center = player.transform.position + player.transform.forward * player.Setting.Skill4Setting.zOffset;
 
-        Debug.Log($"스킬 범위 중심 : {center}");
+        //Debug.Log($"스킬 범위 중심 : {center}");
 
         Collider[] hitcolliders = Physics.OverlapSphere(center, player.Setting.Skill4Setting.Radius, player.Setting.Skill4Setting.TargetMask);
         foreach (Collider hitCollider in hitcolliders)

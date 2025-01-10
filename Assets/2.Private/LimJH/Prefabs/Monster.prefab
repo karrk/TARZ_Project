@@ -214,6 +214,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b63c4c4705e46724692cf9a90d004ea8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 3
-  damageReducation: 1
-  behaviorTree: {fileID: 0}
+  projectilePrefab: {fileID: 0}
+  firePoint: {fileID: 0}
+  stat:
+    Health: 0
+    DamageReducation: 0
+    Damage: 0
+    Angle: 0
+    AttackRange: 0
+    MoveSpeed: 0
+    InAttackRange: 0
+    DetectRange: 0
+    RotateSpeed: 0
+    MaxRotateTime: 0
+    StopDist: 0
+    canJumpAttack: 0
+  type: -1
+  reference:
+    Anim: {fileID: 0}
+    Coll: {fileID: 0}
+    Rb: {fileID: 0}
+    Nav: {fileID: 0}
+  drag:
+    MaxDuration: 0
+    GatherSpeed: 0
+    GatherRad: 0
+  push:
+    MaxDuration: 0
+    PushDist: 0
+    PushSpeed: 0
+  knock:
+    DownDration: 0
+  attackCount: 0

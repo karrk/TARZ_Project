@@ -16,6 +16,7 @@ public class DeadState : BaseState
     {
         Debug.Log("플레이어 사망");
         player.Refernece.Animator.SetBool("Dead", true);
+        player.Refernece.EffectController.gameObject.SetActive(false);
     }
 
     public void GameOver()

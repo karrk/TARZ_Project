@@ -12,6 +12,15 @@ public class UpgradeLayout : MonoBehaviour
 
     [SerializeField] float cellSizeX;
 
+    Color onColor;
+    Color offColor;
+
+    private void Awake()
+    {
+        ColorUtility.TryParseHtmlString("#501D1D", out offColor);
+        onColor = Color.white;
+    }
+
     public void SetLayout(int level)
     {
         gridLayout.cellSize = new Vector2(cellSizeX / level, 30);
@@ -24,15 +33,18 @@ public class UpgradeLayout : MonoBehaviour
 
         foreach (GameObject obj in fills)
         {
-            obj.GetComponent<Image>().color = Color.gray;
+            obj.GetComponent<Image>().color = offColor;
         }
     }
 
     public void ChangeFill(int level)
     {
+       
+
+        
         for (int i = 0; i < level; i++)
         {
-            fills[i].GetComponent<Image>().color = Color.red;
+            fills[i].GetComponent<Image>().color = onColor;
         }
     }
 

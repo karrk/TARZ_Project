@@ -26,6 +26,8 @@ public class AnimatedUI : MonoBehaviour
         rectTransform.anchoredPosition = targetOffset;
     }
 
+   
+
     public void MoveOnUI()
     {
         
@@ -33,6 +35,7 @@ public class AnimatedUI : MonoBehaviour
         gameObject.SetActive(true);
         rectTransform.DOAnchorPos(positionOffset, 0.1f).
             SetEase(Ease.OutBack).
+            SetUpdate(true).
             OnKill(() =>
             {
                 rectTransform.anchoredPosition = positionOffset;
@@ -44,6 +47,7 @@ public class AnimatedUI : MonoBehaviour
     {
         rectTransform.DOAnchorPos(targetOffset, 0.1f).
           SetEase(Ease.InBack).
+          SetUpdate(true).
           OnKill(() =>
           {
               gameObject.SetActive(false);

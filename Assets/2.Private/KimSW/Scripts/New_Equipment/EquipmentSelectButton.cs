@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,20 +11,42 @@ public class EquipmentSelectButton : MonoBehaviour
     [Inject]
     InGameUI inGameUI;
 
+    [SerializeField] Image buttonImage;
+    
     [SerializeField] Image sprite;
     [SerializeField] TMP_Text descriptionText;
 
     [SerializeField] TMP_Text levelText;
     [SerializeField] UpgradeLayout upgradeLayout;
 
+    [SerializeField] Color[] rarityColor;
+
     NewEquipment equipment;
+
+    StringBuilder sb = new StringBuilder();
 
     public void SetInfo(NewEquipment newEquipment)
     {
         equipment = newEquipment;
-
         sprite.sprite = equipment.illust;
-        descriptionText.text = equipment.equipmentName;
+
+        sb.Clear();
+        sb.Append(equipment.equipmentName);
+        sb.Append("\n\n");
+        sb.Append($"{equipment.optionType}\n");
+
+        string value = "0";
+
+        foreach ( var item in inGameUI.EquipmentManager.equipped)
+        {
+            if (item.equipmentType == equipment.equipmentType)
+            {
+                value = item.optionValue.ToString();
+            }
+        }
+        sb.Append($"{value} > {equipment.optionValue}");
+
+        descriptionText.text = sb.ToString();
 
         upgradeLayout.RemoveFill();
         upgradeLayout.SetLayout(newEquipment.upgradeLevel);
@@ -39,7 +62,7 @@ public class EquipmentSelectButton : MonoBehaviour
             }
         }
 
-        
+        buttonImage.color = rarityColor[(int)equipment.rarityTier];
     }
 
     public void SetGold()
@@ -50,10 +73,14 @@ public class EquipmentSelectButton : MonoBehaviour
         levelText.text = "";
         upgradeLayout.RemoveFill();
         upgradeLayout.SetLayout(0);
+
+        buttonImage.color = rarityColor[0];
     }
 
     public void SelectButton()
     {
+        Time.timeScale = 1.0f;
+
         if (equipment)
         {
             inGameUI.EquipmentManager.AddEquipped(equipment);

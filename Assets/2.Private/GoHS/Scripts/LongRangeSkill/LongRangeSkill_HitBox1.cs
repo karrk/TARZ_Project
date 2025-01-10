@@ -10,7 +10,7 @@ public class LongRangeSkill_HitBox1 : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("적 부딪힘");             // 부딪히는 것 확인됨
+        //Debug.Log("적 부딪힘");             // 부딪히는 것 확인됨
 
         if(other.CompareTag("Monster"))
         {
