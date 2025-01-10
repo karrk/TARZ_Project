@@ -108,7 +108,7 @@ public class CameraController : MonoBehaviour
     /// </summary>
     private void LockOn()
     {
-
+        Debug.Log("락온 진행중");
         GetTarget();
         if (targets.Count > 0)
         {
