@@ -8,14 +8,14 @@ public class CheatManager : ITickable
 
     public void Tick()
     {
-        if(Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            GetGarbage();
-        }
-        else if(Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            GetGauge();
-        }
+        //if(Input.GetKeyDown(KeyCode.Alpha1))
+        //{
+        //    GetGarbage();
+        //}
+        //else if(Input.GetKeyDown(KeyCode.Alpha2))
+        //{
+        //    GetGauge();
+        //}
 
     }
 

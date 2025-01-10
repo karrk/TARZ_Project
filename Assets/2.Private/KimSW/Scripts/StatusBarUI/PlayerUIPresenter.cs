@@ -72,7 +72,7 @@ public class PlayerUIPresenter : IInitializable, IDisposable
 
         list.Add(playerModel.SkillGauge
         .Where(value => playerModel.SkillGauge.Value < 0)
-        .Subscribe(value => { playerModel.SkillGauge.Value = 0; }));
+        .Subscribe(value => {  playerModel.SkillGauge.Value = 0; }));
 
         list.Add(playerModel.SkillGauge
        .Where(value => playerModel.SkillGauge.Value > 100)

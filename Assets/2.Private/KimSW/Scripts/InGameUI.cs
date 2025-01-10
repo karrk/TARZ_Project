@@ -5,26 +5,32 @@ public class InGameUI : BindUI
 {
     [Inject] private ItemInventory itemInventory;
 
+    
     private InventoryPanel inventoryPanel;
     private InventorySetPanel inventorySetPanel;
+    
     private ItemInformationPanel itemInformationPanel;
+    
     private StatusBarPanel statusBarPanel;
     private StatusInformationPanel statusInformationPanel;
     private InGameMenuPanel inGameMenuPanel;
     private EnemyStatusPanel enemyStatusPanel;
     private OptionPanel optionPanel;
+    private MenualPanel menualPanel;
+    private AlertText alertText;
     private TargetIndicator targetIndicator;
     private EquipmentGetPanel equipmentGetPanel;
     private EquipmentSelectPanel equipmentSelectPanel;
+    
 
     private EquipmentManager equipmentManager;
 
-
+    
     public InventoryPanel InventoryPanel { get { return inventoryPanel; } }
     public InventorySetPanel InventorySetPanel { get { return inventorySetPanel; } }
 
     public ItemInformationPanel ItemInformationPanel { get { return itemInformationPanel; } }
-
+    
     public StatusBarPanel StatusBarPanel { get { return statusBarPanel; } }
 
     public StatusInformationPanel StatusInformationPanel { get { return statusInformationPanel; } }
@@ -34,7 +40,8 @@ public class InGameUI : BindUI
     public EnemyStatusPanel EnemyStatusPanel { get { return enemyStatusPanel; } }
 
     public OptionPanel OptionPanel { get { return optionPanel; } }
-
+    public MenualPanel MenualPanel { get { return menualPanel; } }
+    public AlertText AlertText { get { return alertText; } }
     public TargetIndicator TargetIndicator { get { return targetIndicator; } }
 
     public EquipmentGetPanel EquipmentGetPanel { get { return equipmentGetPanel; } }
@@ -51,23 +58,25 @@ public class InGameUI : BindUI
     private void Awake()
     {
         Bind();
-        inventoryPanel = GetUI<InventoryPanel>("InventoryPanel");
-        inventorySetPanel = GetUI<InventorySetPanel>("InventorySetPanel");
-        itemInformationPanel = GetUI<ItemInformationPanel>("ItemInformationPanel");
+        //inventoryPanel = GetUI<InventoryPanel>("InventoryPanel");
+        //inventorySetPanel = GetUI<InventorySetPanel>("InventorySetPanel");
+        //itemInformationPanel = GetUI<ItemInformationPanel>("ItemInformationPanel");
         statusBarPanel = GetUI<StatusBarPanel>("StatusBarPanel");
         statusInformationPanel = GetUI<StatusInformationPanel>("StatusInformationPanel");
         inGameMenuPanel = GetUI<InGameMenuPanel>("InGameMenuPanel");
         enemyStatusPanel = GetUI<EnemyStatusPanel>("EnemyStatusPanel");
         targetIndicator = GetUI<TargetIndicator>("TargetIndicator");
         optionPanel = GetUI<OptionPanel>("OptionPanel");
+        menualPanel = GetUI<MenualPanel>("MenualPanel");
+        alertText = GetUI<AlertText>("AlertText");
         equipmentGetPanel = GetUI<EquipmentGetPanel>("EquipmentGetPanel");
         equipmentSelectPanel = GetUI<EquipmentSelectPanel>("EquipmentSelectPanel");
         equipmentManager = GetUI<EquipmentManager>("EquipmentManager");
     }
     private void Start()
     {
-        itemInventory.OnGetItem += (num, sprite) => { InventoryPanel.GetItem(num, sprite); };
-        itemInventory.OnChangeStatusInfo += () => { StatusInformationPanel.UpdateStatusInfo(); };
+       // itemInventory.OnGetItem += (num, sprite) => { InventoryPanel.GetItem(num, sprite); };
+       // itemInventory.OnChangeStatusInfo += () => { StatusInformationPanel.UpdateStatusInfo(); };
 
         currentMenu = statusBarPanel;
 
@@ -82,7 +91,7 @@ public class InGameUI : BindUI
 
         }
     }
-
+    /*
     public void OnInventory()
     {
         if (CurrentMenu.Equals(StatusBarPanel) == false)
@@ -93,10 +102,8 @@ public class InGameUI : BindUI
         CurrentMenu = inventorySetPanel;
         CurrentMenu.OpenUIPanel();
 
-
-
     }
-
+    */
     public void OnEnemyHP()
     {
         if (enemyStatusPanel.EnemyHpViewCheck())

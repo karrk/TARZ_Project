@@ -17,6 +17,10 @@ public class TestInput : MonoBehaviour
     [Inject]
     InputManager inputManager;
 
+    [Inject]
+    PoolManager poolManager;
+
+
     void Update()
     {
         /*
@@ -34,8 +38,37 @@ public class TestInput : MonoBehaviour
             inGameUI.InputCancel();
         }
 
-        playerModel.Stamina.Value += Time.deltaTime * 100;
+        //playerModel.Stamina.Value += Time.deltaTime * 100;
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            poolManager.GetObject<DamageText>(E_VFX.DamageText).SetText("200", transform.position, false);
+
+        }
+
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            poolManager.GetObject<DamageText>(E_VFX.DamageText).SetText("1000", transform.position, true);
+
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            inGameUI.AlertText.SetAlertText("스태미나가 부족합니다");
+
+        }
+
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            inGameUI.AlertText.SetAlertText("게이지가 부족합니다");
+
+        }
+
+
         /*
+
+        
         if (Input.GetMouseButtonDown(0))
         {
 
@@ -58,6 +91,6 @@ public class TestInput : MonoBehaviour
 
         }
         */
-     
+
     }
 }

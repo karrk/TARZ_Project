@@ -207,6 +207,6 @@ MonoBehaviour:
       MaxRotateTime: 2
       StopDist: 1.5
       canJumpAttack: 1
-      soundSetting:
+  soundSetting:
     Player:
-      Audio: {fileID: 8300000, guid: 7a4f2b951fbb18c40b051320f75ba8dd, type: 3}
+      Audio: {fileID: 0}
