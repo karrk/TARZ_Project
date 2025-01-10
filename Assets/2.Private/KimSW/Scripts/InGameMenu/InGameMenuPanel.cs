@@ -14,7 +14,11 @@ public class InGameMenuPanel : MonoBehaviour, IOpenCloseMenu
 
 
     [SerializeField] Button selectedButton;
-  
+
+    [SerializeField] Button exitChoiceButton;
+
+    [SerializeField] GameObject exitChoicePanel;
+
 
     public void ResumeGame()
     {
@@ -44,8 +48,20 @@ public class InGameMenuPanel : MonoBehaviour, IOpenCloseMenu
     }
 
     public void ExitGameScene()
+    { 
+        exitChoicePanel.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(exitChoiceButton.gameObject);
+    }
+
+    public void ConfirmExitPanel()
     {
-        // 게임씬 나가기
+        // 로비로 나가기
+    }
+
+    public void CancelExitPanel()
+    {
+        exitChoicePanel.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(selectedButton.gameObject);
     }
 
     public void OpenUIPanel()
@@ -59,6 +75,7 @@ public class InGameMenuPanel : MonoBehaviour, IOpenCloseMenu
     public void CloseUIPanel()
     {
         gameObject.SetActive(false);
+        exitChoicePanel.SetActive(false);
         inGameUI.CurrentMenu = inGameUI.StatusBarPanel;
         inGameUI.CurrentMenu.OpenUIPanel();
 
