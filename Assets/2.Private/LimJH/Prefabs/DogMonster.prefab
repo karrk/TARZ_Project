@@ -1759,7 +1759,7 @@ GameObject:
   - component: {fileID: 876391276103265379}
   - component: {fileID: 2930164507820503807}
   m_Layer: 12
-  m_Name: BaseMonster3
+  m_Name: DogMonster
   m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1829,6 +1829,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b63c4c4705e46724692cf9a90d004ea8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 0}
+  firePoint: {fileID: 0}
   stat:
     Health: 0
     DamageReducation: 0
@@ -1841,6 +1843,10 @@ MonoBehaviour:
     RotateSpeed: 0
     MaxRotateTime: 0
     StopDist: 0
+    canJumpAttack: 0
+    jumpHeight: 0
+    jumpDuration: 0
+  type: 2
   reference:
     Anim: {fileID: 8158601638827991980}
     Coll: {fileID: 2930164507820503807}

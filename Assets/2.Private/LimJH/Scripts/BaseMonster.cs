@@ -96,16 +96,28 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
     {
         switch (type)
         {
-            case E_Monster.BasicMob1:
+            case E_Monster.BasicMob:
                 originStat = originStats.BaseMobStat;
                 break;
 
-            case E_Monster.RangeMob2:
+            case E_Monster.RangeMob:
                 originStat = originStats.RangeMobStat;
                 break;
 
-            case E_Monster.EliteMob1:
-                originStat = originStats.EliteMobStat;
+            case E_Monster.DogMob:
+                originStat = originStats.DogMobStat;
+                break;
+
+            case E_Monster.JumpMob:
+                originStat = originStats.JumpMobStat;
+                break;
+
+            case E_Monster.BombMob:
+                originStat = originStats.BombMobStat;
+                break;
+
+            case E_Monster.BossMob:
+                originStat = originStats.BossMobStat;
                 break;
         }
     }

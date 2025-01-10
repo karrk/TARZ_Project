@@ -5,6 +5,7 @@ public class BaseAction : Action
 {
     public SharedGameObject my;
     public BaseMonster mob;
+    public EliteMonster1 jumpMob;
 
     public override void OnStart()
     {
@@ -15,5 +16,6 @@ public class BaseAction : Action
     {
         my.SetValue(this.gameObject);
         mob = my.Value.GetComponent<BaseMonster>();
+        jumpMob = my.Value.GetComponent<EliteMonster1>();
     }
 }

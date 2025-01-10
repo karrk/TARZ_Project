@@ -26,6 +26,18 @@ MonoBehaviour:
         - Type: 0
           Prefab: {fileID: 4631580359735930775, guid: 4013b3696dc896548a565b47ab36716b,
             type: 3}
+        - Type: 1
+          Prefab: {fileID: 5011961818549860546, guid: 5001d6ba7c081aa4cb13e640aa5b2343,
+            type: 3}
+        - Type: 2
+          Prefab: {fileID: 9033396301897224197, guid: 3584a3f554ba5564498f047f45e74768,
+            type: 3}
+        - Type: 3
+          Prefab: {fileID: 789139032559144387, guid: 197dfa8656a8d5b40b4a1f81fc3cff4e,
+            type: 3}
+        - Type: 4
+          Prefab: {fileID: 4095791648714568686, guid: 7807ba7acaaa1244e99fa83fcb88e387,
+            type: 3}
     VFX:
       list:
         pairInfo:
@@ -181,6 +193,9 @@ MonoBehaviour:
       MaxRotateTime: 2
       StopDist: 1.5
       canJumpAttack: 0
+      jumpHeight: 0
+      jumpDuration: 0
+      changeSpeed: 0
     RangeMobStat:
       Health: 100
       DamageReducation: 1
@@ -194,19 +209,73 @@ MonoBehaviour:
       MaxRotateTime: 2
       StopDist: 1.5
       canJumpAttack: 0
-    EliteMobStat:
-      Health: 500
+      jumpHeight: 0
+      jumpDuration: 0
+      changeSpeed: 0
+    DogMobStat:
+      Health: 70
       DamageReducation: 1
-      Damage: 10
+      Damage: 2
       Angle: 90
-      AttackRange: 4
+      AttackRange: 2
       MoveSpeed: 3
       InAttackRange: 2
       DetectRange: 10
       RotateSpeed: 5
       MaxRotateTime: 2
       StopDist: 1.5
+      canJumpAttack: 0
+      jumpHeight: 0
+      jumpDuration: 0
+      changeSpeed: 0
+    JumpMobStat:
+      Health: 500
+      DamageReducation: 1
+      Damage: 10
+      Angle: 90
+      AttackRange: 4
+      MoveSpeed: 2
+      InAttackRange: 4
+      DetectRange: 10
+      RotateSpeed: 5
+      MaxRotateTime: 2
+      StopDist: 1.5
       canJumpAttack: 1
+      jumpHeight: 4
+      jumpDuration: 2
+      changeSpeed: 0
+    BombMobStat:
+      Health: 400
+      DamageReducation: 1
+      Damage: 4
+      Angle: 90
+      AttackRange: 4
+      MoveSpeed: 3
+      InAttackRange: 4
+      DetectRange: 10
+      RotateSpeed: 5
+      MaxRotateTime: 2
+      StopDist: 1.5
+      canJumpAttack: 0
+      jumpHeight: 0
+      jumpDuration: 0
+      changeSpeed: 1
+    BossMobStat:
+      Health: 0
+      DamageReducation: 0
+      Damage: 0
+      Angle: 0
+      AttackRange: 0
+      MoveSpeed: 0
+      InAttackRange: 0
+      DetectRange: 0
+      RotateSpeed: 0
+      MaxRotateTime: 0
+      StopDist: 0
+      canJumpAttack: 0
+      jumpHeight: 0
+      jumpDuration: 0
+      changeSpeed: 0
   soundSetting:
     Player:
       Audio: {fileID: 0}

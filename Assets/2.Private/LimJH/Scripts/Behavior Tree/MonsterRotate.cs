@@ -21,7 +21,7 @@ public class MonsterRotate : BaseAction
     {
         if (mob == null)
         {
-            Debug.LogWarning("Self or Target 오브젝트가 없습니다.");
+            Debug.LogWarning("몬스터가 존재하지 않습니다.");
             return TaskStatus.Failure;
         }
 

@@ -6,7 +6,7 @@ public class PoolingObjectTest : MonoBehaviour, IPooledObject
 {
     [Inject] private PoolManager Manager;
 
-    public Enum MyType => E_Monster.BasicMob1;
+    public Enum MyType => E_Monster.BasicMob;
 
     public GameObject MyObj => this.gameObject;
 

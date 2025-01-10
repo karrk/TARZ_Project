@@ -87,7 +87,7 @@ public class CameraController : MonoBehaviour
     /// </summary>
     private void FollowTarget()
     {
-        if(isLockOn && monster.activeInHierarchy
+        if(isLockOn && monster.activeInHierarchy)
         {
             Vector3 directionToMonster = (monster.transform.position - player.transform.position);
             directionToMonster.y = 0;
