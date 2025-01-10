@@ -14,7 +14,8 @@ public class EquipmentSelectPanel : MonoBehaviour, IOpenCloseMenu
 
     [SerializeField] EquipmentSelectButton[] buttons;
     [SerializeField] EquipmentSlot[] slots;
-
+    public GameObject slotsPanel;
+    [SerializeField] GameObject selectsPanel;
     private void Awake()
     {
         buttons = GetComponentsInChildren<EquipmentSelectButton>(true);
@@ -24,8 +25,8 @@ public class EquipmentSelectPanel : MonoBehaviour, IOpenCloseMenu
     public void OpenUIPanel()
     {
         inGameUI.StatusBarPanel.OffUIPanel();
-        gameObject.SetActive(true);
-
+        selectsPanel.SetActive(true);
+        slotsPanel.SetActive(true);
         SetChoice();
         Time.timeScale = 0f;
         EventSystem.current.SetSelectedGameObject(firstSelected);
@@ -36,7 +37,8 @@ public class EquipmentSelectPanel : MonoBehaviour, IOpenCloseMenu
         Time.timeScale = 1.0f;
         inGameUI.CurrentMenu = inGameUI.StatusBarPanel;
         inGameUI.CurrentMenu.OpenUIPanel();
-        gameObject.SetActive(false);
+        selectsPanel.SetActive(false);
+        slotsPanel.SetActive(false);
     }
 
     public void SetChoice()

@@ -45,6 +45,8 @@ public class InGameMenuPanel : MonoBehaviour, IOpenCloseMenu
     {
         gameObject.SetActive(true);
         EventSystem.current.SetSelectedGameObject(selectedButton.gameObject);
+
+        inGameUI.EquipmentSelectPanel.slotsPanel.SetActive(true);
     }
 
     public void CloseUIPanel()
@@ -52,6 +54,8 @@ public class InGameMenuPanel : MonoBehaviour, IOpenCloseMenu
         gameObject.SetActive(false);
         inGameUI.CurrentMenu = inGameUI.StatusBarPanel;
         inGameUI.CurrentMenu.OpenUIPanel();
+
+        inGameUI.EquipmentSelectPanel.slotsPanel.SetActive(false);
     }
 
     public void OffUIPanel()
