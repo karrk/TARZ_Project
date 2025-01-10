@@ -41,7 +41,7 @@ public class LongRangeSkill_HitBox3 : MonoBehaviour
         }
         else
         {
-            Debug.Log("콜라이더 감지 안됨");
+            //Debug.Log("콜라이더 감지 안됨");
         }
     }
 

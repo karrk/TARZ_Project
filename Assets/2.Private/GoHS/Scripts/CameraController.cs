@@ -79,6 +79,7 @@ public class CameraController : MonoBehaviour
     /// </summary>
     private void FollowTarget()
     {
+
         if(isLockOn && monster != null)
         {
             Vector3 directionToMonster = (monster.transform.position - player.transform.position);
@@ -88,13 +89,18 @@ public class CameraController : MonoBehaviour
 
             transform.position = player.transform.position + offset.z * directionToMonster + offset.y * Vector3.up;
             transform.LookAt(player.transform.position);
+
+
             CheckWall();
+
         }
         else
         {
+
             Quaternion rotation = Quaternion.Euler(0, current.x, 0f);
             transform.position = player.transform.position + rotation * offset;
             transform.LookAt(player.transform.position);
+
             CheckWall();
         }
 
@@ -108,7 +114,7 @@ public class CameraController : MonoBehaviour
     /// </summary>
     private void LockOn()
     {
-        Debug.Log("락온 진행중");
+        //Debug.Log("락온 진행중");
         GetTarget();
         if (targets.Count > 0)
         {
@@ -116,13 +122,13 @@ public class CameraController : MonoBehaviour
             if (monster != null)
             {
                 isLockOn = true;
-                Debug.Log("락온 기능 활성화");
+                //Debug.Log("락온 기능 활성화");
             }
         }
         else
         {
             IsLockOn = false;
-            Debug.Log("감지된 몬스터가 없습니다.");
+            //Debug.Log("감지된 몬스터가 없습니다.");
         }
     }
 

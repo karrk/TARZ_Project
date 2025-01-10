@@ -25,7 +25,7 @@ public class LongRangeSkill_1 : BaseState
 
     public override void Enter()
     {
-        Debug.Log("스킬 1 시전 시작!");
+        //Debug.Log("스킬 1 시전 시작!");
         curDelay = player.Setting.Skill1Setting.Delay;
 
         CameraController cameraController = player.Cam.GetComponent<CameraController>();

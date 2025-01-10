@@ -51,7 +51,7 @@ public class MeleeSkill_2 : BaseState
         //player.transform.rotation = Quaternion.Lerp(player.transform.rotation, rotation, 500f * Time.deltaTime);
         player.transform.rotation = rotation;
 
-        Debug.Log("근접 스킬 2번 시전 시작!");
+        //Debug.Log("근접 스킬 2번 시전 시작!");
         player.Refernece.Animator.SetTrigger("MeleeSkill_2");
         player.Refernece.EffectController.MeleeSkill_2Effect_Start();
 
@@ -71,7 +71,7 @@ public class MeleeSkill_2 : BaseState
         }
         else
         {
-            Debug.Log("근접 스킬 2번 진행됨");
+            //Debug.Log("근접 스킬 2번 진행됨");
             player.ChangeState(E_State.Idle);
         }
     }

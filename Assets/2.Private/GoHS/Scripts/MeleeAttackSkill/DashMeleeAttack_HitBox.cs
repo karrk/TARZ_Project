@@ -9,7 +9,7 @@ public class DashMeleeAttack_HitBox : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("적 부딪힘");             // 부딪히는 것 확인됨
+        //Debug.Log("적 부딪힘");             // 부딪히는 것 확인됨
 
         if (other.CompareTag("Monster"))
         {
