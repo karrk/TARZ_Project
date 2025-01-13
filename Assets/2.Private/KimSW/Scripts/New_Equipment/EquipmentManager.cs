@@ -212,27 +212,14 @@ public class EquipmentManager : MonoBehaviour
     {
         this.UpdateAsObservable()
      .Where(x => interactEquipments.Count > 0)
+     .Where(x=>inGameUI.CurrentMenu.Equals(inGameUI.StatusBarPanel))
      .Subscribe(x =>
      {
-         if (inGameUI.CurrentMenu.Equals(inGameUI.InGameMenuPanel))
-         {
-
-             return;
-         }
-         if (inGameUI.CurrentMenu.Equals(inGameUI.OptionPanel))
-         {
-
-             return;
-         }
-         if (inGameUI.CurrentMenu.Equals(inGameUI.MenualPanel))
-         {
-
-             return;
-         }
+        
 
          inGameUI.EquipmentGetPanel.gameObject.SetActive(true);
 
-
+         // 뉴 인풋 시스템으로 변경
          if (Input.GetKeyDown(KeyCode.F))
          {
            

@@ -22,7 +22,7 @@ public class InGameUI : BindUI
     private EquipmentGetPanel equipmentGetPanel;
     private EquipmentSelectPanel equipmentSelectPanel;
     private BlueChipGetPanel blueChipGetPanel;
-    
+    private BlueChipSelectPanel blueChipSelectPanel;
 
     private EquipmentManager equipmentManager;
 
@@ -52,6 +52,7 @@ public class InGameUI : BindUI
     public EquipmentManager EquipmentManager { get { return equipmentManager; } }
 
     public BlueChipGetPanel BlueChipGetPanel { get { return blueChipGetPanel; } }
+    public BlueChipSelectPanel BlueChipSelectPanel { get { return blueChipSelectPanel; } }
 
     private IOpenCloseMenu currentMenu;
 
@@ -75,6 +76,7 @@ public class InGameUI : BindUI
         equipmentSelectPanel = GetUI<EquipmentSelectPanel>("EquipmentSelectPanel");
         equipmentManager = GetUI<EquipmentManager>("EquipmentManager");
         blueChipGetPanel = GetUI<BlueChipGetPanel>("BlueChipGetPanel");
+        blueChipSelectPanel = GetUI<BlueChipSelectPanel>("BlueChipSelectPanel");
     }
     private void Start()
     {
@@ -134,13 +136,15 @@ public class InGameUI : BindUI
     private void Update()
     {
 
+    // 적 체력 초기화
         if (Input.GetKeyDown(KeyCode.C))
         {
             InitEnemyHP(100);
         }
+    // 적에게 데미지 가하기
         if (Input.GetKeyDown(KeyCode.B))
         {
-            enemyStatusPanel.hpView.Hp.Value -= 30;
+            EnemyStatusPanel.hpView.Hp.Value -= 30;
         }
 
     }

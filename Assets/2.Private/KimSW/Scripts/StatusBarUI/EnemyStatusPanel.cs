@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class EnemyStatusPanel : MonoBehaviour
 {
-    [SerializeField] EnemyHpView hpView;
+    public EnemyHpView hpView;
  
 
     public bool EnemyHpViewCheck()
