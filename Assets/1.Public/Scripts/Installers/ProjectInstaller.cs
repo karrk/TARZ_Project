@@ -60,6 +60,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         Container.BindInterfacesAndSelfTo<ItemInventory>().AsSingle().Lazy();
         Container.BindInterfacesAndSelfTo<PlayerEquipment>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<PlayerStats>().AsSingle().NonLazy();
+        Container.Bind<StaticEquipment>().FromComponentInNewPrefab(prefabs.staticEquipment).AsSingle().NonLazy();
     }
 
     [Serializable]
@@ -269,6 +270,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         public GameObject PoolManager;
         public GameObject Player;
         public GameObject SoundManager;
+        public GameObject staticEquipment;
     }
 
     [Serializable]

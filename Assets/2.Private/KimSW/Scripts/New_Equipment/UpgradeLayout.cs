@@ -12,14 +12,10 @@ public class UpgradeLayout : MonoBehaviour
 
     [SerializeField] float cellSizeX;
 
-    Color onColor;
-    Color offColor;
+    [SerializeField] Color onColor;
+    [SerializeField] Color offColor;
 
-    private void Awake()
-    {
-        ColorUtility.TryParseHtmlString("#501D1D", out offColor);
-        onColor = Color.white;
-    }
+ 
 
     public void SetLayout(int level)
     {

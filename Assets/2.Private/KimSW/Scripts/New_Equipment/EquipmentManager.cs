@@ -12,6 +12,9 @@ public class EquipmentManager : MonoBehaviour
     [Inject]
     InGameUI inGameUI;
 
+    [Inject]
+    StaticEquipment staticEquipment;
+
     [SerializeField] EquipmentCSVParser csvParser;
 
     public List<InteractEquipment> interactEquipments = new List<InteractEquipment>();
@@ -28,9 +31,46 @@ public class EquipmentManager : MonoBehaviour
     {
         SetInteract();
 
-        newEquipments = csvParser.newEquipments;
+        LoadEquipment();
+
+    }
+
+    private void OnDestroy()
+    {
+        SaveEquipment();
+    }
+
+    void LoadEquipment()
+    {
+        if (staticEquipment.firstInit)
+        {
+            newEquipments = staticEquipment.newEquipments;
+            equipped = staticEquipment.equipped;
+            equippedLevel = staticEquipment.equippedLevel;
+
+            for (int i = 0; i < equipped.Count; i++)
+            {
+                inGameUI.EquipmentSelectPanel.ChangeSlot(i);
+                inGameUI.EquipmentSelectPanel.LevelUpSlot(i, equippedLevel[i]);
+            }
 
 
+        }
+        else
+        {
+            newEquipments = csvParser.newEquipments;
+            staticEquipment.firstInit = true;
+
+            staticEquipment.newEquipments = newEquipments;
+
+        }
+    }
+
+    void SaveEquipment()
+    {
+        staticEquipment.newEquipments = newEquipments;
+        staticEquipment.equipped = equipped;
+        staticEquipment.equippedLevel = equippedLevel;
     }
 
 

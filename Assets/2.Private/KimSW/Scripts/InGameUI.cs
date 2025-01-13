@@ -72,6 +72,7 @@ public class InGameUI : BindUI
         equipmentGetPanel = GetUI<EquipmentGetPanel>("EquipmentGetPanel");
         equipmentSelectPanel = GetUI<EquipmentSelectPanel>("EquipmentSelectPanel");
         equipmentManager = GetUI<EquipmentManager>("EquipmentManager");
+
     }
     private void Start()
     {
