@@ -38,8 +38,8 @@ public class BackpackPanel : AnimatedUI, ISlotPanel
 
     private void Start()
     {
-        // currentEquipmentSlot = gameUI.InventoryPanel.equipmentPanel.GetSlot(0);
-        // gameUI.InventorySetPanel.gameObject.SetActive(false);
+        currentEquipmentSlot = gameUI.InventoryPanel.equipmentPanel.GetSlot(0);
+        gameUI.InventorySetPanel.gameObject.SetActive(false);
     }
 
     public void SetSelectCursor()

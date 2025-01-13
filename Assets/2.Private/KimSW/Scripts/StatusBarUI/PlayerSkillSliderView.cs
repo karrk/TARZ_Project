@@ -70,7 +70,7 @@ public class PlayerSkillSliderView : SliderView
 
         if(count == 0)
         {
-            // effect.SetActive(false);
+            effect.SetActive(false);
         }
         else
         {
