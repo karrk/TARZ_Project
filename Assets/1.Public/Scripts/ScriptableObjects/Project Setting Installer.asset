@@ -40,6 +40,9 @@ MonoBehaviour:
         - Type: 4
           Prefab: {fileID: 4095791648714568686, guid: 7807ba7acaaa1244e99fa83fcb88e387,
             type: 3}
+        - Type: 5
+          Prefab: {fileID: 689508234494486168, guid: 6fc562c40b8210149bf2a8c32462c268,
+            type: 3}
     VFX:
       list:
         pairInfo:
@@ -263,17 +266,17 @@ MonoBehaviour:
       jumpDuration: 0
       changeSpeed: 1
     BossMobStat:
-      Health: 0
-      DamageReducation: 0
-      Damage: 0
-      Angle: 0
-      AttackRange: 0
-      MoveSpeed: 0
-      InAttackRange: 0
-      DetectRange: 0
-      RotateSpeed: 0
-      MaxRotateTime: 0
-      StopDist: 0
+      Health: 6000
+      DamageReducation: 1
+      Damage: 1
+      Angle: 90
+      AttackRange: 4
+      MoveSpeed: 2
+      InAttackRange: 4
+      DetectRange: 10
+      RotateSpeed: 5
+      MaxRotateTime: 2
+      StopDist: 1.5
       canJumpAttack: 0
       jumpHeight: 0
       jumpDuration: 0
