@@ -1,3 +1,4 @@
+using BehaviorDesigner.Runtime.Tasks.Unity.UnityDebug;
 using System;
 using UnityEngine;
 using Zenject;
@@ -19,6 +20,9 @@ public class Garbage : MonoBehaviour, IDrainable, IPooledObject
     private bool isImmediatelyReturnMode;
 
     [Inject] private PoolManager manager;
+    [SerializeField] private float expRadius;
+
+    public bool ExpMode;
 
     public void SetImmediateMode()
     {
@@ -61,7 +65,22 @@ public class Garbage : MonoBehaviour, IDrainable, IPooledObject
             IDamagable monster = collision.gameObject.GetComponent<IDamagable>();
             if(monster != null)
             {
-                monster.TakeHit(power, true);
+                if(ExpMode == false)
+                {
+                    monster.TakeHit(power, true);
+                }
+                else
+                {
+                    RaycastHit[] hits = Physics.SphereCastAll(transform.position, expRadius, Vector3.up, expRadius,1<<12);
+                    
+                    foreach (var item in hits)
+                    {
+                        if(item.collider.TryGetComponent<IDamagable>(out IDamagable obj))
+                        {
+                            obj.TakeHit(power, true);
+                        }
+                    }
+                }
             }
 
             // 투척물 소멸
@@ -87,6 +106,15 @@ public class Garbage : MonoBehaviour, IDrainable, IPooledObject
             IsProjectile = false;
             //Debug.Log("Garbage hit the ground and is no longer a projectile.");
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (ExpMode == false)
+            return;
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, expRadius);
     }
 
     // 플레이어에 의해 발사되었음을 설정

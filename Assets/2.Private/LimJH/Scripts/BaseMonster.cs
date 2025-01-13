@@ -142,7 +142,11 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
         stat.Health -= value * stat.DamageReducation;
 
         if (stat.Health <= 0)
+        {
+            playerStats.MobDeadCountup();
             OnDead?.Invoke();
+        }
+            
 
         //Debug.Log($"Health: {stat.Health}");
 

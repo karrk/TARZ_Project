@@ -76,7 +76,10 @@ public class MeleeSkill_1 : BaseState
                 IDamagable damagable = target.GetComponent<IDamagable>();
                 if (damagable != null)
                 {
-                    damagable.TakeHit(player.Setting.MeleeSkill1Setting.Damage, false);
+                    int powerFactor = player.stats.UsedMeleePowerUp == true ? 10 : 1;
+
+                    damagable.TakeHit(
+                        player.Setting.MeleeSkill1Setting.Damage * powerFactor, false);
                 }
 
                 // 플레이어의 3만큼(아마 변경 필요) 앞 방향으로 몬스터에게 위치 전달 

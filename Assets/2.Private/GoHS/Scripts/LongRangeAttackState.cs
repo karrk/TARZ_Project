@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using Cysharp.Threading.Tasks;
 
 [System.Serializable]
 
@@ -168,9 +169,23 @@ public class LongRangeAttackState : BaseState
         //Debug.Log(attackStack);
         player.Refernece.Shooter.FireItem(GetCalculatedDamage());    // 총알 발사
 
+        if(player.stats.ZeroGarbageMode)
+        {
+            WaitShoot().Forget();
+        }
 
 
     } // 1 => 40 , 2 => 60 , 3 => 80 , 4 => 100
+
+    private async UniTask WaitShoot()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            await UniTask.Delay(100);
+
+            player.Refernece.Shooter.FireItem(player.Refernece.MuzzlePoint.position,player.transform.forward,GetCalculatedDamage());
+        }
+    }
 
     private float GetCalculatedDamage()
     {

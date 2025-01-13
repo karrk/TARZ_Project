@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7351745e7dd08f14e843795c4a9d296f, type: 3}
+  m_Name: Melee
+  m_EditorClassIdentifier: 
+  blueChipName: "\uADFC\uC811 \uB370\uBBF8\uC9C0 \uC99D\uD3ED"
+  description: "\uADFC\uC811 \uC2A4\uD0AC \uB370\uBBF8\uC9C0\uB97C \uAC15\uD654\uD569\uB2C8\uB2E4."
+  type: 0
+  dropRate: 30
+  illust: {fileID: 0}

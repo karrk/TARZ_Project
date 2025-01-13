@@ -17,6 +17,9 @@ public class GarbageQueue
     /// </summary>
     public void AddItem(int garbageIndex)
     {
+        if (stats.ZeroGarbageMode)
+            return;
+
         if (stats.ThrowCapacity <= garbageIndexList.Count)
             return;
 
@@ -58,6 +61,12 @@ public class GarbageQueue
             }
         }
         return E_Garbage.Basic;
+    }
+
+    public void ClearGabages()
+    {
+        garbageIndexList.Clear();
+        stats.UpdateGarbageCount(garbageIndexList.Count);
     }
 
     /// <summary>
