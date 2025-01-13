@@ -10,16 +10,18 @@ public class Shooter
     private GarbageQueue garbageQueue; // GarbageQueue 참조
     private PoolManager manager;
     private ProjectInstaller.PlayerSettings setting;
+    private PlayerStats stats;
 
     [Inject]
     public void Construct(GarbageQueue garbageQueue, 
         ProjectInstaller.PlayerSettings setting,
-        PoolManager manager, ProjectPlayer player)
+        PoolManager manager, ProjectPlayer player, PlayerStats stats)
     {
         this.garbageQueue = garbageQueue;
         this.manager = manager;
         this.setting = setting;
         this.muzzlePoint = player.Refernece.MuzzlePoint;
+        this.stats = stats;
     }
 
     /// <summary>
@@ -29,8 +31,9 @@ public class Shooter
     {
         // 다음 아이템의 프리팹 가져오기
         E_Garbage idx = garbageQueue.GetNextGarbageIndex();
-
+            
         Garbage garbage = manager.GetObject<Garbage>(idx);
+        garbage.ExpMode = stats.ExpMode;
 
         if (garbage == null)
             return;

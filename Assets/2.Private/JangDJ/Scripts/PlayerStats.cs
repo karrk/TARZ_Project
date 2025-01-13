@@ -42,7 +42,53 @@ public class PlayerStats : IInitializable
     public float MaxHealth { get; private set; }
     public float MovementSpeed { get; private set; }
 
-    // TODO 씬 전환시에도 코루틴과 같은 비동기 작업이 진행될지 확인
+    private int removeCount;
+
+    #region 블루칩 모드
+
+    public bool UsedMeleePowerUp;
+    public bool ExpMode;
+    public bool ZeroGarbageMode;
+    public bool AbsorbHpMode;
+
+    #endregion
+
+    public void AddBlueChip(BlueChipType type)
+    {
+        switch (type)
+        {
+            case BlueChipType.Melee:
+                UsedMeleePowerUp = true;
+                break;
+            case BlueChipType.Exp:
+                ExpMode = true;
+                break;
+            case BlueChipType.RangeAttack:
+                ZeroGarbageMode = true;
+                break;
+            case BlueChipType.AbsorbHp:
+                AbsorbHpMode = true;
+                break;
+            case BlueChipType.BGM:
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void MobDeadCountup()
+    {
+        if (AbsorbHpMode == false)
+            return;
+
+        removeCount++;
+
+        if(removeCount >= 10)
+        {
+            AddHP(1);
+            removeCount = 0;
+        }
+    }
 
     public void Initialize()
     {
@@ -277,6 +323,8 @@ public class PlayerStats : IInitializable
     {
         manaAbsorption = baseStat.ManaAbsorption + equips.GetStat(E_StatType.ManaAbsorption);
     }
+
+    
 
     #endregion
 }
