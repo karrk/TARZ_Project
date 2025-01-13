@@ -611,7 +611,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  skillDamage: 0
+  skillDamage: 10
 --- !u!1 &1061582461559549274
 GameObject:
   m_ObjectHideFlags: 0
@@ -1765,7 +1765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28e0a545e1618d74980558b3cbabbc15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillDamage: 110
+  skillDamage: 150
 --- !u!1 &2914032361739494254
 GameObject:
   m_ObjectHideFlags: 0

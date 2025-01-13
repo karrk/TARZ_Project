@@ -482,12 +482,6 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
         states[(int)curState].Enter();
     }
 
-    public void TakeDamage(float value)
-    {
-        // 데미지 받는 로직
-        // 스탯을 통한
-    }
-
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
