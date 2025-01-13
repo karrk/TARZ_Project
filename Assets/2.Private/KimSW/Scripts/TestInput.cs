@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Zenject;
 
 public class TestInput : MonoBehaviour
@@ -20,6 +21,22 @@ public class TestInput : MonoBehaviour
     [Inject]
     PoolManager poolManager;
 
+    public InputActionReference cancelRef;
+
+    private void OnEnable()
+    {
+        cancelRef.action.performed += CancelInput;
+    }
+
+    private void OnDisable()
+    {
+        cancelRef.action.performed -= CancelInput;
+    }
+
+    public void CancelInput(InputAction.CallbackContext value)
+    {
+        inGameUI.InputCancel();
+    }
 
     void Update()
     {
@@ -32,12 +49,12 @@ public class TestInput : MonoBehaviour
         {
             inGameUI.OnInventory();
         }
-        */
+        
         if (Input.GetButtonDown("Cancel"))
         {
             inGameUI.InputCancel();
         }
-
+        */
         //playerModel.Stamina.Value += Time.deltaTime * 100;
 
         if (Input.GetKeyDown(KeyCode.T))

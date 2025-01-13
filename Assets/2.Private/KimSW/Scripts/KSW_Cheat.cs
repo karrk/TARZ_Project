@@ -22,7 +22,7 @@ public class KSW_Cheat : MonoBehaviour
 
     private void Start()
     {
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+       // target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     void Update()
