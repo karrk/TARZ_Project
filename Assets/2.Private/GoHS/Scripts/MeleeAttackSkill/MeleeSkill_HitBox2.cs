@@ -5,9 +5,9 @@ using Zenject;
 
 public class MeleeSkill_HitBox2 : MonoBehaviour
 {
+    [Inject] private PlayerStats stats;
     [Inject][SerializeField] private ProjectPlayer player;
     [SerializeField] private float skillDamage;       // 스킬 공격력
-
 
     private void OnTriggerEnter(Collider other)
     {
@@ -21,7 +21,7 @@ public class MeleeSkill_HitBox2 : MonoBehaviour
             IDamagable damagable = other.GetComponent<IDamagable>();
             if (damagable != null)
             {
-                damagable.TakeHit(skillDamage, false);
+                damagable.TakeHit(skillDamage * (stats.UsedMeleePowerUp == true? 10 : 1), false);
             }
 
             IPushable pushable = other.GetComponent<IPushable>();

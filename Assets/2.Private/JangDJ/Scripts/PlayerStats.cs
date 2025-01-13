@@ -5,7 +5,7 @@ using UnityEngine;
 using Zenject;
 
 // 프로젝트 컨텍스트 - 씬 전환시에도 상태를 유지시키기 위함
-public class PlayerStats : IInitializable
+public class PlayerStats : IInitializable, ITickable
 {
     [Inject] private ProjectInstaller.PlayerSettings setting;
     [Inject] private ProjectInstaller.PlayerBaseStats baseStat;
@@ -50,6 +50,7 @@ public class PlayerStats : IInitializable
     public bool ExpMode;
     public bool ZeroGarbageMode;
     public bool AbsorbHpMode;
+    public bool SwitchBGM; 
 
     #endregion
 
@@ -70,6 +71,7 @@ public class PlayerStats : IInitializable
                 AbsorbHpMode = true;
                 break;
             case BlueChipType.BGM:
+                SwitchBGM = true;
                 break;
             default:
                 break;
@@ -324,7 +326,15 @@ public class PlayerStats : IInitializable
         manaAbsorption = baseStat.ManaAbsorption + equips.GetStat(E_StatType.ManaAbsorption);
     }
 
-    
+    public void Tick()
+    {
+        if(Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            this.SwitchBGM = true;
+        }
+    }
+
+
 
     #endregion
 }
