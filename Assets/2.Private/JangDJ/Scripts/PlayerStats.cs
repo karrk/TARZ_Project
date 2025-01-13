@@ -9,6 +9,7 @@ public class PlayerStats : IInitializable, ITickable
 {
     [Inject] private ProjectInstaller.PlayerSettings setting;
     [Inject] private ProjectInstaller.PlayerBaseStats baseStat;
+    [Inject] private SoundManager soundManager;
     [Inject] private PlayerEquipment equips;
     [Inject] private CoroutineHelper helper;
 
@@ -326,15 +327,22 @@ public class PlayerStats : IInitializable, ITickable
         manaAbsorption = baseStat.ManaAbsorption + equips.GetStat(E_StatType.ManaAbsorption);
     }
 
-    public void Tick()
-    {
-        if(Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            this.SwitchBGM = true;
-        }
-    }
+
 
 
 
     #endregion
+
+    public void Tick()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            this.SwitchBGM = true;
+
+            if(this.SwitchBGM)
+            {
+                soundManager.PlayBGM(soundManager.SoundSetting.Player.Audio);
+            }
+        }
+    }
 }
