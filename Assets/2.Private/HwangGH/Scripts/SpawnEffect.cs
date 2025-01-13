@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class SpawnEffect : MonoBehaviour
 {
+<<<<<<< Updated upstream
     public ParticleSystem particle;
     public GameObject target;
 
@@ -15,4 +16,20 @@ public class SpawnEffect : MonoBehaviour
         Instantiate(gameObject,target.transform.position, target.transform.rotation);
         particle.Play();
     }
+=======
+    public float remainTime;
+    ParticleSystem particle;
+
+    private void Awake()
+    {
+        remainTime = 0;
+    }
+
+    public void RegenEffect()
+    {
+        remainTime += Time.deltaTime;
+        if(remainTime >= 1f)
+            gameObject.SetActive(false);
+    }
+>>>>>>> Stashed changes
 }

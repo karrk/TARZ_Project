@@ -37,6 +37,7 @@ Transform:
   - {fileID: 2603175986566557845}
   - {fileID: 1266932936638378546}
   - {fileID: 151054782826530189}
+  - {fileID: 4306517436328994775}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!199 &1502995200246211671
@@ -4860,9 +4861,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7773b02054f7abb428759844e2771d5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawnEffectObject: {fileID: 4623979190987320823}
-  delaySeconds: 2
-  target: {fileID: 1992663519276309916}
 --- !u!1 &2717843923878809266
 GameObject:
   m_ObjectHideFlags: 0
@@ -18868,6 +18866,37 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!1 &4541751896060708354
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4306517436328994775}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4306517436328994775
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4541751896060708354}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.4000001, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1992663519276309916}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7131608322209064351
 GameObject:
   m_ObjectHideFlags: 0
