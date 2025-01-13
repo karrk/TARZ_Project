@@ -1,4 +1,5 @@
 using BehaviorDesigner.Runtime.Tasks.Unity.UnityGameObject;
+using Cysharp.Threading.Tasks.Triggers;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -6,35 +7,12 @@ using UnityEngine;
 
 public class SpawnEffect : MonoBehaviour
 {
-    [SerializeField] public GameObject SpawnEffectObject;
-    [SerializeField] public float delaySeconds;
-    [SerializeField] public Transform target;
-    private WaitForSeconds delay;
-    private Coroutine spawnCoroutine;
+    public ParticleSystem particle;
+    public GameObject target;
 
-    private void Init()
+    public void PlayRebornEffect()
     {
-        delay = new WaitForSeconds(delaySeconds);
-        spawnCoroutine = null;
+        Instantiate(gameObject,target.transform.position, target.transform.rotation);
+        particle.Play();
     }
-
-    // public void SpawnDefaultEffect()
-    // {
-    //     if (spawnCoroutine == null)
-    //     {
-    //         spawnCoroutine = StartCoroutine(SpawnTime());
-    //     }
-    //     else if (spawnCoroutine != null)
-    //     {
-    //         {
-    //             StopCoroutine(spawnCoroutine);
-    //             spawnCoroutine = null;
-    //         }
-    //     }
-    // }
-    // public IEnumerator SpawnTime()
-    // {
-    //     Instantiate(SpawnEffectObject.gameObject, target.transform.position, target.transform.rotation);
-    //     yield return delay;
-    // }
 }
