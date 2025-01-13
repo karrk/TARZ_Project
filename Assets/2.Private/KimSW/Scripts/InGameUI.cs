@@ -21,6 +21,7 @@ public class InGameUI : BindUI
     private TargetIndicator targetIndicator;
     private EquipmentGetPanel equipmentGetPanel;
     private EquipmentSelectPanel equipmentSelectPanel;
+    private BlueChipGetPanel blueChipGetPanel;
     
 
     private EquipmentManager equipmentManager;
@@ -50,6 +51,7 @@ public class InGameUI : BindUI
 
     public EquipmentManager EquipmentManager { get { return equipmentManager; } }
 
+    public BlueChipGetPanel BlueChipGetPanel { get { return blueChipGetPanel; } }
 
     private IOpenCloseMenu currentMenu;
 
@@ -72,7 +74,7 @@ public class InGameUI : BindUI
         equipmentGetPanel = GetUI<EquipmentGetPanel>("EquipmentGetPanel");
         equipmentSelectPanel = GetUI<EquipmentSelectPanel>("EquipmentSelectPanel");
         equipmentManager = GetUI<EquipmentManager>("EquipmentManager");
-
+        blueChipGetPanel = GetUI<BlueChipGetPanel>("BlueChipGetPanel");
     }
     private void Start()
     {
