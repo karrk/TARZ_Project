@@ -19,8 +19,7 @@ public class InteractEquipment : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
-
-    
+       
         this.UpdateAsObservable()
         .Where(x => (player.position - transform.position).sqrMagnitude <= getRange)
         .Where(x=> !isInteract)
