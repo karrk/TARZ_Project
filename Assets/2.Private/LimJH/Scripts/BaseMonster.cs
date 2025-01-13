@@ -26,7 +26,7 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
 
     [SerializeField] private E_Monster type = E_Monster.None;
 
-    private ProjectPlayer player;
+    public ProjectPlayer player;
 
     #region Injects
 
