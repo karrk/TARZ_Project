@@ -44,8 +44,6 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
     [Inject] private ProjectInstaller.PlayerSettings setting;
     public ProjectInstaller.PlayerSettings Setting => setting;
     
-
-
     [Inject] private ProjectInstaller.SoundSetting soundSetting;
     public ProjectInstaller.SoundSetting SoundSetting => soundSetting;
 
@@ -88,7 +86,6 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
 
     [SerializeField] private float groundBoxHeight;
 
-    [Inject] private InputManager inputManager;
     [Inject] public PlayerStats stats { get; private set; }
     [Inject] private Shooter shooter;
     [Inject] private SignalBus signal;

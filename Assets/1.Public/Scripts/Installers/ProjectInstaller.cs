@@ -50,8 +50,6 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
 
         //Container.Bind<SkillManager>().AsSingle().NonLazy();
 
-        Container.BindInterfacesAndSelfTo<InputManager>().AsSingle().NonLazy();
-
         //Container.Bind<SoundManager>().FromComponentInNewPrefab(prefabs.SoundManager).AsSingle().NonLazy();
     }
 

@@ -3,6 +3,7 @@ using Zenject;
 using System;
 using UnityEngine.AI;
 using Unity.VisualScripting;
+using BehaviorDesigner.Runtime;
 
 public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
 {
@@ -81,6 +82,7 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
 
     public void Init(ProjectPlayer player)
     {
+        GetComponent<BehaviorTree>().enabled = true;
         Reference.Nav.enabled = true;
         Reference.Coll.enabled = true;
         originStat.SendToCopyStats<ProjectInstaller.MonsterStat>(ref stat);
@@ -316,6 +318,10 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
 
     public void Return()
     {
+        GetComponent<BehaviorTree>().enabled = false;
+        Reference.Nav.enabled = false;
+        OnDead = null;
+        
         manager.Return(this);
     }
 }

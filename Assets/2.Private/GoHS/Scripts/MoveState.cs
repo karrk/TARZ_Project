@@ -14,6 +14,8 @@ public class MoveState : BaseState
 
     public override void Enter()
     {
+
+
         //Debug.Log("Move상태 진입!");
     }
 
