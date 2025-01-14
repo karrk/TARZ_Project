@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 using UnityEngine;
 using Zenject;
+using UnityEngine.SceneManagement;
 
 public class SoundManager : MonoBehaviour
 {
@@ -11,6 +12,23 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField] AudioSource bgm;
     [SerializeField] AudioSource sfx;
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log(scene.buildIndex);
+        switch (scene.buildIndex) 
+        {
+            case 2:
+                PlayBGM(soundSetting.Player.Audio);
+                break;
+        }
+    }
+
 
 
     /// <summary>
