@@ -469,6 +469,8 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
 
         public float halfHealth;
 
+        public bool isSpecialAttackDelay;
+
 
         public virtual void SendToCopyStats<T>(ref T target) where T : MonsterStat, new()
         {
@@ -496,6 +498,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
             target.isGimmickActive = this.isGimmickActive;
             target.halfHealth = this.halfHealth;
             target.pillarSpawnRadius = this.pillarSpawnRadius;
+            target.isSpecialAttackDelay = this.isSpecialAttackDelay;
         }
     }
 }

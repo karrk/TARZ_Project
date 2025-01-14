@@ -11,6 +11,7 @@ public class GimmickFire : BaseAction
 
     public override void OnStart()
     {
+        base.OnStart();
         // 기믹 활성화 상태로 전환
         mob.Stat.isGimmickActive = true;
 

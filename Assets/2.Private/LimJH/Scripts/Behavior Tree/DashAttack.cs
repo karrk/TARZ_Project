@@ -4,7 +4,7 @@ using BehaviorDesigner.Runtime.Tasks;
 using Cysharp.Threading.Tasks;
 using Unity.VisualScripting;
 
-public class DashAttack : Action
+public class DashAttack : BaseAction
 {
     public SharedGameObject targetObject;  // 공격 대상
     public SharedInt rushCount;
