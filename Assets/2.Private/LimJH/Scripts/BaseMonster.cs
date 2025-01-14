@@ -36,6 +36,7 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
     [Inject] PlayerStats playerStats;
     [Inject] private PoolManager manager;
     [Inject] private SignalBus signal;
+    [Inject] private ProjectInstaller.NormalPrefab prefabs;
 
     #endregion
     
@@ -100,13 +101,13 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
 
             if(isGetItem == true)
             {
-                // 아이템 생성
+                Instantiate(prefabs.EquipBox,transform.position,Quaternion.identity);
             }
 
             return;
         }
 
-        // 블루칩 생성
+        Instantiate(prefabs.Bluechip, transform.position, Quaternion.identity);
     }
 
     private bool GetBluechip()
@@ -125,7 +126,7 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
 
     private bool GetEquip()
     {
-        float dropRate = 30f;
+        float dropRate = 70f;
         float rand = Random.Range(0, 100);
 
         if (rand <= dropRate)
@@ -191,6 +192,7 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
 
         if (stat.Health <= 0)
         {
+            Drop();
             playerStats.MobDeadCountup();
             OnDead?.Invoke();
         }
