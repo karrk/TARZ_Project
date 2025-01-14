@@ -486,6 +486,10 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
 
         public bool isSpecialAttackDelay;
 
+        public int rushCount;
+        public float dashSpeed;
+        public float stopDistance;
+
 
         public virtual void SendToCopyStats<T>(ref T target) where T : MonsterStat, new()
         {

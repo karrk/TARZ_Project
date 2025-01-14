@@ -306,7 +306,7 @@ MonoBehaviour:
       Angle: 90
       AttackRange: 4
       MoveSpeed: 2
-      InAttackRange: 4
+      InAttackRange: 8
       DetectRange: 10
       RotateSpeed: 5
       MaxRotateTime: 2
@@ -316,10 +316,10 @@ MonoBehaviour:
       jumpDuration: 0
       changeSpeed: 0
       isGroggyActive: 0
-      pillarStates: 
+      pillarStates: 000000000000000000000000
       groggyDuration: 0
       isGimmickActive: 0
-      pillarSpawnRadius: 0
+      pillarSpawnRadius: 5
       halfHealth: 0
       isSpecialAttackDelay: 0
   audioClips:
