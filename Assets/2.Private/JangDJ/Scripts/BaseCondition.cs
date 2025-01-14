@@ -7,6 +7,7 @@ public abstract class BaseCondition : Conditional
     public SharedGameObject my;
     public BaseMonster mob;
     public EliteMonster1 jumpMob;
+    public MidBossMonster bossMob;
 
     public override void OnStart()
     {

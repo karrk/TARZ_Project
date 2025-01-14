@@ -449,10 +449,23 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         public float RotateSpeed;
         public float MaxRotateTime;
         public float StopDist;
+
         public bool canJumpAttack;
         public float jumpHeight;
         public float jumpDuration;
         public float changeSpeed;
+
+        public bool isGroggyActive;
+        public List<int> pillarStates;
+        public float groggyDuration;
+
+        public bool isGimmickActive;
+        public float pillarSpawnRadius;
+
+        public float halfHealth;
+
+        public bool isSpecialAttackDelay;
+
 
         public virtual void SendToCopyStats<T>(ref T target) where T : MonsterStat, new()
         {
@@ -474,6 +487,13 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
             target.jumpHeight = this.jumpHeight;
             target.jumpDuration = this.jumpDuration;
             target.changeSpeed = this.changeSpeed;
+            target.isGroggyActive = this.isGroggyActive;
+            target.pillarStates = this.pillarStates;
+            target.groggyDuration = this.groggyDuration;
+            target.isGimmickActive = this.isGimmickActive;
+            target.halfHealth = this.halfHealth;
+            target.pillarSpawnRadius = this.pillarSpawnRadius;
+            target.isSpecialAttackDelay = this.isSpecialAttackDelay;
         }
     }
 }

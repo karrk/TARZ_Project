@@ -70,6 +70,7 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
     #endregion
 
     public int attackCount; // 기믹 ?? 용도?
+    public int specialAttackCount;
     public event Action OnDead;
 
     private void Awake()

@@ -2,7 +2,7 @@ using UnityEngine;
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 
-public class IsWithindash : Conditional
+public class IsWithinDash : BaseCondition
 {
     public SharedGameObject targetObject;   // 타겟 오브젝트
     public SharedGameObject selfObject;     // 자기 자신 오브젝트

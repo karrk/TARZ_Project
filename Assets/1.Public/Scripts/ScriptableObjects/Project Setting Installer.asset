@@ -196,10 +196,13 @@ MonoBehaviour:
       jumpHeight: 0
       jumpDuration: 0
       changeSpeed: 0
+      isGroggyActive: 0
+      pillarStates: 
+      groggyDuration: 0
     RangeMobStat:
       Health: 100
       DamageReducation: 1
-      Damage: 10
+      Damage: 1
       Angle: 0
       AttackRange: 0
       MoveSpeed: 3
@@ -212,10 +215,13 @@ MonoBehaviour:
       jumpHeight: 0
       jumpDuration: 0
       changeSpeed: 0
+      isGroggyActive: 0
+      pillarStates: 
+      groggyDuration: 0
     DogMobStat:
       Health: 70
       DamageReducation: 1
-      Damage: 2
+      Damage: 1
       Angle: 90
       AttackRange: 2
       MoveSpeed: 3
@@ -228,10 +234,13 @@ MonoBehaviour:
       jumpHeight: 0
       jumpDuration: 0
       changeSpeed: 0
+      isGroggyActive: 0
+      pillarStates: 
+      groggyDuration: 0
     JumpMobStat:
       Health: 500
       DamageReducation: 1
-      Damage: 10
+      Damage: 1
       Angle: 90
       AttackRange: 4
       MoveSpeed: 2
@@ -244,10 +253,13 @@ MonoBehaviour:
       jumpHeight: 4
       jumpDuration: 2
       changeSpeed: 0
+      isGroggyActive: 0
+      pillarStates: 
+      groggyDuration: 0
     BombMobStat:
       Health: 400
       DamageReducation: 1
-      Damage: 4
+      Damage: 1
       Angle: 90
       AttackRange: 4
       MoveSpeed: 3
@@ -260,6 +272,9 @@ MonoBehaviour:
       jumpHeight: 0
       jumpDuration: 0
       changeSpeed: 1
+      isGroggyActive: 0
+      pillarStates: 
+      groggyDuration: 0
     BossMobStat:
       Health: 6000
       DamageReducation: 1
@@ -276,6 +291,9 @@ MonoBehaviour:
       jumpHeight: 0
       jumpDuration: 0
       changeSpeed: 0
+      isGroggyActive: 0
+      pillarStates: 
+      groggyDuration: 0
   soundSetting:
     Player:
       Audio: {fileID: 8300000, guid: 93b06c5f714ab124487b47d5edf89cad, type: 3}

@@ -2,13 +2,13 @@ using UnityEngine;
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 
-public class rangedAttack : Action
+public class rangedAttack : BaseAction
 {
-    public SharedInt attackCount;
+    //public SharedInt attackCount;
 
-    private MidBossMonster midBossMonster;
+    //private MidBossMonster midBossMonster;
 
-    public SharedBool isDelay;
+    //public SharedBool isDelay;
 
 
     public override void OnStart()
@@ -24,26 +24,23 @@ public class rangedAttack : Action
 
     public override void OnEnd()
     {
-        // 점프 및 공격 종료 작업
         Debug.Log("원거리 특수 공격 완료");
 
-        // 점프 공격 쿨타임 시작
-        if (midBossMonster != null)
+        if (bossMob != null)
         {
-            midBossMonster.StartCoroutine(StartRangedAttackDelay(midBossMonster));
+            bossMob.StartCoroutine(StartRangedAttackDelay(bossMob));
         }
 
-        //attackCount.Value = 0;
+        //mob.attackCount = 0;
     }
 
     private System.Collections.IEnumerator StartRangedAttackDelay(MidBossMonster monster)
     {
-
-        isDelay.Value = true;
+        mob.Stat.isSpecialAttackDelay = true;
         yield return new WaitForSeconds(monster.RangedAttackDelay);
-        isDelay.Value = false;
+        mob.Stat.isSpecialAttackDelay = false;
         Debug.Log("원거리 특수 공격 쿨타임 종료");
 
-        attackCount.Value = 0;
+        mob.attackCount = 0;
     }
 }
