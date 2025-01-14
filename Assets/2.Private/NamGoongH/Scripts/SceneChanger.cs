@@ -11,8 +11,14 @@ public class SceneChanger : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI sceneNameText; // 다음 씬 이름
 
-    [SerializeField]
-    TextMeshProUGUI progressText; // 로딩 진행도
+    [SerializeField] Animator[] movings;    // 로딩 애니메이션
+    [SerializeField] GameObject[] loadings; // 로딩 애니메이션
+    [SerializeField] Animator[] pings;      // 로딩 애니메이션
+
+    private int SceneNumber = 0;
+
+    //[SerializeField]
+    //TextMeshProUGUI progressText; // 로딩 진행도
 
     private void Start()
     {
@@ -21,6 +27,66 @@ public class SceneChanger : MonoBehaviour
 
         // 씬 로딩 시작
         StartCoroutine(LoadScene());
+    }
+
+    private void OnEnable()
+    {
+        // 다음 씬 이름에서 숫자만 추출
+        SceneNumber = (int)nextScene[nextScene.Length - 1] - 49;
+
+        // 로딩 애니메이션 비활성화
+        foreach (var loading in loadings)
+        {
+            loading.SetActive(false);
+        }
+
+        // "Boss"가 포함된 경우
+        if (nextScene.Contains("Boss"))
+        {
+            Debug.Log("Boss scene detected.");
+            // Boss 씬에 대한 특별한 로직을 여기에 추가
+
+            // 해당 씬 위치의 로딩 애니메이션을 활성화
+            loadings[4].SetActive(true);
+
+            // 로딩 애니메이션 재생
+            for (int i = 0; i < movings.Length; i++)
+            {
+                if (i == 4)
+                {
+                    movings[i].SetTrigger("isActivate");
+                }
+                else if (i < 4)
+                {
+                    movings[i].SetTrigger("isComplete");
+                }
+            }
+
+            // 로딩 애니메이션 재생
+            pings[4].SetTrigger("isActivate");
+
+            return;
+        }
+
+        // 해당 씬 위치의 로딩 애니메이션을 활성화
+        loadings[SceneNumber].SetActive(true);
+
+        // 로딩 애니메이션 재생
+        for (int i = 0; i < movings.Length; i++)
+        {
+            if (i == SceneNumber)
+            {
+                movings[i].SetTrigger("isActivate");
+            }
+            else if (i < SceneNumber)
+            {
+                movings[i].SetTrigger("isComplete");
+            }
+        }
+
+        // 로딩 애니메이션 재생
+        pings[SceneNumber].SetTrigger("isActivate");
+
     }
 
     /// <summary>
@@ -55,7 +121,7 @@ public class SceneChanger : MonoBehaviour
                 float progress = Mathf.Lerp(0, op.progress, timer) * 100;
 
                 // 로딩 진행도 표시
-                progressText.text = $"Loading {progress:F0}%";
+                //progressText.text = $"Loading {progress:F0}%";
 
                 if (progress >= op.progress * 100)
                 {
@@ -68,10 +134,13 @@ public class SceneChanger : MonoBehaviour
                 float progress = Mathf.Lerp(0, 1f, timer) * 100;
 
                 // 로딩 진행도 표시
-                progressText.text = $"Loading {progress:F0}%";
+                //progressText.text = $"Loading {progress:F0}%";
 
                 if (progress >= 100f)
                 {
+                    // 1초 대기
+                    yield return new WaitForSeconds(1.0f);
+                    
                     // 씬 활성화
                     op.allowSceneActivation = true;
                     yield break;
