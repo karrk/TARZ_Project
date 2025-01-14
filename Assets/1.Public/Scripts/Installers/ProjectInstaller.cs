@@ -19,9 +19,9 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
 
     private void InstallMisc()
     {
-        SoundSource soundSources = new SoundSource();
-        soundSources.AddSources().SetupSettings().SetParent(this.transform);
-        Container.Bind<SoundSource>().AsSingle().NonLazy();
+        //SoundSource soundSources = new SoundSource();
+        //soundSources.AddSources().SetupSettings().SetParent(this.transform);
+        //Container.Bind<SoundSource>().AsSingle().NonLazy();
 
         Container.Bind<CoroutineHelper>().FromNewComponentOnRoot().AsSingle().NonLazy();
         Container.Bind<GarbageQueue>().AsSingle();
@@ -52,7 +52,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
 
         Container.BindInterfacesAndSelfTo<InputManager>().AsSingle().NonLazy();
 
-        Container.Bind<SoundManager>().FromComponentInNewPrefab(prefabs.SoundManager).AsSingle().NonLazy();
+        //Container.Bind<SoundManager>().FromComponentInNewPrefab(prefabs.SoundManager).AsSingle().NonLazy();
     }
 
     private void InstallInventory()

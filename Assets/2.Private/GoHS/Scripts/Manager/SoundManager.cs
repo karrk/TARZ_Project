@@ -4,6 +4,8 @@ using System.Xml.Serialization;
 using UnityEngine;
 using Zenject;
 using UnityEngine.SceneManagement;
+using Cysharp.Threading.Tasks;
+using Unity.VisualScripting;
 
 public class SoundManager : MonoBehaviour
 {
@@ -13,16 +15,26 @@ public class SoundManager : MonoBehaviour
     [SerializeField] AudioSource bgm;
     [SerializeField] AudioSource sfx;
 
-    private void OnEnable()
+    private void Awake()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    private async void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Log(scene.buildIndex);
+
+        if (scene.buildIndex == 4)
+            return;
+
+        await UniTask.WaitUntil(() => transform.IsDestroyed() == false);
+
         switch (scene.buildIndex) 
         {
+            case 1:
+                PlayBGM(soundSetting.Player.Audio);
+                break;
+
             case 2:
                 PlayBGM(soundSetting.Player.Audio);
                 break;

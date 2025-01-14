@@ -49,7 +49,7 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
     [Inject] private ProjectInstaller.SoundSetting soundSetting;
     public ProjectInstaller.SoundSetting SoundSetting => soundSetting;
 
-    [Inject] [SerializeField] public SoundManager SoundManager;
+    //[Inject] [SerializeField] public SoundManager SoundManager;
 
     // 상태들 추가해주기
     protected BaseState[] states = new BaseState[(int)E_State.Size];
@@ -223,19 +223,19 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
         input.PlayerAction.Move.performed += Move;
         input.PlayerAction.Move.canceled += MoveCanceled;
 
-        input.PlayerAction.Fire.performed += (_) => { Fire(); };
+        input.PlayerAction.Fire.performed += Fire;
 
-        input.PlayerAction.Drain.started += (_) => { Drain(); };
-        input.PlayerAction.Drain.canceled += (_)=> { StopDrain(); };
+        input.PlayerAction.Drain.started += Drain;
+        input.PlayerAction.Drain.canceled += StopDrain;
 
-        input.PlayerAction.Skill.performed += (_) => { UseLongRangeSkill(); };
+        input.PlayerAction.Skill.performed += UseLongRangeSkill;
 
-        input.PlayerAction.Dash.performed += (_) => { Dash(); };
+        input.PlayerAction.Dash.performed += Dash;
 
-        input.PlayerAction.Jump.performed += (_) => { Jump(); };
+        input.PlayerAction.Jump.performed += Jump;
 
-        input.PlayerAction.Melee1.performed += (_) => { MeleeSkill_1(); };
-        input.PlayerAction.Melee2.performed += (_) => { MeleeSkill_2(); };
+        input.PlayerAction.Melee1.performed += MeleeSkill_1;
+        input.PlayerAction.Melee2.performed += MeleeSkill_2;
 
         states[(int)curState].Enter();
         //inputManager.OnControlledLeftStick += Move;
@@ -285,7 +285,7 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
         }
     }
 
-    private void Jump()
+    private void Jump(InputAction.CallbackContext obj)
     {
         //if (IsGrounded == false || skillManager.UseStamina(setting.JumpSetting.UseStamina) == false)
         if (IsGrounded == false || stats.UseStamina(setting.JumpSetting.UseStamina) == false)
@@ -299,7 +299,7 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
         CheckGroundRoutine = StartCoroutine(CheckGround());
     }
 
-    private void Fire()
+    private void Fire(InputAction.CallbackContext obj)
     {
         if (curState == E_State.Dash)
         {
@@ -319,7 +319,7 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
     /// <summary>
     /// 드레인 실행 함수
     /// </summary>
-    private void Drain()
+    private void Drain(InputAction.CallbackContext obj)
     {
         if (curState == E_State.Idle || curState == E_State.Move || curState == E_State.LongRangeAttack)
         {
@@ -333,7 +333,7 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
     /// <summary>
     /// 드레인 멈춤 함수
     /// </summary>
-    private void StopDrain()
+    private void StopDrain(InputAction.CallbackContext obj)
     {
         stats.SetForceStopUseStamina();
         drainState.StopDrain();
@@ -342,7 +342,7 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
     /// <summary>
     /// 대쉬 사용 함수
     /// </summary>
-    private void Dash()
+    private void Dash(InputAction.CallbackContext obj)
     {
         if (IsGrounded == false)
             return;
@@ -360,7 +360,7 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
     /// <summary>
     /// 원거리 스킬 사용 함수
     /// </summary>
-    private void UseLongRangeSkill()
+    private void UseLongRangeSkill(InputAction.CallbackContext obj)
     {
         if (curState == E_State.Idle || curState == E_State.Move || curState == E_State.LongRangeAttack)
         {
@@ -395,7 +395,7 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
 
     }
 
-    private void MeleeSkill_1()
+    private void MeleeSkill_1(InputAction.CallbackContext obj)
     {
         // TODO : 스킬을 사용할 수 있는 조건을 여기에 달아야 할까? 우선적으로 생각중
         if(meleeSkill_1State.CanSkill == true)
@@ -408,7 +408,7 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
         }
     }
 
-    private void MeleeSkill_2()
+    private void MeleeSkill_2(InputAction.CallbackContext obj)
     {
         if(meleeSkill_2State.CanSkill == true)
         {

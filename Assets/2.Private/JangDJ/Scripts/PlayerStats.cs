@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Zenject;
 
 // 프로젝트 컨텍스트 - 씬 전환시에도 상태를 유지시키기 위함
@@ -10,7 +11,7 @@ public class PlayerStats : IInitializable, ITickable
     [Inject] private ProjectInstaller.PlayerSettings setting;
     [Inject] private ProjectInstaller.PlayerBaseStats baseStat;
     private ProjectInstaller.PlayerBaseStats equipStats = new ProjectInstaller.PlayerBaseStats();
-    [Inject] private SoundManager soundManager;
+    
     //[Inject] private PlayerEquipment equips;
     [Inject] private CoroutineHelper helper;
 
@@ -242,7 +243,7 @@ public class PlayerStats : IInitializable, ITickable
         forceStopUseStamina = true;
     }
 
-    public async void UseStamina(float needValue, Action endAction)
+    public async void UseStamina(float needValue, Action<InputAction.CallbackContext> endAction)
     {
         usedStamina = true;
         forceStopUseStamina = false;
@@ -255,7 +256,7 @@ public class PlayerStats : IInitializable, ITickable
         helper.StartCoroutine(StaminaChargeRoutine());
     }
 
-    private async UniTask UseStaminaRoutine(float value, Action endAction)
+    private async UniTask UseStaminaRoutine(float value, Action<InputAction.CallbackContext> endAction)
     {
         float needStamina = value * Time.deltaTime;
 
@@ -273,7 +274,7 @@ public class PlayerStats : IInitializable, ITickable
 
         if(forceStopUseStamina == false)
         {
-            endAction.Invoke();
+            endAction.Invoke(new InputAction.CallbackContext());
         }
 
         usedStamina = false;
@@ -354,12 +355,7 @@ public class PlayerStats : IInitializable, ITickable
     {
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
-            this.SwitchBGM = true;
 
-            if(this.SwitchBGM)
-            {
-                soundManager.PlayBGM(soundManager.SoundSetting.Player.Audio);
-            }
         }
     }
 }

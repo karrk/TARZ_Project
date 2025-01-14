@@ -199,6 +199,10 @@ MonoBehaviour:
       isGroggyActive: 0
       pillarStates: 
       groggyDuration: 0
+      isGimmickActive: 0
+      pillarSpawnRadius: 0
+      halfHealth: 0
+      isSpecialAttackDelay: 0
     RangeMobStat:
       Health: 100
       DamageReducation: 1
@@ -218,6 +222,10 @@ MonoBehaviour:
       isGroggyActive: 0
       pillarStates: 
       groggyDuration: 0
+      isGimmickActive: 0
+      pillarSpawnRadius: 0
+      halfHealth: 0
+      isSpecialAttackDelay: 0
     DogMobStat:
       Health: 70
       DamageReducation: 1
@@ -237,6 +245,10 @@ MonoBehaviour:
       isGroggyActive: 0
       pillarStates: 
       groggyDuration: 0
+      isGimmickActive: 0
+      pillarSpawnRadius: 0
+      halfHealth: 0
+      isSpecialAttackDelay: 0
     JumpMobStat:
       Health: 500
       DamageReducation: 1
@@ -256,6 +268,10 @@ MonoBehaviour:
       isGroggyActive: 0
       pillarStates: 
       groggyDuration: 0
+      isGimmickActive: 0
+      pillarSpawnRadius: 0
+      halfHealth: 0
+      isSpecialAttackDelay: 0
     BombMobStat:
       Health: 400
       DamageReducation: 1
@@ -275,6 +291,10 @@ MonoBehaviour:
       isGroggyActive: 0
       pillarStates: 
       groggyDuration: 0
+      isGimmickActive: 0
+      pillarSpawnRadius: 0
+      halfHealth: 0
+      isSpecialAttackDelay: 0
     BossMobStat:
       Health: 6000
       DamageReducation: 1
@@ -294,6 +314,10 @@ MonoBehaviour:
       isGroggyActive: 0
       pillarStates: 
       groggyDuration: 0
+      isGimmickActive: 0
+      pillarSpawnRadius: 0
+      halfHealth: 0
+      isSpecialAttackDelay: 0
   soundSetting:
     Player:
-      Audio: {fileID: 8300000, guid: 93b06c5f714ab124487b47d5edf89cad, type: 3}
+      Audio: {fileID: 8300000, guid: 27df013357e3db6459d1c2775374af36, type: 3}
