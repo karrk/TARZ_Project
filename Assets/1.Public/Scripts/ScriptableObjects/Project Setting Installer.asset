@@ -85,7 +85,7 @@ MonoBehaviour:
   camSetting:
     Height: 3
     Dist: -7.5
-    RotationSpeed: 2
+    RotationSpeed: 1.5
     SmoothSpeed: 0.125
   lockOnSetting:
     targetLayer:
@@ -110,7 +110,7 @@ MonoBehaviour:
       BasicPower: 1
     JumpSetting:
       JumpPower: 5
-      UseStamina: 30
+      UseStamina: 0
     DashSetting:
       DashTime: 0.3
       DashSpeed: 15
@@ -280,4 +280,4 @@ MonoBehaviour:
       changeSpeed: 0
   soundSetting:
     Player:
-      Audio: {fileID: 0}
+      Audio: {fileID: 8300000, guid: 93b06c5f714ab124487b47d5edf89cad, type: 3}

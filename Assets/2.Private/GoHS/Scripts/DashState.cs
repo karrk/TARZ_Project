@@ -28,7 +28,7 @@ public class DashState : BaseState
         forward.Normalize();
         right.Normalize();
 
-        dashDirection = (forward * player.InputZ) + (right * player.InputX).normalized;
+        dashDirection = (forward * player.InputZ) + (right * player.InputX);
 
         // 입력이 없으면 마지막 바라보는 방향으로 대쉬
         if (dashDirection == Vector3.zero)
