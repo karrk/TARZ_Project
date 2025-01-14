@@ -1,11 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class PassiveShopManager : MonoBehaviour
 {
+
+    [Inject]
+    LobbyData lobbyData;
     public PassiveSlotGroup[] slotGroup;
-    [SerializeField] PassiveCSVParser csvParser;
+  
+  
+
     private void Awake()
     {
         slotGroup = GetComponentsInChildren<PassiveSlotGroup>(true);
@@ -13,9 +19,27 @@ public class PassiveShopManager : MonoBehaviour
 
     private void Start()
     {
-        foreach(var p in csvParser.passives)
+        SetSlotInfo();
+
+    }
+
+    void SetSlotInfo()
+    {
+        int num = 0;
+        for (int i = 0; i < slotGroup.Length; i++)
         {
-            Debug.Log(p.id);
+            for (int j = 0; j < slotGroup[i].slots.Length; j++)
+            {
+                slotGroup[i].slots[j].SetInfo(lobbyData.passives[num]);
+               
+                num++;
+            }
         }
+
+        foreach (PassiveSlotGroup group in slotGroup)
+        {
+            group.SetLock();
+        }
+
     }
 }

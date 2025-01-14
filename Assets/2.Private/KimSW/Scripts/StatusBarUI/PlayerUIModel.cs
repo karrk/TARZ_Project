@@ -39,6 +39,6 @@ public class PlayerUIModel : IInitializable
 
     public void RollingValue()
     {
-        DOVirtual.Int(CurrentEXP.Value, TargetEXP.Value, 0.3f, (x) => { CurrentEXP.Value = x;  });
+        DOVirtual.Int(CurrentEXP.Value, TargetEXP.Value, 0.3f, (x) => { CurrentEXP.Value = x;  }).SetUpdate(true);
     }
 }
