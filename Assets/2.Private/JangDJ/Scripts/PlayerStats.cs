@@ -9,9 +9,12 @@ public class PlayerStats : IInitializable, ITickable
 {
     [Inject] private ProjectInstaller.PlayerSettings setting;
     [Inject] private ProjectInstaller.PlayerBaseStats baseStat;
+    private ProjectInstaller.PlayerBaseStats equipStats = new ProjectInstaller.PlayerBaseStats();
     [Inject] private SoundManager soundManager;
-    [Inject] private PlayerEquipment equips;
+    //[Inject] private PlayerEquipment equips;
     [Inject] private CoroutineHelper helper;
+
+    [Inject] private StaticEquipment newEquips;
 
     public event Action<float> OnChangedCurMana;
     public event Action<float> OnChangedMaxHP;
@@ -24,24 +27,26 @@ public class PlayerStats : IInitializable, ITickable
     // 장비 정보를 담는 클래스 객체
     // hp 는 캐릭터에서 한번 긁어간다.
 
-    public float Atk { get; private set; }
+    public float Atk => baseStat.AttackPower + equipStats.AttackPower * 0.1f;
 
     private float throwCapacity;
     public float ThrowCapacity => throwCapacity;
 
     private float maxMana;
     public float CurMana { get; private set; }
-    private float manaAbsorption;
+    private float ManaAbsorption => baseStat.ManaAbsorption + equipStats.ManaAbsorption;
 
     private float staminaRecoveryRate;
-    private float maxStamina;
-    public float MaxStamina => maxStamina;
+    private float maxStamina => baseStat.MaxStamina + equipStats.MaxStamina;
+    public float MaxStamina => baseStat.MaxStamina + equipStats.MaxStamina;
     private float curStamina;
     public float CurStamina => curStamina;
 
     public float CurHealth { get; private set; }
-    public float MaxHealth { get; private set; }
-    public float MovementSpeed { get; private set; }
+    public float MaxHealth => baseStat.MaxHealth + equipStats.MaxHealth;
+    public float MovementSpeed => baseStat.MovementSpeed + equipStats.MovementSpeed * 0.01f;
+
+    public float AtkSpeed => baseStat.AttackSpeed + equipStats.AttackSpeed;
 
     private int removeCount;
 
@@ -97,27 +102,65 @@ public class PlayerStats : IInitializable, ITickable
     {
         maxMana = setting.BasicSetting.MaxMana;
         CurMana = 0;
-        manaAbsorption = baseStat.ManaAbsorption;
-        maxStamina = baseStat.MaxStamina;
         staminaRecoveryRate = baseStat.StaminaRecoveryRate;
         throwCapacity = baseStat.ThrowableItemCapacity;
-        Atk = baseStat.AttackPower;
-        MaxHealth = baseStat.MaxHealth;
         CurHealth = MaxHealth;
-        MovementSpeed = baseStat.MovementSpeed;
 
-        equips.AddActionOnChangedEquip(E_StatType.ManaAbsorption, UpdateManaAbsorption);
-        equips.AddActionOnChangedEquip(E_StatType.MaxStamina, UpdateMaxStamina);
-        equips.AddActionOnChangedEquip(E_StatType.ThrowableItemCapacity, UpdateGarbageCapacity);
-        equips.AddActionOnChangedEquip(E_StatType.AttackPower, UpdateAttackPower);
-        equips.AddActionOnChangedEquip(E_StatType.MaxHealth, UpdateMaxHP);
-        equips.AddActionOnChangedEquip(E_StatType.MovementSpeed, UpdateMovementSpeed);
+        newEquips.OnChangedEquip += RenewalStats;
+
+    }
+
+    public void RenewalStats()
+    {
+        var equips = newEquips.manager.equipped;
+
+        foreach (var item in equips)
+        {
+            switch (item.optionType)
+            {
+                case OptionType.MOVESPD:
+                    equipStats.MovementSpeed = item.optionValue;
+                    Debug.Log($"추가이속 {item.optionValue}");
+                    break;
+                case OptionType.ATK:
+                    equipStats.AttackPower = item.optionValue;
+                    Debug.Log($"추가공격력 {item.optionValue}");
+                    break;
+                case OptionType.ATKSPD:
+                    equipStats.AttackSpeed = item.optionValue;
+                    break;
+                case OptionType.HP:
+                    equipStats.MaxHealth = item.optionValue;
+                    Debug.Log($"추가체력 {item.optionValue}");
+                    OnChangedMaxHP(equipStats.MaxHealth + baseStat.MaxHealth);
+                    OnChangedCurHP(CurHealth);
+                    break;
+                case OptionType.INVENTORY:
+                    equipStats.ThrowableItemCapacity = (int)item.optionValue;
+                    Debug.Log($"추가인벤 {item.optionValue}");
+                    OnChangedMaxThrowCount?.Invoke(baseStat.ThrowableItemCapacity + equipStats.ThrowableItemCapacity);
+                    break;
+                case OptionType.GAUGEINC:
+                    equipStats.ManaAbsorption = item.optionValue;
+                    Debug.Log($"추가마나 {item.optionValue}");
+                    break;
+                case OptionType.STAMINA:
+                    equipStats.MaxStamina = item.optionValue;
+                    Debug.Log($"추가스테 {item.optionValue}");
+                    OnChangedMaxStamina(equipStats.MaxStamina + baseStat.MaxStamina);
+                    break;
+                case OptionType.LUCK:
+                    equipStats.Luck = item.optionValue;
+                    Debug.Log($"추가럭 {item.optionValue}");
+                    break;
+            }
+        }
     }
 
     /// <summary>
     /// 씬전환시 각 수치를 갱신하기 위한 함수
     /// </summary>
-    public void RenewalStat()
+    public void SceneChangedFunction()
     {
         UseStamina(-0.1f);
         AddHP(0);
@@ -125,11 +168,6 @@ public class PlayerStats : IInitializable, ITickable
     }
 
     #region 이속
-
-    private void UpdateMovementSpeed()
-    {
-        MovementSpeed = baseStat.MovementSpeed + equips.GetStat(E_StatType.MovementSpeed);
-    }
 
     #endregion
 
@@ -149,19 +187,10 @@ public class PlayerStats : IInitializable, ITickable
         return false;
     }
 
-    private void UpdateMaxHP()
-    {
-        this.MaxHealth = baseStat.MaxHealth + equips.GetStat(E_StatType.MaxHealth);
-    }
-
     #endregion
 
     #region 기본 공격력
 
-    private void UpdateAttackPower()
-    {
-        this.Atk = baseStat.AttackPower + equips.GetStat(E_StatType.AttackPower);
-    }
 
     #endregion
 
@@ -169,7 +198,7 @@ public class PlayerStats : IInitializable, ITickable
 
     private void UpdateGarbageCapacity()
     {
-        throwCapacity = baseStat.ThrowableItemCapacity + equips.GetStat(E_StatType.ThrowableItemCapacity);
+        throwCapacity = baseStat.ThrowableItemCapacity + equipStats.ThrowableItemCapacity;
     }
 
     public void UpdateGarbageCount(float count)
@@ -267,12 +296,6 @@ public class PlayerStats : IInitializable, ITickable
         }
     }
 
-    private void UpdateMaxStamina()
-    {
-        this.maxStamina = baseStat.MaxStamina + equips.GetStat(E_StatType.MaxStamina);
-    }
-
-
     #endregion
 
     #region 스킬, 마나 관련
@@ -318,15 +341,9 @@ public class PlayerStats : IInitializable, ITickable
     public void ChargeMana()
     {
         CurMana = Math.Clamp
-            (CurMana + manaAbsorption, 0, maxMana);
+            (CurMana + ManaAbsorption, 0, maxMana);
         OnChangedCurMana?.Invoke(CurMana);
     }
-
-    private void UpdateManaAbsorption()
-    {
-        manaAbsorption = baseStat.ManaAbsorption + equips.GetStat(E_StatType.ManaAbsorption);
-    }
-
 
 
 

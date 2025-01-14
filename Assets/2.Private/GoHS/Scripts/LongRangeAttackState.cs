@@ -24,6 +24,8 @@ public class LongRangeAttackState : BaseState
         if (usedJumpAttack == true)
             return;
 
+        player.Refernece.Animator.speed = player.stats.AtkSpeed;
+
         AlignCamForward();
 
         stateDelayTimer = player.Setting.longRangeSetting.stateDelayTimer;
@@ -196,6 +198,7 @@ public class LongRangeAttackState : BaseState
     {
 
         player.Refernece.Animator.SetBool("LongRangeAttack", false);
+        player.Refernece.Animator.speed = 1;
 
     }
 

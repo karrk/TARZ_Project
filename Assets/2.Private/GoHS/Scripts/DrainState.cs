@@ -100,7 +100,7 @@ public class DrainState : BaseState
 
             if (Vector3.Dot(direction.normalized, player.transform.forward) > GetAngle(player.Setting.DrainSetting.ViewAngle / 2).z)
             {
-                Debug.Log(GetAngle(player.Setting.DrainSetting.ViewAngle / 2).z);
+                //Debug.Log(GetAngle(player.Setting.DrainSetting.ViewAngle / 2).z);
                 Targets.Add(target);
 
                 IDrainable drainable = target.GetComponent<IDrainable>();
