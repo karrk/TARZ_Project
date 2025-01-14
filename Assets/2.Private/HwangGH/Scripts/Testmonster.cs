@@ -5,7 +5,7 @@ using UnityEngine;
 public class Testmonster : MonoBehaviour
 {
     public ParticleSystem target;
-    Tester effect;
+    //Tester effect;
 
     private void Start()
     {
