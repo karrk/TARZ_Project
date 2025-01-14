@@ -249,7 +249,7 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
         GameObject projectile = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
 
         // 투사체 발사 방향 계산
-        Vector3 direction = (target.transform.position - transform.position).normalized;
+        Vector3 direction = (target.transform.position - firePoint.position).normalized;
 
         // Rigidbody 컴포넌트를 가져와 힘을 가함
         Rigidbody rb = projectile.GetComponent<Rigidbody>();

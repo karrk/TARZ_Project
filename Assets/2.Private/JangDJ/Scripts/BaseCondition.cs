@@ -19,5 +19,6 @@ public abstract class BaseCondition : Conditional
         my.SetValue(this.gameObject);
         mob = my.Value.GetComponent<BaseMonster>();
         jumpMob = my.Value.GetComponent<EliteMonster1>();
+        bossMob = my.Value.GetComponent<MidBossMonster>();
     }
 }

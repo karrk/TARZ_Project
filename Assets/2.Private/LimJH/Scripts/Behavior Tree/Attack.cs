@@ -45,7 +45,7 @@ public class Attack : BaseAction
         while (mob.Reference.Anim != null)
         {
             AnimatorStateInfo stateInfo = mob.Reference.Anim.GetCurrentAnimatorStateInfo(0);
-            if (stateInfo.IsName("Jake_Attack") && stateInfo.normalizedTime >= 1.0f)
+            if (stateInfo.IsName("Boss_Attack") && stateInfo.normalizedTime >= 1.0f)
             {
                 break;
             }
