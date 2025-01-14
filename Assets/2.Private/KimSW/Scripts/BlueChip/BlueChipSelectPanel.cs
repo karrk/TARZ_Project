@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -9,7 +10,17 @@ public class BlueChipSelectPanel : MonoBehaviour, IOpenCloseMenu
 {
     [Inject]
     InGameUI inGameUI;
+
+   
     [SerializeField] Button selectedButton;
+
+    [SerializeField] Image beforeSprite;
+    [SerializeField] TMP_Text beforeBluechipName;
+    [SerializeField] TMP_Text beforeBluechipExplain;
+
+    [SerializeField] Image afterSprite;
+    [SerializeField] TMP_Text afterBluechipName;
+    [SerializeField] TMP_Text afterBluechipExplain;
 
     public InteractBlueChip chip;
 
@@ -33,8 +44,20 @@ public class BlueChipSelectPanel : MonoBehaviour, IOpenCloseMenu
 
 
     }
+
+    public void SetInfo(BlueChip beforeChip, BlueChip afterChip)
+    {
+        afterBluechipName.text = afterChip.blueChipName;
+        afterBluechipExplain.text = afterChip.description;
+
+        beforeBluechipName.text = beforeChip.blueChipName;
+        beforeBluechipExplain.text = beforeChip.description;
+    }
+
+
     public void ChangeButton()
     {
+        chip.ChangeChip();
         CloseUIPanel();
     }
 

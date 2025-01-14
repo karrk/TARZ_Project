@@ -61,6 +61,8 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         Container.BindInterfacesAndSelfTo<PlayerEquipment>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<PlayerStats>().AsSingle().NonLazy();
         Container.Bind<StaticEquipment>().FromComponentInNewPrefab(prefabs.staticEquipment).AsSingle().NonLazy();
+        Container.Bind<StaticBluechip>().FromComponentInNewPrefab(prefabs.staticBluechip).AsSingle().NonLazy();
+        Container.Bind<LobbyData>().FromComponentInNewPrefab(prefabs.staticLobbyData).AsSingle().NonLazy();
     }
 
     [Serializable]
@@ -271,6 +273,8 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         public GameObject Player;
         public GameObject SoundManager;
         public GameObject staticEquipment;
+        public GameObject staticBluechip;
+        public GameObject staticLobbyData;
     }
 
     [Serializable]
