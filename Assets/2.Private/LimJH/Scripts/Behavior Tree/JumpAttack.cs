@@ -66,7 +66,7 @@ public class JumpAttack : BaseAction
 
         if (progress > 0 && progress <= 0.1)
         {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(init.x + 1,init.y,init.z), Time.deltaTime * 100);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(init.x + 5,init.y,init.z), Time.deltaTime * 100);
         }
 
         // 점프 곡선 (포물선 형태)

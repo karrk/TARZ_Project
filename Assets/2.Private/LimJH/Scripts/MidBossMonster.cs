@@ -8,17 +8,9 @@ public class MidBossMonster : BaseMonster
     public float RangedAttackDelay;
     public float DashAttackDelay;
 
-    public float halfHealth;                  // 최대 체력의 절반 값
-
     private void Start()
     {
-        //halfHealth = base.health / 2;         // 최대 체력의 절반 계산
-
-        // behaviorTree에 halfHealth 값을 설정
-        //if (behaviorTree != null && behaviorTree.GetVariable("halfHealth") != null)
-        //{
-        //    behaviorTree.SetVariableValue("halfHealth", halfHealth);
-        //}
+        this.Stat.halfHealth = base.Stat.Health / 2;
     }
 
     protected override void Update()
@@ -29,7 +21,7 @@ public class MidBossMonster : BaseMonster
         if (Input.GetKeyDown(KeyCode.Space))
         {
             //TakeDamage(1);
-            TakeHit(1);
+            TakeHit(1000);
         }
 
         // 피해 감소를 적용할 때 체력이 절반 이하로 떨어지면 피해 감소를 90%로 적용

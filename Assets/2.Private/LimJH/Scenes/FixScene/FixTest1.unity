@@ -1162,7 +1162,11 @@ MonoBehaviour:
     jumpHeight: 0
     jumpDuration: 0
     changeSpeed: 0
+    isGroggyActive: 0
+    pillarStates: 
+    groggyDuration: 0
   type: -1
+  player: {fileID: 0}
   reference:
     Anim: {fileID: 0}
     Coll: {fileID: 0}
