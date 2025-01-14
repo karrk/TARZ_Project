@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class Tester : MonoBehaviour
 {
-    public SpawnEffect spawnEffect;
+    public EffectDestroy spawnEffect;
 
-    private void Awake()
+    private void Start()
     {
-        spawnEffect = GetComponent<SpawnEffect>();
-    }
-
-    private void Update()
-    {
-        // spawnEffect.SpawnDefaultEffect();
+        Instantiate(spawnEffect);
     }
 }

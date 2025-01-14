@@ -285,7 +285,7 @@ PrefabInstance:
     - target: {fileID: 8978218563401471887, guid: 35f6643c69d705a488ece60209e4e104,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.5
+      value: -18.56
       objectReference: {fileID: 0}
     - target: {fileID: 8978218563401471887, guid: 35f6643c69d705a488ece60209e4e104,
         type: 3}
@@ -10078,6 +10078,8 @@ MonoBehaviour:
   markerPrefab: {fileID: 4714070860029359875, guid: f108ad7a309762c488e48290e0c288b1,
     type: 3}
   markerTransform: {fileID: 4641623034491320932}
+  skillCountText: {fileID: 0}
+  effect: {fileID: 0}
 --- !u!222 &2841461327116134127
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -28426,6 +28428,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedButton: {fileID: 1068081022450940045}
+  exitChoiceButton: {fileID: 0}
+  exitChoicePanel: {fileID: 0}
 --- !u!224 &7865777587672835224
 RectTransform:
   m_ObjectHideFlags: 0
@@ -30669,6 +30673,9 @@ MonoBehaviour:
     MaxRotateTime: 0
     StopDist: 0
     canJumpAttack: 0
+    jumpHeight: 0
+    jumpDuration: 0
+    changeSpeed: 0
   type: -1
   reference:
     Anim: {fileID: 0}
