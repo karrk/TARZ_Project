@@ -44,10 +44,8 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
     [Inject] private ProjectInstaller.PlayerSettings setting;
     public ProjectInstaller.PlayerSettings Setting => setting;
     
-
-
-    [Inject] private ProjectInstaller.SoundSetting soundSetting;
-    public ProjectInstaller.SoundSetting SoundSetting => soundSetting;
+    //[Inject] private ProjectInstaller.SoundSetting soundSetting;
+    //public ProjectInstaller.SoundSetting SoundSetting => soundSetting;
 
     //[Inject] [SerializeField] public SoundManager SoundManager;
 
@@ -88,7 +86,6 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
 
     [SerializeField] private float groundBoxHeight;
 
-    [Inject] private InputManager inputManager;
     [Inject] public PlayerStats stats { get; private set; }
     [Inject] private Shooter shooter;
     [Inject] private SignalBus signal;
@@ -214,6 +211,26 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
     }
 
     private PlayerInputAction input;
+
+    private void OnDisable()
+    {
+        input.PlayerAction.Move.performed -= Move;
+        input.PlayerAction.Move.canceled -= MoveCanceled;
+
+        input.PlayerAction.Fire.performed -= Fire;
+
+        input.PlayerAction.Drain.started -= Drain;
+        input.PlayerAction.Drain.canceled -= StopDrain;
+
+        input.PlayerAction.Skill.performed -= UseLongRangeSkill;
+
+        input.PlayerAction.Dash.performed -= Dash;
+
+        input.PlayerAction.Jump.performed -= Jump;
+
+        input.PlayerAction.Melee1.performed -= MeleeSkill_1;
+        input.PlayerAction.Melee2.performed -= MeleeSkill_2;
+    }
 
     private void Start()
     {

@@ -16,9 +16,6 @@ public class TestInput : MonoBehaviour
     PlayerUIModel playerModel;
 
     [Inject]
-    InputManager inputManager;
-
-    [Inject]
     PoolManager poolManager;
 
     public InputActionReference cancelRef;
