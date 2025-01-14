@@ -9,7 +9,7 @@ public class StageController : IInitializable
 
     public void Initialize()
     {
-        playerStats.RenewalStat();
+        playerStats.SceneChangedFunction();
         
     }
 }

@@ -29,6 +29,8 @@ public class EquipmentManager : MonoBehaviour
     List<NewEquipment> getEquipmentList = new List<NewEquipment>();
     private void Start()
     {
+        staticEquipment.manager = this;
+
         SetInteract();
 
         LoadEquipment();
@@ -37,6 +39,8 @@ public class EquipmentManager : MonoBehaviour
 
     private void OnDestroy()
     {
+        staticEquipment.manager = null;
+
         SaveEquipment();
     }
 
@@ -144,7 +148,7 @@ public class EquipmentManager : MonoBehaviour
                     newEquipments.Remove(newEquipment);
                 }
                 inGameUI.EquipmentSelectPanel.LevelUpSlot(i, equippedLevel[i]);
-
+                staticEquipment.InvokeOnChangedEq();
                 return;
             }
             // 높은 등급의 아이템이 왔을때 교체 되도록
@@ -162,7 +166,7 @@ public class EquipmentManager : MonoBehaviour
 
                 inGameUI.EquipmentSelectPanel.ChangeSlot(i);
                 inGameUI.EquipmentSelectPanel.LevelUpSlot(i, equippedLevel[i]);
-
+                staticEquipment.InvokeOnChangedEq();
                 return;
             }
 
@@ -188,8 +192,7 @@ public class EquipmentManager : MonoBehaviour
             EquippedFullSizeCheck();
         }
 
-
-        
+        staticEquipment.InvokeOnChangedEq();
     }
 
 
@@ -212,27 +215,14 @@ public class EquipmentManager : MonoBehaviour
     {
         this.UpdateAsObservable()
      .Where(x => interactEquipments.Count > 0)
+     .Where(x=>inGameUI.CurrentMenu.Equals(inGameUI.StatusBarPanel))
      .Subscribe(x =>
      {
-         if (inGameUI.CurrentMenu.Equals(inGameUI.InGameMenuPanel))
-         {
-
-             return;
-         }
-         if (inGameUI.CurrentMenu.Equals(inGameUI.OptionPanel))
-         {
-
-             return;
-         }
-         if (inGameUI.CurrentMenu.Equals(inGameUI.MenualPanel))
-         {
-
-             return;
-         }
+        
 
          inGameUI.EquipmentGetPanel.gameObject.SetActive(true);
 
-
+         // 뉴 인풋 시스템으로 변경
          if (Input.GetKeyDown(KeyCode.F))
          {
            

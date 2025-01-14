@@ -12,6 +12,8 @@ public class JumpAttack : BaseAction
     {
         base.OnStart();
 
+        init = transform.rotation.eulerAngles;
+        
         if (mob == null)
         {
             Debug.LogWarning("몬스터가 존재하지 않습니다.");
@@ -27,7 +29,15 @@ public class JumpAttack : BaseAction
         //                              transform.position.y + mob.Stat.jumpHeight,
         //                              mob.PlayerPos.z);
 
-                                     targetPosition = mob.PlayerPos;
+        targetPosition = mob.PlayerPos;
+
+        /*// 충돌 방지 설정
+        Collider mobCollider = mob.GetComponent<Collider>();
+        Collider playerCollider = mob.player.GetComponent<Collider>();
+        if (mobCollider != null && playerCollider != null)
+        {
+            Physics.IgnoreCollision(mobCollider, playerCollider, true); // 충돌 비활성화
+        }*/
 
         // 점프 애니메이션 트리거 추가 가능
         Debug.Log("점프 시작!");
@@ -38,6 +48,9 @@ public class JumpAttack : BaseAction
             mob.Stat.canJumpAttack = false; // 점프 공격 비활성화
         }
     }
+
+    Vector3 temp;
+    Vector3 init;
 
     public override TaskStatus OnUpdate()
     {
@@ -51,6 +64,11 @@ public class JumpAttack : BaseAction
         elapsedTime += Time.deltaTime;
         float progress = elapsedTime / mob.Stat.jumpDuration;
 
+        if (progress > 0 && progress <= 0.1)
+        {
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(init.x + 1,init.y,init.z), Time.deltaTime * 100);
+        }
+
         // 점프 곡선 (포물선 형태)
         Vector3 currentPosition = Vector3.Lerp(startPosition, targetPosition, progress);
         currentPosition.y += Mathf.Sin(progress * Mathf.PI) * mob.Stat.jumpHeight;
@@ -59,8 +77,15 @@ public class JumpAttack : BaseAction
         // 점프 완료
         if (progress >= 1f)
         {
-            //공격처리
+            /*// 충돌 복구
+            Collider mobCollider = mob.GetComponent<Collider>();
+            Collider playerCollider = mob.player.GetComponent<Collider>();
+            if (mobCollider != null && playerCollider != null)
+            {
+                Physics.IgnoreCollision(mobCollider, playerCollider, false); // 충돌 활성화
+            }*/
 
+            //공격처리
             return TaskStatus.Success;
         }
 

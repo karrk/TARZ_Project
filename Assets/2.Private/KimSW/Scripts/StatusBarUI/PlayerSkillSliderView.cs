@@ -66,7 +66,7 @@ public class PlayerSkillSliderView : SliderView
         sb.Append("스킬 레벨 ");
         sb.Append(count);
 
-        skillCountText.text = sb.ToString();
+        // skillCountText.text = sb.ToString();
 
         if(count == 0)
         {
