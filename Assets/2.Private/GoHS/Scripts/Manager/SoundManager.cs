@@ -1,57 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Xml.Serialization;
 using UnityEngine;
 using Zenject;
-using UnityEngine.SceneManagement;
-using Cysharp.Threading.Tasks;
-using Unity.VisualScripting;
 
 public class SoundManager : MonoBehaviour
 {
-    [Inject] private ProjectInstaller.SoundSetting soundSetting;
-    public ProjectInstaller.SoundSetting SoundSetting => soundSetting;
+    //[Inject] private ProjectInstaller.SoundSetting soundSetting;
+    //public ProjectInstaller.SoundSetting SoundSetting => soundSetting;
+
+    [Inject] private ProjectInstaller.AudioClips clips;
 
     [SerializeField] AudioSource bgm;
     [SerializeField] AudioSource sfx;
 
-    private void Awake()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    private async void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        Debug.Log(scene.buildIndex);
-
-        if (scene.buildIndex == 4)
-            return;
-
-        await UniTask.WaitUntil(() => transform.IsDestroyed() == false);
-
-        switch (scene.buildIndex) 
-        {
-            case 1:
-                PlayBGM(soundSetting.Player.Audio);
-                break;
-
-            case 2:
-                PlayBGM(soundSetting.Player.Audio);
-                break;
-        }
-    }
-
-
+    private E_Audio curBGM; 
 
     /// <summary>
     /// BGM 재생시 호출 하는 함수
     /// </summary>
-    /// <param name="clip"></param>
-    public void PlayBGM(AudioClip clip)
+    public void PlayBGM(E_Audio bgmType)
     {
-        bgm.clip = clip;
+        if (bgmType == E_Audio.None)
+            StopBGM();
+
+        bgm.clip = clips[bgmType];
         bgm.ignoreListenerPause = true;
-        Debug.Log($"BGM 클립 이름 : {bgm.clip.name}");
+        //Debug.Log($"BGM 클립 이름 : {bgm.clip.name}");
         bgm.Play();
 
     }
@@ -59,26 +31,9 @@ public class SoundManager : MonoBehaviour
     /// <summary>
     /// BGM 멈출때 사용하는 함수
     /// </summary>
-    /// <param name="clip"></param>
-    public void StopBGM(AudioClip clip)
+    public void StopBGM()
     {
-        if (!bgm.isPlaying == false)
-        {
-            return;
-        }
         bgm.Stop();
-    }
-
-
-    /// <summary>
-    /// BGM 현재 나오고있으면 멈추는 함수
-    /// </summary>
-    public void StopCurBGM()
-    {
-        if (bgm.isPlaying)
-        {
-            bgm.Stop();
-        }
     }
 
     /// <summary>
@@ -95,7 +50,7 @@ public class SoundManager : MonoBehaviour
     /// BGM 반복재생할지 말지 여부 함수
     /// </summary>
     /// <param name="loop"></param>
-    public void LoopBGM(bool loop)
+    public void SetLoopBGM(bool loop)
     {
         bgm.loop = loop;
     }
@@ -114,10 +69,9 @@ public class SoundManager : MonoBehaviour
     /// <summary>
     /// 효과음을 재생시키는 함수
     /// </summary>
-    /// <param name="clip"></param>
-    public void PlaySFX(AudioClip clip)
+    public void PlaySFX(E_Audio type)
     {
-        sfx.PlayOneShot(clip);
+        sfx.PlayOneShot(clips[type]);
     }
 
     /// <summary>
@@ -130,5 +84,8 @@ public class SoundManager : MonoBehaviour
         sfx.volume = volume;
         sfx.pitch = pitch;
     }
+
+
+    // 위치기반 SFX 음원 재생 
 }
 

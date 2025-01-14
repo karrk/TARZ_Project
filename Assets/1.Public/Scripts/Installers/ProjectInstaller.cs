@@ -6,7 +6,6 @@ using Zenject;
 public class ProjectInstaller : MonoInstaller<ProjectInstaller>
 {
     [Inject] private NormalPrefab prefabs;
-    //public LayerMask garbageLayer;
 
     public override void InstallBindings()
     {
@@ -50,7 +49,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
 
         //Container.Bind<SkillManager>().AsSingle().NonLazy();
 
-        //Container.Bind<SoundManager>().FromComponentInNewPrefab(prefabs.SoundManager).AsSingle().NonLazy();
+        Container.Bind<SoundManager>().FromComponentInNewPrefab(prefabs.SoundManager).AsSingle().NonLazy();
     }
 
     private void InstallInventory()
@@ -62,33 +61,52 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
     }
 
     [Serializable]
-    public class SoundSetting
+    public class AudioClips
     {
-        public BGMSettings BGM;
-        public SFXSettings SFX;
-        public PlayerSettings Player;
+        public List<AudioPrefab> clips;
 
+        private Dictionary<E_Audio, AudioClip> innerTable;
 
-        [Serializable]
-        public class BGMSettings
+        private void Init()
         {
+            innerTable = new Dictionary<E_Audio, AudioClip>();
 
+            foreach (var item in clips)
+            {
+                if (item.Clip == null)
+                    continue;
+
+                innerTable.Add(item.Type, item.Clip);
+            }
         }
 
-        [Serializable]
-        public class SFXSettings
+        public AudioClip this[E_Audio type]
         {
+            get
+            {
+                if(innerTable == null)
+                {
+                    Init();
+                }
 
+                if(innerTable.ContainsKey(type) == false)
+                {
+                    Debug.Log("해당 오디오 클립 못찾음");
+                }
+
+                return innerTable[type];
+            }
         }
-
-        [Serializable]
-        public class PlayerSettings
-        {
-            public AudioClip Audio;
-        }
-
-
     }
+
+    [Serializable]
+    public class AudioPrefab
+    {
+        public E_Audio Type;
+        public AudioClip Clip;
+    }
+
+    
 
     [Serializable]
     public class InventorySetting

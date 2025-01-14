@@ -2,8 +2,8 @@ using UnityEngine;
 using Zenject;
 using System;
 using UnityEngine.AI;
-using Unity.VisualScripting;
 using BehaviorDesigner.Runtime;
+using Random = UnityEngine.Random;
 
 public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
 {
@@ -87,6 +87,51 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
         Reference.Coll.enabled = true;
         originStat.SendToCopyStats<ProjectInstaller.MonsterStat>(ref stat);
         this.player = player;
+    }
+
+    private void Drop()
+    {
+        bool isGetBluechip = GetBluechip();
+        bool isGetItem;
+
+        if(isGetBluechip == false)
+        {
+            isGetItem = GetEquip();
+
+            if(isGetItem == true)
+            {
+                // 아이템 생성
+            }
+
+            return;
+        }
+
+        // 블루칩 생성
+    }
+
+    private bool GetBluechip()
+    {
+        if (this.type != (E_Monster.BombMob | E_Monster.JumpMob | E_Monster.BossMob))
+            return false;
+
+        float dropRate = 30f;
+        float rand = Random.Range(0, 100);
+
+        if (rand <= dropRate)
+            return true;
+
+        return false;
+    }
+
+    private bool GetEquip()
+    {
+        float dropRate = 30f;
+        float rand = Random.Range(0, 100);
+
+        if (rand <= dropRate)
+            return true;
+
+        return false;
     }
 
     private void OnDisable()

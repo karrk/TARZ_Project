@@ -44,8 +44,8 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
     [Inject] private ProjectInstaller.PlayerSettings setting;
     public ProjectInstaller.PlayerSettings Setting => setting;
     
-    [Inject] private ProjectInstaller.SoundSetting soundSetting;
-    public ProjectInstaller.SoundSetting SoundSetting => soundSetting;
+    //[Inject] private ProjectInstaller.SoundSetting soundSetting;
+    //public ProjectInstaller.SoundSetting SoundSetting => soundSetting;
 
     //[Inject] [SerializeField] public SoundManager SoundManager;
 
