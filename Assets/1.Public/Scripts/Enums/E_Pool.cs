@@ -6,7 +6,8 @@ public enum E_PoolType
     VFX,
     Garbage,
     SFX,
-    
+    Item,
+
     Size,
 }
 
@@ -39,5 +40,13 @@ public enum E_Garbage
     Garbage5,
     
 
+    Size
+}
+
+public enum E_Item
+{
+    None = -1,
+    Equip,
+    Bluechip,
     Size
 }

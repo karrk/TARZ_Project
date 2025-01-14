@@ -14,6 +14,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         InstallData();
         InstallManagers();
         InstallInventory();
+
     }
 
     private void InstallMisc()
@@ -286,6 +287,8 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         public GameObject staticEquipment;
         public GameObject staticBluechip;
         public GameObject staticLobbyData;
+        public GameObject EquipBox;
+        public GameObject Bluechip;
     }
 
     [Serializable]
