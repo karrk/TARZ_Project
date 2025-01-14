@@ -35,7 +35,7 @@ public class CameraController : MonoBehaviour
         input.PlayerAction.Rot.performed += SetDeltaValue;
         input.PlayerAction.Rot.canceled += (_)=> { deltaVec = Vector2.zero; };
 
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
         CamSetting();
         input.PlayerAction.LockOn.started += (_) => { LockOnDown(); };
         input.PlayerAction.LockOn.canceled += (_) => { LockOnUp(); };

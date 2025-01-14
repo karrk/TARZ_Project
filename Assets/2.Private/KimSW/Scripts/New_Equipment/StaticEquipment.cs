@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,12 @@ public class StaticEquipment : MonoBehaviour
 
     public bool firstInit;
 
-  
+    public EquipmentManager manager;
 
+    public event Action OnChangedEquip;
+
+    public void InvokeOnChangedEq()
+    {
+        OnChangedEquip?.Invoke();
+    }
 }

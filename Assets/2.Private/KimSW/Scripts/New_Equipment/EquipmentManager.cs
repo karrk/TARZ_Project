@@ -29,6 +29,8 @@ public class EquipmentManager : MonoBehaviour
     List<NewEquipment> getEquipmentList = new List<NewEquipment>();
     private void Start()
     {
+        staticEquipment.manager = this;
+
         SetInteract();
 
         LoadEquipment();
@@ -37,6 +39,8 @@ public class EquipmentManager : MonoBehaviour
 
     private void OnDestroy()
     {
+        staticEquipment.manager = null;
+
         SaveEquipment();
     }
 
@@ -144,7 +148,7 @@ public class EquipmentManager : MonoBehaviour
                     newEquipments.Remove(newEquipment);
                 }
                 inGameUI.EquipmentSelectPanel.LevelUpSlot(i, equippedLevel[i]);
-
+                staticEquipment.InvokeOnChangedEq();
                 return;
             }
             // 높은 등급의 아이템이 왔을때 교체 되도록
@@ -162,7 +166,7 @@ public class EquipmentManager : MonoBehaviour
 
                 inGameUI.EquipmentSelectPanel.ChangeSlot(i);
                 inGameUI.EquipmentSelectPanel.LevelUpSlot(i, equippedLevel[i]);
-
+                staticEquipment.InvokeOnChangedEq();
                 return;
             }
 
@@ -188,8 +192,7 @@ public class EquipmentManager : MonoBehaviour
             EquippedFullSizeCheck();
         }
 
-
-        
+        staticEquipment.InvokeOnChangedEq();
     }
 
 

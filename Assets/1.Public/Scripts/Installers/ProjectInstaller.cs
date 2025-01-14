@@ -104,20 +104,15 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
     [Serializable]
     public class PlayerBaseStats
     {
-        public float CriticalChance;
-        public float CriticalDamage;
         public float AttackPower;
-        public float SkillAttackPower;
-        public float ElementaAttackPower;
-        public float BasicAttackPower;
         public float Luck;
         public int ThrowableItemCapacity;
-        public float ExperienceGain;
         public float ManaAbsorption;
         public float StaminaRecoveryRate;
         public float MaxStamina;
         public float MaxHealth;
-        public float MovementSpeed;       
+        public float MovementSpeed;
+        public float AttackSpeed;
     }
 
     [Serializable]

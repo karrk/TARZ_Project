@@ -164,6 +164,8 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
         {E_State.MeleeSkill_2, new List<E_State>(){ E_State.Idle,
         E_State.Dead}  },
 
+        {E_State.Dead, new List<E_State>(){ }  },
+
     };
 
     private bool ValidNextAction(E_State nextState)
@@ -246,8 +248,6 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
 
         //inputManager.PressedL1Key += MeleeSkill_1;
         //inputManager.OnControlledDPAD += MeleeSkill_2;
-
-
     }
 
     private void MoveCanceled(InputAction.CallbackContext obj)
