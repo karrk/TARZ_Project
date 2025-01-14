@@ -2,17 +2,22 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using Zenject;
+public class PassiveInfo
+{
+    public int id;
+    public string statName;
+    public OptionType statType;
+    public float statValue;
+    public int cost;
+    public Sprite illust;
+}
 
 public class PassiveCSVParser : MonoBehaviour
 {
-    public class PassiveInfo
-    {
-        public int id;
-        public string statName;
-        public OptionType statType;
-        public float statValue;
-        public int cost;
-    }
+    [Inject]
+    LobbyData lobbyData;
 
     public List<PassiveInfo> passives = new List<PassiveInfo>();
 
@@ -39,7 +44,7 @@ public class PassiveCSVParser : MonoBehaviour
         string file = File.ReadAllText($"{path}/StatDatatable.csv");
         string[] lines = file.Split('\n');
 
-        for (int y = 3; y < lines.Length; y++)
+        for (int y = 1; y < lines.Length; y++)
         {
             string[] values = lines[y].Split(',', '\t');
 
@@ -83,14 +88,20 @@ public class PassiveCSVParser : MonoBehaviour
 
 
             passive.statValue = float.Parse(values[3]);
-            passive.statValue = int.Parse(values[4]);
+           
 
+            passive.illust = Addressables.LoadAssetAsync<Sprite>(values[4]).WaitForCompletion();
+
+
+            passive.cost = int.Parse(values[5]);
 
             passives.Add(passive);
 
+         
+
             // AssetDatabase.CreateAsset(newEquipment, $"Assets/2.Private/KimSW/Prefabs/Required/InGame/NewEquipmentSO/{newEquipment.id}.asset");
         }
-
+        lobbyData.passives = passives;
 
     }
 }

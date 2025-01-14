@@ -125,7 +125,7 @@ public class EquipmentCSVParser : MonoBehaviour
                     newEquipment.equipmentType = EquipmentType.SIZE;
                     break;
             }
-
+           
             newEquipment.illust = Addressables.LoadAssetAsync<Sprite>(values[7]).WaitForCompletion();
 
             newEquipment.description = values[8];

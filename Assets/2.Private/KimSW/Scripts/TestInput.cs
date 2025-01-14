@@ -82,6 +82,13 @@ public class TestInput : MonoBehaviour
 
         }
 
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            inGameUI.CurrentMenu = inGameUI.PassiveShopPanel;
+            inGameUI.CurrentMenu.OpenUIPanel();
+
+        }
+
 
         /*
 
