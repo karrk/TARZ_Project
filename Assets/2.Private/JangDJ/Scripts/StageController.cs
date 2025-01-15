@@ -18,7 +18,7 @@ public class StageController : IInitializable
                 soundmanager.PlayBGM(E_Audio.Stage_1_BGM);
                 break;
             case "FixTest2":
-                soundmanager.PlayBGM(E_Audio.None);
+                soundmanager.PlayBGM(E_Audio.Stage_1_BGM);
                 break;
             case "FixTest3":
                 soundmanager.PlayBGM(E_Audio.None);
