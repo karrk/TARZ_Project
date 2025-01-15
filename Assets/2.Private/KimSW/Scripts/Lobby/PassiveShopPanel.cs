@@ -61,6 +61,7 @@ public class PassiveShopPanel : MonoBehaviour, IOpenCloseMenu
         if (lobbyData.equipPassive[num] == null)
         {
             SetInfoTextNull();
+           
         }
         else
         {
@@ -113,6 +114,8 @@ public class PassiveShopPanel : MonoBehaviour, IOpenCloseMenu
 
         SetInfoText(currentPassive);
         SetSprite();
+
+        lobbyData.SaveData();
     }
 
     public void SetSprite()

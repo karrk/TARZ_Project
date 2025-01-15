@@ -12,18 +12,16 @@ public class LoadGamePanel : FadePanel, IOpenCloseMenu
 {
     [Inject]
     MainSceneUI mainUI;
+    [Inject]
+    LobbyData lobbyData;
 
     [SerializeField] TMP_Text[] loadText;
+
+    [SerializeField] bool[] isSave;
 
     private void Awake()
     {
         SetLoadText();
-    }
-
-    private void OnDisable()
-    {
-       
-
     }
 
 
@@ -40,9 +38,17 @@ public class LoadGamePanel : FadePanel, IOpenCloseMenu
         FadeInUI();
     }
    
-    public void LoadData()
+    public void LoadData(int num)
     {
-
+        if (isSave[num])
+        {
+            lobbyData.LoadData(num);
+            mainUI.ChangeScene();
+        }
+        else
+        {
+            Debug.Log("세이브 파일 없음");
+        }
     }
 
     public void SetLoadText()
@@ -62,6 +68,7 @@ public class LoadGamePanel : FadePanel, IOpenCloseMenu
             else
             {
                 loadText[i].text = $"세이브{i+1}";
+                isSave[i] = true;
             }
         }
 

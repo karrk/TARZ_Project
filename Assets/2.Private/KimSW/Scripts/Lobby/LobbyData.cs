@@ -20,21 +20,44 @@ public class LobbyData : MonoBehaviour
  
     public int exp;
     public bool[] passiveEnable;
-    public PassiveInfo[] equipPassive;
+    public PassiveInfo[] equipPassive = new PassiveInfo[3];
 
     public List<PassiveInfo> passives = new List<PassiveInfo>();
 
     public SaveData saveData = new SaveData(); // 플레이어 데이터 생성
 
+    public int saveNumber;
+
     void Start()
     {
-        equipPassive = new PassiveInfo[3];
-        LoadData();
-        SetExp();
+      
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
 
+    public void SetSaveDataNumber(int num)
+    {
+        saveNumber = num;
+    }
+
+    public void NewSaveData()
+    {
+        saveData.exp = 0;
+
+        saveData.passiveEnable = new bool[passiveEnable.Length];
+        for (int i = 0; i < passiveEnable.Length; i++)
+        {
+            saveData.passiveEnable[i] = false;
+        }
+
+        saveData.equipPassiveID = new int[equipPassive.Length];
+        for (int i = 0; i < equipPassive.Length; i++)
+        {
+                saveData.equipPassiveID[i] = 0;
+        }
+
+        WriteData();
+    }
 
     public void SaveData()
     {
@@ -53,7 +76,12 @@ public class LobbyData : MonoBehaviour
             }
            
         }
-      
+
+        WriteData();
+    }
+
+    public void WriteData()
+    {
 
 #if UNITY_EDITOR
         string path = $"{Application.dataPath}/2.Private/KimSW/Json";
@@ -61,10 +89,10 @@ public class LobbyData : MonoBehaviour
         string persPath = Application.persistentDataPath; 
 #endif
         string data = JsonUtility.ToJson(saveData);
-        File.WriteAllText($"{path}/Save1.json", data);
+        File.WriteAllText($"{path}/Save{saveNumber}.json", data);
     }
 
-    public void LoadData()
+    public void LoadData(int num)
     {
 #if UNITY_EDITOR
         string path = $"{Application.dataPath}/2.Private/KimSW/Json";
@@ -72,14 +100,15 @@ public class LobbyData : MonoBehaviour
         string persPath = Application.persistentDataPath; 
 #endif
 
-        if (File.Exists($"{path}/Save1.json") == false)
+        if (File.Exists($"{path}/Save{num+1}.json") == false)
         {
             Debug.LogError("파일이 없습니다");
             return;
         }
 
+        saveNumber = num + 1;
 
-        string data = File.ReadAllText($"{path}/Save1.json");
+        string data = File.ReadAllText($"{path}/Save{num + 1}.json");
         saveData = JsonUtility.FromJson<SaveData>(data);
 
         exp = saveData.exp;
@@ -97,13 +126,14 @@ public class LobbyData : MonoBehaviour
             }
 
         }
+
+        SetExp();
     }
 
 
     private void OnDestroy()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
-        SaveData();
     }
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {

@@ -11,14 +11,6 @@ public class LoadingScript : MonoBehaviour
 
     [SerializeField] GameObject loadingImage;
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            Loading();
-        }
-    }
-
     public void Loading()
     {
 
