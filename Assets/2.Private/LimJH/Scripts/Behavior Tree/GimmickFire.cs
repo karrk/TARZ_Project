@@ -16,7 +16,7 @@ public class GimmickFire : BaseAction
         mob.Stat.isGimmickActive = true;
 
         // 피해 감소 설정 (90% 감소)
-        mob.Stat.DamageReducation = 0.1f; // 90% 감소
+        mob.Stat.DamageReducation = 0.1f;
 
         // 타겟 위치에 불장판 생성
         if (firePrefab != null && mob != null)
@@ -41,6 +41,15 @@ public class GimmickFire : BaseAction
             if (pillarPrefab != null)
             {
                 GameObject pillar = GameObject.Instantiate(pillarPrefab, randomPosition, Quaternion.identity);
+
+                // FirePillar 스크립트에서 mob 참조 설정
+                FirePillar firePillar = pillar.GetComponent<FirePillar>();
+                if (firePillar != null)
+                {
+                    firePillar.mob = mob; // mob 객체 전달
+                    firePillar.pillarIndex = i; // 인덱스 설정
+                }
+
                 mob.Stat.pillarStates[i] = 1;
             }
         }
@@ -54,11 +63,10 @@ public class GimmickFire : BaseAction
 
     public override void OnEnd()
     {
-
         /*if (fire != null)
         {
             GameObject.Destroy(fire);
         }*/
-        mob.Stat.DamageReducation = 1f; // 데미지 감소율 정상화
+        //mob.Stat.DamageReducation = 1f; // 데미지 감소율 정상화
     }
 }

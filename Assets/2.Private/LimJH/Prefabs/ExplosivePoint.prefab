@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1039652048415967213}
   - component: {fileID: 4269638962477344727}
   - component: {fileID: 3395236701459161067}
-  - component: {fileID: 134561805388071989}
+  - component: {fileID: 991659158098973484}
   m_Layer: 0
   m_Name: ExplosivePoint
   m_TagString: Untagged
@@ -108,7 +108,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &134561805388071989
+--- !u!114 &991659158098973484
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,7 +117,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2247642504869527512}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28601c2872953f04e9d691c05023cb2d, type: 3}
+  m_Script: {fileID: 11500000, guid: 13be0c6a506df52499315b1d0d01c8b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damagePerSecond: 1
+  power: 1
