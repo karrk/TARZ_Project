@@ -20,31 +20,27 @@ public class PassiveCSVParser : MonoBehaviour
 
     public List<PassiveInfo> passives = new List<PassiveInfo>();
 
-    [SerializeField] TextAsset csv;
-
     private void Awake()
     {
-        Debug.Log(this.gameObject.name);
+//#if UNITY_EDITOR
+//        string path = $"{Application.dataPath}/2.Private/KimSW/CSV";
+//#else
+//                string path = Application.persistentDataPath; 
+//#endif
+//        if (Directory.Exists(path) == false)
+//        {
+//            Debug.LogError("경로가 없습니다");
+//            return;
+//        }
 
-        //#if UNITY_EDITOR
-        //        string path = $"{Application.dataPath}/2.Private/KimSW/CSV";
-        //#else
-        //        string path = Application.persistentDataPath; 
-        //#endif
-        //        if (Directory.Exists(path) == false)
-        //        {
-        //            Debug.LogError("경로가 없습니다");
-        //            return;
-        //        }
+//        if (File.Exists($"{path}/StatDatatable.csv") == false)
+//        {
+//            Debug.LogError("파일이 없습니다");
+//            return;
+//        }
 
-        //        if (File.Exists($"{path}/StatDatatable.csv") == false)
-        //        {
-        //            Debug.LogError("파일이 없습니다");
-        //            return;
-        //        }
-
-        //        string file = File.ReadAllText($"{path}/StatDatatable.csv");
-        //        string[] lines = file.Split('\n');
+//        string file = File.ReadAllText($"{path}/StatDatatable.csv");
+//        string[] lines = file.Split('\n');
 
         TextAsset asset = Resources.Load<TextAsset>("StatDatatable");
 
