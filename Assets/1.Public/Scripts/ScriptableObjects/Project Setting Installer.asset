@@ -116,12 +116,12 @@ MonoBehaviour:
       BasicPower: 1
     JumpSetting:
       JumpPower: 5
-      UseStamina: 0
+      UseStamina: 20
     DashSetting:
       DashTime: 0.3
       DashSpeed: 15
       DashCoolTime: 1
-      UseStamina: 0
+      UseStamina: 40
     DrainSetting:
       DrainSpeed: 3
       ViewArea: 0
@@ -182,11 +182,11 @@ MonoBehaviour:
         m_Bits: 4096
       Delay: 0.5
       Zoffset: 3
-      CoolTime: 0
+      CoolTime: 15
     MeleeSkill2Setting:
       DashTime: 0.4
       DashSpeed: 20
-      CoolTime: 0
+      CoolTime: 15
   monsterStatSetting:
     BaseMobStat:
       Health: 100
@@ -211,6 +211,9 @@ MonoBehaviour:
       pillarSpawnRadius: 0
       halfHealth: 0
       isSpecialAttackDelay: 0
+      rushCount: 0
+      dashSpeed: 0
+      stopDistance: 0
     RangeMobStat:
       Health: 100
       DamageReducation: 1
@@ -234,6 +237,9 @@ MonoBehaviour:
       pillarSpawnRadius: 0
       halfHealth: 0
       isSpecialAttackDelay: 0
+      rushCount: 0
+      dashSpeed: 0
+      stopDistance: 0
     DogMobStat:
       Health: 70
       DamageReducation: 1
@@ -257,6 +263,9 @@ MonoBehaviour:
       pillarSpawnRadius: 0
       halfHealth: 0
       isSpecialAttackDelay: 0
+      rushCount: 0
+      dashSpeed: 0
+      stopDistance: 0
     JumpMobStat:
       Health: 500
       DamageReducation: 1
@@ -280,6 +289,9 @@ MonoBehaviour:
       pillarSpawnRadius: 0
       halfHealth: 0
       isSpecialAttackDelay: 0
+      rushCount: 0
+      dashSpeed: 0
+      stopDistance: 0
     BombMobStat:
       Health: 400
       DamageReducation: 1
@@ -303,6 +315,9 @@ MonoBehaviour:
       pillarSpawnRadius: 0
       halfHealth: 0
       isSpecialAttackDelay: 0
+      rushCount: 0
+      dashSpeed: 0
+      stopDistance: 0
     BossMobStat:
       Health: 6000
       DamageReducation: 1
@@ -326,6 +341,9 @@ MonoBehaviour:
       pillarSpawnRadius: 5
       halfHealth: 0
       isSpecialAttackDelay: 0
+      rushCount: 0
+      dashSpeed: 0
+      stopDistance: 0
   audioClips:
     clips:
     - Type: 0
