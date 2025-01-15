@@ -32,13 +32,29 @@ public class CameraController : MonoBehaviour
         input = new PlayerInputAction();
         input.Enable();
 
-        input.PlayerAction.Rot.performed += SetDeltaValue;
-        input.PlayerAction.Rot.canceled += (_)=> { deltaVec = Vector2.zero; };
-
         //Cursor.lockState = CursorLockMode.Locked;
         CamSetting();
-        input.PlayerAction.LockOn.started += (_) => { LockOnDown(); };
-        input.PlayerAction.LockOn.canceled += (_) => { LockOnUp(); };
+
+        input.PlayerAction.Rot.performed += SetDeltaValue;
+        input.PlayerAction.Rot.canceled += SetZero;
+
+        input.PlayerAction.LockOn.started += LockOnDown;
+        input.PlayerAction.LockOn.canceled += LockOnUp;
+    }
+
+    private void OnDestroy()
+    {
+        input.PlayerAction.Rot.performed -= SetDeltaValue;
+        input.PlayerAction.Rot.canceled -= SetZero;
+
+        input.PlayerAction.LockOn.started -= LockOnDown;
+        input.PlayerAction.LockOn.canceled -= LockOnUp;
+        input.Disable();
+    }
+
+    private void SetZero(InputAction.CallbackContext obj)
+    {
+        deltaVec = Vector2.zero;
     }
 
     private void SetDeltaValue(InputAction.CallbackContext obj)
@@ -151,6 +167,9 @@ public class CameraController : MonoBehaviour
         targets.Clear();    // 배열 초기화
         Collider[] TargetCollider = Physics.OverlapSphere(player.transform.position, lockOnSetting.viewArea, lockOnSetting.targetLayer);
 
+        if (TargetCollider == null)
+            return;
+
         for (int i = 0; i < TargetCollider.Length; i++) // 감지된 콜라이더 
         {
             Transform target = TargetCollider[i].transform;
@@ -197,7 +216,7 @@ public class CameraController : MonoBehaviour
         return new Vector3(Mathf.Sin(AngleInDegree * Mathf.Deg2Rad), 0, Mathf.Cos(AngleInDegree * Mathf.Deg2Rad));
     }
 
-    private void LockOnDown()
+    private void LockOnDown(InputAction.CallbackContext obj)
     {
         if (!isLockOn)
         {
@@ -209,7 +228,7 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    private void LockOnUp()
+    private void LockOnUp(InputAction.CallbackContext obj)
     {
         monster = null;
         isLockOn = false;

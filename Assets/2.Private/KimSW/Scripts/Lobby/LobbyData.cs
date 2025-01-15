@@ -86,7 +86,7 @@ public class LobbyData : MonoBehaviour
 #if UNITY_EDITOR
         string path = $"{Application.dataPath}/2.Private/KimSW/Json";
 #else
-        string persPath = Application.persistentDataPath; 
+        string path = Application.persistentDataPath; 
 #endif
         string data = JsonUtility.ToJson(saveData);
         File.WriteAllText($"{path}/Save{saveNumber}.json", data);
@@ -97,7 +97,7 @@ public class LobbyData : MonoBehaviour
 #if UNITY_EDITOR
         string path = $"{Application.dataPath}/2.Private/KimSW/Json";
 #else
-        string persPath = Application.persistentDataPath; 
+        string path = Application.persistentDataPath; 
 #endif
 
         if (File.Exists($"{path}/Save{num+1}.json") == false)

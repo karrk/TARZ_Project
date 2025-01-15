@@ -1,10 +1,8 @@
 using System.Collections.Generic;
 using UniRx;
 using UniRx.Triggers;
-using UnityEditor;
 using UnityEngine;
 using Zenject;
-using static UnityEditor.Progress;
 
 public class EquipmentManager : MonoBehaviour
 {
