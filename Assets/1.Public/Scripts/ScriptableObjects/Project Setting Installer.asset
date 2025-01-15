@@ -189,12 +189,12 @@ MonoBehaviour:
       CoolTime: 0
   monsterStatSetting:
     BaseMobStat:
-      Health: 100
+      Health: 150
       DamageReducation: 1
       Damage: 1
       Angle: 90
       AttackRange: 3
-      MoveSpeed: 3
+      MoveSpeed: 1
       InAttackRange: 2
       DetectRange: 10
       RotateSpeed: 5
@@ -220,8 +220,8 @@ MonoBehaviour:
       Damage: 1
       Angle: 0
       AttackRange: 0
-      MoveSpeed: 3
-      InAttackRange: 8
+      MoveSpeed: 0.5
+      InAttackRange: 7
       DetectRange: 10
       RotateSpeed: 5
       MaxRotateTime: 2
@@ -246,7 +246,7 @@ MonoBehaviour:
       Damage: 1
       Angle: 90
       AttackRange: 2
-      MoveSpeed: 3
+      MoveSpeed: 2
       InAttackRange: 2
       DetectRange: 10
       RotateSpeed: 5
@@ -271,9 +271,9 @@ MonoBehaviour:
       DamageReducation: 1
       Damage: 1
       Angle: 90
-      AttackRange: 4
-      MoveSpeed: 2
-      InAttackRange: 4
+      AttackRange: 3
+      MoveSpeed: 1
+      InAttackRange: 3
       DetectRange: 10
       RotateSpeed: 5
       MaxRotateTime: 2
@@ -297,9 +297,9 @@ MonoBehaviour:
       DamageReducation: 1
       Damage: 1
       Angle: 90
-      AttackRange: 4
-      MoveSpeed: 3
-      InAttackRange: 4
+      AttackRange: 3
+      MoveSpeed: 2
+      InAttackRange: 3
       DetectRange: 10
       RotateSpeed: 5
       MaxRotateTime: 2
@@ -322,11 +322,11 @@ MonoBehaviour:
       Health: 6000
       DamageReducation: 1
       Damage: 1
-      Angle: 90
-      AttackRange: 4
-      MoveSpeed: 2
-      InAttackRange: 8
-      DetectRange: 10
+      Angle: 0
+      AttackRange: 0
+      MoveSpeed: 1
+      InAttackRange: 30
+      DetectRange: 30
       RotateSpeed: 5
       MaxRotateTime: 2
       StopDist: 1.5
