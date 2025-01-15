@@ -63,6 +63,8 @@ public class PassiveSlot : MonoBehaviour
 
             group.SetLock();
             inGameUI.PassiveShopPanel.ActiveCost(false);
+
+            lobbyData.SaveData();
         }
     }
 

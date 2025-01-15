@@ -8,6 +8,7 @@ public class MainSceneUI : BindUI
 {
     public InputActionReference cancelRef;
 
+    public LoadingScript loadingScript;
     public  MainMenuPanel MainMenuPanel {  get; private set; }
     public LoadGamePanel LoadGamePanel { get; private set; }
     public NewGamePanel NewGamePanel { get; private set; }
@@ -41,6 +42,11 @@ public class MainSceneUI : BindUI
     {
         if (currentMenu is not null)
             CurrentMenu.CloseUIPanel();
+    }
+
+    public void ChangeScene()
+    {
+        loadingScript.Loading();
     }
     private void OnEnable()
     {
