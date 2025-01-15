@@ -25,6 +25,11 @@ public class DashAttack : BaseAction
         isDashing = false;
     }
 
+    /*private async UniTask Rush(int count)
+    {
+        for(int i = 0; i < count; i++)
+    }*/
+
     public override TaskStatus OnUpdate()
     {
         if (mob.player == null)
@@ -34,6 +39,10 @@ public class DashAttack : BaseAction
 
         if (!isDashing)
         {
+            if (mob.Stat.rushCount <= 0)
+            {
+                return TaskStatus.Success; // 모든 대시를 완료했으면 성공 반환
+            }
             StartDash();
         }
 
@@ -47,6 +56,7 @@ public class DashAttack : BaseAction
 
     private void StartDash()
     {
+        Debug.Log("방향설정");
         // 현재 위치와 타겟 위치를 기반으로 방향 설정
         dashDirection = (mob.PlayerPos - transform.position).normalized;
         isDashing = true;
@@ -54,16 +64,18 @@ public class DashAttack : BaseAction
 
     private void PerformDash()
     {
+        Debug.Log("대쉬진행");
         // 타겟 지점까지 이동
-        Vector3 newPosition = transform.position + dashDirection * mob.Stat.dashSpeed * Time.deltaTime;
+        Vector3 newPosition = transform.position + dashDirection * mob.Stat.dashSpeed;
         transform.position = newPosition;
 
         // 목표 지점에 도달했는지 확인
         float distanceToTarget = Vector3.Distance(transform.position, mob.PlayerPos);
 
-        if (distanceToTarget <= mob.Stat.stopDistance)
+        if (distanceToTarget <= mob.Stat.stopDistanceDash)
         {
             isDashing = false; // 돌진 완료
+            mob.Stat.rushCount--;
         }
     }
 

@@ -211,6 +211,9 @@ MonoBehaviour:
       pillarSpawnRadius: 0
       halfHealth: 0
       isSpecialAttackDelay: 0
+      rushCount: 0
+      dashSpeed: 0
+      stopDistanceDash: 0
     RangeMobStat:
       Health: 100
       DamageReducation: 1
@@ -234,6 +237,9 @@ MonoBehaviour:
       pillarSpawnRadius: 0
       halfHealth: 0
       isSpecialAttackDelay: 0
+      rushCount: 0
+      dashSpeed: 0
+      stopDistanceDash: 0
     DogMobStat:
       Health: 70
       DamageReducation: 1
@@ -257,6 +263,9 @@ MonoBehaviour:
       pillarSpawnRadius: 0
       halfHealth: 0
       isSpecialAttackDelay: 0
+      rushCount: 0
+      dashSpeed: 0
+      stopDistanceDash: 0
     JumpMobStat:
       Health: 500
       DamageReducation: 1
@@ -280,6 +289,9 @@ MonoBehaviour:
       pillarSpawnRadius: 0
       halfHealth: 0
       isSpecialAttackDelay: 0
+      rushCount: 0
+      dashSpeed: 0
+      stopDistanceDash: 0
     BombMobStat:
       Health: 400
       DamageReducation: 1
@@ -303,6 +315,9 @@ MonoBehaviour:
       pillarSpawnRadius: 0
       halfHealth: 0
       isSpecialAttackDelay: 0
+      rushCount: 0
+      dashSpeed: 0
+      stopDistanceDash: 0
     BossMobStat:
       Health: 6000
       DamageReducation: 1
@@ -321,11 +336,14 @@ MonoBehaviour:
       changeSpeed: 0
       isGroggyActive: 0
       pillarStates: 000000000000000000000000
-      groggyDuration: 0
+      groggyDuration: 5
       isGimmickActive: 0
       pillarSpawnRadius: 5
       halfHealth: 0
       isSpecialAttackDelay: 0
+      rushCount: 0
+      dashSpeed: 10
+      stopDistanceDash: 20
   audioClips:
     clips:
     - Type: 0

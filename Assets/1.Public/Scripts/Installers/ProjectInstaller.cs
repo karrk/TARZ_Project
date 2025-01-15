@@ -491,7 +491,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
 
         public int rushCount;
         public float dashSpeed;
-        public float stopDistance;
+        public float stopDistanceDash;
 
 
         public virtual void SendToCopyStats<T>(ref T target) where T : MonsterStat, new()
@@ -521,6 +521,9 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
             target.halfHealth = this.halfHealth;
             target.pillarSpawnRadius = this.pillarSpawnRadius;
             target.isSpecialAttackDelay = this.isSpecialAttackDelay;
+            target.rushCount = this.rushCount;
+            target.dashSpeed = this.dashSpeed;
+            target.stopDistanceDash = this.stopDistanceDash;
         }
     }
 }
