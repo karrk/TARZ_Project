@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using DG.Tweening;
 
 public class SceneChanger : MonoBehaviour
 {
@@ -15,7 +16,9 @@ public class SceneChanger : MonoBehaviour
     [SerializeField] GameObject[] loadings; // 로딩 애니메이션
     [SerializeField] Animator[] pings;      // 로딩 애니메이션
 
-    private int SceneNumber = 0;
+    [SerializeField] CanvasGroup fadeCanvasGroup; // 페이드 효과를 위한 CanvasGroup
+
+    private int sceneNumber = 0;
 
     //[SerializeField]
     //TextMeshProUGUI progressText; // 로딩 진행도
@@ -25,14 +28,18 @@ public class SceneChanger : MonoBehaviour
         // 다음 씬 이름 표시
         sceneNameText.text = nextScene;
 
-        // 씬 로딩 시작
-        StartCoroutine(LoadScene());
+        // 페이드인 효과
+        FadeIn(() =>
+        {
+            // 씬 로딩 시작
+            StartCoroutine(LoadScene());
+        });
     }
 
     private void OnEnable()
     {
         // 다음 씬 이름에서 숫자만 추출
-        SceneNumber = (int)nextScene[nextScene.Length - 1] - 49;
+        sceneNumber = (int)nextScene[nextScene.Length - 1] - 49;
 
         // 로딩 애니메이션 비활성화
         foreach (var loading in loadings)
@@ -69,23 +76,23 @@ public class SceneChanger : MonoBehaviour
         }
 
         // 해당 씬 위치의 로딩 애니메이션을 활성화
-        loadings[SceneNumber].SetActive(true);
+        loadings[sceneNumber].SetActive(true);
 
         // 로딩 애니메이션 재생
         for (int i = 0; i < movings.Length; i++)
         {
-            if (i == SceneNumber)
+            if (i == sceneNumber)
             {
                 movings[i].SetTrigger("isActivate");
             }
-            else if (i < SceneNumber)
+            else if (i < sceneNumber)
             {
                 movings[i].SetTrigger("isComplete");
             }
         }
 
         // 로딩 애니메이션 재생
-        pings[SceneNumber].SetTrigger("isActivate");
+        pings[sceneNumber].SetTrigger("isActivate");
 
     }
 
@@ -140,12 +147,33 @@ public class SceneChanger : MonoBehaviour
                 {
                     // 1초 대기
                     yield return new WaitForSeconds(1.0f);
-                    
-                    // 씬 활성화
-                    op.allowSceneActivation = true;
+
+                    // 페이드아웃 효과 후 씬 전환
+                    FadeOut(() =>
+                    {
+                        op.allowSceneActivation = true;
+                    });
                     yield break;
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// 페이드인 효과
+    /// </summary>
+    private void FadeIn(TweenCallback onComplete)
+    {
+        fadeCanvasGroup.alpha = 1f;
+        fadeCanvasGroup.DOFade(0f, 1f).OnComplete(onComplete);
+    }
+
+    /// <summary>
+    /// 페이드아웃 효과
+    /// </summary>
+    private void FadeOut(TweenCallback onComplete)
+    {
+        fadeCanvasGroup.alpha = 0f;
+        fadeCanvasGroup.DOFade(1f, 1f).OnComplete(onComplete);
     }
 }
