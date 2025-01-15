@@ -115,7 +115,7 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
         if (this.type != (E_Monster.BombMob | E_Monster.JumpMob | E_Monster.BossMob))
             return false;
 
-        float dropRate = 30f;
+        float dropRate = 5f;
         float rand = Random.Range(0, 100);
 
         if (rand <= dropRate)
@@ -126,7 +126,7 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
 
     private bool GetEquip()
     {
-        float dropRate = 70f;
+        float dropRate = 10f;
         float rand = Random.Range(0, 100);
 
         if (rand <= dropRate)
