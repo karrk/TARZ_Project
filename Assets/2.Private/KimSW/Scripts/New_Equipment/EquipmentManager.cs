@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -35,7 +36,7 @@ public class EquipmentManager : MonoBehaviour
 
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         staticEquipment.manager = null;
 
@@ -46,9 +47,13 @@ public class EquipmentManager : MonoBehaviour
     {
         if (staticEquipment.firstInit)
         {
-            newEquipments = staticEquipment.newEquipments;
+          
+            
+            newEquipments = staticEquipment.newEquipments.ToList();
+
             equipped = staticEquipment.equipped;
             equippedLevel = staticEquipment.equippedLevel;
+
 
             for (int i = 0; i < equipped.Count; i++)
             {
@@ -60,17 +65,21 @@ public class EquipmentManager : MonoBehaviour
         }
         else
         {
-            newEquipments = csvParser.newEquipments;
+            newEquipments = csvParser.GetEquipment().ToList();
+
+
             staticEquipment.firstInit = true;
 
-            staticEquipment.newEquipments = newEquipments;
+            staticEquipment.newEquipments = newEquipments.ToList();
 
         }
     }
 
-    void SaveEquipment()
+    public void SaveEquipment()
     {
-        staticEquipment.newEquipments = newEquipments;
+       
+        staticEquipment.newEquipments = newEquipments.ToList();
+      
         staticEquipment.equipped = equipped;
         staticEquipment.equippedLevel = equippedLevel;
     }
@@ -109,7 +118,8 @@ public class EquipmentManager : MonoBehaviour
     public NewEquipment GetEquipment(int rarity)
     {
         getEquipmentList.Clear();
-
+       
+    
         foreach (var equipment in newEquipments)
         {
             if((int)equipment.rarityTier == rarity)
@@ -117,11 +127,13 @@ public class EquipmentManager : MonoBehaviour
                 getEquipmentList.Add(equipment);
             }
         }
-
+       
+       
         if (getEquipmentList.Count > 0)
         {
-
-            return getEquipmentList[Random.Range(0, getEquipmentList.Count)];
+            int num = Random.Range(0, getEquipmentList.Count);
+            
+            return getEquipmentList[num];
         }
         else
         {

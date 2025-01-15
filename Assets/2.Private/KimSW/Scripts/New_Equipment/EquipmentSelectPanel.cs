@@ -75,34 +75,33 @@ public class EquipmentSelectPanel : MonoBehaviour, IOpenCloseMenu
             if(inGameUI.EquipmentManager.newEquipments[i] == null) // 에디터에선 안뜸
             {
 
-                Debug.LogError($"빌드에선 뜸 {i}");
+                Debug.LogError($"빌드에선 뜸 {i}   {inGameUI.EquipmentManager.newEquipments.Count}");
             }
 
             //Debug.LogError($"갯수 {rarityCount.Length}");
             //Debug.LogError($"내부 {inGameUI.EquipmentManager.newEquipments[i]}");
             //Debug.LogError($"티어 {(int)inGameUI.EquipmentManager.newEquipments[i].rarityTier}");
+            
             rarityCount[(int)inGameUI.EquipmentManager.newEquipments[i].rarityTier]++;
-          
+           
         }
 
-       
 
 
-        for(int i = 0; i < rarityProbability.Length; i++)
+        for (int i = 0; i < rarityProbability.Length; i++)
         {
             rarityProbability[i] = inGameUI.EquipmentManager.GetProbability();
 
         }
-
       
         List<NewEquipment> newEquipments = new List<NewEquipment>();
 
         for (int i = 0; i < 3; i++)
         {
             NewEquipment equipment = inGameUI.EquipmentManager.GetEquipment(rarityProbability[i]);
+     
 
-      
-            if(equipment == null)
+            if (equipment == null)
             {
               
                 Debug.Log("null값 발생 " + i);
