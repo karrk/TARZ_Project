@@ -13,18 +13,12 @@ public class NewGamePanel : FadePanel, IOpenCloseMenu
   
 
 
-    private void OnDisable()
-    {
-        mainUI.CurrentMenu = mainUI.MainMenuPanel;
-        mainUI.CurrentMenu.OpenUIPanel();
-        
-
-    }
-
-
     public void CloseUIPanel()
     {
         FadeOutUI();
+        mainUI.CurrentMenu = mainUI.MainMenuPanel;
+        mainUI.CurrentMenu.OpenUIPanel();
+        
     }
 
     public void OpenUIPanel()

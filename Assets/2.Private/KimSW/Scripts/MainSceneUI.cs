@@ -2,9 +2,12 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MainSceneUI : BindUI
 {
+    public InputActionReference cancelRef;
+
     public  MainMenuPanel MainMenuPanel {  get; private set; }
     public LoadGamePanel LoadGamePanel { get; private set; }
     public NewGamePanel NewGamePanel { get; private set; }
@@ -29,18 +32,25 @@ public class MainSceneUI : BindUI
 
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if(currentMenu is not null)
-            CurrentMenu.CloseUIPanel();
-        }
-    }
 
     private void OnApplicationQuit()
     {
         DOTween.KillAll();
     }
+    public void CancelInput(InputAction.CallbackContext value)
+    {
+        if (currentMenu is not null)
+            CurrentMenu.CloseUIPanel();
+    }
+    private void OnEnable()
+    {
+        cancelRef.action.performed += CancelInput;
+    }
+
+    private void OnDisable()
+    {
+        cancelRef.action.performed -= CancelInput;
+    }
+
 
 }
