@@ -2,13 +2,16 @@ using BehaviorDesigner.Runtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.ProBuilder;
 
 public class MidBossMonster : BaseMonster
 {
-    public float RangedAttackDelay;
+    /*public float RangedAttackDelay;*/
     public float DashAttackDelay;
 
     [SerializeField] private GameObject explosivesPrefab;
+    [SerializeField] private GameObject explosivesRange;
+    private GameObject range;
 
     private void Start()
     {
@@ -53,9 +56,17 @@ public class MidBossMonster : BaseMonster
             return;
         }
         Vector3 spawnPosition = transform.position + new Vector3(0, 4f, 0);
-        GameObject projectile = Instantiate(explosivesPrefab, spawnPosition, Quaternion.identity);
+        GameObject explosivePrefab = Instantiate(explosivesPrefab, spawnPosition, Quaternion.identity);
+
+        Explosive explosive = explosivePrefab.GetComponent<Explosive>();
+        if (explosive != null)
+        {
+            explosive.onExplosiveBomb += OnExplosiveRangeDelete;
+        }
 
         Vector3 targetPosition = player.transform.position;
+
+        range = GameObject.Instantiate(explosivesRange, targetPosition, Quaternion.identity);
 
         // 목표 방향 계산
         Vector3 direction = targetPosition - transform.position;
@@ -63,7 +74,7 @@ public class MidBossMonster : BaseMonster
         float distance = direction.magnitude; // 수평 거리
 
         // 초기 속도 설정
-        Rigidbody rb = projectile.GetComponent<Rigidbody>();
+        Rigidbody rb = explosivePrefab.GetComponent<Rigidbody>();
         if (rb == null)
         {
             UnityEngine.Debug.LogError("폭탄 프리팹에 Rigidbody가 없습니다.");
@@ -76,5 +87,10 @@ public class MidBossMonster : BaseMonster
         velocity.y = Mathf.Sqrt(2 * Mathf.Abs(Physics.gravity.y) * launchHeight); // 수직 속도 계산
 
         rb.velocity = velocity;
+    }
+
+    private void OnExplosiveRangeDelete()
+    {
+        Destroy(range);
     }
 }

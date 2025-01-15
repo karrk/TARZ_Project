@@ -14,6 +14,7 @@ public class DashAttack : BaseAction
 
     private Vector3 dashDirection;         // 돌진 방향
     private bool isDashing;                // 현재 돌진 중인지 확인
+    private bool isEndDash;                // 현재 돌진 중인지 확인
 
     public override void OnStart()
     {
@@ -23,12 +24,61 @@ public class DashAttack : BaseAction
 
         // 돌진 중 상태 초기화
         isDashing = false;
+        isEndDash = false;
     }
 
-    /*private async UniTask Rush(int count)
+    private async UniTask Rush(int count)
     {
+        isDashing = true;
+
         for(int i = 0; i < count; i++)
-    }*/
+        {
+            await RushLogic();
+            await UniTask.Delay((int)(bossMob.DashAttackDelay * 1000));
+        }
+
+        isEndDash = true;
+    }
+
+    private async UniTask RushLogic()
+    {
+        mob.Reference.Anim.Play("Boss_Skill1(Rush)");
+
+        dashDirection = (mob.PlayerPos - transform.position).normalized;
+
+        Vector3 start = transform.position;
+        Vector3 targetPos = transform.position + dashDirection * mob.Stat.dashSpeed;
+
+        float duration = Vector3.Distance(start,targetPos) / mob.Stat.dashSpeed;
+        float t = 0;
+
+        while(true)
+        {
+            if(t >= 1)
+                break;
+
+            RotateTowardsPlayer();
+            transform.position = Vector3.Lerp(start, targetPos, t);
+            t += Time.deltaTime/duration;
+
+            await UniTask.Yield();
+        }
+
+        transform.position = targetPos;
+    }
+
+    private bool result;
+
+    private void RotateTowardsPlayer()
+    {
+        // 플레이어 방향으로 캐릭터 회전
+        Vector3 targetDirection = (mob.PlayerPos - transform.position).normalized;
+        if (targetDirection != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
+        }
+    }
 
     public override TaskStatus OnUpdate()
     {
@@ -37,21 +87,16 @@ public class DashAttack : BaseAction
             return TaskStatus.Failure; // 타겟이 없으면 실패로 처리
         }
 
-        if (!isDashing)
-        {
-            if (mob.Stat.rushCount <= 0)
-            {
-                return TaskStatus.Success; // 모든 대시를 완료했으면 성공 반환
-            }
-            StartDash();
-        }
+        else {
 
-        if (isDashing)
-        {
-            PerformDash();
+            if(isDashing == false)
+                Rush(mob.Stat.rushCount).Forget();
+            else if(isEndDash == true)
+                return TaskStatus.Success;
         }
 
         return TaskStatus.Running;
+        
     }
 
     private void StartDash()

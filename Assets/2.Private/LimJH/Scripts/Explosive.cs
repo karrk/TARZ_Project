@@ -1,11 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class Explosive : MonoBehaviour
 {
     [SerializeField] private float power;
-    [SerializeField] public GameObject ExplosivePoint;
+    [SerializeField] GameObject ExplosivePoint;
+    public event Action onExplosiveBomb;
 
     private void Start()
     {
@@ -36,6 +39,7 @@ public class Explosive : MonoBehaviour
         if (ExplosivePoint != null)
         {
             Instantiate(ExplosivePoint, transform.position, Quaternion.identity);
+            onExplosiveBomb?.Invoke();
         }
 
         // 현재 오브젝트 파괴

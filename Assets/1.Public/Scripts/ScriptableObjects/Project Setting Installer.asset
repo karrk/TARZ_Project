@@ -213,7 +213,6 @@ MonoBehaviour:
       isSpecialAttackDelay: 0
       rushCount: 0
       dashSpeed: 0
-      stopDistance: 0
       stopDistanceDash: 0
     RangeMobStat:
       Health: 100
@@ -240,7 +239,6 @@ MonoBehaviour:
       isSpecialAttackDelay: 0
       rushCount: 0
       dashSpeed: 0
-      stopDistance: 0
       stopDistanceDash: 0
     DogMobStat:
       Health: 70
@@ -267,7 +265,6 @@ MonoBehaviour:
       isSpecialAttackDelay: 0
       rushCount: 0
       dashSpeed: 0
-      stopDistance: 0
       stopDistanceDash: 0
     JumpMobStat:
       Health: 500
@@ -294,7 +291,6 @@ MonoBehaviour:
       isSpecialAttackDelay: 0
       rushCount: 0
       dashSpeed: 0
-      stopDistance: 0
       stopDistanceDash: 0
     BombMobStat:
       Health: 400
@@ -321,7 +317,6 @@ MonoBehaviour:
       isSpecialAttackDelay: 0
       rushCount: 0
       dashSpeed: 0
-      stopDistance: 0
       stopDistanceDash: 0
     BossMobStat:
       Health: 6000
@@ -348,7 +343,7 @@ MonoBehaviour:
       isSpecialAttackDelay: 0
       rushCount: 0
       dashSpeed: 10
-      stopDistanceDash: 20
+      stopDistanceDash: 10
   audioClips:
     clips:
     - Type: 0
