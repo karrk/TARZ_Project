@@ -47,7 +47,7 @@ public class PlayerStats : IInitializable, ITickable
     public float MaxHealth => baseStat.MaxHealth + equipStats.MaxHealth;
     public float MovementSpeed => baseStat.MovementSpeed + equipStats.MovementSpeed * 0.01f;
 
-    public float AtkSpeed => baseStat.AttackSpeed + equipStats.AttackSpeed;
+    public float AtkSpeed => baseStat.AttackSpeed + equipStats.AttackSpeed * 0.001f;
 
     private int removeCount;
 
