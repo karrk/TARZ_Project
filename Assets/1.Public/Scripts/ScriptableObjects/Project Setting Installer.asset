@@ -21,6 +21,14 @@ MonoBehaviour:
       type: 3}
     staticEquipment: {fileID: 9067213451011842492, guid: f9bfc3f757331c14f93e50451d78c4a9,
       type: 3}
+    staticBluechip: {fileID: 9067213451011842492, guid: b3a400598c9d14944aa4f87075249e19,
+      type: 3}
+    staticLobbyData: {fileID: 9067213451011842492, guid: 7d5205721403ffd468b1f0c8b5252c2d,
+      type: 3}
+    EquipBox: {fileID: 249021994024999976, guid: 21d7284a981fdc84099e7c472aa23f12,
+      type: 3}
+    Bluechip: {fileID: 2359229103487153431, guid: d827aee61de9da7428d5e369d88fbe86,
+      type: 3}
   pooledPrefabs:
     Monster:
       list:
@@ -302,7 +310,7 @@ MonoBehaviour:
       Angle: 90
       AttackRange: 4
       MoveSpeed: 2
-      InAttackRange: 4
+      InAttackRange: 8
       DetectRange: 10
       RotateSpeed: 5
       MaxRotateTime: 2
@@ -312,12 +320,33 @@ MonoBehaviour:
       jumpDuration: 0
       changeSpeed: 0
       isGroggyActive: 0
-      pillarStates: 
+      pillarStates: 000000000000000000000000
       groggyDuration: 0
       isGimmickActive: 0
-      pillarSpawnRadius: 0
+      pillarSpawnRadius: 5
       halfHealth: 0
       isSpecialAttackDelay: 0
-  soundSetting:
-    Player:
-      Audio: {fileID: 8300000, guid: 27df013357e3db6459d1c2775374af36, type: 3}
+  audioClips:
+    clips:
+    - Type: 0
+      Clip: {fileID: 8300000, guid: 27df013357e3db6459d1c2775374af36, type: 3}
+    - Type: 10
+      Clip: {fileID: 8300000, guid: b45b19776b2e15e48947a75b76ccca86, type: 3}
+    - Type: 42
+      Clip: {fileID: 8300000, guid: 5cd691c7632755d499fbbb55bc1f0fac, type: 3}
+    - Type: 0
+      Clip: {fileID: 0}
+    - Type: 0
+      Clip: {fileID: 0}
+    - Type: 0
+      Clip: {fileID: 0}
+    - Type: 0
+      Clip: {fileID: 0}
+    - Type: 0
+      Clip: {fileID: 0}
+    - Type: 0
+      Clip: {fileID: 0}
+    - Type: 0
+      Clip: {fileID: 0}
+    - Type: 0
+      Clip: {fileID: 0}

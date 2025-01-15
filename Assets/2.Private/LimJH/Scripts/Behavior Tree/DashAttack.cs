@@ -6,136 +6,70 @@ using Unity.VisualScripting;
 
 public class DashAttack : BaseAction
 {
-    public SharedGameObject targetObject;  // 공격 대상
-    public SharedInt rushCount;
-    public SharedInt attackCount;
-    public SharedFloat dashSpeed;          // 돌진 속도
-    public SharedFloat stopDistance;       // 돌진 완료 거리
+    //public SharedGameObject targetObject;  // 공격 대상
+    //public SharedInt rushCount;
+    //public SharedInt attackCount;
+    //public SharedFloat dashSpeed;          // 돌진 속도
+    //public SharedFloat stopDistance;       // 돌진 완료 거리
 
     private Vector3 dashDirection;         // 돌진 방향
     private bool isDashing;                // 현재 돌진 중인지 확인
-    private int initialRushCount;          // 초기 설정된 돌진 횟수
-
-    private MidBossMonster midBossMonster;
-
-    public SharedBool isDelay;
-
-    private float originalAttackRange;
-    public SharedFloat attackRange;        // 공격 범위
-    public SharedFloat detectRange;        // 탐지 범위
 
     public override void OnStart()
     {
-        // 원래 attackRange 값 저장
-        originalAttackRange = attackRange.Value;
+        base.OnStart();
 
-        // attackRange를 detectRange로 변경
-        attackRange.Value = detectRange.Value;
+        mob.Stat.rushCount = Random.Range(1, 4); // 1~3 랜덤 횟수 선택
 
-        rushCount.Value = Random.Range(1, 4); // 1~3 랜덤 횟수 선택
-        //Debug.Log($"{rushCount.Value}번 돌진 실행");
-
-        if(midBossMonster == null)
-        {
-            midBossMonster = gameObject.GetComponent<MidBossMonster>();
-        }
-
-        // 점프 공격 쿨타임 시작
-        if (midBossMonster != null)
-        {
-            midBossMonster.StartCoroutine(StartDashAttackDelay(midBossMonster));
-            Test(midBossMonster).Forget();
-        }
-
-        /*if (targetObject.Value != null)
-        {
-            // 타겟 방향 계산
-            Vector3 targetPosition = targetObject.Value.transform.position;
-            Vector3 currentPosition = transform.position;
-
-            dashDirection = (targetPosition - currentPosition).normalized; // 방향 계산
-            isDashing = true;
-
-            if (rushCount.Value <= 0)
-            {
-                rushCount.Value = Random.Range(1, 4); // 1~3 랜덤 횟수 설정
-            }
-
-            initialRushCount = rushCount.Value;
-            Debug.Log($"{initialRushCount}번 돌진 시작: 방향 - {dashDirection}");
-        }
-        else
-        {
-            Debug.LogError("TargetObject가 설정되지 않았습니다.");
-            isDashing = false;
-        }*/
-
+        // 돌진 중 상태 초기화
+        isDashing = false;
     }
 
-    //public override TaskStatus OnUpdate()
-    //{
-    //    //return TaskStatus.Success;
-    //    /*if (!isDashing)
-    //    {
-    //        return TaskStatus.Failure; // 돌진 불가능한 상태
-    //    }
+    public override TaskStatus OnUpdate()
+    {
+        if (mob.player == null)
+        {
+            return TaskStatus.Failure; // 타겟이 없으면 실패로 처리
+        }
 
-    //    // 돌진 실행
-    //    transform.position += dashDirection * dashSpeed.Value * Time.deltaTime;
+        if (!isDashing)
+        {
+            StartDash();
+        }
 
-    //    // 타겟과의 거리 계산
-    //    float distanceToTarget = Vector3.Distance(transform.position, targetObject.Value.transform.position);
+        if (isDashing)
+        {
+            PerformDash();
+        }
 
-    //    if (distanceToTarget <= stopDistance.Value)
-    //    {
-    //        Debug.Log($"돌진 완료, 남은 돌진 횟수: {rushCount.Value - 1}");
+        return TaskStatus.Running;
+    }
 
-    //        rushCount.Value--; // 돌진 횟수 감소
-    //        if (rushCount.Value <= 0)
-    //        {
-    //            Debug.Log("모든 돌진 완료");
-    //            isDashing = false; // 돌진 종료
-    //            return TaskStatus.Success;
-    //        }
+    private void StartDash()
+    {
+        // 현재 위치와 타겟 위치를 기반으로 방향 설정
+        dashDirection = (mob.PlayerPos - transform.position).normalized;
+        isDashing = true;
+    }
 
-    //        // 다음 돌진을 위해 방향 재계산
-    //        Vector3 targetPosition = targetObject.Value.transform.position;
-    //        Vector3 currentPosition = transform.position;
-    //        dashDirection = (targetPosition - currentPosition).normalized; // 새로운 방향 계산
-    //    }
+    private void PerformDash()
+    {
+        // 타겟 지점까지 이동
+        Vector3 newPosition = transform.position + dashDirection * mob.Stat.dashSpeed * Time.deltaTime;
+        transform.position = newPosition;
 
-    //    // 아직 돌진 중인 상태
-    //    return TaskStatus.Running;
-    //}
+        // 목표 지점에 도달했는지 확인
+        float distanceToTarget = Vector3.Distance(transform.position, mob.PlayerPos);
+
+        if (distanceToTarget <= mob.Stat.stopDistance)
+        {
+            isDashing = false; // 돌진 완료
+        }
+    }
 
     public override void OnEnd()
     {
-        // 점프 및 공격 종료 작업
-        Debug.Log("대쉬 특수 공격 완료");
-        attackRange.Value = originalAttackRange;
-
-        //attackCount.Value = 0;
-    }
-
-    private System.Collections.IEnumerator StartDashAttackDelay(MidBossMonster monster)
-    {
-        isDelay.Value = true;
-        yield return new WaitForSeconds(monster.DashAttackDelay);
-        isDelay.Value = false;
-        attackCount.Value = 0;
-
-        // return TaskStatus.Success; 를 호출 시키는 방법을 찾는다.
-    }
-
-    private async UniTask<TaskStatus> Test(MidBossMonster monster)
-    {
-        //대쉬어택 구현
-
-        isDelay.Value = true;
-        await UniTask.Delay((int)(monster.DashAttackDelay * 1000));
-        isDelay.Value = false;
-        attackCount.Value = -1;
-
-        return TaskStatus.Success;
+        base.OnEnd();
+        isDashing = false; // 상태 초기화
     }
 }

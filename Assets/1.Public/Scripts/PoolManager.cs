@@ -37,8 +37,8 @@ public class PoolManager : MonoBehaviour
         var monsterPrefab = prefabs.Monster.GetPairTable();
         foreach (var item in monsterPrefab)
         {
-            pools[E_PoolType.Monster][item.Key] 
-                = new ObjPool(container, item.Value,5,MainDirectory);
+            pools[E_PoolType.Monster][item.Key]
+                = new ObjPool(container, item.Value, 5, MainDirectory);
         }
 
         var vfxTable = prefabs.VFX.GetPairTable();
@@ -69,7 +69,7 @@ public class PoolManager : MonoBehaviour
         {
             foreach (var inner in total.Value)
             {
-                if(inner.Key.Equals(type))
+                if (inner.Key.Equals(type))
                 {
                     return inner.Value.GetObject();
                 }
@@ -85,8 +85,8 @@ public class PoolManager : MonoBehaviour
     public T GetObject<T>(Enum type) where T : class
     {
         GameObject obj = GetObject(type);
-        
-        if (obj == null) 
+
+        if (obj == null)
             return null;
 
         return obj.GetComponent<T>();
@@ -122,7 +122,7 @@ public class PoolManager : MonoBehaviour
         private Transform innerDirectory;
         private DiContainer container;
 
-        public ObjPool(DiContainer container, GameObject prefab,int initCount = 10, Transform parent = null)
+        public ObjPool(DiContainer container, GameObject prefab, int initCount = 10, Transform parent = null)
         {
             innerDirectory = new GameObject().transform;
             innerDirectory.gameObject.name = $"{prefab.name} Pool";
@@ -149,7 +149,7 @@ public class PoolManager : MonoBehaviour
         {
             GameObject obj;
 
-            if(pool.Count <= 1)
+            if (pool.Count <= 1)
             {
                 CreateObject(pool[0], pool.Capacity * 2);
                 return GetObject();

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3936025823665182721}
   - component: {fileID: 4628478019820410366}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Bluechip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,6 +46,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   getRange: 3
+  isPossess: 0
+  blueChips:
+  - {fileID: 11400000, guid: f6d2ceebf04b4234c94e2b13ce48d1dd, type: 2}
+  - {fileID: 11400000, guid: d497aa463dd3f084ca9f56e5021907f8, type: 2}
+  - {fileID: 11400000, guid: c33eca05fe391bc43bd5845bc75196e6, type: 2}
+  - {fileID: 11400000, guid: c93649559bd07764590554fc07aaa77a, type: 2}
+  - {fileID: 11400000, guid: dab02a1d77578dc47a107f545b731395, type: 2}
+  probability: []
+  blueChip: {fileID: 0}
 --- !u!1001 &8158623239435936004
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -54,10 +63,20 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3936025823665182721}
     m_Modifications:
+    - target: {fileID: 606787584308952839, guid: 5f5c8ff82e294784eb2bf7b5297fe620,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 3619674257923135844, guid: 5f5c8ff82e294784eb2bf7b5297fe620,
         type: 3}
       propertyPath: m_Name
       value: BoxDeco00
+      objectReference: {fileID: 0}
+    - target: {fileID: 3619674257923135844, guid: 5f5c8ff82e294784eb2bf7b5297fe620,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8443071586514968487, guid: 5f5c8ff82e294784eb2bf7b5297fe620,
         type: 3}

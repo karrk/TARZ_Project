@@ -6,7 +6,6 @@ using Zenject;
 public class ProjectInstaller : MonoInstaller<ProjectInstaller>
 {
     [Inject] private NormalPrefab prefabs;
-    //public LayerMask garbageLayer;
 
     public override void InstallBindings()
     {
@@ -15,6 +14,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         InstallData();
         InstallManagers();
         InstallInventory();
+
     }
 
     private void InstallMisc()
@@ -50,9 +50,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
 
         //Container.Bind<SkillManager>().AsSingle().NonLazy();
 
-        Container.BindInterfacesAndSelfTo<InputManager>().AsSingle().NonLazy();
-
-        //Container.Bind<SoundManager>().FromComponentInNewPrefab(prefabs.SoundManager).AsSingle().NonLazy();
+        Container.Bind<SoundManager>().FromComponentInNewPrefab(prefabs.SoundManager).AsSingle().NonLazy();
     }
 
     private void InstallInventory()
@@ -61,36 +59,57 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         Container.BindInterfacesAndSelfTo<PlayerEquipment>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<PlayerStats>().AsSingle().NonLazy();
         Container.Bind<StaticEquipment>().FromComponentInNewPrefab(prefabs.staticEquipment).AsSingle().NonLazy();
+        Container.Bind<StaticBluechip>().FromComponentInNewPrefab(prefabs.staticBluechip).AsSingle().NonLazy();
+        Container.Bind<LobbyData>().FromComponentInNewPrefab(prefabs.staticLobbyData).AsSingle().NonLazy();
     }
 
     [Serializable]
-    public class SoundSetting
+    public class AudioClips
     {
-        public BGMSettings BGM;
-        public SFXSettings SFX;
-        public PlayerSettings Player;
+        public List<AudioPrefab> clips;
 
+        private Dictionary<E_Audio, AudioClip> innerTable;
 
-        [Serializable]
-        public class BGMSettings
+        private void Init()
         {
+            innerTable = new Dictionary<E_Audio, AudioClip>();
 
+            foreach (var item in clips)
+            {
+                if (item.Clip == null)
+                    continue;
+
+                innerTable.Add(item.Type, item.Clip);
+            }
         }
 
-        [Serializable]
-        public class SFXSettings
+        public AudioClip this[E_Audio type]
         {
+            get
+            {
+                if(innerTable == null)
+                {
+                    Init();
+                }
 
+                if(innerTable.ContainsKey(type) == false)
+                {
+                    Debug.Log("해당 오디오 클립 못찾음");
+                }
+
+                return innerTable[type];
+            }
         }
-
-        [Serializable]
-        public class PlayerSettings
-        {
-            public AudioClip Audio;
-        }
-
-
     }
+
+    [Serializable]
+    public class AudioPrefab
+    {
+        public E_Audio Type;
+        public AudioClip Clip;
+    }
+
+    
 
     [Serializable]
     public class InventorySetting
@@ -266,6 +285,10 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         public GameObject Player;
         public GameObject SoundManager;
         public GameObject staticEquipment;
+        public GameObject staticBluechip;
+        public GameObject staticLobbyData;
+        public GameObject EquipBox;
+        public GameObject Bluechip;
     }
 
     [Serializable]
@@ -465,6 +488,10 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         public float halfHealth;
 
         public bool isSpecialAttackDelay;
+
+        public int rushCount;
+        public float dashSpeed;
+        public float stopDistance;
 
 
         public virtual void SendToCopyStats<T>(ref T target) where T : MonsterStat, new()

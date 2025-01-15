@@ -16,7 +16,7 @@ public class ProjectSettingInstaller : ScriptableObjectInstaller<ProjectSettingI
 
     public ProjectInstaller.MonsterStats monsterStatSetting;
 
-    public ProjectInstaller.SoundSetting soundSetting;
+    public ProjectInstaller.AudioClips audioClips;
 
     public override void InstallBindings()
     {
@@ -28,7 +28,7 @@ public class ProjectSettingInstaller : ScriptableObjectInstaller<ProjectSettingI
         Container.BindInstance(playerSettings);
         Container.BindInstance(inventorySettings);
         Container.BindInstance(lockOnSetting);
-        Container.BindInstance(soundSetting);
+        Container.BindInstance(audioClips);
         Container.BindInstance(monsterStatSetting);
     }
 }

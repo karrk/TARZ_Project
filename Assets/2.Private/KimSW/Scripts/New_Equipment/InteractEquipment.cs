@@ -1,14 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
-using Zenject;
 
 public class InteractEquipment : MonoBehaviour, IInteractable
 {
-    [Inject]
-    InGameUI gameUI;
+    private InGameUI gameUI;
 
     Transform player;
 
@@ -18,6 +14,7 @@ public class InteractEquipment : MonoBehaviour, IInteractable
 
     private void Start()
     {
+        gameUI = FindObjectOfType<InGameUI>();
         SetInteractObservable();
     }
 

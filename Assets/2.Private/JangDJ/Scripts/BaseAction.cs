@@ -18,5 +18,6 @@ public class BaseAction : Action
         my.SetValue(this.gameObject);
         mob = my.Value.GetComponent<BaseMonster>();
         jumpMob = my.Value.GetComponent<EliteMonster1>();
+        bossMob = my.Value.GetComponent<MidBossMonster>();
     }
 }

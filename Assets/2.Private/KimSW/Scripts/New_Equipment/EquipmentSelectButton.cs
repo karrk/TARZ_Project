@@ -11,6 +11,9 @@ public class EquipmentSelectButton : MonoBehaviour
     [Inject]
     InGameUI inGameUI;
 
+    [Inject]
+    PlayerUIModel playerUIModel;
+
     [SerializeField] Image buttonImage;
     
     [SerializeField] Image sprite;
@@ -69,7 +72,7 @@ public class EquipmentSelectButton : MonoBehaviour
     {
         equipment = null;
         sprite.sprite = null;
-        descriptionText.text = "골드";
+        descriptionText.text = "경험치";
         levelText.text = "";
         upgradeLayout.RemoveFill();
         upgradeLayout.SetLayout(0);
@@ -87,7 +90,7 @@ public class EquipmentSelectButton : MonoBehaviour
         }
         else
         {
-            Debug.Log("골드 획득");
+            playerUIModel.TargetEXP.Value += 500;
         }
         inGameUI.EquipmentSelectPanel.CloseUIPanel();
     }

@@ -16,9 +16,6 @@ public class TestInput : MonoBehaviour
     PlayerUIModel playerModel;
 
     [Inject]
-    InputManager inputManager;
-
-    [Inject]
     PoolManager poolManager;
 
     public InputActionReference cancelRef;
@@ -79,6 +76,13 @@ public class TestInput : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I))
         {
             inGameUI.AlertText.SetAlertText("게이지가 부족합니다");
+
+        }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            inGameUI.CurrentMenu = inGameUI.PassiveShopPanel;
+            inGameUI.CurrentMenu.OpenUIPanel();
 
         }
 

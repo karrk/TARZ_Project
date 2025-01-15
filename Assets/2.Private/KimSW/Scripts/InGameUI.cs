@@ -24,7 +24,10 @@ public class InGameUI : BindUI
     private BlueChipGetPanel blueChipGetPanel;
     private BlueChipSelectPanel blueChipSelectPanel;
 
+    private PassiveShopPanel passiveShopPanel;
+
     private EquipmentManager equipmentManager;
+
 
     
     public InventoryPanel InventoryPanel { get { return inventoryPanel; } }
@@ -54,6 +57,8 @@ public class InGameUI : BindUI
     public BlueChipGetPanel BlueChipGetPanel { get { return blueChipGetPanel; } }
     public BlueChipSelectPanel BlueChipSelectPanel { get { return blueChipSelectPanel; } }
 
+    public PassiveShopPanel PassiveShopPanel { get { return passiveShopPanel; } }
+
     private IOpenCloseMenu currentMenu;
 
     public IOpenCloseMenu CurrentMenu { get { return currentMenu; } set { currentMenu = value; } }
@@ -61,6 +66,11 @@ public class InGameUI : BindUI
     private void Awake()
     {
         Bind();
+        InitPanel();
+    }
+
+    void InitPanel()
+    {
         //inventoryPanel = GetUI<InventoryPanel>("InventoryPanel");
         //inventorySetPanel = GetUI<InventorySetPanel>("InventorySetPanel");
         //itemInformationPanel = GetUI<ItemInformationPanel>("ItemInformationPanel");
@@ -77,7 +87,11 @@ public class InGameUI : BindUI
         equipmentManager = GetUI<EquipmentManager>("EquipmentManager");
         blueChipGetPanel = GetUI<BlueChipGetPanel>("BlueChipGetPanel");
         blueChipSelectPanel = GetUI<BlueChipSelectPanel>("BlueChipSelectPanel");
+
+        passiveShopPanel = GetUI<PassiveShopPanel>("PassiveShopPanel");
+
     }
+
     private void Start()
     {
        // itemInventory.OnGetItem += (num, sprite) => { InventoryPanel.GetItem(num, sprite); };

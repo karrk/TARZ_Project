@@ -2,7 +2,8 @@ using UnityEngine;
 using Zenject;
 using System;
 using UnityEngine.AI;
-using Unity.VisualScripting;
+using BehaviorDesigner.Runtime;
+using Random = UnityEngine.Random;
 
 public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
 {
@@ -35,6 +36,7 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
     [Inject] PlayerStats playerStats;
     [Inject] private PoolManager manager;
     [Inject] private SignalBus signal;
+    [Inject] private ProjectInstaller.NormalPrefab prefabs;
 
     #endregion
     
@@ -81,10 +83,56 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
 
     public void Init(ProjectPlayer player)
     {
+        GetComponent<BehaviorTree>().enabled = true;
         Reference.Nav.enabled = true;
         Reference.Coll.enabled = true;
         originStat.SendToCopyStats<ProjectInstaller.MonsterStat>(ref stat);
         this.player = player;
+    }
+
+    private void Drop()
+    {
+        bool isGetBluechip = GetBluechip();
+        bool isGetItem;
+
+        if(isGetBluechip == false)
+        {
+            isGetItem = GetEquip();
+
+            if(isGetItem == true)
+            {
+                Instantiate(prefabs.EquipBox,transform.position,Quaternion.identity);
+            }
+
+            return;
+        }
+
+        Instantiate(prefabs.Bluechip, transform.position, Quaternion.identity);
+    }
+
+    private bool GetBluechip()
+    {
+        if (this.type != (E_Monster.BombMob | E_Monster.JumpMob | E_Monster.BossMob))
+            return false;
+
+        float dropRate = 30f;
+        float rand = Random.Range(0, 100);
+
+        if (rand <= dropRate)
+            return true;
+
+        return false;
+    }
+
+    private bool GetEquip()
+    {
+        float dropRate = 70f;
+        float rand = Random.Range(0, 100);
+
+        if (rand <= dropRate)
+            return true;
+
+        return false;
     }
 
     private void OnDisable()
@@ -144,6 +192,7 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
 
         if (stat.Health <= 0)
         {
+            Drop();
             playerStats.MobDeadCountup();
             OnDead?.Invoke();
         }
@@ -249,7 +298,7 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
         GameObject projectile = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
 
         // 투사체 발사 방향 계산
-        Vector3 direction = (target.transform.position - transform.position).normalized;
+        Vector3 direction = (target.transform.position - firePoint.position).normalized;
 
         // Rigidbody 컴포넌트를 가져와 힘을 가함
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
@@ -316,6 +365,10 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
 
     public void Return()
     {
+        GetComponent<BehaviorTree>().enabled = false;
+        Reference.Nav.enabled = false;
+        OnDead = null;
+        
         manager.Return(this);
     }
 }
