@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -59,8 +60,27 @@ public class EquipmentSelectPanel : MonoBehaviour, IOpenCloseMenu
         // 티어 별 남은 장비 개수
         int[] rarityCount = new int[(int)RarityTier.SIZE];
 
+        //for (int i = 0; i < inGameUI.EquipmentManager.newEquipments.Count; i++)
+        //{
+        //    Debug.LogError($"순회 : {inGameUI.EquipmentManager.newEquipments[i]}");
+        //    Debug.LogError($"이름 : {inGameUI.EquipmentManager.newEquipments[i].equipmentName}");
+        //}
+
+        //Debug.LogError($"인게임 UI {inGameUI}");
+        //Debug.LogError($"equipment {inGameUI.EquipmentManager}");
+        //Debug.LogError($"new equipment {inGameUI.EquipmentManager.newEquipments}"); // 씬 전환시 해당 데이터가 날아감
+
         for(int i = 0; i < inGameUI.EquipmentManager.newEquipments.Count; i++)
         {
+            if(inGameUI.EquipmentManager.newEquipments[i] == null) // 에디터에선 안뜸
+            {
+
+                Debug.LogError($"빌드에선 뜸 {i}");
+            }
+
+            //Debug.LogError($"갯수 {rarityCount.Length}");
+            //Debug.LogError($"내부 {inGameUI.EquipmentManager.newEquipments[i]}");
+            //Debug.LogError($"티어 {(int)inGameUI.EquipmentManager.newEquipments[i].rarityTier}");
             rarityCount[(int)inGameUI.EquipmentManager.newEquipments[i].rarityTier]++;
           
         }

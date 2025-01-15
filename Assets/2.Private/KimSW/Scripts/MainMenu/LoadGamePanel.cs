@@ -50,7 +50,7 @@ public class LoadGamePanel : FadePanel, IOpenCloseMenu
     #if UNITY_EDITOR
             string path = $"{Application.dataPath}/2.Private/KimSW/Json";
 #else
-            string persPath = Application.persistentDataPath; 
+            string path = Application.persistentDataPath; 
 #endif
 
         for (int i = 0; i < loadText.Length; i++)

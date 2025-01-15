@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.IO;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Zenject;
@@ -21,28 +20,35 @@ public class PassiveCSVParser : MonoBehaviour
 
     public List<PassiveInfo> passives = new List<PassiveInfo>();
 
+    [SerializeField] TextAsset csv;
 
     private void Awake()
     {
-#if UNITY_EDITOR
-        string path = $"{Application.dataPath}/2.Private/KimSW/CSV";
-#else
-        string persPath = Application.persistentDataPath; 
-#endif
-        if (Directory.Exists(path) == false)
-        {
-            Debug.LogError("경로가 없습니다");
-            return;
-        }
+        Debug.Log(this.gameObject.name);
 
-        if (File.Exists($"{path}/StatDatatable.csv") == false)
-        {
-            Debug.LogError("파일이 없습니다");
-            return;
-        }
+        //#if UNITY_EDITOR
+        //        string path = $"{Application.dataPath}/2.Private/KimSW/CSV";
+        //#else
+        //        string path = Application.persistentDataPath; 
+        //#endif
+        //        if (Directory.Exists(path) == false)
+        //        {
+        //            Debug.LogError("경로가 없습니다");
+        //            return;
+        //        }
 
-        string file = File.ReadAllText($"{path}/StatDatatable.csv");
-        string[] lines = file.Split('\n');
+        //        if (File.Exists($"{path}/StatDatatable.csv") == false)
+        //        {
+        //            Debug.LogError("파일이 없습니다");
+        //            return;
+        //        }
+
+        //        string file = File.ReadAllText($"{path}/StatDatatable.csv");
+        //        string[] lines = file.Split('\n');
+
+        TextAsset asset = Resources.Load<TextAsset>("StatDatatable");
+
+        string[] lines = asset.text.Split('\n');
 
         for (int y = 1; y < lines.Length; y++)
         {

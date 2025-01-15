@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.IO;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -9,28 +8,33 @@ public class EquipmentCSVParser : MonoBehaviour
 
     public List<NewEquipment> newEquipments = new List<NewEquipment>();
 
+    [SerializeField]
+    TextAsset csv;
 
     private void Awake()
     {
-#if UNITY_EDITOR
-        string path = $"{Application.dataPath}/2.Private/KimSW/CSV";
-#else
-        string persPath = Application.persistentDataPath; 
-#endif
-        if (Directory.Exists(path) == false)
-        {
-            Debug.LogError("경로가 없습니다");
-            return;
-        }
+        //#if UNITY_EDITOR
+        //        string path = $"{Application.dataPath}/2.Private/KimSW/CSV";
+        //#else
+        //        string path = Application.persistentDataPath; 
+        //#endif
+        //        if (Directory.Exists(path) == false)
+        //        {
+        //            Debug.LogError("경로가 없습니다");
+        //            return;
+        //        }
 
-        if (File.Exists($"{path}/EquipmentDatatable.csv") == false)
-        {
-            Debug.LogError("파일이 없습니다");
-            return;
-        }
+        //        if (File.Exists($"{path}/EquipmentDatatable.csv") == false)
+        //        {
+        //            Debug.LogError("파일이 없습니다");
+        //            return;
+        //        }
 
-        string file = File.ReadAllText($"{path}/EquipmentDatatable.csv");
-        string[] lines = file.Split('\n');
+        //        string file = File.ReadAllText($"{path}/EquipmentDatatable.csv");
+        //       string[] lines = file.Split('\n');
+        TextAsset asset = Resources.Load<TextAsset>("EquipmentDatatable");
+
+        string[] lines = asset.text.Split('\n');
 
         for (int y = 3; y < lines.Length; y++)
         {
