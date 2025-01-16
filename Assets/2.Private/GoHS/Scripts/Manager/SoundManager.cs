@@ -87,7 +87,7 @@ public class SoundManager : MonoBehaviour
 
     public float GetVolume()
     {
-        return sfx.volume;
+        return bgm.volume;
     }
 
 

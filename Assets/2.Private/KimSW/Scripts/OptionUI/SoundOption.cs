@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-public class SoundOption : MonoBehaviour
+public class SoundOption : MonoBehaviour, ISaveOption
 {
     [Inject]
     SoundManager soundManager;
@@ -13,7 +13,8 @@ public class SoundOption : MonoBehaviour
 
     public float soundValue;
 
-    private void Awake()
+
+    private void OnEnable()
     {
         slider.value = soundManager.GetVolume();
         soundValue = slider.value;
@@ -24,7 +25,8 @@ public class SoundOption : MonoBehaviour
         soundValue = slider.value;
     }
 
-    public void SaveSoundValue()
+ 
+    public void SaveOption()
     {
         soundManager.SetBGM(soundValue);
         soundManager.SetSFX(soundValue);

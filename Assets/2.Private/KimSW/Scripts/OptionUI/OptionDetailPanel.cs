@@ -7,16 +7,17 @@ public class OptionDetailPanel : MonoBehaviour
 {
     OptionButton[] optionButtons;
 
-    [SerializeField] SoundOption soundOption;
+    [SerializeField] ISaveOption[] options;
 
 
     private void Awake()
     {
         optionButtons = GetComponentsInChildren<OptionButton>(true);
+        options = GetComponentsInChildren<ISaveOption>(true);
 
-     
+
     }
-
+    /*
     private void OnEnable()
     {
         foreach (OptionButton button in optionButtons)
@@ -41,9 +42,13 @@ public class OptionDetailPanel : MonoBehaviour
 
         obj.SetActive(true);
     }
-
+    */
     public void SaveOption()
     {
-        soundOption.SaveSoundValue();
+        foreach(ISaveOption option in options)
+        {
+            option.SaveOption();
+        }
+       
     }
 }
