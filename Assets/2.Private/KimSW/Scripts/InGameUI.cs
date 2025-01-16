@@ -6,7 +6,7 @@ public class InGameUI : BindUI
 {
     [Inject] private ItemInventory itemInventory;
 
-    
+    #region
     private InventoryPanel inventoryPanel;
     private InventorySetPanel inventorySetPanel;
     
@@ -31,7 +31,8 @@ public class InGameUI : BindUI
 
     private EquipmentBackpackPanel equipmentBackpackPanel;
 
-    
+    private GameOverPanel gameOverPanel;
+
     public InventoryPanel InventoryPanel { get { return inventoryPanel; } }
     public InventorySetPanel InventorySetPanel { get { return inventorySetPanel; } }
 
@@ -62,6 +63,9 @@ public class InGameUI : BindUI
     public PassiveShopPanel PassiveShopPanel { get { return passiveShopPanel; } }
 
     public EquipmentBackpackPanel EquipmentBackpackPanel { get { return equipmentBackpackPanel; } }
+
+    public GameOverPanel GameOverPanel { get { return gameOverPanel; } }
+    #endregion
 
     private IOpenCloseMenu currentMenu;
 
@@ -116,7 +120,7 @@ public class InGameUI : BindUI
         passiveShopPanel = GetUI<PassiveShopPanel>("PassiveShopPanel");
 
         equipmentBackpackPanel = GetUI<EquipmentBackpackPanel>("EquipmentBackpackPanel");
-
+        gameOverPanel = GetUI<GameOverPanel>("GameOverPanel");
     }
 
     private void Start()
@@ -152,6 +156,28 @@ public class InGameUI : BindUI
 
     }
 
+    public void OnGameOver()
+    {
+        if (!CurrentMenu.Equals(StatusBarPanel))
+        {
+            CurrentMenu.CloseUIPanel();
+
+        }
+
+        InGameMenuPanel.gameObject.SetActive(false);
+        StatusBarPanel.gameObject.SetActive(false);
+
+        CurrentMenu = GameOverPanel;
+        CurrentMenu.OpenUIPanel();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            OnGameOver();
+        }
+    }
 
     /*
     public void OnInventory()

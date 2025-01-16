@@ -43,7 +43,13 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
 
     [Inject] private ProjectInstaller.PlayerSettings setting;
     public ProjectInstaller.PlayerSettings Setting => setting;
-    
+
+    [Inject]
+    public PlayerUIModel playerUIModel;
+
+    private InGameUI inGameUI;
+
+
     //[Inject] private ProjectInstaller.SoundSetting soundSetting;
     //public ProjectInstaller.SoundSetting SoundSetting => soundSetting;
 
@@ -265,6 +271,8 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
 
         //inputManager.PressedL1Key += MeleeSkill_1;
         //inputManager.OnControlledDPAD += MeleeSkill_2;
+
+        inGameUI = GameObject.FindGameObjectWithTag("ship").GetComponent<InGameUI>();
     }
 
     private void MoveCanceled(InputAction.CallbackContext obj)
@@ -305,8 +313,14 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
     private void Jump(InputAction.CallbackContext obj)
     {
         //if (IsGrounded == false || skillManager.UseStamina(setting.JumpSetting.UseStamina) == false)
-        if (IsGrounded == false || stats.UseStamina(setting.JumpSetting.UseStamina) == false)
+        if (IsGrounded == false)
+        {
             return;
+        }
+        if (stats.UseStamina(setting.JumpSetting.UseStamina) == false) {
+            inGameUI.AlertText.SetAlertText("스태미나가 부족합니다");
+            return;
+    }
 
         ChangeState(E_State.Jump);
 
@@ -368,7 +382,10 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
         bool useAccept = stats.UseStamina(setting.DashSetting.UseStamina);
 
         if (useAccept == false)
+        {
+            inGameUI.AlertText.SetAlertText("스태미나가 부족합니다");
             return;
+        }
 
         ChangeState(E_State.Dash);
     }
@@ -384,7 +401,10 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
             int skillNumber = stats.UseSkill();
 
             if (skillNumber == 0)
+            {
+                inGameUI.AlertText.SetAlertText("스킬 게이지가 부족합니다");
                 return;
+            }
 
 
 

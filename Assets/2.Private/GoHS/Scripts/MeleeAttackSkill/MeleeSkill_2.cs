@@ -25,6 +25,8 @@ public class MeleeSkill_2 : BaseState
     {
         dashTime = player.Setting.MeleeSkill2Setting.DashTime;      
         coolTime = player.Setting.MeleeSkill2Setting.CoolTime;
+        player.playerUIModel.SkillCoolTime[1].Value = player.Setting.MeleeSkill2Setting.CoolTime;
+
         player.candash = true;
 
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Monster"), true);
@@ -86,7 +88,13 @@ public class MeleeSkill_2 : BaseState
 
     private IEnumerator CoolTimeCoroutine()
     {
-        yield return new WaitForSeconds(coolTime);
+        while (player.playerUIModel.SkillCoolTime[1].Value > 0)
+        {
+            player.playerUIModel.SkillCoolTime[1].Value -= Time.deltaTime;
+
+            yield return null;
+
+        }
         canSkill = true;
     }
 }

@@ -12,6 +12,8 @@ public class CoolTimeView : AnimatedUI
     [SerializeField] Color enableColor;
     [SerializeField] Color disableColor;
 
+    bool[] isStart = new bool[2];
+
     private void Awake()
     {
         SetMoveOffset();
@@ -20,18 +22,25 @@ public class CoolTimeView : AnimatedUI
 
     public void StartCoolTime(int num)
     {
-        EnableCooltimeText(num);
-        SetSpriteDisable(num);
+        if (!isStart[num])
+        {
+
+            EnableCooltimeText(num);
+            SetSpriteDisable(num);
+            isStart[num] = true;
+        }
     }
 
     public void EndCoolTime(int num)
     {
         DisableCooltimeText(num);
         SetSpriteEnable(num);
+        isStart[num] = false;
     }
     public void SetSkillTimeValue(float value, int num)
     {
         timeText[num].text = value.ToString("N0");
+        StartCoolTime(num);
     }
 
     public void EnableCooltimeText(int num)

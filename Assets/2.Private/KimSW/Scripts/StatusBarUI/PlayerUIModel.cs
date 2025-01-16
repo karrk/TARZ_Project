@@ -36,6 +36,7 @@ public class PlayerUIModel : IInitializable
         GarbageCount = new ReactiveProperty<int>(garbages.Count);
         MaxGarbageCount = new ReactiveProperty<int>((int)stats.ThrowCapacity);
 
+        
         for (int i = 0; i < SkillCoolTime.Length; i++)
         {
             SkillCoolTime[i] = new ReactiveProperty<float>(0);

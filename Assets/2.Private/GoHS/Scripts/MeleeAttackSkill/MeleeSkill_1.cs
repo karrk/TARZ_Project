@@ -5,6 +5,8 @@ using UnityEngine.Rendering;
 
 public class MeleeSkill_1 : BaseState
 {
+    
+
     public MeleeSkill_1(ProjectPlayer player) : base(player)
     {
     }
@@ -18,9 +20,11 @@ public class MeleeSkill_1 : BaseState
 
     public override void Enter()
     {
-        //Debug.Log("근접 스킬 1 시작!");
+       // Debug.Log("근접 스킬 1 시작!");
         curDelay = player.Setting.MeleeSkill1Setting.Delay;
         coolTime = player.Setting.MeleeSkill1Setting.CoolTime;
+       
+        player.playerUIModel.SkillCoolTime[0].Value = player.Setting.MeleeSkill1Setting.CoolTime;
 
         player.Refernece.Animator.SetTrigger("MeleeSkill_1");
 
@@ -102,7 +106,14 @@ public class MeleeSkill_1 : BaseState
 
     private IEnumerator CoolTimeCoroutine()
     {
-        yield return new WaitForSeconds(coolTime);
+       
+        while (player.playerUIModel.SkillCoolTime[0].Value > 0)
+        {
+            player.playerUIModel.SkillCoolTime[0].Value -= Time.deltaTime;
+ 
+            yield return null;
+           
+        }
         canSkill = true;
     }
 }
