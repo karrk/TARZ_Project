@@ -85,6 +85,11 @@ public class SoundManager : MonoBehaviour
         sfx.pitch = pitch;
     }
 
+    public float GetVolume()
+    {
+        return sfx.volume;
+    }
+
 
     // 위치기반 SFX 음원 재생 
 }

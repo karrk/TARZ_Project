@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class OptionDetailPanel : MonoBehaviour
 {
     OptionButton[] optionButtons;
+
+    [SerializeField] SoundOption soundOption;
+
 
     private void Awake()
     {
@@ -36,5 +40,10 @@ public class OptionDetailPanel : MonoBehaviour
         }
 
         obj.SetActive(true);
+    }
+
+    public void SaveOption()
+    {
+        soundOption.SaveSoundValue();
     }
 }

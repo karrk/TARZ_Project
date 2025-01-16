@@ -28,5 +28,9 @@ public class OptionPanel : MonoBehaviour, IOpenCloseMenu
         inGameUI.CurrentMenu.OpenUIPanel();
     }
 
+    public void OnOptionSaveButton()
+    {
+        EventSystem.current.SetSelectedGameObject(defaultSelectedButton.gameObject);
+    }
    
 }
