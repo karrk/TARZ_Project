@@ -16,12 +16,25 @@ public class ResolutionOption : MonoBehaviour, ISaveOption
 
     private void OnEnable()
     {
-       dropdown.value = changeNum;
+#if UNITY_EDITOR
+        dropdown.value = changeNum;
+#else
+        string path = Application.persistentDataPath; 
+#endif
+        for (int i = 0; i < resolutionX.Length; i++)
+        {
+            if (resolutionX[i] == Screen.currentResolution.width)
+            {
+                dropdown.value = i;
+            }
+        }
+
+      
     }
 
     public void SaveOption()
     {
-        Screen.SetResolution(resolutionX[tempNum], resolutionY[tempNum], false);
+        Screen.SetResolution(resolutionX[tempNum], resolutionY[tempNum], true);
         changeNum = tempNum;
         
     }
