@@ -118,6 +118,16 @@ public class PlayerUIPresenter : IInitializable, IDisposable
           .Subscribe(value => inGameUI.StatusBarPanel.PlayerExpView.SetExpText(value)));
 
 
+        for (int i = 0; i < playerModel.SkillCoolTime.Length; i++)
+        {
+            list.Add(playerModel.SkillCoolTime[i]
+         .Where(value => value > 0)
+         .Subscribe(value => inGameUI.StatusBarPanel.CoolTimeView.SetSkillTimeValue(value, i)));
+
+            list.Add(playerModel.SkillCoolTime[i]
+         .Where(value => value <= 0)
+         .Subscribe(value => inGameUI.StatusBarPanel.CoolTimeView.EndCoolTime(i) ));
+        }
     }
 
 

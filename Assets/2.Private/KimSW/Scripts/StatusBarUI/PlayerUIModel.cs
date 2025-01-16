@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System.Diagnostics;
 using UniRx;
 using Zenject;
 
@@ -13,6 +14,8 @@ public class PlayerUIModel : IInitializable
     public ReactiveProperty<float> MaxStamina;
     public ReactiveProperty<float> Stamina;
     public ReactiveProperty<float> SkillGauge ;
+
+    public ReactiveProperty<float>[] SkillCoolTime = new ReactiveProperty<float>[2];
 
     public ReactiveProperty<int> GarbageCount;
     public ReactiveProperty<int> MaxGarbageCount;
@@ -33,6 +36,10 @@ public class PlayerUIModel : IInitializable
         GarbageCount = new ReactiveProperty<int>(garbages.Count);
         MaxGarbageCount = new ReactiveProperty<int>((int)stats.ThrowCapacity);
 
+        for (int i = 0; i < SkillCoolTime.Length; i++)
+        {
+            SkillCoolTime[i] = new ReactiveProperty<float>(0);
+        }
         TargetEXP = new ReactiveProperty<int>(0);
         CurrentEXP = new ReactiveProperty<int>(0);
     }
