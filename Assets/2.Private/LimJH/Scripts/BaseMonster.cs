@@ -29,6 +29,8 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
 
     public ProjectPlayer player;
 
+    public bool Ongroggy;
+
     #region Injects
 
 
