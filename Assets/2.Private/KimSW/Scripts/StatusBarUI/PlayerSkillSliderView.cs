@@ -47,6 +47,7 @@ public class PlayerSkillSliderView : SliderView
 
     public override void SetSlider(float value)
     {
+       
         slider.value = value;
         sb.Clear();
 
@@ -63,12 +64,12 @@ public class PlayerSkillSliderView : SliderView
 
         }
 
-        sb.Append("스킬 레벨 ");
+        sb.Append("Skill ");
         sb.Append(count);
 
-        // skillCountText.text = sb.ToString();
+        skillCountText.text = sb.ToString();
 
-        if(count == 0)
+        if(count < 1)
         {
             effect.SetActive(false);
         }

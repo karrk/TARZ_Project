@@ -1,38 +1,42 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
 public class EquipmentCSVParser : MonoBehaviour
 {
 
-    public List<NewEquipment> newEquipments = new List<NewEquipment>();
+    private List<NewEquipment> newEquipments;
 
     //[SerializeField]
     //TextAsset csv;
 
+    public List<NewEquipment> GetEquipment() { return newEquipments; }
+
     private void Awake()
     {
-//#if UNITY_EDITOR
-//        string path = $"{Application.dataPath}/2.Private/KimSW/CSV";
-//#else
-//                string path = Application.persistentDataPath; 
-//#endif
-//        if (Directory.Exists(path) == false)
-//        {
-//            Debug.LogError("경로가 없습니다");
-//            return;
-//        }
+        //#if UNITY_EDITOR
+        //        string path = $"{Application.dataPath}/2.Private/KimSW/CSV";
+        //#else
+        //                string path = Application.persistentDataPath; 
+        //#endif
+        //        if (Directory.Exists(path) == false)
+        //        {
+        //            Debug.LogError("경로가 없습니다");
+        //            return;
+        //        }
 
-//        if (File.Exists($"{path}/EquipmentDatatable.csv") == false)
-//        {
-//            Debug.LogError("파일이 없습니다");
-//            return;
-//        }
+        //        if (File.Exists($"{path}/EquipmentDatatable.csv") == false)
+        //        {
+        //            Debug.LogError("파일이 없습니다");
+        //            return;
+        //        }
 
-//        string file = File.ReadAllText($"{path}/EquipmentDatatable.csv");
-//        string[] lines = file.Split('\n');
-
+        //        string file = File.ReadAllText($"{path}/EquipmentDatatable.csv");
+        //        string[] lines = file.Split('\n');
+        newEquipments = new List<NewEquipment>();
+        newEquipments.Clear();
         TextAsset asset = Resources.Load<TextAsset>("EquipmentDatatable");
 
         string[] lines = asset.text.Split('\n');
@@ -136,10 +140,13 @@ public class EquipmentCSVParser : MonoBehaviour
             newEquipment.description = values[8];
 
             newEquipments.Add(newEquipment);
+          
 
             // AssetDatabase.CreateAsset(newEquipment, $"Assets/2.Private/KimSW/Prefabs/Required/InGame/NewEquipmentSO/{newEquipment.id}.asset");
         }
-
-
+        
+       
+        newEquipments.RemoveAt(0);
+        
     }
 }

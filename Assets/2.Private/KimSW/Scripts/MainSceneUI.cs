@@ -3,9 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Zenject;
 
 public class MainSceneUI : BindUI
 {
+    [Inject]
+    StaticEquipment staticEquipment;
+
     public InputActionReference cancelRef;
 
     public LoadingScript loadingScript;
@@ -31,6 +35,7 @@ public class MainSceneUI : BindUI
 
         CurrentMenu = MainMenuPanel;
 
+        staticEquipment.firstInit = false;
     }
 
 
