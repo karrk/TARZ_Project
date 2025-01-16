@@ -408,6 +408,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 108258980250908406, guid: ff2331e3cac16584cbaeb105ac37ce81,
+        type: 3}
+      propertyPath: m_ScrollDeltaPerTick
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 665152921253061759, guid: ff2331e3cac16584cbaeb105ac37ce81,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1676,12 +1681,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: InGameCanvas3
       objectReference: {fileID: 0}
-    - target: {fileID: 2991329055548527919, guid: 061939cc51f14a24dac0fd1a8e923ed8,
-        type: 3}
-      propertyPath: cancelRef
-      value: 
-      objectReference: {fileID: 7727032971491509709, guid: 4818de72e2b00354aadf906f3227caa0,
-        type: 3}
     - target: {fileID: 8181929706600210064, guid: 061939cc51f14a24dac0fd1a8e923ed8,
         type: 3}
       propertyPath: m_Pivot.x

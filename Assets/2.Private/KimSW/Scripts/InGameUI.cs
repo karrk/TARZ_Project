@@ -69,17 +69,23 @@ public class InGameUI : BindUI
 
 
     // 인풋
-
+ 
     public InputActionReference cancelRef;
+    public InputActionReference interRef;
+    public InputActionReference invenRef;
 
     private void OnEnable()
     {
         cancelRef.action.performed += CancelInput;
+       
+        invenRef.action.performed += InvenInput;
     }
 
     private void OnDisable()
     {
         cancelRef.action.performed -= CancelInput;
+      
+        invenRef.action.performed -= InvenInput;
     }
 
     private void Awake()
@@ -131,6 +137,22 @@ public class InGameUI : BindUI
 
         }
     }
+  
+    public void InvenInput(InputAction.CallbackContext value)
+    {
+        if (CurrentMenu.Equals(StatusBarPanel))
+        {
+            CurrentMenu = EquipmentBackpackPanel;
+            CurrentMenu.OpenUIPanel();
+        }
+        else if(CurrentMenu.Equals(EquipmentBackpackPanel))
+        {
+            EquipmentBackpackPanel.ChangeSelect();
+        }
+
+    }
+
+
     /*
     public void OnInventory()
     {

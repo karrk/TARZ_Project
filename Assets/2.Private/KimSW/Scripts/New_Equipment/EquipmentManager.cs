@@ -3,6 +3,7 @@ using System.Linq;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Zenject;
 
 public class EquipmentManager : MonoBehaviour
@@ -26,6 +27,9 @@ public class EquipmentManager : MonoBehaviour
     [SerializeField] float[] rarityProbability;
 
     List<NewEquipment> getEquipmentList = new List<NewEquipment>();
+
+    bool isInter;
+
     private void Start()
     {
         staticEquipment.manager = this;
@@ -36,11 +40,26 @@ public class EquipmentManager : MonoBehaviour
 
     }
 
+  
     private void OnDisable()
     {
         staticEquipment.manager = null;
 
         SaveEquipment();
+
+        inGameUI.interRef.action.canceled -= InteractInput;
+    }
+
+    public void InteractInput(InputAction.CallbackContext value)
+    {
+        
+        interactEquipments[0].RemoveInstance();
+        interactEquipments.Remove(interactEquipments[0]);
+        inGameUI.EquipmentGetPanel.gameObject.SetActive(false);
+
+        inGameUI.CurrentMenu = inGameUI.EquipmentSelectPanel;
+        inGameUI.CurrentMenu.OpenUIPanel();
+
     }
 
     void LoadEquipment()
@@ -226,35 +245,33 @@ public class EquipmentManager : MonoBehaviour
         this.UpdateAsObservable()
      .Where(x => interactEquipments.Count > 0)
      .Where(x=>inGameUI.CurrentMenu.Equals(inGameUI.StatusBarPanel))
+     .Where(x => !isInter)
      .Subscribe(x =>
      {
         
 
          inGameUI.EquipmentGetPanel.gameObject.SetActive(true);
 
-         // 뉴 인풋 시스템으로 변경
-         if (Input.GetKeyDown(KeyCode.F))
-         {
-           
-             
-             interactEquipments[0].RemoveInstance();
-             interactEquipments.Remove(interactEquipments[0]);
-             inGameUI.EquipmentGetPanel.gameObject.SetActive(false);
 
-             inGameUI.CurrentMenu = inGameUI.EquipmentSelectPanel;
-             inGameUI.CurrentMenu.OpenUIPanel();
+         inGameUI.interRef.action.canceled += InteractInput;
+         isInter = true;
 
-         }
+
+
+
 
      });
 
 
         this.UpdateAsObservable()
           .Where(x => interactEquipments.Count == 0)
+          .Where(x=> isInter)
           .Subscribe(x =>
           {
               inGameUI.EquipmentGetPanel.gameObject.SetActive(false);
+              inGameUI.interRef.action.canceled -= InteractInput;
 
+              isInter = false;
           });
     }
 

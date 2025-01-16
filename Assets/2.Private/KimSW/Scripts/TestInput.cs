@@ -44,7 +44,8 @@ public class TestInput : MonoBehaviour
             poolManager.GetObject<DamageText>(E_VFX.DamageText).SetText("200", transform.position, false);
 
         }
-         */
+         
+
         if (Input.GetKeyDown(KeyCode.Y))
         {
             if (!inGameUI.CurrentMenu.Equals(inGameUI.StatusBarPanel))
@@ -64,7 +65,7 @@ public class TestInput : MonoBehaviour
             inGameUI.EquipmentBackpackPanel.ChangeSelect();
 
         }
-
+        */
         if (Input.GetKeyDown(KeyCode.U))
         {
             inGameUI.AlertText.SetAlertText("스태미나가 부족합니다");
@@ -76,7 +77,7 @@ public class TestInput : MonoBehaviour
             inGameUI.AlertText.SetAlertText("게이지가 부족합니다");
 
         }
-
+        /*
         if (Input.GetKeyDown(KeyCode.P))
         {
             
@@ -84,7 +85,7 @@ public class TestInput : MonoBehaviour
             inGameUI.CurrentMenu.OpenUIPanel();
 
         }
-
+        */
 
         /*
 

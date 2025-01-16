@@ -1,6 +1,7 @@
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Zenject;
 
 public class InteractBlueChip : MonoBehaviour, IInteractable
@@ -159,6 +160,8 @@ public class InteractBlueChip : MonoBehaviour, IInteractable
                inGameUI.CurrentMenu = inGameUI.BlueChipGetPanel;
                inGameUI.CurrentMenu.CloseUIPanel();
            }
+
+           inGameUI.interRef.action.canceled -= InteractInput;
        });
 
 
@@ -169,16 +172,22 @@ public class InteractBlueChip : MonoBehaviour, IInteractable
     .Subscribe(x =>
     {
 
-        // 뉴 인풋 시스템으로 변경
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            ChangeChip();
-
-            inGameUI.CurrentMenu.CloseUIPanel();
-            RemoveInstance();
-        }
-
+        inGameUI.interRef.action.canceled += InteractInput;
+  
     });
+    }
+
+    private void OnDisable()
+    {
+        inGameUI.interRef.action.canceled -= InteractInput;
+    }
+
+    public void InteractInput(InputAction.CallbackContext value)
+    {
+        ChangeChip();
+
+        inGameUI.CurrentMenu.CloseUIPanel();
+        RemoveInstance();
     }
 
     public void ChangeChip()
