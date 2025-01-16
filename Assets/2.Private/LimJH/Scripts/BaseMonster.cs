@@ -189,6 +189,8 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
         }
 
         stat.Health -= value * stat.DamageReducation;
+        DamageText text = manager.GetObject<DamageText>(E_VFX.DamageText);
+        text.SetText(value.ToString(), transform.position + Vector3.up * 2, chargable == true ? false : true);
 
         if (stat.Health <= 0)
         {
