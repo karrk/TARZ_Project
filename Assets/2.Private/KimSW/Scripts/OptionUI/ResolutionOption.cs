@@ -19,8 +19,6 @@ public class ResolutionOption : MonoBehaviour, ISaveOption
 #if UNITY_EDITOR
         dropdown.value = changeNum;
 #else
-        string path = Application.persistentDataPath; 
-#endif
         for (int i = 0; i < resolutionX.Length; i++)
         {
             if (resolutionX[i] == Screen.currentResolution.width)
@@ -28,12 +26,15 @@ public class ResolutionOption : MonoBehaviour, ISaveOption
                 dropdown.value = i;
             }
         }
+#endif
 
-      
+
+
     }
 
     public void SaveOption()
     {
+        
         Screen.SetResolution(resolutionX[tempNum], resolutionY[tempNum], true);
         changeNum = tempNum;
         

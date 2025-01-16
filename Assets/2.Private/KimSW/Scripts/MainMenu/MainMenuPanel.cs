@@ -34,7 +34,7 @@ public class MainMenuPanel : FadePanel, IOpenCloseMenu
         FadeOutUI();
         mainUI.CurrentMenu = mainUI.LoadGamePanel;
        
-        // °è¼ÓÇÏ±â È°¼ºÈ­ 
+        // ê³„ì†í•˜ê¸° í™œì„±í™” 
     }
 
     public void NewGame()
@@ -42,21 +42,23 @@ public class MainMenuPanel : FadePanel, IOpenCloseMenu
         FadeOutUI();
         mainUI.CurrentMenu = mainUI.NewGamePanel;
        
-        // »õ·ÎÇÏ±â È°¼ºÈ­
+        // ìƒˆë¡œí•˜ê¸° í™œì„±í™”
     }
 
     public void OnOptionMenu()
     {
-        // ¿É¼Ç ¸Ş´º È°¼ºÈ­
+        FadeOutUI();
+        mainUI.CurrentMenu = mainUI.MainOptionPanel;
+        // ì˜µì…˜ ë©”ë‰´ í™œì„±í™”
     }
 
     public void ExitGame()
     {
-        // °ÔÀÓ ³ª°¡±â
+        // ê²Œì„ ë‚˜ê°€ê¸°
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else
-        Application.Quit(); // ¾îÇÃ¸®ÄÉÀÌ¼Ç Á¾·á
+        Application.Quit(); // ì–´í”Œë¦¬ì¼€ì´ì…˜ ì¢…ë£Œ
 #endif
     }
 

@@ -17,6 +17,9 @@ public class MainSceneUI : BindUI
     public LoadGamePanel LoadGamePanel { get; private set; }
     public NewGamePanel NewGamePanel { get; private set; }
 
+    public MainOptionPanel MainOptionPanel { get; private set; }
+   
+
     private IOpenCloseMenu currentMenu;
 
     public IOpenCloseMenu CurrentMenu { get { return currentMenu; } set { currentMenu = value; } }
@@ -32,6 +35,8 @@ public class MainSceneUI : BindUI
 
         NewGamePanel = GetUI<NewGamePanel>("NewGamePanel");
         NewGamePanel.SetComponent();
+
+        MainOptionPanel = GetUI<MainOptionPanel>("MainOptionPanel");
 
         CurrentMenu = MainMenuPanel;
 
