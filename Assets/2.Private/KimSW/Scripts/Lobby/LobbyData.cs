@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
 using System.IO;
+using System;
 public class SaveData
 {
    
@@ -31,6 +32,8 @@ public class LobbyData : MonoBehaviour
     public SaveData saveData = new SaveData(); // 플레이어 데이터 생성
 
     public int saveNumber;
+
+    public event Action OnChanged;
 
     void Start()
     {
@@ -95,6 +98,11 @@ public class LobbyData : MonoBehaviour
         WriteData();
     }
 
+    public void Renewal()
+    {
+        OnChanged?.Invoke();
+    }
+
     public void WriteData()
     {
 
@@ -105,6 +113,8 @@ public class LobbyData : MonoBehaviour
 #endif
         string data = JsonUtility.ToJson(saveData);
         File.WriteAllText($"{path}/Save{saveNumber}.json", data);
+
+        OnChanged?.Invoke();
     }
 
     public void LoadData(int num)
@@ -142,6 +152,8 @@ public class LobbyData : MonoBehaviour
                 equipPassive[i] = passives[saveData.equipPassiveID[i]-1];
             }
         }
+
+        OnChanged?.Invoke();
 
         SetExp();
     }

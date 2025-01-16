@@ -5,6 +5,7 @@ public class StageController : IInitializable
 {
     [Inject] private PlayerStats playerStats;
     [Inject] private SoundManager soundmanager;
+    [Inject] private LobbyData lobby;
 
     public void Initialize()
     {
