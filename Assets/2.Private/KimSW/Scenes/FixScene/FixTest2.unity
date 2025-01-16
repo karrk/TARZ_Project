@@ -408,6 +408,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 108258980250908406, guid: ff2331e3cac16584cbaeb105ac37ce81,
+        type: 3}
+      propertyPath: m_ScrollDeltaPerTick
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 665152921253061759, guid: ff2331e3cac16584cbaeb105ac37ce81,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1793,7 +1798,6 @@ SceneRoots:
   - {fileID: 129043993}
   - {fileID: 1104369736}
   - {fileID: 1613355811}
-  - {fileID: 4878600337976001538}
   - {fileID: 1733108820}
   - {fileID: 944220458}
   - {fileID: 1183579314}
@@ -1807,3 +1811,4 @@ SceneRoots:
   - {fileID: 1647977289}
   - {fileID: 671614743}
   - {fileID: 388236039}
+  - {fileID: 4878600337976001538}

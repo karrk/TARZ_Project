@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UniRx;
-using UnityEngine;
 using Zenject;
 public class PlayerUIPresenter : IInitializable, IDisposable
 {
@@ -72,7 +71,7 @@ public class PlayerUIPresenter : IInitializable, IDisposable
 
         list.Add(playerModel.SkillGauge
         .Where(value => playerModel.SkillGauge.Value < 0)
-        .Subscribe(value => {  playerModel.SkillGauge.Value = 0; }));
+        .Subscribe(value => { playerModel.SkillGauge.Value = 0; }));
 
         list.Add(playerModel.SkillGauge
        .Where(value => playerModel.SkillGauge.Value > 100)
@@ -116,6 +115,25 @@ public class PlayerUIPresenter : IInitializable, IDisposable
         list.Add(playerModel.CurrentEXP
           .Where(value => value >= 0)
           .Subscribe(value => inGameUI.StatusBarPanel.PlayerExpView.SetExpText(value)));
+
+
+
+        list.Add(playerModel.SkillCoolTime[0]
+     .Where(value => value > 0)
+     .Subscribe(value => inGameUI.StatusBarPanel.CoolTimeView.SetSkillTimeValue(value, 0)));
+
+        list.Add(playerModel.SkillCoolTime[0]
+     .Where(value => value <= 0)
+     .Subscribe(value => inGameUI.StatusBarPanel.CoolTimeView.EndCoolTime(0)));
+
+
+        list.Add(playerModel.SkillCoolTime[1]
+      .Where(value => value > 0)
+      .Subscribe(value => inGameUI.StatusBarPanel.CoolTimeView.SetSkillTimeValue(value, 1)));
+
+        list.Add(playerModel.SkillCoolTime[1]
+     .Where(value => value <= 0)
+     .Subscribe(value => inGameUI.StatusBarPanel.CoolTimeView.EndCoolTime(1)));
 
 
     }

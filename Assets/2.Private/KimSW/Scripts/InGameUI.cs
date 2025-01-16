@@ -1,11 +1,12 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Zenject;
 
 public class InGameUI : BindUI
 {
     [Inject] private ItemInventory itemInventory;
 
-    
+    #region
     private InventoryPanel inventoryPanel;
     private InventorySetPanel inventorySetPanel;
     
@@ -28,8 +29,10 @@ public class InGameUI : BindUI
 
     private EquipmentManager equipmentManager;
 
+    private EquipmentBackpackPanel equipmentBackpackPanel;
 
-    
+    private GameOverPanel gameOverPanel;
+
     public InventoryPanel InventoryPanel { get { return inventoryPanel; } }
     public InventorySetPanel InventorySetPanel { get { return inventorySetPanel; } }
 
@@ -59,9 +62,35 @@ public class InGameUI : BindUI
 
     public PassiveShopPanel PassiveShopPanel { get { return passiveShopPanel; } }
 
+    public EquipmentBackpackPanel EquipmentBackpackPanel { get { return equipmentBackpackPanel; } }
+
+    public GameOverPanel GameOverPanel { get { return gameOverPanel; } }
+    #endregion
+
     private IOpenCloseMenu currentMenu;
 
     public IOpenCloseMenu CurrentMenu { get { return currentMenu; } set { currentMenu = value; } }
+
+
+    // 인풋
+ 
+    public InputActionReference cancelRef;
+    public InputActionReference interRef;
+    public InputActionReference invenRef;
+
+    private void OnEnable()
+    {
+        cancelRef.action.performed += CancelInput;
+       
+        invenRef.action.performed += InvenInput;
+    }
+
+    private void OnDisable()
+    {
+        cancelRef.action.performed -= CancelInput;
+      
+        invenRef.action.performed -= InvenInput;
+    }
 
     private void Awake()
     {
@@ -90,6 +119,8 @@ public class InGameUI : BindUI
 
         passiveShopPanel = GetUI<PassiveShopPanel>("PassiveShopPanel");
 
+        equipmentBackpackPanel = GetUI<EquipmentBackpackPanel>("EquipmentBackpackPanel");
+        gameOverPanel = GetUI<GameOverPanel>("GameOverPanel");
     }
 
     private void Start()
@@ -102,7 +133,7 @@ public class InGameUI : BindUI
     }
 
 
-    public void InputCancel()
+    public void CancelInput(InputAction.CallbackContext value)
     {
         if (currentMenu is not null)
         {
@@ -110,6 +141,44 @@ public class InGameUI : BindUI
 
         }
     }
+  
+    public void InvenInput(InputAction.CallbackContext value)
+    {
+        if (CurrentMenu.Equals(StatusBarPanel))
+        {
+            CurrentMenu = EquipmentBackpackPanel;
+            CurrentMenu.OpenUIPanel();
+        }
+        else if(CurrentMenu.Equals(EquipmentBackpackPanel))
+        {
+            EquipmentBackpackPanel.ChangeSelect();
+        }
+
+    }
+
+    public void OnGameOver()
+    {
+        if (!CurrentMenu.Equals(StatusBarPanel))
+        {
+            CurrentMenu.CloseUIPanel();
+
+        }
+
+        InGameMenuPanel.gameObject.SetActive(false);
+        StatusBarPanel.gameObject.SetActive(false);
+
+        CurrentMenu = GameOverPanel;
+        CurrentMenu.OpenUIPanel();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            OnGameOver();
+        }
+    }
+
     /*
     public void OnInventory()
     {

@@ -15,7 +15,7 @@ public class StatusBarPanel : MonoBehaviour, IOpenCloseMenu
     private PlayerSkillSliderView playerSkillSliderView;
     private PlayerExpView playerExpView;
     private GarbageInventoryView garbageInventoryView;
-
+    private CoolTimeView coolTimeView;
 
     public PlayerHpSliderView PlayerHpSliderView { get { return playerHpSliderView; } }
     public PlayerStaminaSliderView PlayerStaminaSliderView { get { return playerStaminaSliderView; } }
@@ -23,7 +23,7 @@ public class StatusBarPanel : MonoBehaviour, IOpenCloseMenu
 
     public PlayerExpView PlayerExpView { get { return playerExpView; } }
     public GarbageInventoryView GarbageInventoryView { get { return garbageInventoryView; } }
-
+    public CoolTimeView CoolTimeView { get { return coolTimeView; } }
 
 
     [SerializeField] AnimatedUI[] animatedUIs;
@@ -36,7 +36,7 @@ public class StatusBarPanel : MonoBehaviour, IOpenCloseMenu
         playerSkillSliderView = GetComponentInChildren<PlayerSkillSliderView>();
         playerExpView = GetComponentInChildren<PlayerExpView>();
         garbageInventoryView = GetComponentInChildren<GarbageInventoryView>();
-
+        coolTimeView = GetComponentInChildren<CoolTimeView>();
     }
   
 

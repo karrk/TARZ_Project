@@ -5,10 +5,10 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Zenject;
 
-public class OptionPanel : MonoBehaviour, IOpenCloseMenu
+public class MainOptionPanel : MonoBehaviour, IOpenCloseMenu
 {
     [Inject]
-    InGameUI inGameUI;
+    MainSceneUI mainUI;
 
     [SerializeField] Button defaultSelectedButton;
 
@@ -24,13 +24,15 @@ public class OptionPanel : MonoBehaviour, IOpenCloseMenu
     public void CloseUIPanel()
     {
         gameObject.SetActive(false);
-        inGameUI.CurrentMenu = inGameUI.InGameMenuPanel;
-        inGameUI.CurrentMenu.OpenUIPanel();
+        mainUI.CurrentMenu = mainUI.MainMenuPanel;
+        mainUI.CurrentMenu.OpenUIPanel();
     }
 
     public void OnOptionSaveButton()
     {
         EventSystem.current.SetSelectedGameObject(defaultSelectedButton.gameObject);
     }
+
    
+
 }

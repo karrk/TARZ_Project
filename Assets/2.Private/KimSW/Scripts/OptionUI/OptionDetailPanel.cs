@@ -1,18 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class OptionDetailPanel : MonoBehaviour
 {
     OptionButton[] optionButtons;
 
+    [SerializeField] ISaveOption[] options;
+
+
     private void Awake()
     {
         optionButtons = GetComponentsInChildren<OptionButton>(true);
+        options = GetComponentsInChildren<ISaveOption>(true);
 
-     
+
     }
-
+    /*
     private void OnEnable()
     {
         foreach (OptionButton button in optionButtons)
@@ -36,5 +41,14 @@ public class OptionDetailPanel : MonoBehaviour
         }
 
         obj.SetActive(true);
+    }
+    */
+    public void SaveOption()
+    {
+        foreach(ISaveOption option in options)
+        {
+            option.SaveOption();
+        }
+       
     }
 }

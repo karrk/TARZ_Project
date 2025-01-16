@@ -10,8 +10,7 @@ public class StaticBluechip : MonoBehaviour
     PlayerStats stats;
 
     public bool[] bluechipCheck;
-    public bool firstInit;
-   
+
     private void Start()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -30,12 +29,13 @@ public class StaticBluechip : MonoBehaviour
 
     public void SetBlueChip()
     {
+      
         stats.UsedMeleePowerUp = false;
         stats.ExpMode = false;
         stats.ZeroGarbageMode = false;
-        stats.AbsorbHpMode = false; 
-        stats.SwitchBGM = false; 
-   
+        stats.AbsorbHpMode = false;
+        stats.SwitchBGM = false;
+
         int num = -1;
         for (int i = 0; i < bluechipCheck.Length; i++)
         {
@@ -48,6 +48,14 @@ public class StaticBluechip : MonoBehaviour
         if (num > 0)
         {
             stats.AddBlueChip((BlueChipType)num);
+        }
+    }
+
+    public void ResetBlueChip()
+    {
+        for (int i = 0; i < bluechipCheck.Length; i++)
+        {
+            bluechipCheck[i] = false;
         }
     }
 }

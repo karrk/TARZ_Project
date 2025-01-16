@@ -12,8 +12,11 @@ public class StatCollider : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            inGameUI.CurrentMenu = inGameUI.PassiveShopPanel;
-            inGameUI.CurrentMenu.OpenUIPanel();
+            if (inGameUI.CurrentMenu.Equals(inGameUI.StatusBarPanel))
+            {
+                inGameUI.CurrentMenu = inGameUI.PassiveShopPanel;
+                inGameUI.CurrentMenu.OpenUIPanel();
+            }
         }
     }
   
