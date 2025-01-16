@@ -35,7 +35,7 @@ public class MonsterGroggy : BaseAction
     {
         // 타이머를 감소시킴
         timer -= Time.deltaTime;
-        Debug.Log($"그로기 진행 시간 : {timer}");
+        //Debug.Log($"그로기 진행 시간 : {timer}");
 
         if (timer < mob.Stat.groggyDuration - 1.2f)
         {
