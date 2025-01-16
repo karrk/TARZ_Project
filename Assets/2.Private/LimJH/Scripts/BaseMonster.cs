@@ -29,6 +29,8 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
 
     public ProjectPlayer player;
 
+    public bool Ongroggy;
+
     #region Injects
 
 
@@ -304,7 +306,7 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
         if (rb != null)
         {
-            float launchForce = 20f; // 발사 힘
+            float launchForce = 15f; // 발사 힘
             rb.AddForce(direction * launchForce, ForceMode.Impulse);
         }
 

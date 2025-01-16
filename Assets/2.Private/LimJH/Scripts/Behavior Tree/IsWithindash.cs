@@ -4,21 +4,17 @@ using BehaviorDesigner.Runtime.Tasks;
 
 public class IsWithinDash : BaseCondition
 {
-    public SharedGameObject targetObject;   // 타겟 오브젝트
-    public SharedGameObject selfObject;     // 자기 자신 오브젝트
-    public float rangeThreshold = 10f;
-
     public override TaskStatus OnUpdate()
     {
-        if (targetObject.Value == null || selfObject.Value == null)
+        if (mob.player == null || mob == null)
         {
             return TaskStatus.Failure;
         }
 
         // 셀프와 타겟 간의 거리 계산
-        float distance = Vector3.Distance(selfObject.Value.transform.position, targetObject.Value.transform.position);
+        float distance = Vector3.Distance(mob.transform.position, mob.PlayerPos);
 
-        if (distance <= rangeThreshold)
+        if (distance <= 20f)
         {
             return TaskStatus.Success;
         }

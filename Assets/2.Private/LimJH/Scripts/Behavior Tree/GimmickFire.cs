@@ -7,6 +7,7 @@ public class GimmickFire : BaseAction
 {
     public GameObject firePrefab;              // 불장판 프리팹
     public GameObject pillarPrefab;            // 기둥 프리팹
+    public SharedGameObject sharedFire;
     private GameObject fire;
 
     public override void OnStart()
@@ -25,6 +26,7 @@ public class GimmickFire : BaseAction
             spawnPosition.y = 0;
 
             fire = GameObject.Instantiate(firePrefab, spawnPosition, Quaternion.identity);
+            sharedFire.Value = fire;
         }
 
         mob.Stat.pillarStates = new List<int> { 0, 0, 0 };
