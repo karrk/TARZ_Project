@@ -189,6 +189,8 @@ public class InteractBlueChip : MonoBehaviour, IInteractable
         }
 
         staticBluechip.bluechipCheck[(int)blueChip.type] = true;
+
+        inGameUI.EquipmentBackpackPanel.blueChip = blueChip;
     }
 
     public void RemoveInstance()

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Zenject;
 
 public class InGameUI : BindUI
@@ -28,6 +29,7 @@ public class InGameUI : BindUI
 
     private EquipmentManager equipmentManager;
 
+    private EquipmentBackpackPanel equipmentBackpackPanel;
 
     
     public InventoryPanel InventoryPanel { get { return inventoryPanel; } }
@@ -59,9 +61,26 @@ public class InGameUI : BindUI
 
     public PassiveShopPanel PassiveShopPanel { get { return passiveShopPanel; } }
 
+    public EquipmentBackpackPanel EquipmentBackpackPanel { get { return equipmentBackpackPanel; } }
+
     private IOpenCloseMenu currentMenu;
 
     public IOpenCloseMenu CurrentMenu { get { return currentMenu; } set { currentMenu = value; } }
+
+
+    // 인풋
+
+    public InputActionReference cancelRef;
+
+    private void OnEnable()
+    {
+        cancelRef.action.performed += CancelInput;
+    }
+
+    private void OnDisable()
+    {
+        cancelRef.action.performed -= CancelInput;
+    }
 
     private void Awake()
     {
@@ -90,6 +109,8 @@ public class InGameUI : BindUI
 
         passiveShopPanel = GetUI<PassiveShopPanel>("PassiveShopPanel");
 
+        equipmentBackpackPanel = GetUI<EquipmentBackpackPanel>("EquipmentBackpackPanel");
+
     }
 
     private void Start()
@@ -102,7 +123,7 @@ public class InGameUI : BindUI
     }
 
 
-    public void InputCancel()
+    public void CancelInput(InputAction.CallbackContext value)
     {
         if (currentMenu is not null)
         {

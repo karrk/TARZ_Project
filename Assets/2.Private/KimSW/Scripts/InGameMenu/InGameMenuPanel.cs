@@ -34,7 +34,6 @@ public class InGameMenuPanel : MonoBehaviour, IOpenCloseMenu
         inGameUI.CurrentMenu = inGameUI.OptionPanel;
         inGameUI.CurrentMenu.OpenUIPanel();
 
-        inGameUI.EquipmentSelectPanel.slotsPanel.SetActive(false);
     }
 
     public void OnKeyMenual()
@@ -44,7 +43,6 @@ public class InGameMenuPanel : MonoBehaviour, IOpenCloseMenu
         inGameUI.CurrentMenu = inGameUI.MenualPanel;
         inGameUI.CurrentMenu.OpenUIPanel();
 
-        inGameUI.EquipmentSelectPanel.slotsPanel.SetActive(false);
     }
 
     public void ExitGameScene()
@@ -69,7 +67,6 @@ public class InGameMenuPanel : MonoBehaviour, IOpenCloseMenu
         gameObject.SetActive(true);
         EventSystem.current.SetSelectedGameObject(selectedButton.gameObject);
 
-        inGameUI.EquipmentSelectPanel.slotsPanel.SetActive(true);
     }
 
     public void CloseUIPanel()
@@ -79,7 +76,6 @@ public class InGameMenuPanel : MonoBehaviour, IOpenCloseMenu
         inGameUI.CurrentMenu = inGameUI.StatusBarPanel;
         inGameUI.CurrentMenu.OpenUIPanel();
 
-        inGameUI.EquipmentSelectPanel.slotsPanel.SetActive(false);
     }
 
     public void OffUIPanel()

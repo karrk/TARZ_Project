@@ -18,22 +18,7 @@ public class TestInput : MonoBehaviour
     [Inject]
     PoolManager poolManager;
 
-    public InputActionReference cancelRef;
-
-    private void OnEnable()
-    {
-        cancelRef.action.performed += CancelInput;
-    }
-
-    private void OnDisable()
-    {
-        cancelRef.action.performed -= CancelInput;
-    }
-
-    public void CancelInput(InputAction.CallbackContext value)
-    {
-        inGameUI.InputCancel();
-    }
+ 
 
     void Update()
     {
@@ -51,7 +36,7 @@ public class TestInput : MonoBehaviour
         {
             inGameUI.InputCancel();
         }
-        */
+       
         //playerModel.Stamina.Value += Time.deltaTime * 100;
 
         if (Input.GetKeyDown(KeyCode.T))
@@ -59,13 +44,26 @@ public class TestInput : MonoBehaviour
             poolManager.GetObject<DamageText>(E_VFX.DamageText).SetText("200", transform.position, false);
 
         }
-
+         */
         if (Input.GetKeyDown(KeyCode.Y))
         {
-            poolManager.GetObject<DamageText>(E_VFX.DamageText).SetText("1000", transform.position, true);
+            if (!inGameUI.CurrentMenu.Equals(inGameUI.StatusBarPanel))
+            {
+                return;
+            }
+                inGameUI.CurrentMenu = inGameUI.EquipmentBackpackPanel;
+            inGameUI.CurrentMenu.OpenUIPanel();
 
         }
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            if (!inGameUI.CurrentMenu.Equals(inGameUI.EquipmentBackpackPanel))
+            {
+                return;
+            }
+            inGameUI.EquipmentBackpackPanel.ChangeSelect();
 
+        }
 
         if (Input.GetKeyDown(KeyCode.U))
         {
@@ -81,6 +79,7 @@ public class TestInput : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.P))
         {
+            
             inGameUI.CurrentMenu = inGameUI.PassiveShopPanel;
             inGameUI.CurrentMenu.OpenUIPanel();
 
