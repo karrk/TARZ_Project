@@ -4,6 +4,7 @@ using System;
 using UnityEngine.AI;
 using BehaviorDesigner.Runtime;
 using Random = UnityEngine.Random;
+using UnityEngine.PlayerLoop;
 
 public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
 {
@@ -38,6 +39,7 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
     [Inject] private PoolManager manager;
     [Inject] private SignalBus signal;
     [Inject] private ProjectInstaller.NormalPrefab prefabs;
+    [Inject] private AchieveManager achieve;
 
     #endregion
     
@@ -195,6 +197,7 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
 
         if (stat.Health <= 0)
         {
+            achieve.UpdateAchieve(E_Achieve.DieToDie);
             Drop();
             playerStats.MobDeadCountup();
             OnDead?.Invoke();
@@ -362,9 +365,7 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
         SkillPos = Vector3.down;
     }
 
-    protected virtual void Update()
-    {
-    }
+    protected virtual void Update() { }
 
     public void Return()
     {

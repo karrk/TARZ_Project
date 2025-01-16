@@ -89,6 +89,7 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
     [Inject] public PlayerStats stats { get; private set; }
     [Inject] private Shooter shooter;
     [Inject] private SignalBus signal;
+    [Inject] private AchieveManager manager;
     public SignalBus Signal { get { return signal; } }
  
     [SerializeField] public PlayerReferences Refernece;
@@ -386,7 +387,7 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
             if (skillNumber == 0)
                 return;
 
-
+            manager.UpdateAchieve(E_Achieve.UseSKill);
 
             switch (skillNumber)
             {

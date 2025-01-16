@@ -48,6 +48,9 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         Container.Bind<PoolManager>().FromComponentInNewPrefab(prefabs.PoolManager)
             .AsSingle().NonLazy();
 
+        Container.Bind<AchieveManager>().FromComponentInNewPrefab(prefabs.AchieveManager)
+            .AsSingle().NonLazy();
+
         //Container.Bind<SkillManager>().AsSingle().NonLazy();
 
         Container.Bind<SoundManager>().FromComponentInNewPrefab(prefabs.SoundManager).AsSingle().NonLazy();
@@ -289,6 +292,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         public GameObject staticLobbyData;
         public GameObject EquipBox;
         public GameObject Bluechip;
+        public GameObject AchieveManager;
     }
 
     [Serializable]

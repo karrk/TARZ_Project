@@ -10,6 +10,7 @@ public class SaveData
     public int exp;
     public bool[] passiveEnable;
     public int[] equipPassiveID;
+    public bool[] achieves;
 }
 
 public class LobbyData : MonoBehaviour
@@ -20,9 +21,12 @@ public class LobbyData : MonoBehaviour
  
     public int exp;
     public bool[] passiveEnable;
+
     public PassiveInfo[] equipPassive = new PassiveInfo[3];
 
     public List<PassiveInfo> passives = new List<PassiveInfo>();
+
+    public bool[] achieves = new bool[5];
 
     public SaveData saveData = new SaveData(); // 플레이어 데이터 생성
 
@@ -44,6 +48,8 @@ public class LobbyData : MonoBehaviour
     {
         saveData.exp = 0;
 
+        // 추가
+
         saveData.passiveEnable = new bool[passiveEnable.Length];
         for (int i = 0; i < passiveEnable.Length; i++)
         {
@@ -56,6 +62,12 @@ public class LobbyData : MonoBehaviour
                 saveData.equipPassiveID[i] = 0;
         }
 
+        saveData.achieves = new bool[achieves.Length];
+        for (int i = 0; i < achieves.Length; i++)
+        {
+            saveData.achieves[i] = false;
+        }
+
         WriteData();
     }
 
@@ -63,6 +75,7 @@ public class LobbyData : MonoBehaviour
     {
         saveData.exp = exp;
         saveData.passiveEnable = passiveEnable;
+        // 추가
         saveData.equipPassiveID = new int[equipPassive.Length];
         for (int i = 0; i < equipPassive.Length; i++)
         {
@@ -76,6 +89,8 @@ public class LobbyData : MonoBehaviour
             }
            
         }
+
+        saveData.achieves = achieves;
 
         WriteData();
     }
@@ -112,7 +127,9 @@ public class LobbyData : MonoBehaviour
         saveData = JsonUtility.FromJson<SaveData>(data);
 
         exp = saveData.exp;
+
         passiveEnable = saveData.passiveEnable;
+        achieves = saveData.achieves;
 
         for (int i = 0; i < equipPassive.Length; i++)
         {
@@ -124,7 +141,6 @@ public class LobbyData : MonoBehaviour
             {
                 equipPassive[i] = passives[saveData.equipPassiveID[i]-1];
             }
-
         }
 
         SetExp();

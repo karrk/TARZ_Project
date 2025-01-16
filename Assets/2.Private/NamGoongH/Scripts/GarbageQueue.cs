@@ -9,6 +9,7 @@ public class GarbageQueue
     private List<E_Garbage> garbageIndexList = new List<E_Garbage>(); // 인덱스를 저장하는 리스트 (FIFO)
 
     [Inject] private PlayerStats stats;
+    [Inject] private AchieveManager manager;
 
     public int Count => garbageIndexList.Count;
 
@@ -21,7 +22,12 @@ public class GarbageQueue
             return;
 
         if (stats.ThrowCapacity <= garbageIndexList.Count)
+        {
+            manager.UpdateAchieve(E_Achieve.FullInventory);
             return;
+        }
+
+        manager.UpdateAchieve(E_Achieve.GetItem);
 
         if (garbageIndex >= 0 && garbageIndex < (int)E_Garbage.Size)
         {
