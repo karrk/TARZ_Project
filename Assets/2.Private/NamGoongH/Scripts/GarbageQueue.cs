@@ -12,6 +12,8 @@ public class GarbageQueue
 
     public int Count => garbageIndexList.Count;
 
+    private int addGarbageNum = 5;
+
     /// <summary>
     /// 리스트에 투척물 인덱스 추가
     /// </summary>
@@ -25,7 +27,10 @@ public class GarbageQueue
 
         if (garbageIndex >= 0 && garbageIndex < (int)E_Garbage.Size)
         {
-            garbageIndexList.Add((E_Garbage)garbageIndex); // 리스트 끝에 인덱스 추가
+            for (int i = 0; i < addGarbageNum; i++)
+            { 
+                garbageIndexList.Add((E_Garbage)garbageIndex); // 리스트 끝에 인덱스 추가
+            }
             //Debug.Log($"Item index added: {garbageIndex}. Queue size: {garbageIndexList.Count}");
             //PrintQueue();
 
