@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -17,6 +18,11 @@ public class EquipmentSelectPanel : MonoBehaviour, IOpenCloseMenu
     [SerializeField] EquipmentSlot[] slots;
     public GameObject slotsPanel;
     [SerializeField] GameObject selectsPanel;
+
+    [SerializeField] TMP_Text rerollCountText;
+
+    public int rerollCount;
+
     private void Awake()
     {
         buttons = GetComponentsInChildren<EquipmentSelectButton>(true);
@@ -40,6 +46,16 @@ public class EquipmentSelectPanel : MonoBehaviour, IOpenCloseMenu
         inGameUI.CurrentMenu.OpenUIPanel();
         selectsPanel.SetActive(false);
         slotsPanel.SetActive(false);
+    }
+
+    public void ReRoll()
+    {
+        if (rerollCount <= 0)
+            return;
+        rerollCount--;
+        rerollCountText.text = rerollCount.ToString();
+
+        SetChoice();
     }
 
     public void SetChoice()
