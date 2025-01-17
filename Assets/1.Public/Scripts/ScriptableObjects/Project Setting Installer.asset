@@ -79,13 +79,13 @@ MonoBehaviour:
           Prefab: {fileID: 1134474963432908769, guid: e7d093322ff250b4bab5fe934d7cea52,
             type: 3}
   playerBaseStats:
-    AttackPower: 6000
+    AttackPower: 20
     Luck: 10
     ThrowableItemCapacity: 30
     ManaAbsorption: 10
     StaminaRecoveryRate: 0.2
     MaxStamina: 100
-    MaxHealth: 5
+    MaxHealth: 3
     MovementSpeed: 3
     AttackSpeed: 1
   camSetting:
