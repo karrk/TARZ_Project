@@ -4,12 +4,16 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Zenject;
 
 public class LoadingScript : MonoBehaviour
 {
     [SerializeField] string sceneName;
 
     [SerializeField] GameObject loadingImage;
+
+    [Inject] private SignalBus signal;
+
 
     public void Loading()
     {
@@ -26,6 +30,8 @@ public class LoadingScript : MonoBehaviour
 
     IEnumerator StartGame()
     {
+        signal.Fire<StageEndSignal>();
+
         loadingImage.SetActive(true);
         AsyncOperation loading = SceneManager.LoadSceneAsync(sceneName);
 

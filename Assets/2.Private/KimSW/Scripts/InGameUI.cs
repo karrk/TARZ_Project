@@ -8,6 +8,12 @@ public class InGameUI : BindUI
 
     [Inject] private ItemInventory itemInventory;
 
+    [Inject]
+    StaticEquipment staticEquipment;
+
+    [Inject]
+    StaticBluechip bluechip;
+
     #region
     private InventoryPanel inventoryPanel;
     private InventorySetPanel inventorySetPanel;
@@ -235,7 +241,10 @@ public class InGameUI : BindUI
 
     public void GoToLobby()
     {
+        staticEquipment.firstInit = false;
+        bluechip.ResetBlueChip();
         loading.Loading("FixTestRobi");
+
     }
 
     public void ExitGame()

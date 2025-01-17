@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.Windows;
 using Zenject;
 using static UnityEngine.Rendering.DebugUI;
@@ -273,6 +274,13 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
         //inputManager.OnControlledDPAD += MeleeSkill_2;
 
         inGameUI = GameObject.FindGameObjectWithTag("ship").GetComponent<InGameUI>();
+
+        Scene scene = SceneManager.GetActiveScene();
+        if(scene.name == "FixTestRobi")
+        {
+           
+            stats.Initialize();
+        }
     }
 
     private void MoveCanceled(InputAction.CallbackContext obj)

@@ -31,8 +31,8 @@ public class PlayerStats : IInitializable
     // 장비 정보를 담는 클래스 객체
     // hp 는 캐릭터에서 한번 긁어간다.
 
-    public float Atk => baseStat.AttackPower + equipStats.AttackPower * 0.1f;
-
+    public float Atk => (baseStat.AttackPower + equipStats.AttackPower * 0.1f) * (1 + (passiveStats.AttackPower * 0.01f));
+    
     public float ThrowCapacity => baseStat.ThrowableItemCapacity + equipStats.ThrowableItemCapacity + passiveStats.ThrowableItemCapacity;
 
     private float maxMana;
@@ -110,6 +110,8 @@ public class PlayerStats : IInitializable
 
         newEquips.OnChangedEquip += RenewalStats;
         passive.OnChanged += UpdatePassive;
+
+        
     }
 
     private void UpdatePassive()
@@ -127,7 +129,7 @@ public class PlayerStats : IInitializable
                     passiveStats.MovementSpeed = item.statValue;
                     break;
                 case OptionType.ATK:
-                    passiveStats.AttackPower = item.statValue;
+                    passiveStats.AttackPower += item.statValue;
                     break;
                 case OptionType.ATKSPD:
                     passiveStats.AttackSpeed = item.statValue;

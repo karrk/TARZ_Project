@@ -11,11 +11,7 @@ using Zenject;
 
 public class GameOverPanel : MonoBehaviour, IOpenCloseMenu
 {
-    [Inject]
-    StaticEquipment staticEquipment;
-
-    [Inject]
-    StaticBluechip bluechip;
+  
     
     [Inject]
     LobbyData lobbyData;
@@ -31,17 +27,12 @@ public class GameOverPanel : MonoBehaviour, IOpenCloseMenu
         gameObject.SetActive(true);
 
         SetSelected().Forget();
-      
 
-        ResetData();
-    }
-
-    void ResetData()
-    {
-        staticEquipment.firstInit = false;
-        bluechip.ResetBlueChip();
         lobbyData.SaveData();
+       
     }
+
+
 
     public void CloseUIPanel()
     {

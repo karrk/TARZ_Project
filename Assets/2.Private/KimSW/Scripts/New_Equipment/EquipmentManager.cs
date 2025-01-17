@@ -89,7 +89,7 @@ public class EquipmentManager : MonoBehaviour
         {
             newEquipments = csvParser.GetEquipment().ToList();
 
-
+            staticEquipment.ResetData();
             staticEquipment.firstInit = true;
 
             staticEquipment.newEquipments = newEquipments.ToList();
