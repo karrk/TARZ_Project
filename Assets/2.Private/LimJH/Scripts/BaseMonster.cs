@@ -15,7 +15,7 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
 
     public IAttackRange AttackType { get; private set; } = IAttackRange.Melee;*/
 
-    InGameUI inGameUI;
+    protected InGameUI inGameUI;
 
     [SerializeField] private GameObject projectilePrefab;
 
@@ -87,15 +87,7 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
         SelectStat();
     }
 
-    private void Start()
-    {
-        if (type == E_Monster.BossMob)
-        {
-            inGameUI = GameObject.FindGameObjectWithTag("ship").GetComponent<InGameUI>();
-            inGameUI.InitEnemyHP(stat.Health);
-        }
-    }
-
+  
     public void Init(ProjectPlayer player)
     {
         GetComponent<BehaviorTree>().enabled = true;
