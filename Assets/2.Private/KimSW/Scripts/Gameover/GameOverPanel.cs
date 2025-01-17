@@ -24,6 +24,8 @@ public class GameOverPanel : MonoBehaviour, IOpenCloseMenu
 
     [SerializeField] GameObject selectedButton;
 
+    [SerializeField] TMP_Text gameoverText;
+
     public void OpenUIPanel()
     {
         gameObject.SetActive(true);
@@ -45,6 +47,18 @@ public class GameOverPanel : MonoBehaviour, IOpenCloseMenu
     {
         
 
+    }
+
+    public void SetGameoverText(bool isWin)
+    {
+        if (isWin)
+        {
+            gameoverText.text = "Clear";
+        }
+        else
+        {
+            gameoverText.text = "Game Over";
+        }
     }
 
     public void GoToLobby()

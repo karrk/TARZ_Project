@@ -156,8 +156,10 @@ public class InGameUI : BindUI
 
     }
 
-    public void OnGameOver()
+    public void OnGameOver(bool isWin)
     {
+        
+
         if (!CurrentMenu.Equals(StatusBarPanel))
         {
             CurrentMenu.CloseUIPanel();
@@ -168,16 +170,11 @@ public class InGameUI : BindUI
         StatusBarPanel.gameObject.SetActive(false);
 
         CurrentMenu = GameOverPanel;
+        GameOverPanel.SetGameoverText(isWin);
         CurrentMenu.OpenUIPanel();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            OnGameOver();
-        }
-    }
+   
 
     /*
     public void OnInventory()
