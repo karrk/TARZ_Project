@@ -38,9 +38,13 @@ public class DamageText : MonoBehaviour, IPooledObject
 
     private void Awake()
     {
-        damageText = GetComponent<TMP_Text>();
+        damageText = GetComponentInChildren<TMP_Text>();
     }
- 
+
+    private void Update()
+    {
+        transform.LookAt(Camera.main.transform);
+    }
 
     /// <summary>
     /// 데미지 텍스트 세팅 후 애니메이션 시작
