@@ -83,6 +83,12 @@ public class DashAttack : BaseAction
         {
             if (token.IsCancellationRequested) break;
 
+            // 구조물과의 충돌 검사
+            if (CheckCollisionWithObstacles())
+            {
+                break;
+            }
+
             if (readyGroggyAct && initState)
             {
                 onChangedState = true;
@@ -107,6 +113,24 @@ public class DashAttack : BaseAction
             Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
         }
+    }
+
+    private bool CheckCollisionWithObstacles()
+    {
+        float raycastDistance = 2.0f;
+
+        // Raycast를 사용하여 충돌 감지
+        Ray ray = new Ray(transform.position, dashDirection);
+        if (Physics.Raycast(ray, out RaycastHit hit, raycastDistance))
+        {
+            // 충돌한 오브젝트가 플레이어나 몬스터가 아닌 경우
+            if (!hit.collider.CompareTag("Player") && !hit.collider.CompareTag("Monster"))
+            {
+                return true; // 충돌 발생
+            }
+        }
+
+        return false; // 충돌 없음
     }
 
     public override TaskStatus OnUpdate()
