@@ -67,6 +67,8 @@ public class InGameMenuPanel : MonoBehaviour, IOpenCloseMenu
         gameObject.SetActive(true);
         EventSystem.current.SetSelectedGameObject(selectedButton.gameObject);
 
+        Time.timeScale = 0;
+
     }
 
     public void CloseUIPanel()
