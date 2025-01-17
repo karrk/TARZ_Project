@@ -51,6 +51,7 @@ public class LongRangeSkill_2 : BaseState
         }
 
         armUnit.SetActive(true);
+        player.SoundManager.PlaySFX(E_Audio.Char_ArmUnit);
         player.Refernece.EffectController.UseSkillEffect();
     }
 
@@ -81,6 +82,7 @@ public class LongRangeSkill_2 : BaseState
     public void LongRangeSkill_2_On()
     {
         player.StartCoroutine(DelayCoroutine());
+        player.SoundManager.PlaySFX(E_Audio.Char_LongRangeSkill_4);
     }
 
     public override void Exit()

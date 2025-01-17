@@ -95,7 +95,7 @@ public class LongRangeSkill_3 : BaseState
                 toggle = !toggle;
 
                 //Debug.Log($"{i}번 펀치 생성함");
-
+                player.SoundManager.PlaySFX(E_Audio.Char_LongRangeSkill_3);
                 yield return new WaitForSeconds(interval);
             }
         }

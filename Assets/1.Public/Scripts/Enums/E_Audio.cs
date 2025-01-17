@@ -14,7 +14,20 @@ public enum E_Audio
 
     Char_Dash = 10,
     Char_RangeAttack,
-
+    Char_Walk,
+    Char_AfterJump,
+    Char_Jump,
+    Char_Damaged,
+    Char_Dead,
+    Char_DashMeleeAttack,
+    Char_ArmUnit,
+    Char_MeleeSkill_1,
+    Char_MeleeSkill_2,
+    Char_Drain,
+    Char_LongRangeSkill_3,
+    Char_LongRangeSkill_4,
+    Char_LongRangeSkill_5_Rotate,
+    Char_LongRangeSkill_5_Shoot,
 
     #endregion
 

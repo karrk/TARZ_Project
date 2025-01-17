@@ -13,6 +13,8 @@ public class JumpState : BaseState
         player.IsGrounded = false;
         player.Refernece.Animator.SetBool("Jump", true);
         player.Refernece.Rigid.AddForce(Vector3.up * player.Setting.JumpSetting.JumpPower, ForceMode.Impulse);
+
+        player.SoundManager.PlaySFX(E_Audio.Char_Jump);
     }
 
     public void ResetJump()
@@ -44,5 +46,10 @@ public class JumpState : BaseState
             player.transform.rotation = rotation;
         }
 
+    }
+
+    public override void Exit()
+    {
+        player.SoundManager.PlaySFX(E_Audio.Char_AfterJump);
     }
 }

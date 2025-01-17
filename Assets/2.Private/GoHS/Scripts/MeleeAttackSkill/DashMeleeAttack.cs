@@ -33,6 +33,7 @@ public class DashMeleeAttack : BaseState
     private IEnumerator DelayCoroutine()
     {
         hitBox.SetActive(true);
+        player.SoundManager.PlaySFX(E_Audio.Char_DashMeleeAttack);
         yield return new WaitForSeconds(player.Setting.DashMeleeAttackSetting.Delay);
         player.ChangeState(E_State.Idle);
     }
