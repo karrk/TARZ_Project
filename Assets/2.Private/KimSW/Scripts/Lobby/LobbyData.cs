@@ -12,6 +12,7 @@ public class SaveData
     public bool[] passiveEnable;
     public int[] equipPassiveID;
     public bool[] achieves;
+    public bool[] equipSlotEnable;
 }
 
 public class LobbyData : MonoBehaviour
@@ -28,6 +29,8 @@ public class LobbyData : MonoBehaviour
     public List<PassiveInfo> passives = new List<PassiveInfo>();
 
     public bool[] achieves = new bool[5];
+
+    public bool[] equipSlotEnable = new bool[3];
 
     public SaveData saveData = new SaveData(); // 플레이어 데이터 생성
 
@@ -71,6 +74,9 @@ public class LobbyData : MonoBehaviour
             saveData.achieves[i] = false;
         }
 
+        saveData.equipSlotEnable = new bool[3];
+        saveData.equipSlotEnable[0] = true;
+
         WriteData();
     }
 
@@ -94,6 +100,8 @@ public class LobbyData : MonoBehaviour
         }
 
         saveData.achieves = achieves;
+
+        saveData.equipSlotEnable = equipSlotEnable;
 
         WriteData();
     }
@@ -140,6 +148,7 @@ public class LobbyData : MonoBehaviour
 
         passiveEnable = saveData.passiveEnable;
         achieves = saveData.achieves;
+        equipSlotEnable = saveData.equipSlotEnable;
 
         for (int i = 0; i < equipPassive.Length; i++)
         {
@@ -166,6 +175,7 @@ public class LobbyData : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         SetExp();
+        equipSlotEnable[0] = true;
     }
 
     public void SetExp()
