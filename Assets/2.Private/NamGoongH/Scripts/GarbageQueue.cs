@@ -12,7 +12,7 @@ public class GarbageQueue
 
     public int Count => garbageIndexList.Count;
 
-    private int addGarbageNum = 3;
+    private int addGarbageNum = 5;
 
     /// <summary>
     /// 리스트에 투척물 인덱스 추가
