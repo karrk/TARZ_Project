@@ -35,6 +35,11 @@ public class PassiveSlot : MonoBehaviour
     {
         this.info = info;
         passiveImage.sprite = info.illust;
+
+        if (lobbyData.passiveEnable[info.id - 1])
+        {
+            passiveImage.color = Color.white;
+        }
     }
 
     public void OnClickButton()
@@ -65,6 +70,11 @@ public class PassiveSlot : MonoBehaviour
             inGameUI.PassiveShopPanel.ActiveCost(false);
 
             lobbyData.SaveData();
+
+            if (lobbyData.passiveEnable[info.id - 1])
+            {
+                passiveImage.color = Color.white;
+            }
         }
     }
 
