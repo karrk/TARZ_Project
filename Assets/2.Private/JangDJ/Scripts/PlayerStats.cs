@@ -6,12 +6,15 @@ using UnityEngine.InputSystem;
 using Zenject;
 
 // 프로젝트 컨텍스트 - 씬 전환시에도 상태를 유지시키기 위함
-public class PlayerStats : IInitializable, ITickable
+public class PlayerStats : IInitializable
 {
     [Inject] private ProjectInstaller.PlayerSettings setting;
     [Inject] private ProjectInstaller.PlayerBaseStats baseStat;
+    [Inject] private LobbyData passive;
+
     private ProjectInstaller.PlayerBaseStats equipStats = new ProjectInstaller.PlayerBaseStats();
-    
+    private ProjectInstaller.PlayerBaseStats passiveStats = new ProjectInstaller.PlayerBaseStats();
+
     //[Inject] private PlayerEquipment equips;
     [Inject] private CoroutineHelper helper;
 
@@ -30,24 +33,23 @@ public class PlayerStats : IInitializable, ITickable
 
     public float Atk => baseStat.AttackPower + equipStats.AttackPower * 0.1f;
 
-    private float throwCapacity;
-    public float ThrowCapacity => throwCapacity;
+    public float ThrowCapacity => baseStat.ThrowableItemCapacity + equipStats.ThrowableItemCapacity + passiveStats.ThrowableItemCapacity;
 
     private float maxMana;
     public float CurMana { get; private set; }
-    private float ManaAbsorption => baseStat.ManaAbsorption + equipStats.ManaAbsorption;
+    private float ManaAbsorption => baseStat.ManaAbsorption + equipStats.ManaAbsorption + passiveStats.ManaAbsorption;
 
     private float staminaRecoveryRate;
-    private float maxStamina => baseStat.MaxStamina + equipStats.MaxStamina;
-    public float MaxStamina => baseStat.MaxStamina + equipStats.MaxStamina;
+    //private float maxStamina => baseStat.MaxStamina + equipStats.MaxStamina + passiveStats.ManaAbsorption;
+    public float MaxStamina => baseStat.MaxStamina + equipStats.MaxStamina + passiveStats.MaxStamina;
     private float curStamina;
     public float CurStamina => curStamina;
 
     public float CurHealth { get; private set; }
-    public float MaxHealth => baseStat.MaxHealth + equipStats.MaxHealth;
-    public float MovementSpeed => baseStat.MovementSpeed + equipStats.MovementSpeed * 0.01f;
+    public float MaxHealth => baseStat.MaxHealth + equipStats.MaxHealth + passiveStats.MaxHealth;
+    public float MovementSpeed => baseStat.MovementSpeed + equipStats.MovementSpeed * 0.01f + passiveStats.MovementSpeed * 0.01f;
 
-    public float AtkSpeed => baseStat.AttackSpeed + equipStats.AttackSpeed * 0.001f;
+    public float AtkSpeed => baseStat.AttackSpeed + equipStats.AttackSpeed * 0.001f + passiveStats.AttackSpeed * 0.001f;
 
     private int removeCount;
 
@@ -57,7 +59,7 @@ public class PlayerStats : IInitializable, ITickable
     public bool ExpMode;
     public bool ZeroGarbageMode;
     public bool AbsorbHpMode;
-    public bool SwitchBGM; 
+    public bool SwitchBGM;
 
     #endregion
 
@@ -92,7 +94,7 @@ public class PlayerStats : IInitializable, ITickable
 
         removeCount++;
 
-        if(removeCount >= 10)
+        if (removeCount >= 10)
         {
             AddHP(1);
             removeCount = 0;
@@ -104,11 +106,53 @@ public class PlayerStats : IInitializable, ITickable
         maxMana = setting.BasicSetting.MaxMana;
         CurMana = 0;
         staminaRecoveryRate = baseStat.StaminaRecoveryRate;
-        throwCapacity = baseStat.ThrowableItemCapacity;
         CurHealth = MaxHealth;
 
         newEquips.OnChangedEquip += RenewalStats;
+        passive.OnChanged += UpdatePassive;
+    }
 
+    private void UpdatePassive()
+    {
+        var passives = passive.equipPassive;
+
+        foreach (var item in passives)
+        {
+            if (item == null)
+                continue;
+
+            switch (item.statType)
+            {
+                case OptionType.MOVESPD:
+                    passiveStats.MovementSpeed = item.statValue;
+                    break;
+                case OptionType.ATK:
+                    passiveStats.AttackPower = item.statValue;
+                    break;
+                case OptionType.ATKSPD:
+                    passiveStats.AttackSpeed = item.statValue;
+                    break;
+                case OptionType.HP:
+                    passiveStats.MaxHealth = item.statValue;
+                    OnChangedMaxHP?.Invoke(MaxHealth);
+                    AddHP(item.statValue);
+                    break;
+                case OptionType.INVENTORY:
+                    passiveStats.ThrowableItemCapacity = (int)item.statValue;
+                    OnChangedMaxThrowCount?.Invoke(ThrowCapacity);
+                    break;
+                case OptionType.GAUGEINC:
+                    passiveStats.ManaAbsorption = item.statValue;
+                    break;
+                case OptionType.STAMINA:
+                    passiveStats.MaxStamina = item.statValue;
+                    OnChangedMaxStamina?.Invoke(MaxStamina);
+                    break;
+                case OptionType.LUCK:
+                    passiveStats.Luck = item.statValue;
+                    break;
+            }
+        }
     }
 
     public void RenewalStats()
@@ -133,22 +177,22 @@ public class PlayerStats : IInitializable, ITickable
                 case OptionType.HP:
                     equipStats.MaxHealth = item.optionValue;
                     Debug.Log($"추가체력 {item.optionValue}");
-                    OnChangedMaxHP(equipStats.MaxHealth + baseStat.MaxHealth);
-                    OnChangedCurHP(CurHealth);
+                    AddHP(item.optionValue);
+                    OnChangedMaxHP?.Invoke(MaxHealth);
                     break;
                 case OptionType.INVENTORY:
                     equipStats.ThrowableItemCapacity = (int)item.optionValue;
                     Debug.Log($"추가인벤 {item.optionValue}");
-                    OnChangedMaxThrowCount?.Invoke(baseStat.ThrowableItemCapacity + equipStats.ThrowableItemCapacity);
+                    OnChangedMaxThrowCount?.Invoke(ThrowCapacity);
                     break;
                 case OptionType.GAUGEINC:
                     equipStats.ManaAbsorption = item.optionValue;
-                    Debug.Log($"추가마나 {item.optionValue}");
+                    Debug.Log($"추가 마나 흡수 {item.optionValue}");
                     break;
                 case OptionType.STAMINA:
                     equipStats.MaxStamina = item.optionValue;
                     Debug.Log($"추가스테 {item.optionValue}");
-                    OnChangedMaxStamina(equipStats.MaxStamina + baseStat.MaxStamina);
+                    OnChangedMaxStamina?.Invoke(MaxStamina);
                     break;
                 case OptionType.LUCK:
                     equipStats.Luck = item.optionValue;
@@ -197,11 +241,6 @@ public class PlayerStats : IInitializable, ITickable
 
     #region 가비지
 
-    private void UpdateGarbageCapacity()
-    {
-        throwCapacity = baseStat.ThrowableItemCapacity + equipStats.ThrowableItemCapacity;
-    }
-
     public void UpdateGarbageCount(float count)
     {
         OnChangedCurThrowCount?.Invoke(count);
@@ -226,7 +265,7 @@ public class PlayerStats : IInitializable, ITickable
 
         usedStamina = true;
 
-        curStamina = Math.Clamp(curStamina - needValue, 0, maxStamina);
+        curStamina = Math.Clamp(curStamina - needValue, 0, MaxStamina);
 
         OnChangedCurStamina?.Invoke(curStamina);
 
@@ -265,14 +304,14 @@ public class PlayerStats : IInitializable, ITickable
             if (curStamina < needStamina || forceStopUseStamina == true)
                 break;
 
-            curStamina = Math.Clamp(curStamina - needStamina, 0, maxStamina);
+            curStamina = Math.Clamp(curStamina - needStamina, 0, MaxStamina);
 
             OnChangedCurStamina?.Invoke(curStamina);
 
             await UniTask.Yield(PlayerLoopTiming.Update);
         }
 
-        if(forceStopUseStamina == false)
+        if (forceStopUseStamina == false)
         {
             endAction.Invoke(new InputAction.CallbackContext());
         }
@@ -287,10 +326,10 @@ public class PlayerStats : IInitializable, ITickable
 
         while (true)
         {
-            if (usedStamina == true || curStamina >= maxStamina)
+            if (usedStamina == true || curStamina >= MaxStamina)
                 break;
 
-            curStamina = Math.Clamp(curStamina + staminaRecoveryRate, 0, maxStamina);
+            curStamina = Math.Clamp(curStamina + staminaRecoveryRate, 0, MaxStamina);
             OnChangedCurStamina?.Invoke(curStamina);
 
             yield return null;
@@ -346,16 +385,6 @@ public class PlayerStats : IInitializable, ITickable
         OnChangedCurMana?.Invoke(CurMana);
     }
 
-
-
-
     #endregion
 
-    public void Tick()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-
-        }
-    }
 }

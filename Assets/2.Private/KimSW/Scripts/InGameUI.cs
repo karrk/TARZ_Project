@@ -209,7 +209,7 @@ public class InGameUI : BindUI
     /// 적 체력 초기화
     /// </summary>
     /// <param name="hp"></param>
-    public void InitEnemyHP(int hp)
+    public void InitEnemyHP(float hp)
     {
         enemyStatusPanel.SetEnemyHP(hp);
         OnEnemyHP();

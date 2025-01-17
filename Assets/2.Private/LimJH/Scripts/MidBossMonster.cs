@@ -16,6 +16,8 @@ public class MidBossMonster : BaseMonster
     private void Start()
     {
         this.Stat.halfHealth = base.Stat.Health / 2;
+        inGameUI = GameObject.FindGameObjectWithTag("ship").GetComponent<InGameUI>();
+        inGameUI.InitEnemyHP(Stat.Health);
     }
 
     protected override void Update()

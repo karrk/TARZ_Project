@@ -10,7 +10,7 @@ public class EnemyHpView : SliderView
 
 
     //model
-    public ReactiveProperty<int> Hp;
+    public ReactiveProperty<float> Hp;
 
     private IDisposable disposable;
 
@@ -23,7 +23,7 @@ public class EnemyHpView : SliderView
         panel = GetComponentInParent<EnemyStatusPanel>();
     }
 
-    public void TempModel(int hp)
+    public void TempModel(float hp)
     {
         //model
         slider.maxValue = hp;
@@ -35,17 +35,17 @@ public class EnemyHpView : SliderView
     {
         // presenter
         disposable = Hp
-        .Where(value => Hp.Value < 0)
+        .Where(value => Hp.Value <= 0)
      .Subscribe(value => { panel.gameObject.SetActive(false); disposable.Dispose(); })
      .AddTo(this);
 
         disposable = Hp
-       .Where(value => value >= 0)
+       .Where(value => value > 0)
        .Subscribe(value => { SetSlider(value); })
        .AddTo(this);
     }
 
-    public void SetEnemyHp(int hp)
+    public void SetEnemyHp(float hp)
     {
         TempModel(hp);
         TempPresenter();
