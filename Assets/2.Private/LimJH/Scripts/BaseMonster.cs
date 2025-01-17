@@ -26,6 +26,8 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
     private ProjectInstaller.MonsterStat originStat;
 
     [SerializeField] private E_Monster type = E_Monster.None;
+    [SerializeField] private float headHeight = 2;
+
 
     public ProjectPlayer player;
 
@@ -191,6 +193,8 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
         }
 
         stat.Health -= value * stat.DamageReducation;
+        DamageText text = manager.GetObject<DamageText>(E_VFX.DamageText);
+        text.SetText(value.ToString(), transform.position + Vector3.up * headHeight, chargable == true ? false : true);
 
         if (stat.Health <= 0)
         {
