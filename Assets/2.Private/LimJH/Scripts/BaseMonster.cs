@@ -15,6 +15,8 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
 
     public IAttackRange AttackType { get; private set; } = IAttackRange.Melee;*/
 
+    InGameUI inGameUI;
+
     [SerializeField] private GameObject projectilePrefab;
 
     [SerializeField] private Transform firePoint;
@@ -83,6 +85,15 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
     {
         signal.Subscribe<StageEndSignal>(Return);
         SelectStat();
+    }
+
+    private void Start()
+    {
+        if (type == E_Monster.BossMob)
+        {
+            inGameUI = GameObject.FindGameObjectWithTag("ship").GetComponent<InGameUI>();
+            inGameUI.InitEnemyHP(stat.Health);
+        }
     }
 
     public void Init(ProjectPlayer player)
@@ -187,14 +198,21 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
 
     public void TakeHit(float value, bool chargable = false)
     {
-        if(chargable == true)
+        if (chargable == true)
         {
             playerStats.ChargeMana();
         }
 
         stat.Health -= value * stat.DamageReducation;
+        if (type == E_Monster.BossMob) { 
+            inGameUI.EnemyStatusPanel.hpView.Hp.Value = stat.Health;
+         }
+
         DamageText text = manager.GetObject<DamageText>(E_VFX.DamageText);
         text.SetText(value.ToString(), transform.position + Vector3.up * headHeight, chargable == true ? false : true);
+
+        
+
 
         if (stat.Health <= 0)
         {

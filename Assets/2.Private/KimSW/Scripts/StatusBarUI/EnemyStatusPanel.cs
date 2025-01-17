@@ -21,7 +21,7 @@ public class EnemyStatusPanel : MonoBehaviour
         }
     }
 
-    public void SetEnemyHP(int hp)
+    public void SetEnemyHP(float hp)
     {
         hpView.SetEnemyHp(hp);
 
