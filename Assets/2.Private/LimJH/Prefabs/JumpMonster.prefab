@@ -248,7 +248,20 @@ MonoBehaviour:
     jumpHeight: 0
     jumpDuration: 0
     changeSpeed: 0
+    isGroggyActive: 0
+    pillarStates: 
+    groggyDuration: 0
+    isGimmickActive: 0
+    pillarSpawnRadius: 0
+    halfHealth: 0
+    isSpecialAttackDelay: 0
+    rushCount: 0
+    dashSpeed: 0
+    stopDistanceDash: 0
   type: 3
+  headHeight: 2
+  player: {fileID: 0}
+  Ongroggy: 0
   reference:
     Anim: {fileID: 5319549081127871000}
     Coll: {fileID: 8549264284049050068}
@@ -265,6 +278,7 @@ MonoBehaviour:
   knock:
     DownDration: 2
   attackCount: 0
+  specialAttackCount: 0
   jumpAttackCoolTime: 5
   shockwavePrefab: {fileID: 45157075010272663, guid: 7de8c3455b9c9574cb5aeb21c17402f3,
     type: 3}

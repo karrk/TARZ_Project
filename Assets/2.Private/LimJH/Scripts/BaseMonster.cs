@@ -324,7 +324,7 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
             rb.AddForce(direction * launchForce, ForceMode.Impulse);
         }
 
-        Debug.Log($"투사체가 {target.name}을 향해 발사되었습니다.");
+        //Debug.Log($"투사체가 {target.name}을 향해 발사되었습니다.");
 
         attackCount++;
     }
