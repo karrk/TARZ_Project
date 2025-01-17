@@ -1175,9 +1175,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8377266320237842524}
-        m_TargetAssemblyTypeName: InGameMenuPanel, Assembly-CSharp
-        m_MethodName: ConfirmExitPanel
+      - m_Target: {fileID: 2991329055548527919}
+        m_TargetAssemblyTypeName: InGameUI, Assembly-CSharp
+        m_MethodName: GoToLobby
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -32107,8 +32107,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7305707650732960989}
-        m_TargetAssemblyTypeName: GameOverPanel, Assembly-CSharp
+      - m_Target: {fileID: 2991329055548527919}
+        m_TargetAssemblyTypeName: InGameUI, Assembly-CSharp
         m_MethodName: GoToLobby
         m_Mode: 1
         m_Arguments:

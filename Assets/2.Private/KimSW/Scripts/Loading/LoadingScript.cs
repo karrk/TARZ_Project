@@ -17,6 +17,12 @@ public class LoadingScript : MonoBehaviour
         StartCoroutine(StartGame());
 
     }
+    public void Loading(string str)
+    {
+        sceneName = str;
+        StartCoroutine(StartGame());
+
+    }
 
     IEnumerator StartGame()
     {
