@@ -130,11 +130,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3400639349626145850, guid: 304bf06a96cfe834c88132426d94569f,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3416865260716160727, guid: 304bf06a96cfe834c88132426d94569f,
         type: 3}
       propertyPath: loadingScript
       value: 
       objectReference: {fileID: 2040376334}
+    - target: {fileID: 6549158471794533016, guid: 304bf06a96cfe834c88132426d94569f,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7034707408482907697, guid: 304bf06a96cfe834c88132426d94569f,
         type: 3}
       propertyPath: m_Name
@@ -238,6 +248,11 @@ PrefabInstance:
     - target: {fileID: 8909580150349824018, guid: 304bf06a96cfe834c88132426d94569f,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9067821831713144371, guid: 304bf06a96cfe834c88132426d94569f,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

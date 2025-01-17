@@ -46,7 +46,7 @@ public class PlayerHpSliderView : SliderView
     public void DecreaseValue()
     {
     
-        hitImage.DOFade(0.7f, 0).OnComplete(() => { hitImage.enabled = true; });
+        hitImage.DOFade(0.4f, 0).OnComplete(() => { hitImage.enabled = true; });
         hitImage.DOFade(0.0f, hitDuration).OnComplete(() => { hitImage.enabled = false; });
 
         fillImage.DOKill();

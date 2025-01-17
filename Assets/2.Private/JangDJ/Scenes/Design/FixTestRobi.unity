@@ -5988,6 +5988,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1934334394596760312, guid: 061939cc51f14a24dac0fd1a8e923ed8,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ExitGame
+      objectReference: {fileID: 0}
     - target: {fileID: 2233226709417840841, guid: 061939cc51f14a24dac0fd1a8e923ed8,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -6022,6 +6027,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: InGameCanvas3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2855079832249425881, guid: 061939cc51f14a24dac0fd1a8e923ed8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2991329055548527919, guid: 061939cc51f14a24dac0fd1a8e923ed8,
+        type: 3}
+      propertyPath: loading
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5650526855084849663, guid: 061939cc51f14a24dac0fd1a8e923ed8,
+        type: 3}
+      propertyPath: m_text
+      value: "\uAC8C\uC784 \uC885\uB8CC"
       objectReference: {fileID: 0}
     - target: {fileID: 8181929706600210064, guid: 061939cc51f14a24dac0fd1a8e923ed8,
         type: 3}

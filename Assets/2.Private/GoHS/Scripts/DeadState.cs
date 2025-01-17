@@ -22,6 +22,7 @@ public class DeadState : BaseState
     public void GameOver()
     {
         player.Signal.Fire<PlayerDeadSignal>();
+        player.inGameUI.OnGameOver(false);
         Debug.Log("플레이어 사망 애니메이션 이벤트 발생");
     }
 

@@ -20,4 +20,10 @@ public class StaticEquipment : MonoBehaviour
     {
         OnChangedEquip?.Invoke();
     }
+
+    public void ResetData()
+    {
+        equipped = new List<NewEquipment>();
+        equippedLevel = new int[5];
+    }
 }

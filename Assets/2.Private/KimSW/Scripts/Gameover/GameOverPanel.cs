@@ -11,11 +11,7 @@ using Zenject;
 
 public class GameOverPanel : MonoBehaviour, IOpenCloseMenu
 {
-    [Inject]
-    StaticEquipment staticEquipment;
-
-    [Inject]
-    StaticBluechip bluechip;
+  
     
     [Inject]
     LobbyData lobbyData;
@@ -24,27 +20,36 @@ public class GameOverPanel : MonoBehaviour, IOpenCloseMenu
 
     [SerializeField] GameObject selectedButton;
 
+    [SerializeField] TMP_Text gameoverText;
+
     public void OpenUIPanel()
     {
         gameObject.SetActive(true);
 
         SetSelected().Forget();
-      
 
-        ResetData();
-    }
-
-    void ResetData()
-    {
-        staticEquipment.firstInit = false;
-        bluechip.ResetBlueChip();
         lobbyData.SaveData();
+       
     }
+
+
 
     public void CloseUIPanel()
     {
         
 
+    }
+
+    public void SetGameoverText(bool isWin)
+    {
+        if (isWin)
+        {
+            gameoverText.text = "Clear";
+        }
+        else
+        {
+            gameoverText.text = "Game Over";
+        }
     }
 
     public void GoToLobby()
