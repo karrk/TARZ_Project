@@ -4,6 +4,8 @@ using Zenject;
 
 public class InGameUI : BindUI
 {
+    [SerializeField] LoadingScript loading;
+
     [Inject] private ItemInventory itemInventory;
 
     #region
@@ -233,7 +235,7 @@ public class InGameUI : BindUI
 
     public void GoToLobby()
     {
-
+        loading.Loading("FixTestRobi");
     }
 
     public void ExitGame()
