@@ -83,7 +83,7 @@ MonoBehaviour:
     Luck: 10
     ThrowableItemCapacity: 30
     ManaAbsorption: 10
-    StaminaRecoveryRate: 0.1
+    StaminaRecoveryRate: 0.2
     MaxStamina: 100
     MaxHealth: 3
     MovementSpeed: 3
@@ -112,7 +112,7 @@ MonoBehaviour:
       - 1
       MaxMana: 100
       ThrowingSpeed: 15
-      StaminaChargeWaitTime: 1.5
+      StaminaChargeWaitTime: 3
       BasicPower: 1
     JumpSetting:
       JumpPower: 5
@@ -139,7 +139,7 @@ MonoBehaviour:
     Skill1Setting:
       Delay: 1
     Skill2Setting:
-      Damage: 200
+      Damage: 1500
       ViewArea: 8
       ViewAngle: 60
       TargetMask:
@@ -152,7 +152,7 @@ MonoBehaviour:
       Radius: 5
       zOffset: 6
       Delay: 1.5
-      Damage: 350
+      Damage: 2000
       TargetMask:
         serializedVersion: 2
         m_Bits: 4096
@@ -174,7 +174,7 @@ MonoBehaviour:
     DashMeleeAttackSetting:
       Delay: 0.5
     MeleeSkill1Setting:
-      Damage: 20
+      Damage: 100
       ViewArea: 8
       ViewAngle: 180
       TargetMask:
