@@ -66,6 +66,7 @@ public class TestInput : MonoBehaviour
 
         }
         */
+        /*
         if (Input.GetKeyDown(KeyCode.U))
         {
             inGameUI.AlertText.SetAlertText("스태미나가 부족합니다");
@@ -77,6 +78,7 @@ public class TestInput : MonoBehaviour
             inGameUI.AlertText.SetAlertText("게이지가 부족합니다");
 
         }
+        */
         /*
         if (Input.GetKeyDown(KeyCode.P))
         {
