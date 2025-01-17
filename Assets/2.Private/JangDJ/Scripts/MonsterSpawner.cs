@@ -6,6 +6,7 @@ public class MonsterSpawner : MonoBehaviour
 {
     [Inject] protected PoolManager manager;
     [Inject] protected ProjectPlayer player;
+    [SerializeField] ParticleSystem spawnParticle;
 
     protected virtual void Start()
     {
@@ -27,6 +28,7 @@ public class MonsterSpawner : MonoBehaviour
             mob.transform.position = creator.transform.position;
             mob.transform.rotation = Quaternion.Euler(0,Random.Range(0,359),0);
             mob.Init(player);
+            Instantiate(spawnParticle, mob.transform.position, Quaternion.identity);
         }
     }
 
