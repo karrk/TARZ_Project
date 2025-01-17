@@ -22,6 +22,8 @@ public class LongRangeSkill_5 : BaseState
 
         player.Refernece.EffectController.UseSkillEffect();
         player.Refernece.EffectController.LongRangeSkill_5Effect_Start();
+        player.SoundManager.SetLoopSKillSound(true);
+        player.SoundManager.SkillSoundStart(E_Audio.Char_LongRangeSkill_5_Rotate);
     }
 
     private IEnumerator ActionSkill()
@@ -70,6 +72,8 @@ public class LongRangeSkill_5 : BaseState
         }
 
         player.Refernece.Animator.SetTrigger("LongRange5_End");
+        player.SoundManager.SkillSoundStop();
+        player.SoundManager.PlaySFX(E_Audio.Char_LongRangeSkill_5_Shoot);
     }
 
     private Vector3 GetRandomPos()

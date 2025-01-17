@@ -10,6 +10,7 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField] AudioSource bgm;
     [SerializeField] AudioSource sfx;
+    [SerializeField] AudioSource skillSound;
 
     private E_Audio curBGM; 
 
@@ -90,6 +91,22 @@ public class SoundManager : MonoBehaviour
         return bgm.volume;
     }
 
+    public void SkillSoundStart(E_Audio type)
+    {
+        skillSound.clip = clips[type];
+        skillSound.ignoreListenerPause = true;
+        skillSound.Play();
+    }
+
+    public void SkillSoundStop()
+    {
+        skillSound.Stop();
+    }
+
+    public void SetLoopSKillSound(bool loop)
+    {
+        skillSound.loop = loop;
+    }
 
     // 위치기반 SFX 음원 재생 
 }

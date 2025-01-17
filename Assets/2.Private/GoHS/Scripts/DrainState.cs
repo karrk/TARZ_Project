@@ -44,6 +44,8 @@ public class DrainState : BaseState
         //Debug.Log("@@@@@@@@@@@@@@수집상태 진입 성공");
         player.Refernece.Animator.SetBool("Drain", true);
         isDrainMode = true;
+
+        player.SoundManager.SkillSoundStart(E_Audio.Char_Drain);
     }
 
     private bool isDrainMode = false;
@@ -127,5 +129,6 @@ public class DrainState : BaseState
     public override void Exit()
     {
         StopDrain();
+        player.SoundManager.SkillSoundStop();
     }
 }

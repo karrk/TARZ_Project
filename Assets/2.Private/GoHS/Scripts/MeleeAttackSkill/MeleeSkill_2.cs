@@ -61,6 +61,8 @@ public class MeleeSkill_2 : BaseState
 
         player.Refernece.Rigid.AddForce(dashDirection * player.Setting.MeleeSkill2Setting.DashSpeed, ForceMode.VelocityChange);
 
+        player.SoundManager.PlaySFX(E_Audio.Char_MeleeSkill_2);
+
         canSkill = false;
         player.StartCoroutine(CoolTimeCoroutine());
     }

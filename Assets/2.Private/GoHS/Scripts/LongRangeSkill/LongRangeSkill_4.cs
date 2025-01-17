@@ -31,7 +31,7 @@ public class LongRangeSkill_4 : BaseState
         }
         
         armUnit.SetActive(true);
-
+        player.SoundManager.PlaySFX(E_Audio.Char_ArmUnit);
         player.Refernece.EffectController.UseSkillEffect();
     }
 
@@ -44,6 +44,7 @@ public class LongRangeSkill_4 : BaseState
     public void LongRangeSkill_4_On()
     {
         player.StartCoroutine(DelayCoroutine());
+        player.SoundManager.PlaySFX(E_Audio.Char_LongRangeSkill_4);
     }
 
     private IEnumerator DelayCoroutine()

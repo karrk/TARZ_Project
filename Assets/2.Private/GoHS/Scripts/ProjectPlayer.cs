@@ -97,7 +97,11 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
     [Inject] private Shooter shooter;
     [Inject] private SignalBus signal;
     public SignalBus Signal { get { return signal; } }
- 
+
+    [Inject] private SoundManager soundmanager;
+    public SoundManager SoundManager { get { return soundmanager; } set { soundmanager = value; } }
+
+
     [SerializeField] public PlayerReferences Refernece;
 
     private Coroutine CheckGroundRoutine;
@@ -560,15 +564,28 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
         }
     }
 
+    bool isPlayerLive = true;
+
     public void TakeHit(float value, bool chargable = false)
     {
-        if(stats.AddHP(-value))
+        if(isPlayerLive)
         {
-            ChangeState(E_State.Dead);
+            if (stats.AddHP(-value))
+            {
+                isPlayerLive = false;
+                soundmanager.PlaySFX(E_Audio.Char_Dead);
+                ChangeState(E_State.Dead);
+            }
+            else
+            {
+                soundmanager.PlaySFX(E_Audio.Char_Damaged);
+                return;
+            }
         }
         else
         {
             return;
         }
+
     }
 }

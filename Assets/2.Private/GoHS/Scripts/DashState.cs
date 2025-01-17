@@ -41,7 +41,7 @@ public class DashState : BaseState
         player.transform.rotation = rotation;
 
         player.candash = true;
-        //player.SoundManager.PlaySFX(player.SoundSetting.Player.Audio);
+        player.SoundManager.PlaySFX(E_Audio.Char_Dash);
     }
 
     public override void Update()

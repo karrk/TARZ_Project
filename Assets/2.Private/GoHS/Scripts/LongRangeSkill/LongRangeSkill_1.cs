@@ -41,6 +41,7 @@ public class LongRangeSkill_1 : BaseState
         }
 
         armUnit.SetActive(true);
+        player.SoundManager.PlaySFX(E_Audio.Char_ArmUnit);
         player.Refernece.EffectController.UseSkillEffect();
     }
 
@@ -82,6 +83,7 @@ public class LongRangeSkill_1 : BaseState
     private IEnumerator DelayCoroutine()
     {
         hitBox.SetActive(true);
+        player.SoundManager.PlaySFX(E_Audio.Char_ArmUnit);
         yield return new WaitForSeconds(curDelay);
         player.ChangeState(E_State.Idle);
     }
