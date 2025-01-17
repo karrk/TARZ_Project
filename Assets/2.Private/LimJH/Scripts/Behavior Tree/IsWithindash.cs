@@ -14,7 +14,7 @@ public class IsWithinDash : BaseCondition
         // 셀프와 타겟 간의 거리 계산
         float distance = Vector3.Distance(mob.transform.position, mob.PlayerPos);
 
-        if (distance <= 20f)
+        if (distance <= 10f)
         {
             return TaskStatus.Success;
         }

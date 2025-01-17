@@ -15,7 +15,7 @@ public class rangedAttack : BaseAction
     public override void OnStart()
     {
         base.OnStart();
-        Debug.Log("원거리공격 테스트");
+        //Debug.Log("원거리공격 테스트");
         // 원거리 공격 로직 추가
         mob.Reference.Anim.Play("Boss_Skill2");
     }

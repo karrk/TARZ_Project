@@ -3,22 +3,8 @@ using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 using Cysharp.Threading.Tasks;
 
-public class Attack : BaseAction
+public class BossAttack : BaseAction
 {
-    /*public SharedFloat attackDamage;
-    public SharedInt attackCount;
-    public SharedBool canAttack;
-
-    public float attackRange;
-    public float angle;*/
-
-    //public SharedGameObject selfObject;
-    //public SharedGameObject targetObject;
-
-    //private Animator animator; // Animator 컴포넌트
-
-    //private BaseMonster baseMonster;
-
     public override void OnStart()
     {
         base.OnStart();
@@ -45,7 +31,7 @@ public class Attack : BaseAction
         while (mob.Reference.Anim != null)
         {
             AnimatorStateInfo stateInfo = mob.Reference.Anim.GetCurrentAnimatorStateInfo(0);
-            if (stateInfo.IsName("Jake_Attack") && stateInfo.normalizedTime >= 1.0f)
+            if (stateInfo.IsName("Boss_Attack") && stateInfo.normalizedTime >= 1.0f)
             {
                 break;
             }

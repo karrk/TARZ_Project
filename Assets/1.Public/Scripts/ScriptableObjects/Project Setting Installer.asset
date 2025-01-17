@@ -189,7 +189,7 @@ MonoBehaviour:
       CoolTime: 15
   monsterStatSetting:
     BaseMobStat:
-      Health: 150
+      Health: 600
       DamageReducation: 1
       Damage: 1
       Angle: 90
@@ -215,7 +215,7 @@ MonoBehaviour:
       dashSpeed: 0
       stopDistanceDash: 0
     RangeMobStat:
-      Health: 100
+      Health: 400
       DamageReducation: 1
       Damage: 1
       Angle: 0
@@ -241,7 +241,7 @@ MonoBehaviour:
       dashSpeed: 0
       stopDistanceDash: 0
     DogMobStat:
-      Health: 70
+      Health: 280
       DamageReducation: 1
       Damage: 1
       Angle: 90
@@ -267,7 +267,7 @@ MonoBehaviour:
       dashSpeed: 0
       stopDistanceDash: 0
     JumpMobStat:
-      Health: 500
+      Health: 4000
       DamageReducation: 1
       Damage: 1
       Angle: 90
@@ -293,7 +293,7 @@ MonoBehaviour:
       dashSpeed: 0
       stopDistanceDash: 0
     BombMobStat:
-      Health: 400
+      Health: 2300
       DamageReducation: 1
       Damage: 1
       Angle: 90
@@ -319,7 +319,7 @@ MonoBehaviour:
       dashSpeed: 0
       stopDistanceDash: 0
     BossMobStat:
-      Health: 6000
+      Health: 24000
       DamageReducation: 1
       Damage: 1
       Angle: 0
