@@ -47,7 +47,7 @@ public class ProjectPlayer : MonoBehaviour, IDamagable
     [Inject]
     public PlayerUIModel playerUIModel;
 
-    private InGameUI inGameUI;
+    public InGameUI inGameUI;
 
 
     //[Inject] private ProjectInstaller.SoundSetting soundSetting;
