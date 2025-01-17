@@ -52,7 +52,10 @@ public class EquipmentManager : MonoBehaviour
 
     public void InteractInput(InputAction.CallbackContext value)
     {
-        
+        if (!inGameUI.CurrentMenu.Equals(inGameUI.StatusBarPanel))
+            return;
+
+
         interactEquipments[0].RemoveInstance();
         interactEquipments.Remove(interactEquipments[0]);
         inGameUI.EquipmentGetPanel.gameObject.SetActive(false);
@@ -261,6 +264,9 @@ public class EquipmentManager : MonoBehaviour
 
 
      });
+
+      
+
 
 
         this.UpdateAsObservable()

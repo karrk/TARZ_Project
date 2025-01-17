@@ -77,12 +77,15 @@ public class InGameUI : BindUI
     public InputActionReference cancelRef;
     public InputActionReference interRef;
     public InputActionReference invenRef;
+    public InputActionReference menuRef;
 
     private void OnEnable()
     {
         cancelRef.action.performed += CancelInput;
        
         invenRef.action.performed += InvenInput;
+
+        menuRef.action.performed += MenuInput;
     }
 
     private void OnDisable()
@@ -90,6 +93,8 @@ public class InGameUI : BindUI
         cancelRef.action.performed -= CancelInput;
       
         invenRef.action.performed -= InvenInput;
+
+        menuRef.action.performed -= MenuInput;
     }
 
     private void Awake()
@@ -132,13 +137,24 @@ public class InGameUI : BindUI
 
     }
 
+    public void MenuInput(InputAction.CallbackContext value)
+    {
+        if (currentMenu is not null)
+        {
+            if (CurrentMenu.Equals(StatusBarPanel)) { 
+                CurrentMenu.CloseUIPanel();
+            }
+        }
+    }
 
     public void CancelInput(InputAction.CallbackContext value)
     {
         if (currentMenu is not null)
         {
-            CurrentMenu.CloseUIPanel();
-
+            if (!CurrentMenu.Equals(StatusBarPanel))
+            {
+                CurrentMenu.CloseUIPanel();
+            }
         }
     }
   
