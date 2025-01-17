@@ -63,7 +63,8 @@ public class ChapterSelector : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.F))
         {
-            SceneChanger.LoadScene(chapterTexts[SelectedChapterIndex].text + "-1");
+            SceneChanger.LoadScene(chapterTexts[SelectedChapterIndex].text);
+            //SceneChanger.LoadScene(chapterTexts[SelectedChapterIndex].text + "-1");
         }
     }
 }
