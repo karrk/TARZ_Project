@@ -62,7 +62,9 @@ public class GameOverPanel : MonoBehaviour, IOpenCloseMenu
         
         await UniTask.Delay(TimeSpan.FromSeconds(2f), cancellationToken: cancell.Token);
         EventSystem.current.SetSelectedGameObject(selectedButton.gameObject);
+        Cursor.lockState = CursorLockMode.None;
 
+        Cursor.visible = true;
 
     }
 

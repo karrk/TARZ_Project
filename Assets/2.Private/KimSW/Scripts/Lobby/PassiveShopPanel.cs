@@ -185,6 +185,9 @@ public class PassiveShopPanel : MonoBehaviour, IOpenCloseMenu
 
     public void OpenUIPanel()
     {
+        Cursor.lockState = CursorLockMode.None;
+
+        Cursor.visible = true;
         SetSprite();
         gameObject.SetActive(true);
         
