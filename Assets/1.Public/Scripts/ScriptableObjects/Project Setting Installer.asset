@@ -82,7 +82,7 @@ MonoBehaviour:
     AttackPower: 20
     Luck: 10
     ThrowableItemCapacity: 30
-    ManaAbsorption: 10
+    ManaAbsorption: 0.9
     StaminaRecoveryRate: 0.2
     MaxStamina: 100
     MaxHealth: 3
@@ -105,10 +105,10 @@ MonoBehaviour:
   playerSettings:
     BasicSetting:
       SkillAnchor:
-      - 0.2
-      - 0.4
-      - 0.6
-      - 0.8
+      - 0.273
+      - 0.455
+      - 0.591
+      - 0.727
       - 1
       MaxMana: 100
       ThrowingSpeed: 15
