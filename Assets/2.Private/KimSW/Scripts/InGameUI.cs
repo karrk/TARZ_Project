@@ -142,7 +142,7 @@ public class InGameUI : BindUI
        // itemInventory.OnChangeStatusInfo += () => { StatusInformationPanel.UpdateStatusInfo(); };
 
         currentMenu = statusBarPanel;
-
+        Time.timeScale = 1.0f;
     }
 
     public void MenuInput(InputAction.CallbackContext value)

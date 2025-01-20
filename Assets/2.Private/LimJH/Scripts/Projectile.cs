@@ -5,6 +5,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     [SerializeField] private float power;
+    [SerializeField] ParticleSystem takeDamageEffect;
 
     private void Start()
     {
@@ -29,7 +30,6 @@ public class Projectile : MonoBehaviour
         string collisionTag = collider.gameObject.tag;
 
 
-        // 몬스터와 충돌한 경우
         if (collisionTag == "Player")
         {
             Debug.Log("몬스터 투사체 플레이어에게 충돌");
@@ -38,6 +38,7 @@ public class Projectile : MonoBehaviour
             if (player != null)
             {
                 player.TakeHit(power, true);
+                Instantiate(takeDamageEffect, transform.position, Quaternion.identity);
             }
 
             // 투척물 소멸

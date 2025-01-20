@@ -43,6 +43,7 @@ public class StatusBarPanel : MonoBehaviour, IOpenCloseMenu
 
     public void OpenUIPanel()
     {
+        Time.timeScale = 1.0f;
         gameObject.SetActive(true);
         for (int i = 0; i < animatedUIs.Length; i++)
         {

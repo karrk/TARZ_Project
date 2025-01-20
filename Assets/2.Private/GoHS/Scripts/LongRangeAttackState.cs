@@ -170,6 +170,7 @@ public class LongRangeAttackState : BaseState
 
         //Debug.Log(attackStack);
         player.Refernece.Shooter.FireItem(GetCalculatedDamage());    // 총알 발사
+        player.SoundManager.PlaySFX(E_Audio.Char_RangeAttack);
 
         if(player.stats.ZeroGarbageMode)
         {

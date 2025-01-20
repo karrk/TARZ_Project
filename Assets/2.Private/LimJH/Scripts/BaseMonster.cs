@@ -201,7 +201,7 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
          }
 
         DamageText text = manager.GetObject<DamageText>(E_VFX.DamageText);
-        text.SetText(value.ToString(), transform.position + Vector3.up * headHeight, chargable == true ? false : true);
+        text.SetText((value * stat.DamageReducation).ToString(), transform.position + Vector3.up * headHeight, chargable == true ? false : true);
 
         
 

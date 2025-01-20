@@ -15,9 +15,11 @@ public class StageController : IInitializable
         switch (sceneName)
         {
             case "FixTest1":
+                soundmanager.SetLoopBGM(true);
                 soundmanager.PlayBGM(E_Audio.Stage_1_BGM);
                 break;
             case "FixTest2":
+                soundmanager.SetLoopBGM(true);
                 soundmanager.PlayBGM(E_Audio.Stage_1_BGM);
                 break;
             case "FixTest3":

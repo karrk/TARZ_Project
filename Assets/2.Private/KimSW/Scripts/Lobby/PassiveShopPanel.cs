@@ -35,7 +35,22 @@ public class PassiveShopPanel : MonoBehaviour, IOpenCloseMenu
 
     StringBuilder sb = new StringBuilder();
 
-   
+    private void Awake()
+    {
+        SetSlotLock();
+    }
+
+    public void SetSlotLock()
+    {
+        for (int i = 0; i < passiveSelectCallbacks.Length; i++)
+        {
+            if (lobbyData.equipSlotEnable[i])
+            {
+                passiveSelectCallbacks[i].lockImage.gameObject.SetActive(false);
+            }
+        }
+    }
+
 
     public void SetInfoText(PassiveInfo info)
     {
@@ -55,10 +70,22 @@ public class PassiveShopPanel : MonoBehaviour, IOpenCloseMenu
         passiveInfoText.text ="";
         passiveCostText.text ="";
     }
+
+    public void SetInfoSlotCost(int num)
+    {
+        passiveNameText.text = $"슬롯{num+1} 구매";
+        passiveInfoText.text = "";
+        passiveCostText.text = passiveSelectCallbacks[num].cost.ToString();
+        ActiveCost(true);
+    }
     public void OnSelectButton(int num)
     {
-
-        if (lobbyData.equipPassive[num] == null)
+        if (!lobbyData.equipSlotEnable[num])
+        {
+            SetInfoSlotCost(num);
+            return;
+        }
+            if (lobbyData.equipPassive[num] == null)
         {
             SetInfoTextNull();
            
@@ -98,6 +125,27 @@ public class PassiveShopPanel : MonoBehaviour, IOpenCloseMenu
 
     public void EquipPassive(int num)
     {
+        if (!lobbyData.equipSlotEnable[num])
+        {
+                if (passiveSelectCallbacks[num].cost <= lobbyData.exp)
+            {
+                lobbyData.exp -= passiveSelectCallbacks[num].cost;
+                lobbyData.SetExp();
+
+                lobbyData.equipSlotEnable[num] = true;
+                lobbyData.SaveData();
+                SetSlotLock();
+
+               
+            }
+
+            return;
+        }
+
+
+        if (currentPassive == null)
+            return;
+
         foreach (var item in lobbyData.equipPassive)
         {
             if(item == null)

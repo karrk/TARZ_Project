@@ -11,6 +11,7 @@ public class MidBossMonster : BaseMonster
 
     [SerializeField] private GameObject explosivesPrefab;
     [SerializeField] private GameObject explosivesRange;
+    [SerializeField] public ParticleSystem bossMobDie;
     private GameObject range;
 
     private void Start()
