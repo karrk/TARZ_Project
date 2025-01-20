@@ -15,6 +15,9 @@ public class PassiveShopPanel : MonoBehaviour, IOpenCloseMenu
     [Inject]
     LobbyData lobbyData;
 
+    [Inject]
+    SoundManager soundManager;
+
     [SerializeField] GameObject selectButton;
 
     [SerializeField] GameObject costUI;
@@ -193,6 +196,8 @@ public class PassiveShopPanel : MonoBehaviour, IOpenCloseMenu
         
         Time.timeScale = 0f;
         EventSystem.current.SetSelectedGameObject(selectButton);
+
+        soundManager.PlaySFX(E_Audio.UI_ShopOnOff);
     }
 
     public void CloseUIPanel()
@@ -201,6 +206,7 @@ public class PassiveShopPanel : MonoBehaviour, IOpenCloseMenu
         gameObject.SetActive(false);
         inGameUI.CurrentMenu = inGameUI.StatusBarPanel;
         inGameUI.CurrentMenu.OpenUIPanel();
+        soundManager.PlaySFX(E_Audio.UI_ShopOnOff);
 
     }
 }

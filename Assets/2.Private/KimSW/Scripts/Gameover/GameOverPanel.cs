@@ -11,7 +11,8 @@ using Zenject;
 
 public class GameOverPanel : MonoBehaviour, IOpenCloseMenu
 {
-  
+    [Inject]
+    SoundManager soundManager;
     
     [Inject]
     LobbyData lobbyData;
@@ -29,7 +30,8 @@ public class GameOverPanel : MonoBehaviour, IOpenCloseMenu
         SetSelected().Forget();
 
         lobbyData.SaveData();
-       
+
+        soundManager.PlaySFX(E_Audio.UI_GameOver);
     }
 
 

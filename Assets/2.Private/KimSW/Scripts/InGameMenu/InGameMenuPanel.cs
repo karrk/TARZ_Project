@@ -12,6 +12,8 @@ public class InGameMenuPanel : MonoBehaviour, IOpenCloseMenu
     [Inject]
     InGameUI inGameUI;
 
+    [Inject]
+    SoundManager soundManager;
 
     [SerializeField] Button selectedButton;
 
@@ -69,6 +71,8 @@ public class InGameMenuPanel : MonoBehaviour, IOpenCloseMenu
 
         Time.timeScale = 0;
 
+        soundManager.PlaySFX(E_Audio.UI_PopUp);
+
     }
 
     public void CloseUIPanel()
@@ -77,6 +81,8 @@ public class InGameMenuPanel : MonoBehaviour, IOpenCloseMenu
         exitChoicePanel.SetActive(false);
         inGameUI.CurrentMenu = inGameUI.StatusBarPanel;
         inGameUI.CurrentMenu.OpenUIPanel();
+
+        soundManager.PlaySFX(E_Audio.UI_PopUp);
 
     }
 
