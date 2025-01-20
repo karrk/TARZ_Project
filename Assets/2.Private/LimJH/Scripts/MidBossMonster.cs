@@ -14,6 +14,8 @@ public class MidBossMonster : BaseMonster
     [SerializeField] public ParticleSystem bossMobDie;
     private GameObject range;
 
+    [SerializeField] protected override float headHeight => 5;
+
     private void Start()
     {
         this.Stat.halfHealth = base.Stat.Health / 2;

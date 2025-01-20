@@ -476,6 +476,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         public bool canJumpAttack;
         public float jumpHeight;
         public float jumpDuration;
+        public float jumpAttakRange;
         public float changeSpeed;
 
         public bool isGroggyActive;
@@ -513,6 +514,7 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
             target.canJumpAttack = this.canJumpAttack;
             target.jumpHeight = this.jumpHeight;
             target.jumpDuration = this.jumpDuration;
+            target.jumpAttakRange = this.jumpAttakRange;
             target.changeSpeed = this.changeSpeed;
             target.isGroggyActive = this.isGroggyActive;
             target.pillarStates = this.pillarStates;

@@ -265,7 +265,7 @@
                 {
                     "name": "",
                     "id": "cec29037-19e0-473d-b461-39ea71970da1",
-                    "path": "<XInputController>/buttonSouth",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": ";JoyStick",
@@ -276,7 +276,7 @@
                 {
                     "name": "",
                     "id": "6058613c-aa4f-4f7a-8983-4f124c879f90",
-                    "path": "<Keyboard>/q",
+                    "path": "<Keyboard>/r",
                     "interactions": "",
                     "processors": "",
                     "groups": ";PC",
@@ -290,7 +290,7 @@
                     "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";JoyStick",
                     "action": "Skill",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -309,7 +309,7 @@
                 {
                     "name": "",
                     "id": "9fafef56-49f0-4f1e-bb1c-58588ccbf22e",
-                    "path": "<XInputController>/buttonEast",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": ";JoyStick",
@@ -331,7 +331,7 @@
                 {
                     "name": "",
                     "id": "f4d1f85e-1d26-41a6-916f-9a58f84dcb95",
-                    "path": "<XInputController>/buttonWest",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": ";JoyStick",
@@ -342,7 +342,7 @@
                 {
                     "name": "",
                     "id": "9cd50bb5-74b6-4dd5-a522-602cd9d54aaa",
-                    "path": "<Keyboard>/r",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": ";PC",
@@ -364,40 +364,7 @@
                 {
                     "name": "",
                     "id": "3a5b45ca-d9f6-4b02-a5cd-927a59ca87b7",
-                    "path": "<Keyboard>/upArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";PC",
-                    "action": "Melee2",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a1612b72-7765-4818-83ff-fc66df93ac63",
-                    "path": "<Keyboard>/downArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";PC",
-                    "action": "Melee2",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6b93e0b8-3a71-459b-959d-29f6fd4e6f1f",
-                    "path": "<Keyboard>/leftArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";PC",
-                    "action": "Melee2",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9d1471d5-f1c1-416f-84df-06d0ad266705",
-                    "path": "<Keyboard>/rightArrow",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": ";PC",

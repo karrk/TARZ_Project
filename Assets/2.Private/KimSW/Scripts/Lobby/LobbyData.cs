@@ -175,6 +175,10 @@ public class LobbyData : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         SetExp();
+        if (equipSlotEnable == null)
+        {
+            return;
+        }
         equipSlotEnable[0] = true;
     }
 

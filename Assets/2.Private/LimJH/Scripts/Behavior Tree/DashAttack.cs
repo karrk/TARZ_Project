@@ -18,6 +18,8 @@ public class DashAttack : BaseAction
 
     private CancellationTokenSource cancellationTokenSource;
 
+    public Collider dashCollider;
+
     public override void OnStart()
     {
         base.OnStart();
@@ -37,6 +39,11 @@ public class DashAttack : BaseAction
         // 돌진 중 상태 초기화
         isDashing = false;
         isEndDash = false;
+
+        if (dashCollider != null)
+        {
+            dashCollider.enabled = false;
+        }
     }
 
     private async UniTask Rush(int count, CancellationToken token)
@@ -79,6 +86,12 @@ public class DashAttack : BaseAction
         float duration = Vector3.Distance(start, targetPos) / mob.Stat.dashSpeed;
         float t = 0;
 
+        // 대쉬 시작 시 Trigger Collider 활성화
+        if (dashCollider != null)
+        {
+            dashCollider.enabled = true;
+        }
+
         while (t < 1)
         {
             if (token.IsCancellationRequested) break;
@@ -102,6 +115,12 @@ public class DashAttack : BaseAction
             t += Time.deltaTime / duration;
 
             await UniTask.Yield(token);
+        }
+
+        // 대쉬 종료 시 콜라이더 비활성화
+        if (dashCollider != null)
+        {
+            dashCollider.enabled = false;
         }
     }
 
@@ -171,5 +190,13 @@ public class DashAttack : BaseAction
         cancellationTokenSource?.Dispose();
 
         isDashing = false; // 상태 초기화
+    }
+
+    public override void OnTriggerEnter(Collider other)
+    {
+        if (isDashing && other.CompareTag("Player"))
+        {
+            mob.player.TakeHit(2);
+        }
     }
 }

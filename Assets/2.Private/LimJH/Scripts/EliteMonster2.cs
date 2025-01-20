@@ -4,6 +4,7 @@ using UnityEngine;
 public class EliteMonster2 : BaseMonster
 {
     [SerializeField] private GameObject bombPrefab;
+    [SerializeField] protected override float headHeight => 2.5f;
 
     protected override void Update()
     {

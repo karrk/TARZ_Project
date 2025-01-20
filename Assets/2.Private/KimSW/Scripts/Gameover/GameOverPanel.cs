@@ -11,7 +11,8 @@ using Zenject;
 
 public class GameOverPanel : MonoBehaviour, IOpenCloseMenu
 {
-  
+    [Inject]
+    SoundManager soundManager;
     
     [Inject]
     LobbyData lobbyData;
@@ -29,7 +30,8 @@ public class GameOverPanel : MonoBehaviour, IOpenCloseMenu
         SetSelected().Forget();
 
         lobbyData.SaveData();
-       
+
+        soundManager.PlaySFX(E_Audio.UI_GameOver);
     }
 
 
@@ -62,7 +64,9 @@ public class GameOverPanel : MonoBehaviour, IOpenCloseMenu
         
         await UniTask.Delay(TimeSpan.FromSeconds(2f), cancellationToken: cancell.Token);
         EventSystem.current.SetSelectedGameObject(selectedButton.gameObject);
+        Cursor.lockState = CursorLockMode.None;
 
+        Cursor.visible = true;
 
     }
 

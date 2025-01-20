@@ -13,6 +13,9 @@ public class InteractBlueChip : MonoBehaviour, IInteractable
     [Inject]
     StaticBluechip staticBluechip;
 
+    [Inject]
+    SoundManager soundManager;
+
     Transform player;
 
     [SerializeField] float getRange;
@@ -200,6 +203,8 @@ public class InteractBlueChip : MonoBehaviour, IInteractable
         staticBluechip.bluechipCheck[(int)blueChip.type] = true;
 
         inGameUI.EquipmentBackpackPanel.blueChip = blueChip;
+
+        soundManager.PlaySFX(E_Audio.UI_GetChip);
     }
 
     public void RemoveInstance()
