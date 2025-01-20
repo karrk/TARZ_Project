@@ -28,7 +28,7 @@ public class BaseMonster : MonoBehaviour, IDamagable, IPushable, IPooledObject
     private ProjectInstaller.MonsterStat originStat;
 
     [SerializeField] private E_Monster type = E_Monster.None;
-    [SerializeField] private float headHeight = 2;
+    [SerializeField] protected virtual float headHeight => 2;
 
 
     public ProjectPlayer player;

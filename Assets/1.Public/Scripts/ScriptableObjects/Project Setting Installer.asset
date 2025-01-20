@@ -203,6 +203,7 @@ MonoBehaviour:
       canJumpAttack: 0
       jumpHeight: 0
       jumpDuration: 0
+      jumpAttakRange: 0
       changeSpeed: 0
       isGroggyActive: 0
       pillarStates: 
@@ -229,6 +230,7 @@ MonoBehaviour:
       canJumpAttack: 0
       jumpHeight: 0
       jumpDuration: 0
+      jumpAttakRange: 0
       changeSpeed: 0
       isGroggyActive: 0
       pillarStates: 
@@ -255,6 +257,7 @@ MonoBehaviour:
       canJumpAttack: 0
       jumpHeight: 0
       jumpDuration: 0
+      jumpAttakRange: 0
       changeSpeed: 0
       isGroggyActive: 0
       pillarStates: 
@@ -281,6 +284,7 @@ MonoBehaviour:
       canJumpAttack: 1
       jumpHeight: 4
       jumpDuration: 2
+      jumpAttakRange: 6
       changeSpeed: 0
       isGroggyActive: 0
       pillarStates: 
@@ -307,6 +311,7 @@ MonoBehaviour:
       canJumpAttack: 0
       jumpHeight: 0
       jumpDuration: 0
+      jumpAttakRange: 0
       changeSpeed: 1
       isGroggyActive: 0
       pillarStates: 
@@ -333,6 +338,7 @@ MonoBehaviour:
       canJumpAttack: 0
       jumpHeight: 0
       jumpDuration: 0
+      jumpAttakRange: 0
       changeSpeed: 0
       isGroggyActive: 0
       pillarStates: 000000000000000000000000
