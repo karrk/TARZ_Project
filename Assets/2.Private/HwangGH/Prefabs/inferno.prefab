@@ -19830,8 +19830,8 @@ GameObject:
   - component: {fileID: 478616}
   - component: {fileID: 199705852046673106}
   - component: {fileID: 198047616570591458}
-  - component: {fileID: 8755940725863888414}
   - component: {fileID: 7495441495229765487}
+  - component: {fileID: 1286474292319148068}
   m_Layer: 0
   m_Name: inferno
   m_TagString: Untagged
@@ -19848,7 +19848,7 @@ Transform:
   m_GameObject: {fileID: 132016}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.08, y: 0, z: 0}
+  m_LocalPosition: {x: -0.72, y: 0, z: 0.29}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -24677,8 +24677,21 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!136 &8755940725863888414
-CapsuleCollider:
+--- !u!114 &7495441495229765487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28601c2872953f04e9d691c05023cb2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damagePerSecond: 1
+--- !u!65 &1286474292319148068
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -24695,24 +24708,9 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 2.9915953
-  m_Height: 7.3843126
-  m_Direction: 1
-  m_Center: {x: 0.01, y: 1.8535514, z: -0.01999998}
---- !u!114 &7495441495229765487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 132016}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28601c2872953f04e9d691c05023cb2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damagePerSecond: 1
+  serializedVersion: 3
+  m_Size: {x: 8.5, y: 1, z: 8.1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &138662
 GameObject:
   m_ObjectHideFlags: 0
