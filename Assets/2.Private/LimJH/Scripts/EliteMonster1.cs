@@ -5,6 +5,7 @@ public class EliteMonster1 : BaseMonster
 {
     public float jumpAttackCoolTime;
     [SerializeField] private GameObject shockwavePrefab;
+    [SerializeField] protected override float headHeight => 4;
 
     protected override void Update()
     {

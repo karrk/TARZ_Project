@@ -19,7 +19,7 @@ public class IsInJumpAttack : BaseCondition
 
         //Debug.Log(distance);
         
-        if (distance <= mob.Stat.InAttackRange && mob.Stat.canJumpAttack)
+        if (distance <= mob.Stat.jumpAttakRange && mob.Stat.canJumpAttack)
         {
             return TaskStatus.Success;
         }
