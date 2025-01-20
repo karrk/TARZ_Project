@@ -10,6 +10,9 @@ public class EquipmentBackpackPanel : MonoBehaviour, IOpenCloseMenu
     [Inject]
     InGameUI inGameUI;
 
+    [Inject]
+    SoundManager soundManager;
+
     [SerializeField] GameObject slotButton;
     [SerializeField] GameObject chip;
     [SerializeField] TMP_Text blueChipName;
@@ -27,6 +30,8 @@ public class EquipmentBackpackPanel : MonoBehaviour, IOpenCloseMenu
         inGameUI.EquipmentSelectPanel.slotsPanel.SetActive(true);
 
         EventSystem.current.SetSelectedGameObject(chip);
+
+        soundManager.PlaySFX(E_Audio.UI_Backpack);
     }
 
     public void CloseUIPanel()
@@ -36,6 +41,8 @@ public class EquipmentBackpackPanel : MonoBehaviour, IOpenCloseMenu
 
         chip.SetActive(false);
         inGameUI.EquipmentSelectPanel.slotsPanel.SetActive(false);
+
+        soundManager.PlaySFX(E_Audio.UI_Backpack);
     }
 
     public void SetChipInfo()

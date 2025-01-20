@@ -739,6 +739,7 @@ GameObject:
   - component: {fileID: 9191105748944893658}
   - component: {fileID: 6730740334834701064}
   - component: {fileID: 8665129987595833316}
+  - component: {fileID: 5191004398820421061}
   m_Layer: 5
   m_Name: KeyManualButton
   m_TagString: Untagged
@@ -860,6 +861,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8408426956162002929}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5191004398820421061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282634935383047621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &291312621035766428
 GameObject:
   m_ObjectHideFlags: 0
@@ -1007,6 +1032,7 @@ GameObject:
   - component: {fileID: 1736367070473533730}
   - component: {fileID: 3792379442775106969}
   - component: {fileID: 8816302444492677532}
+  - component: {fileID: 3286134719974891474}
   m_Layer: 5
   m_Name: RerollButton
   m_TagString: Untagged
@@ -1130,6 +1156,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3286134719974891474}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3286134719974891474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 298333000183704332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &314325850716778244
 GameObject:
   m_ObjectHideFlags: 0
@@ -1142,6 +1192,7 @@ GameObject:
   - component: {fileID: 7535790743951792600}
   - component: {fileID: 9044062964781300587}
   - component: {fileID: 1934334394596760312}
+  - component: {fileID: 5223620227810335332}
   m_Layer: 5
   m_Name: ConfirmButton
   m_TagString: Untagged
@@ -1263,6 +1314,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2968422177328735118}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5223620227810335332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 314325850716778244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &331646806822529936
 GameObject:
   m_ObjectHideFlags: 0
@@ -1819,6 +1894,7 @@ GameObject:
   - component: {fileID: 4532726120087441933}
   - component: {fileID: 6517495674494438725}
   - component: {fileID: 7121246095277616122}
+  - component: {fileID: 8872790956196383956}
   m_Layer: 5
   m_Name: PassiveSlotButton
   m_TagString: Untagged
@@ -1939,6 +2015,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7294315525207458017}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClickShop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7121246095277616122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1949,6 +2037,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a141ee45b29e8ed4a8fb48e58afd3563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8872790956196383956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 391719164014733976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &425590252906521243
@@ -2511,6 +2611,7 @@ GameObject:
   - component: {fileID: 7611452803558158428}
   - component: {fileID: 3578881495144916006}
   - component: {fileID: 8100162654121918341}
+  - component: {fileID: 4503989527274639743}
   m_Layer: 5
   m_Name: PassiveSlotButton
   m_TagString: Untagged
@@ -2631,6 +2732,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7294315525207458017}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClickShop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8100162654121918341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2641,6 +2754,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a141ee45b29e8ed4a8fb48e58afd3563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4503989527274639743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 562297018249676293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &567229744319847773
@@ -2655,6 +2780,7 @@ GameObject:
   - component: {fileID: 8486618525818875845}
   - component: {fileID: 8895674050108943800}
   - component: {fileID: 1428955338307841591}
+  - component: {fileID: 5417168579867329039}
   m_Layer: 5
   m_Name: ChangeButton
   m_TagString: Untagged
@@ -2777,6 +2903,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2402441095106848341}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5417168579867329039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567229744319847773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &569326304155942973
 GameObject:
   m_ObjectHideFlags: 0
@@ -3767,7 +3917,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uB85C\uBE44\uB85C \uB3CC\uC544\uAC00\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?"
+  m_text: "\uB85C\uBE44\uB85C \uB098\uAC00\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1105d88b95db17c46aaa6135b6ac9825, type: 2}
   m_sharedMaterial: {fileID: 5435159123889671083, guid: 1105d88b95db17c46aaa6135b6ac9825,
@@ -3850,6 +4000,7 @@ GameObject:
   - component: {fileID: 5596123144125988834}
   - component: {fileID: 7675914850461695886}
   - component: {fileID: 4983048330339285223}
+  - component: {fileID: 560092376123967223}
   m_Layer: 5
   m_Name: PassiveSlotButton
   m_TagString: Untagged
@@ -3970,6 +4121,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7294315525207458017}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClickShop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4983048330339285223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3980,6 +4143,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a141ee45b29e8ed4a8fb48e58afd3563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &560092376123967223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 837759239149926879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &859258929066480360
@@ -4543,6 +4718,7 @@ GameObject:
   - component: {fileID: 3177923753072742543}
   - component: {fileID: 4482817543094353350}
   - component: {fileID: 1145603114625105837}
+  - component: {fileID: 5366951151195707506}
   m_Layer: 5
   m_Name: PassiveSlotButton
   m_TagString: Untagged
@@ -4663,6 +4839,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7294315525207458017}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClickShop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1145603114625105837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4673,6 +4861,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a141ee45b29e8ed4a8fb48e58afd3563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5366951151195707506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944080085116402116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &954110605584743949
@@ -4951,6 +5151,7 @@ GameObject:
   - component: {fileID: 8174378472574399420}
   - component: {fileID: 6745482925389485594}
   - component: {fileID: 4470756440593919333}
+  - component: {fileID: 8187265036095381428}
   m_Layer: 5
   m_Name: PassiveSlotButton
   m_TagString: Untagged
@@ -5071,6 +5272,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7294315525207458017}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClickShop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4470756440593919333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5081,6 +5294,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a141ee45b29e8ed4a8fb48e58afd3563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8187265036095381428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1066457574213644995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1114536122537879085
@@ -5705,6 +5930,7 @@ GameObject:
   - component: {fileID: 704665039483070991}
   - component: {fileID: 2123867573348449024}
   - component: {fileID: 1250375599274033101}
+  - component: {fileID: 7155293463270592227}
   m_Layer: 5
   m_Name: PassiveSlotButton
   m_TagString: Untagged
@@ -5825,6 +6051,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7294315525207458017}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClickShop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1250375599274033101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5835,6 +6073,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a141ee45b29e8ed4a8fb48e58afd3563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7155293463270592227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195906593484008881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1274950819184752980
@@ -7250,6 +7500,7 @@ GameObject:
   - component: {fileID: 1656840124733386513}
   - component: {fileID: 4216345210165427443}
   - component: {fileID: 4824617088775566470}
+  - component: {fileID: 5138920501765040936}
   m_Layer: 5
   m_Name: PassiveSlotButton
   m_TagString: Untagged
@@ -7370,6 +7621,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7294315525207458017}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClickShop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4824617088775566470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7380,6 +7643,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a141ee45b29e8ed4a8fb48e58afd3563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5138920501765040936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1519068318921717066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1540897532965879594
@@ -7952,6 +8227,7 @@ GameObject:
   - component: {fileID: 9121165003280739327}
   - component: {fileID: 4134472777350833059}
   - component: {fileID: 6453299602074478222}
+  - component: {fileID: 588514718580363240}
   m_Layer: 5
   m_Name: PassiveSlot
   m_TagString: Untagged
@@ -8074,6 +8350,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1356225380273825649}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6453299602074478222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8089,6 +8377,18 @@ MonoBehaviour:
   num: 0
   lockImage: {fileID: 6177807032134677302}
   cost: 0
+--- !u!114 &588514718580363240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774301675070818952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1797959535174313608
 GameObject:
   m_ObjectHideFlags: 0
@@ -10675,6 +10975,7 @@ GameObject:
   - component: {fileID: 5411104116549913837}
   - component: {fileID: 7816456605474847454}
   - component: {fileID: 59264779228320275}
+  - component: {fileID: 2711084927522237926}
   m_Layer: 5
   m_Name: ResumeButton
   m_TagString: Untagged
@@ -10796,6 +11097,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8408426956162002929}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2711084927522237926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2391690598864284941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2399329538771847364
 GameObject:
   m_ObjectHideFlags: 0
@@ -14863,6 +15188,7 @@ GameObject:
   - component: {fileID: 6749149164184108828}
   - component: {fileID: 7996356195952721526}
   - component: {fileID: 7971397992437592938}
+  - component: {fileID: 1837600276487354714}
   m_Layer: 5
   m_Name: EquipmentSelectButton
   m_TagString: Untagged
@@ -14988,6 +15314,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3013798326191396193}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7971397992437592938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15010,6 +15348,18 @@ MonoBehaviour:
   - {r: 1, g: 0.5896226, b: 0.9838362, a: 1}
   - {r: 0.6698113, g: 0, b: 0.5321398, a: 1}
   - {r: 1, g: 0.30238533, b: 0, a: 1}
+--- !u!114 &1837600276487354714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3335973797190559371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3337049933928124143
 GameObject:
   m_ObjectHideFlags: 0
@@ -15234,6 +15584,7 @@ GameObject:
   - component: {fileID: 6216740390345682029}
   - component: {fileID: 4558342453797386801}
   - component: {fileID: 7452634924473436350}
+  - component: {fileID: 7294315525207458017}
   m_Layer: 5
   m_Name: PassiveSlotButton
   m_TagString: Untagged
@@ -15354,6 +15705,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7294315525207458017}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClickShop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7452634924473436350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15364,6 +15727,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a141ee45b29e8ed4a8fb48e58afd3563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7294315525207458017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3394420674602554195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3431106062362628758
@@ -17209,6 +17584,7 @@ GameObject:
   - component: {fileID: 3227297614642502757}
   - component: {fileID: 7060643948335314085}
   - component: {fileID: 8894931398424696709}
+  - component: {fileID: 1685245496852411499}
   m_Layer: 5
   m_Name: EquipmentSelectButton
   m_TagString: Untagged
@@ -17334,6 +17710,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3013798326191396193}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8894931398424696709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17356,6 +17744,18 @@ MonoBehaviour:
   - {r: 1, g: 0.5896226, b: 0.9838362, a: 1}
   - {r: 0.6698113, g: 0, b: 0.5321398, a: 1}
   - {r: 1, g: 0.30238533, b: 0, a: 1}
+--- !u!114 &1685245496852411499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3857659066080973727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3858587608270770097
 GameObject:
   m_ObjectHideFlags: 0
@@ -18393,6 +18793,7 @@ GameObject:
   - component: {fileID: 3166162886572900594}
   - component: {fileID: 4187302548907752902}
   - component: {fileID: 765984979828728177}
+  - component: {fileID: 3809549258854623281}
   m_Layer: 5
   m_Name: PassiveSlotButton
   m_TagString: Untagged
@@ -18513,6 +18914,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7294315525207458017}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClickShop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &765984979828728177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18523,6 +18936,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a141ee45b29e8ed4a8fb48e58afd3563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3809549258854623281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4066471919599031149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4069657308462919369
@@ -18538,6 +18963,7 @@ GameObject:
   - component: {fileID: 1884082221554772317}
   - component: {fileID: 364405253046856941}
   - component: {fileID: 2945906247681936927}
+  - component: {fileID: 1481480162979377426}
   m_Layer: 5
   m_Name: PassiveSlotButton
   m_TagString: Untagged
@@ -18658,6 +19084,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7294315525207458017}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClickShop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2945906247681936927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18668,6 +19106,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a141ee45b29e8ed4a8fb48e58afd3563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1481480162979377426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4069657308462919369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4069986628505162007
@@ -19696,6 +20146,7 @@ GameObject:
   - component: {fileID: 2554597419266791776}
   - component: {fileID: 7948924573777612443}
   - component: {fileID: 7181949265595854850}
+  - component: {fileID: 3236501034405347241}
   m_Layer: 5
   m_Name: PassiveSlotButton
   m_TagString: Untagged
@@ -19816,6 +20267,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7294315525207458017}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClickShop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7181949265595854850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19826,6 +20289,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a141ee45b29e8ed4a8fb48e58afd3563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3236501034405347241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4243247952803050855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4254967273801991977
@@ -20673,6 +21148,7 @@ GameObject:
   - component: {fileID: 8423648833484148066}
   - component: {fileID: 2237689265957207079}
   - component: {fileID: 3893343045258955591}
+  - component: {fileID: 1356225380273825649}
   m_Layer: 5
   m_Name: PassiveSlot
   m_TagString: Untagged
@@ -20795,6 +21271,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1356225380273825649}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3893343045258955591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20810,6 +21298,18 @@ MonoBehaviour:
   num: 2
   lockImage: {fileID: 5735165914695262795}
   cost: 150000
+--- !u!114 &1356225380273825649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4432090808140279299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4448358299922334845
 GameObject:
   m_ObjectHideFlags: 0
@@ -21314,6 +21814,7 @@ GameObject:
   - component: {fileID: 4687565829893317233}
   - component: {fileID: 1325328199565610450}
   - component: {fileID: 7847775763759144700}
+  - component: {fileID: 3770757224161785126}
   m_Layer: 5
   m_Name: OptionButton
   m_TagString: Untagged
@@ -21435,6 +21936,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8408426956162002929}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3770757224161785126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4643957045042581231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4653810323369081097
 GameObject:
   m_ObjectHideFlags: 0
@@ -21698,6 +22223,7 @@ GameObject:
   - component: {fileID: 8773580138378240539}
   - component: {fileID: 2855684685988817093}
   - component: {fileID: 7740609188042418567}
+  - component: {fileID: 258056761294241261}
   m_Layer: 5
   m_Name: PassiveSlotButton
   m_TagString: Untagged
@@ -21818,6 +22344,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7294315525207458017}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClickShop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7740609188042418567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21828,6 +22366,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a141ee45b29e8ed4a8fb48e58afd3563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &258056761294241261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4723320357913065903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4737280026781436659
@@ -22803,7 +23353,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uB85C\uBE44\uB85C \uB3CC\uC544\uAC00\uAE30"
+  m_text: "\uB85C\uBE44\uB85C \uB098\uAC00\uAE30"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3ea7fcc5cdb048d47981ec359df72933, type: 2}
   m_sharedMaterial: {fileID: 1630324947820159634, guid: 3ea7fcc5cdb048d47981ec359df72933,
@@ -23367,6 +23917,7 @@ GameObject:
   - component: {fileID: 3001673820761030780}
   - component: {fileID: 8219224889773883999}
   - component: {fileID: 2073003286975964295}
+  - component: {fileID: 4782832619546873788}
   m_Layer: 5
   m_Name: PassiveSlot
   m_TagString: Untagged
@@ -23489,6 +24040,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1356225380273825649}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2073003286975964295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23504,6 +24067,18 @@ MonoBehaviour:
   num: 1
   lockImage: {fileID: 6047024922245207270}
   cost: 10000
+--- !u!114 &4782832619546873788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5224595724100401657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5250885083401587576
 GameObject:
   m_ObjectHideFlags: 0
@@ -23596,6 +24171,7 @@ GameObject:
   - component: {fileID: 6908854172970128164}
   - component: {fileID: 4909235051358823853}
   - component: {fileID: 965498219654239288}
+  - component: {fileID: 4963274142721641675}
   m_Layer: 5
   m_Name: PassiveSlotButton
   m_TagString: Untagged
@@ -23716,6 +24292,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7294315525207458017}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClickShop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &965498219654239288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23726,6 +24314,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a141ee45b29e8ed4a8fb48e58afd3563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4963274142721641675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5259524623147585971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5268688259483276643
@@ -24100,6 +24700,7 @@ GameObject:
   - component: {fileID: 269031040478021370}
   - component: {fileID: 5531551551979860014}
   - component: {fileID: 2103581019315680832}
+  - component: {fileID: 6740898021903207150}
   m_Layer: 5
   m_Name: PassiveSlotButton
   m_TagString: Untagged
@@ -24220,6 +24821,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7294315525207458017}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClickShop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2103581019315680832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24230,6 +24843,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a141ee45b29e8ed4a8fb48e58afd3563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6740898021903207150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5337091557322289367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5429223007960092896
@@ -24629,6 +25254,7 @@ GameObject:
   - component: {fileID: 5391474249198021451}
   - component: {fileID: 7100978714643836733}
   - component: {fileID: 7716007862980705567}
+  - component: {fileID: 4140588412903930415}
   m_Layer: 5
   m_Name: PassiveSlotButton
   m_TagString: Untagged
@@ -24749,6 +25375,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7294315525207458017}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClickShop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7716007862980705567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24759,6 +25397,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a141ee45b29e8ed4a8fb48e58afd3563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4140588412903930415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5534394074844811741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5557041192602439112
@@ -24909,6 +25559,7 @@ GameObject:
   - component: {fileID: 8768057198723783310}
   - component: {fileID: 1322138775833547590}
   - component: {fileID: 2836275526555807583}
+  - component: {fileID: 3013798326191396193}
   m_Layer: 5
   m_Name: EquipmentSelectButton
   m_TagString: Untagged
@@ -25034,6 +25685,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3013798326191396193}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2836275526555807583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25056,6 +25719,18 @@ MonoBehaviour:
   - {r: 1, g: 0.5896226, b: 0.9838362, a: 1}
   - {r: 0.6698113, g: 0, b: 0.5321398, a: 1}
   - {r: 1, g: 0.30238533, b: 0, a: 1}
+--- !u!114 &3013798326191396193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5563854261383589741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5568810680402992226
 GameObject:
   m_ObjectHideFlags: 0
@@ -27315,6 +27990,7 @@ GameObject:
   - component: {fileID: 3065111744139387932}
   - component: {fileID: 1514453940769244879}
   - component: {fileID: 3594633888686495966}
+  - component: {fileID: 1510328082851552486}
   m_Layer: 5
   m_Name: OptionButton
   m_TagString: Untagged
@@ -27424,6 +28100,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1510328082851552486}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 5648658944872408429}
         m_TargetAssemblyTypeName: OptionPanel, Assembly-CSharp
         m_MethodName: CloseUIPanel
@@ -27436,6 +28124,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1510328082851552486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6025986943444787329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6026359479868411443
 GameObject:
   m_ObjectHideFlags: 0
@@ -27584,6 +28284,7 @@ GameObject:
   - component: {fileID: 1886511626375255712}
   - component: {fileID: 9216495151571143445}
   - component: {fileID: 3757497622088747231}
+  - component: {fileID: 8679113430068483315}
   m_Layer: 5
   m_Name: PassiveSlotButton
   m_TagString: Untagged
@@ -27704,6 +28405,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7294315525207458017}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClickShop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3757497622088747231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27714,6 +28427,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a141ee45b29e8ed4a8fb48e58afd3563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8679113430068483315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6027155984619864583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6029736243695335152
@@ -29945,6 +30670,7 @@ GameObject:
   - component: {fileID: 3727026613467897003}
   - component: {fileID: 6439736672674425067}
   - component: {fileID: 1037461797844025441}
+  - component: {fileID: 4317231513607727102}
   m_Layer: 5
   m_Name: SkipButton
   m_TagString: Untagged
@@ -30067,6 +30793,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3286134719974891474}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4317231513607727102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6558164764819774493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6573822173481526255
 GameObject:
   m_ObjectHideFlags: 0
@@ -30984,6 +31734,7 @@ GameObject:
   - component: {fileID: 4614849024617756384}
   - component: {fileID: 9029310970854890582}
   - component: {fileID: 117354436367747806}
+  - component: {fileID: 9171284517094633996}
   m_Layer: 5
   m_Name: PassiveSlotButton
   m_TagString: Untagged
@@ -31104,6 +31855,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7294315525207458017}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClickShop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &117354436367747806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31114,6 +31877,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a141ee45b29e8ed4a8fb48e58afd3563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9171284517094633996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6742025311579859642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6777249606588578384
@@ -32111,6 +32886,7 @@ GameObject:
   - component: {fileID: 634201568027144091}
   - component: {fileID: 5627511735287075856}
   - component: {fileID: 2169498730488300534}
+  - component: {fileID: 8960393010580744738}
   m_Layer: 5
   m_Name: PassiveSlotButton
   m_TagString: Untagged
@@ -32231,6 +33007,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7294315525207458017}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClickShop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2169498730488300534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32241,6 +33029,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a141ee45b29e8ed4a8fb48e58afd3563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8960393010580744738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6997495023789663498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7021397568342106685
@@ -35244,6 +36044,7 @@ GameObject:
   - component: {fileID: 1550572919863006257}
   - component: {fileID: 1501257749963184795}
   - component: {fileID: 432798525481431258}
+  - component: {fileID: 3037435860839635420}
   m_Layer: 5
   m_Name: OptionButton
   m_TagString: Untagged
@@ -35353,7 +36154,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1550572919863006257}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1510328082851552486}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &432798525481431258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35367,6 +36180,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   set: {fileID: 5081890595982184362}
+--- !u!114 &3037435860839635420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7659509084830548107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7659767005496338675
 GameObject:
   m_ObjectHideFlags: 0
@@ -35580,6 +36405,7 @@ GameObject:
   - component: {fileID: 1838930519410383092}
   - component: {fileID: 8868989575438779165}
   - component: {fileID: 6346264743453230823}
+  - component: {fileID: 6594616397012493954}
   m_Layer: 5
   m_Name: PassiveSlotButton
   m_TagString: Untagged
@@ -35700,6 +36526,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7294315525207458017}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClickShop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6346264743453230823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35710,6 +36548,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a141ee45b29e8ed4a8fb48e58afd3563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6594616397012493954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7704165608719505341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7724551335959569812
@@ -35916,6 +36766,7 @@ GameObject:
   - component: {fileID: 5714180279203714549}
   - component: {fileID: 1137568489686434052}
   - component: {fileID: 1067568624632298832}
+  - component: {fileID: 6295857643867051000}
   m_Layer: 5
   m_Name: PassiveSlotButton
   m_TagString: Untagged
@@ -36036,6 +36887,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7294315525207458017}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClickShop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1067568624632298832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36046,6 +36909,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a141ee45b29e8ed4a8fb48e58afd3563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6295857643867051000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7726470772523758690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7743972134990794689
@@ -36061,6 +36936,7 @@ GameObject:
   - component: {fileID: 7792741230508728765}
   - component: {fileID: 3705854670656526598}
   - component: {fileID: 455130108483757458}
+  - component: {fileID: 4585037690787090133}
   m_Layer: 5
   m_Name: PassiveSlotButton
   m_TagString: Untagged
@@ -36181,6 +37057,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7294315525207458017}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClickShop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &455130108483757458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36191,6 +37079,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a141ee45b29e8ed4a8fb48e58afd3563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4585037690787090133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7743972134990794689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7766661385311975486
@@ -37256,6 +38156,7 @@ GameObject:
   - component: {fileID: 1125107773531273776}
   - component: {fileID: 1191210922214817235}
   - component: {fileID: 6461078793423810769}
+  - component: {fileID: 2968422177328735118}
   m_Layer: 5
   m_Name: CancelButton
   m_TagString: Untagged
@@ -37377,6 +38278,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2968422177328735118}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2968422177328735118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7915784062079686033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7918154409973852079
 GameObject:
   m_ObjectHideFlags: 0
@@ -38442,6 +39367,7 @@ GameObject:
   - component: {fileID: 3556227242647500371}
   - component: {fileID: 1971051970736223648}
   - component: {fileID: 7360931480873523735}
+  - component: {fileID: 187097171265927492}
   m_Layer: 5
   m_Name: PassiveSlotButton
   m_TagString: Untagged
@@ -38562,6 +39488,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7294315525207458017}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClickShop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7360931480873523735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38572,6 +39510,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a141ee45b29e8ed4a8fb48e58afd3563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &187097171265927492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8234192622014575066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8234320192653561448
@@ -39392,6 +40342,7 @@ GameObject:
   - component: {fileID: 7763772799210619234}
   - component: {fileID: 2155035499313906458}
   - component: {fileID: 9142841984899430903}
+  - component: {fileID: 2084304681306751302}
   m_Layer: 5
   m_Name: PassiveSlotButton
   m_TagString: Untagged
@@ -39512,6 +40463,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7294315525207458017}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClickShop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &9142841984899430903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39522,6 +40485,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a141ee45b29e8ed4a8fb48e58afd3563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2084304681306751302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8440395398820705395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8473638343130840549
@@ -39536,6 +40511,7 @@ GameObject:
   - component: {fileID: 1176970609708869938}
   - component: {fileID: 2204538969276460678}
   - component: {fileID: 1643895887764651336}
+  - component: {fileID: 2402441095106848341}
   m_Layer: 5
   m_Name: CancelButton
   m_TagString: Untagged
@@ -39658,6 +40634,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2402441095106848341}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2402441095106848341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8473638343130840549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8480452822532860655
 GameObject:
   m_ObjectHideFlags: 0
@@ -39909,6 +40909,7 @@ GameObject:
   - component: {fileID: 5881720506468777991}
   - component: {fileID: 4884940365594744305}
   - component: {fileID: 6467697228159656091}
+  - component: {fileID: 5836576049580798226}
   m_Layer: 5
   m_Name: PassiveSlotButton
   m_TagString: Untagged
@@ -40029,6 +41030,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7294315525207458017}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClickShop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6467697228159656091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40039,6 +41052,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a141ee45b29e8ed4a8fb48e58afd3563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5836576049580798226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8545078324119989619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8550706366158480031
@@ -43322,6 +44347,7 @@ GameObject:
   - component: {fileID: 2764562143378520900}
   - component: {fileID: 2629989923131746220}
   - component: {fileID: 5808930048435600854}
+  - component: {fileID: 8408426956162002929}
   m_Layer: 5
   m_Name: ExitButton
   m_TagString: Untagged
@@ -43443,6 +44469,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8408426956162002929}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &8408426956162002929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8941898849627673636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf00e410379b45458812fd45b23d6f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8979022785771745574
 GameObject:
   m_ObjectHideFlags: 0

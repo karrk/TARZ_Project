@@ -44,6 +44,13 @@ public enum E_Audio
 
     UI_ButtonClick = 100,
     UI_ButtonClick2,
+    UI_ButtonMove,
+    UI_GetChip,
+    UI_ShopOnOff,
+    UI_ShopConfirm,
+    UI_Backpack,
+    UI_PopUp,
+    UI_GameOver
 
     #endregion
 }

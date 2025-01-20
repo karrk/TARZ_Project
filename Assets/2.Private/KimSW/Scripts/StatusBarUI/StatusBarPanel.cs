@@ -38,12 +38,23 @@ public class StatusBarPanel : MonoBehaviour, IOpenCloseMenu
         garbageInventoryView = GetComponentInChildren<GarbageInventoryView>();
         coolTimeView = GetComponentInChildren<CoolTimeView>();
     }
-  
 
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+
+        Cursor.visible = false;
+    }
 
     public void OpenUIPanel()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+
+        Cursor.visible = false;
         Time.timeScale = 1.0f;
+
+     
+
         gameObject.SetActive(true);
         for (int i = 0; i < animatedUIs.Length; i++)
         {
@@ -55,6 +66,10 @@ public class StatusBarPanel : MonoBehaviour, IOpenCloseMenu
 
     public void CloseUIPanel()
     {
+        Cursor.lockState = CursorLockMode.None;
+
+        Cursor.visible = true;
+
         for (int i = 0; i < animatedUIs.Length; i++)
         {
             animatedUIs[i].MoveOffUI();
