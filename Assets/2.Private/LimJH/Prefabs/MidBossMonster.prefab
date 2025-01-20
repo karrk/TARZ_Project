@@ -274,6 +274,7 @@ GameObject:
   - component: {fileID: 1012377218929762063}
   - component: {fileID: 6203839926819243416}
   - component: {fileID: 2515306666662830243}
+  - component: {fileID: 4634508585915017806}
   m_Layer: 12
   m_Name: MidBossMonster
   m_TagString: Monster
@@ -435,7 +436,7 @@ MonoBehaviour:
         Attack","Instant":true,"SharedGameObjectmy":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null}},{"Type":"BehaviorDesigner.Runtime.Tasks.Wait","NodeData":{"Offset":"(176.207886,102.758606)"},"ID":31,"Name":"Wait","Instant":true,"SharedFloatwaitTime":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":3},"SharedBoolrandomWait":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatrandomWaitMin":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedFloatrandomWaitMax":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}},{"Type":"ResetAttackCount","NodeData":{"Offset":"(305.8999,99.79993)"},"ID":32,"Name":"Reset
         Attack Count","Instant":true,"SharedGameObjectmy":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null}}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(153.826492,104.285751)"},"ID":33,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"IsWithinDash","NodeData":{"Offset":"(-60,100)"},"ID":34,"Name":"Is
         Within Dash","Instant":true,"SharedGameObjectmy":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null}},{"Type":"DashAttack","NodeData":{"Offset":"(59.7306137,97.86473)"},"ID":35,"Name":"Dash
-        Attack","Instant":true,"SharedGameObjectmy":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null}},{"Type":"ResetAttackCount","NodeData":{"Offset":"(190,100)"},"ID":36,"Name":"Reset
+        Attack","Instant":true,"ColliderdashCollider":2,"SharedGameObjectmy":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null}},{"Type":"ResetAttackCount","NodeData":{"Offset":"(190,100)"},"ID":36,"Name":"Reset
         Attack Count","Instant":true,"SharedGameObjectmy":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null}}]}]}]}]}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(661.700867,96.20004)"},"ID":37,"Name":"Sequence","Instant":true,"AbortTypeabortType":"Both","Children":[{"Type":"IsWithinDistance","NodeData":{"Offset":"(-74.0999756,99.00006)"},"ID":38,"Name":"Is
         Within Distance","Instant":true,"SharedGameObjectmy":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null}},{"Type":"FollowPlayer","NodeData":{"Offset":"(84.30005,99)"},"ID":39,"Name":"Follow
         Player","Instant":true,"SharedGameObjectmy":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null}}]},{"Type":"Idle","NodeData":{"Offset":"(863.6905,102.600006)"},"ID":40,"Name":"Idle","Instant":true}]}]},"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"sharedFire","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"selfObject","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"targetObject","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"health","IsShared":true,"SinglemValue":0},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"IsGroggyActive","IsShared":true,"BooleanmValue":false},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"IsGimmickActive","IsShared":true,"BooleanmValue":false},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"halfHealth","IsShared":true,"SinglemValue":0},{"Type":"SharedIntList","Name":"pillarStateList","IsShared":true,"List`1mValue":[0,0,0]},{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":"attackCount","IsShared":true,"Int32mValue":0},{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":"specialAttackCount","IsShared":true,"Int32mValue":2},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"isDelay","IsShared":true,"BooleanmValue":false},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"attackRange","IsShared":true,"SinglemValue":1.5},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"detectRange","IsShared":true,"SinglemValue":5}]}'
@@ -447,6 +448,7 @@ MonoBehaviour:
         unityObjects:
         - {fileID: 132016, guid: ffbb36661689f67498bbe3c871783a34, type: 3}
         - {fileID: 1092421663555646865, guid: f4e6740d4d7aef147975f65027210fac, type: 3}
+        - {fileID: 4634508585915017806}
         byteData: 
         byteDataArray: 
       Version: 1.7.11
@@ -524,6 +526,29 @@ CapsuleCollider:
   m_Height: 2.0178099
   m_Direction: 1
   m_Center: {x: 0, y: 1.0017414, z: 0}
+--- !u!136 &4634508585915017806
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 689508234494486168}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 0.7297143
+  m_Height: 2.3108995
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.6554475, z: 0.2297144}
 --- !u!1 &712596138963445508
 GameObject:
   m_ObjectHideFlags: 0
